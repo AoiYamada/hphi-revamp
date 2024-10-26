@@ -3,7 +3,9 @@ import type { FieldHook } from 'payload'
 export const formatSlug = (val: string): string =>
   val
     .replace(/ /g, '-')
-    .replace(/[^\w-]+/g, '')
+    // `\p{Script=Han}` matches any Han script character, which includes Chinese, Japanese, and Korean characters
+    // Han script characters in slugs will be url encoded, so we need to decodeURIComponent when parsing the slug
+    .replace(/[^\p{Script=Han}\w-]+/gu, '')
     .toLowerCase()
 
 export const formatSlugHook =

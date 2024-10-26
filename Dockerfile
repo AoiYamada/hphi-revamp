@@ -1,4 +1,4 @@
-FROM node:18.8-alpine as base
+FROM node:22.10-alpine as base
 
 FROM base as builder
 
@@ -6,8 +6,8 @@ WORKDIR /home/node/app
 COPY package*.json ./
 
 COPY . .
-RUN yarn install
-RUN yarn build
+RUN pnpm install
+RUN pnpm build
 
 FROM base as runtime
 
@@ -15,9 +15,9 @@ ENV NODE_ENV=production
 
 WORKDIR /home/node/app
 COPY package*.json  ./
-COPY yarn.lock ./
+COPY pnpm-lock.yaml ./
 
-RUN yarn install --production
+RUN pnpm install --prod
 
 EXPOSE 3000
 

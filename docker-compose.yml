@@ -1,24 +1,22 @@
-version: '3'
-
 services:
-  payload:
-    image: node:18-alpine
-    ports:
-      - '3000:3000'
-    volumes:
-      - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
-    working_dir: /home/node/app/
-    command: sh -c "yarn install && yarn dev"
-    depends_on:
-      - mongo
-    env_file:
-      - .env
+  # may need to reinstall node_modules, package "sharp" is broken
+  # payload:
+  #   image: node:22.10-alpine
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     - .:/home/node/app
+  #   working_dir: /home/node/app/
+  #   command: sh -c "corepack enable pnpm && pnpm dev"
+  #   depends_on:
+  #     - mongo
+  #   env_file:
+  #     - .env
 
   mongo:
     image: mongo:latest
     ports:
-      - '27017:27017'
+      - 27017:27017
     command:
       - --storageEngine=wiredTiger
     volumes:
@@ -28,4 +26,8 @@ services:
 
 volumes:
   data:
-  node_modules:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./volumes/mongo

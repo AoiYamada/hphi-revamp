@@ -37,7 +37,9 @@ type Args = {
 }
 
 export default async function Post({ params: paramsPromise }: Args) {
-  const { slug = '' } = await paramsPromise
+  let { slug = '' } = await paramsPromise
+  slug = decodeURIComponent(slug)
+
   const url = '/posts/' + slug
   const post = await queryPostBySlug({ slug })
 
