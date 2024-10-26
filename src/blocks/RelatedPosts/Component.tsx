@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React from 'react'
+import React, { FC } from 'react'
 import RichText from '@/components/RichText'
 
 import type { Post } from '@/payload-types'
@@ -12,7 +12,7 @@ export type RelatedPostsProps = {
   introContent?: any
 }
 
-export const RelatedPosts: React.FC<RelatedPostsProps> = (props) => {
+export const RelatedPosts: FC<RelatedPostsProps> = (props) => {
   const { className, docs, introContent } = props
 
   return (
