@@ -1,7 +1,5 @@
-import React from 'react'
+import { FC, PropsWithChildren } from 'react'
 
-export const Providers: React.FC<{
-  children: React.ReactNode
-}> = ({ children }) => {
+export const Providers: FC<PropsWithChildren> = ({ children }) => {
   return children
 }

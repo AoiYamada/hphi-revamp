@@ -1,5 +1,4 @@
-'use client'
-import { FC } from 'react'
+import type { FC } from 'react'
 import type { Page } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
