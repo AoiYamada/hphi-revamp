@@ -1,4 +1,3 @@
-import { HeaderClient } from './Component.client'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import React from 'react'
 
@@ -11,7 +10,7 @@ export async function Header() {
   const header: Header = await getCachedGlobal('header', 1)
 
   return (
-    <header className="container relative z-20 py-8 flex justify-between" data-theme="dark">
+    <header className="container relative z-20 py-8 flex justify-between items-end">
       <Link href="/">
         <Logo />
       </Link>

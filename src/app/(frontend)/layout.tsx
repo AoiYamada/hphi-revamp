@@ -21,8 +21,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html
       className={cn(GeistSans.variable, GeistMono.variable)}
-      lang="en"
-      data-theme="dark"
+      lang="zh-Hant-TW"
       // to get rid of the hydration warning caused by extensions
       suppressHydrationWarning
     >

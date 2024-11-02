@@ -1,25 +1,54 @@
 'use client'
 
-import React from 'react'
-
+import type { FC } from 'react'
 import type { Header as HeaderType } from '@/payload-types'
-
-import { CMSLink } from '@/components/Link'
 import Link from 'next/link'
 import { SearchIcon } from 'lucide-react'
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from '@/components/ui/navigation-menu'
+import MenuItemLabel from './MenuItemLabel'
+import MenuItemContent from './MenuItemContent'
+import { cn } from '@/utilities'
 
-export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
-  const navItems = header?.navItems || []
+export const HeaderNav: FC<{ header: HeaderType }> = ({ header }) => {
+  const taps = header?.tabs || []
 
   return (
-    <nav className="flex gap-3 items-center">
-      {navItems.map(({ link }, i) => {
-        return <CMSLink key={i} {...link} appearance="link" />
-      })}
-      <Link href="/search">
-        <span className="sr-only">Search</span>
-        <SearchIcon className="w-5 text-primary" />
-      </Link>
-    </nav>
+    <NavigationMenu>
+      <NavigationMenuList>
+        {taps.map(({ label, link, enableDirectLink, enableDropdown, ...content }, i) => {
+          const text = (
+            <MenuItemLabel
+              label={label}
+              enableDirectLink={enableDirectLink}
+              link={link}
+              className={cn({
+                'py-2 px-4': !enableDropdown,
+              })}
+            />
+          )
+
+          return (
+            <NavigationMenuItem key={i}>
+              {enableDropdown ? <NavigationMenuTrigger>{text}</NavigationMenuTrigger> : text}
+              {enableDropdown && <MenuItemContent {...content} />}
+            </NavigationMenuItem>
+          )
+        })}
+        <NavigationMenuItem className="py-2 px-4">
+          <Link href="/search" legacyBehavior passHref>
+            <NavigationMenuLink>
+              <span className="sr-only">Search</span>
+              <SearchIcon className="w-5 text-primary" />
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
   )
 }
