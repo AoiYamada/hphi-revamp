@@ -4,34 +4,33 @@ import React from 'react'
 
 import type { Footer } from '@/payload-types'
 
-import { CMSLink } from '@/components/Link'
+import { Logo } from '@/components/Logo/Logo'
+import MaxWidthWrapper from '@/components/MaxWidthWrapper'
+import FooterNavColumn from './FooterNavColumn'
 
 export async function Footer() {
   const footer: Footer = await getCachedGlobal('footer')
 
-  const navItems = footer?.navItems || []
+  const columns = footer?.columns || []
 
   return (
-    <footer className="border-t border-border bg-black dark:bg-card text-white">
-      <div className="container py-8 gap-8 flex flex-col md:flex-row md:justify-between">
-        <Link className="flex items-center" href="/">
-          <picture>
-            <img
-              alt="Payload Logo"
-              className="max-w-[6rem] invert-0"
-              src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/payload/src/admin/assets/images/payload-logo-light.svg"
-            />
-          </picture>
-        </Link>
-
-        <div className="flex flex-col-reverse items-start md:flex-row gap-4 md:items-center">
-          <nav className="flex flex-col md:flex-row gap-4">
-            {navItems.map(({ link }, i) => {
-              return <CMSLink className="text-white" key={i} {...link} />
-            })}
-          </nav>
+    <footer id="footer" className="border-t border-border bg-primary text-primary-foreground">
+      <MaxWidthWrapper className="flex flex-col items-center justify-center gap-8 pb-4 pt-12">
+        <div className="flex w-full flex-col justify-between gap-4 md:flex-row md:gap-16 items-start">
+          <Link className="flex flex-grow pb-8 items-center" href="/">
+            <picture>
+              <Logo className="w-32 invert" />
+            </picture>
+          </Link>
+          {columns.length > 0 &&
+            columns.map((column, i) => <FooterNavColumn key={i} {...column} />)}
         </div>
-      </div>
+        <div className="w-full text-xs font-light">
+          <p className="leading-6">
+            Copyright © {new Date().getFullYear()} HPHI EDUCATION LIMITED All rights reserved
+          </p>
+        </div>
+      </MaxWidthWrapper>
     </footer>
   )
 }

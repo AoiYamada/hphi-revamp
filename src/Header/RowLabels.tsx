@@ -24,28 +24,26 @@ type NavItem = {
     }
   }
   featuredLink?: {
-    tag: string
+    label: string
   }
   listLinks?: {
-    tag: string
+    label: string
   }
 }
 
 export const NavItem = () => {
   const { data } = useRowLabel<NavItem>()
 
-  console.log(data, 'here?')
-
   if (data.style === 'default') {
     return data.defaultLink?.link.label
   }
 
   if (data.style === 'featured') {
-    return data.featuredLink?.tag
+    return data.featuredLink?.label
   }
 
   if (data.style === 'list') {
-    return data.listLinks?.tag
+    return data.listLinks?.label
   }
 
   return '...'

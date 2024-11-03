@@ -13,7 +13,7 @@ type MenuItemContentProps = Omit<
 const MenuItemContent: FC<MenuItemContentProps> = ({ description, descriptionLinks, navItems }) => {
   return (
     <NavigationMenuContent>
-      <div className="grid grid-cols-12 gap-6 max-w-7xl p-6 w-[630px]">
+      <div className="grid grid-cols-12 gap-6 p-6 w-[600px]">
         {(description || (descriptionLinks?.length ?? 0) > 0) && (
           <div className="col-span-12 pt-1 md:col-span-3 space-y-4 border-r border-gray-200">
             {description && <p className="text-sm font-medium text-gray-900">{description}</p>}
@@ -78,10 +78,10 @@ type ListLinksProps = NonNullable<
   NonNullable<MenuItemContentProps['navItems']>[number]['listLinks']
 >
 
-const ListLinks: FC<ListLinksProps> = ({ tag, links }) => {
+const ListLinks: FC<ListLinksProps> = ({ label, links }) => {
   return (
     <div className="space-y-3">
-      {tag && <p className="font-medium text-gray-900">{tag}</p>}
+      {label && <p className="font-medium text-gray-900">{label}</p>}
       {links && links.length > 0 && (
         <ul className="space-y-2">
           {links.map(({ link }, i) => (
@@ -103,13 +103,13 @@ type FeaturedLinkProps = NonNullable<
   NonNullable<MenuItemContentProps['navItems']>[number]['featuredLink']
 >
 
-const FeaturedLink: FC<FeaturedLinkProps> = ({ tag, label, links }) => {
+const FeaturedLink: FC<FeaturedLinkProps> = ({ label, content, links }) => {
   return (
     <div className="space-y-3">
-      {tag && <p className="font-medium text-gray-900">{tag}</p>}
-      {label && (
+      {label && <p className="font-medium text-gray-900">{label}</p>}
+      {content && (
         <div>
-          <RichText content={label} enableGutter={false} />
+          <RichText content={content} enableGutter={false} />
         </div>
       )}
       {links && links.length > 0 && (

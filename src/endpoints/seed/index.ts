@@ -70,7 +70,7 @@ export const seed = async ({
         await payload.updateGlobal({
           slug: global,
           data: {
-            navItems: [],
+            columns: [],
           },
           req,
         })
@@ -313,27 +313,6 @@ export const seed = async ({
 
   await payload.updateGlobal({
     slug: 'header',
-    // data: {
-    //   navItems: [
-    //     {
-    //       link: {
-    //         type: 'custom',
-    //         label: 'Posts',
-    //         url: '/posts',
-    //       },
-    //     },
-    //     {
-    //       link: {
-    //         type: 'reference',
-    //         label: 'Contact',
-    //         reference: {
-    //           relationTo: 'pages',
-    //           value: contactPage.id,
-    //         },
-    //       },
-    //     },
-    //   ],
-    // },
     data: {
       tabs: [
         {
@@ -450,7 +429,7 @@ export const seed = async ({
             {
               style: 'list',
               listLinks: {
-                tag: 'Resources',
+                label: 'Resources',
                 links: [
                   {
                     link: {
@@ -496,7 +475,7 @@ export const seed = async ({
             {
               style: 'list',
               listLinks: {
-                tag: 'Community',
+                label: 'Community',
                 links: [
                   {
                     link: {
@@ -527,8 +506,8 @@ export const seed = async ({
             {
               style: 'featured',
               featuredLink: {
-                tag: 'Payload Cloud',
-                label: {
+                label: 'Payload Cloud',
+                content: {
                   root: {
                     type: 'root',
                     children: [
@@ -591,7 +570,7 @@ export const seed = async ({
             {
               style: 'list',
               listLinks: {
-                tag: 'Enterprise Features',
+                label: 'Enterprise Features',
                 links: [
                   {
                     link: {
@@ -634,7 +613,7 @@ export const seed = async ({
             {
               style: 'list',
               listLinks: {
-                tag: 'Customer Stories',
+                label: 'Customer Stories',
                 links: [
                   {
                     link: {
@@ -677,8 +656,8 @@ export const seed = async ({
             {
               style: 'featured',
               featuredLink: {
-                tag: 'Featured Customer Story',
-                label: {
+                label: 'Featured Customer Story',
+                content: {
                   root: {
                     type: 'root',
                     children: [
@@ -741,29 +720,118 @@ export const seed = async ({
   await payload.updateGlobal({
     slug: 'footer',
     data: {
-      navItems: [
+      columns: [
         {
+          label: '其他課程',
+          enableDirectLink: true,
           link: {
             type: 'custom',
-            label: 'Admin',
-            url: '/admin',
+            url: '/courses',
           },
+          navItems: [
+            {
+              link: {
+                type: 'custom',
+                url: 'https://www.hk-hphi.com/%E5%9F%BA%E7%A4%8E%E5%82%AC%E7%9C%A0%E6%B2%BB%E7%99%82%E5%AD%B8%E8%AD%89%E6%9B%B8%E8%AA%B2%E7%A8%8B',
+                label: '基礎催眠治療學證書課程',
+              },
+            },
+            {
+              link: {
+                type: 'custom',
+                url: 'https://www.hk-hphi.com/%E7%BE%8E%E5%9C%8B%E8%A8%BB%E5%86%8A%E5%82%AC%E7%9C%A0%E6%B2%BB%E7%99%82%E5%B8%AB%E8%AA%B2%E7%A8%8C-abh-ngh',
+                label: '美國註冊催眠治療師課程',
+              },
+            },
+            {
+              link: {
+                type: 'custom',
+                url: 'https://www.hk-hphi.com/%E6%B7%B1%E5%8C%96%E5%82%AC%E7%9C%A0%E5%B0%88%E6%A5%AD%E8%AA%8D%E8%AD%89%E8%AA%B2%E7%A8%8C-imdha',
+                label: '深化催眠專業認證課程',
+              },
+            },
+            {
+              link: {
+                type: 'custom',
+                url: 'https://www.hk-hphi.com/ibnlp%E5%9F%B7%E8%A1%8C%E5%B8%AB%E8%AA%B2%E7%A8%8B',
+                label: 'NLP 執行師證書課程',
+              },
+            },
+          ],
         },
         {
+          label: '聯絡我們',
+          enableDirectLink: true,
           link: {
             type: 'custom',
-            label: 'Source Code',
-            newTab: true,
-            url: 'https://github.com/payloadcms/payload/tree/beta/templates/website',
+            url: '/contact',
           },
-        },
-        {
-          link: {
-            type: 'custom',
-            label: 'Payload',
-            newTab: true,
-            url: 'https://payloadcms.com/',
-          },
+          navItems: [
+            {
+              icon: 'whatsapp',
+              link: {
+                type: 'custom',
+                url: 'https://wa.me/85290469438',
+                label: '+852 9046 9438',
+              },
+            },
+            {
+              icon: 'whatsapp',
+              link: {
+                type: 'custom',
+                url: 'https://wa.me/85293098317',
+                label: '+852 9309 8317',
+              },
+            },
+            {
+              icon: 'instagram',
+              link: {
+                type: 'custom',
+                url: 'https://www.instagram.com/hphi_psychotherapy',
+                label: '@hphi_psychotherapy',
+              },
+            },
+            {
+              icon: 'youtube',
+              link: {
+                type: 'custom',
+                url: 'https://www.youtube.com/@know.the.inside',
+                label: '潛意識達人',
+              },
+            },
+            {
+              icon: 'facebook',
+              link: {
+                type: 'custom',
+                url: 'https://www.facebook.com/hphi.health',
+                label: '專業心理治療及催眠應用中心',
+              },
+            },
+            {
+              icon: 'mail',
+              link: {
+                type: 'custom',
+                url: 'mailto:info@hk-hphi.com">info@hk-hphi.com',
+                label: 'info@hk-hphi.com',
+              },
+            },
+            {
+              icon: 'phone',
+              link: {
+                type: 'custom',
+                url: 'tel:35007168',
+                label: '35007168 (熱線)',
+              },
+            },
+            {
+              icon: 'phone',
+              link: {
+                type: 'custom',
+                url: 'tel:26261828',
+                label: '26261828 (催眠課程專線)',
+              },
+            },
+          ],
         },
       ],
     },

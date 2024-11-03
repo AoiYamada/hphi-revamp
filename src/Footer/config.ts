@@ -10,14 +10,77 @@ export const Footer: GlobalConfig = {
   },
   fields: [
     {
-      name: 'navItems',
+      name: 'columns',
       type: 'array',
       fields: [
-        link({
-          appearances: false,
-        }),
+        {
+          name: 'label',
+          required: true,
+          type: 'text',
+        },
+        {
+          type: 'checkbox',
+          name: 'enableDirectLink',
+        },
+        {
+          label: 'Direct Link',
+          type: 'collapsible',
+          admin: {
+            condition: (_, siblingData) => siblingData.enableDirectLink,
+          },
+          fields: [
+            link({
+              appearances: false,
+              disableLabel: true,
+            }),
+          ],
+        },
+        {
+          name: 'navItems',
+          type: 'array',
+          fields: [
+            {
+              name: 'icon',
+              type: 'select',
+              defaultValue: 'none',
+              options: [
+                {
+                  label: 'None',
+                  value: 'none',
+                },
+                {
+                  label: 'WhatsApp',
+                  value: 'whatsapp',
+                },
+                {
+                  label: 'Instagram',
+                  value: 'instagram',
+                },
+                {
+                  label: 'Youtube',
+                  value: 'youtube',
+                },
+                {
+                  label: 'Facebook',
+                  value: 'facebook',
+                },
+                {
+                  label: 'Mail',
+                  value: 'mail',
+                },
+                {
+                  label: 'Phone',
+                  value: 'phone',
+                },
+              ],
+            },
+            link({
+              appearances: false,
+            }),
+          ],
+        },
       ],
-      maxRows: 6,
+      maxRows: 5,
     },
   ],
   hooks: {

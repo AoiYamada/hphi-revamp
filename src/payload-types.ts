@@ -746,8 +746,8 @@ export interface Header {
                 description?: string | null;
               };
               featuredLink?: {
-                tag?: string | null;
-                label?: {
+                label?: string | null;
+                content?: {
                   root: {
                     type: string;
                     children: {
@@ -779,7 +779,7 @@ export interface Header {
                   | null;
               };
               listLinks?: {
-                tag?: string | null;
+                label?: string | null;
                 links?:
                   | {
                       link: {
@@ -811,9 +811,11 @@ export interface Header {
  */
 export interface Footer {
   id: string;
-  navItems?:
+  columns?:
     | {
-        link: {
+        label: string;
+        enableDirectLink?: boolean | null;
+        link?: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
           reference?: {
@@ -821,8 +823,23 @@ export interface Footer {
             value: string | Page;
           } | null;
           url?: string | null;
-          label: string;
         };
+        navItems?:
+          | {
+              icon?: ('none' | 'whatsapp' | 'instagram' | 'youtube' | 'facebook' | 'mail' | 'phone') | null;
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?: {
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null;
+                url?: string | null;
+                label: string;
+              };
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
