@@ -1,16 +1,16 @@
 import { cn } from '@/utilities/cn'
-import React from 'react'
+import type { FC } from 'react'
 
 import { serializeLexical } from './serialize'
 
-type Props = {
+type RichTextProps = {
   className?: string
   content: Record<string, any>
   enableGutter?: boolean
   enableProse?: boolean
 }
 
-const RichText: React.FC<Props> = ({
+const RichText: FC<RichTextProps> = ({
   className,
   content,
   enableGutter = true,

@@ -12,47 +12,47 @@ type MenuItemContentProps = Omit<
 
 const MenuItemContent: FC<MenuItemContentProps> = ({ description, descriptionLinks, navItems }) => {
   return (
-    <NavigationMenuContent className="p-4 w-[630px]">
-      <div className="flex flex-row gap-4">
-        {description || (descriptionLinks?.length ?? 0 > 0) ? (
-          <div className="flex flex-col gap-4 shrink-0 w-[180px] pt-1">
-            {description && <p className="text-sm font-bold">{description}</p>}
+    <NavigationMenuContent>
+      <div className="grid grid-cols-12 gap-6 max-w-7xl p-6 w-[630px]">
+        {(description || (descriptionLinks?.length ?? 0) > 0) && (
+          <div className="col-span-12 pt-1 md:col-span-3 space-y-4 border-r border-gray-200">
+            {description && <p className="text-sm font-medium text-gray-900">{description}</p>}
             {descriptionLinks?.length ? (
-              <ul className="flex flex-col gap-2">
+              <ul className="space-y-3">
                 {descriptionLinks.map(({ link }, i) => (
-                  <li key={i} className="flex flex-row gap-2 items-center">
-                    <CMSLink key={i} {...link} appearance="link" />
-                    <ExternalLink className="w-4 h-4" />
+                  <li key={i} className="flex items-center gap-2 text-sm">
+                    <CMSLink {...link} appearance="link" />
+                    {link.newTab && <ExternalLink className="h-3 w-3 text-gray-400" />}
                   </li>
                 ))}
               </ul>
             ) : null}
           </div>
-        ) : null}
+        )}
         {navItems?.length ? (
-          <ul className="flex flex-row flex-wrap gap-4 w-[360px]">
-            {navItems.map(({ style, defaultLink, featuredLink, listLinks }, i) => {
-              let item: ReactNode = null
+          <div
+            className={`col-span-12 ${description || descriptionLinks?.length ? 'md:col-span-9' : 'md:col-span-12'}`}
+          >
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {navItems.map(({ style, defaultLink, featuredLink, listLinks }, i) => {
+                let item: ReactNode = null
 
-              switch (style) {
-                case 'default':
-                  item = <DefaultLink {...defaultLink!} />
-                  break
-                case 'featured':
-                  item = <FeaturedLink {...featuredLink!} />
-                  break
-                case 'list':
-                  item = <ListLinks {...listLinks!} />
-                  break
-              }
+                switch (style) {
+                  case 'default':
+                    item = <DefaultLink {...defaultLink!} />
+                    break
+                  case 'featured':
+                    item = <FeaturedLink {...featuredLink!} />
+                    break
+                  case 'list':
+                    item = <ListLinks {...listLinks!} />
+                    break
+                }
 
-              return (
-                <li key={i} className="w-[150px]">
-                  {item}
-                </li>
-              )
-            })}
-          </ul>
+                return <li key={i}>{item}</li>
+              })}
+            </ul>
+          </div>
         ) : null}
       </div>
     </NavigationMenuContent>
@@ -67,9 +67,9 @@ type DefaultLinkProps = NonNullable<
 
 const DefaultLink: FC<DefaultLinkProps> = ({ link, description }) => {
   return (
-    <div className="flex flex-col gap-4 w-full">
-      <CMSLink {...link} appearance="link" />
-      {description && <p className="text-sm">{description}</p>}
+    <div className="space-y-2">
+      <CMSLink {...link} appearance="inline" className="font-medium text-gray-900" />
+      {description && <p className="text-sm text-gray-500">{description}</p>}
     </div>
   )
 }
@@ -80,13 +80,17 @@ type ListLinksProps = NonNullable<
 
 const ListLinks: FC<ListLinksProps> = ({ tag, links }) => {
   return (
-    <div className="flex flex-col gap-4 w-full">
-      <p className="font-bold">{tag}</p>
+    <div className="space-y-3">
+      {tag && <p className="font-medium text-gray-900">{tag}</p>}
       {links && links.length > 0 && (
-        <ul className="flex flex-col gap-2 pl-2">
+        <ul className="space-y-2">
           {links.map(({ link }, i) => (
             <li key={i}>
-              <CMSLink {...link} appearance="link" />
+              <CMSLink
+                {...link}
+                appearance="link"
+                className="text-sm text-gray-600 hover:text-gray-900"
+              />
             </li>
           ))}
         </ul>
@@ -101,14 +105,22 @@ type FeaturedLinkProps = NonNullable<
 
 const FeaturedLink: FC<FeaturedLinkProps> = ({ tag, label, links }) => {
   return (
-    <div className="flex flex-col gap-4 w-full">
-      {tag && <p className="font-bold">{tag}</p>}
-      {label && <RichText content={label} enableGutter={false} className="pl-2" />}
+    <div className="space-y-3">
+      {tag && <p className="font-medium text-gray-900">{tag}</p>}
+      {label && (
+        <div>
+          <RichText content={label} enableGutter={false} />
+        </div>
+      )}
       {links && links.length > 0 && (
-        <ul className="flex flex-col gap-2 pl-2">
-          {links.map((link, i) => (
+        <ul className="space-y-2">
+          {links.map(({ link }, i) => (
             <li key={i}>
-              <CMSLink {...link} appearance="link" />
+              <CMSLink
+                {...link}
+                appearance="link"
+                className="text-sm text-gray-600 hover:text-gray-900"
+              />
             </li>
           ))}
         </ul>
