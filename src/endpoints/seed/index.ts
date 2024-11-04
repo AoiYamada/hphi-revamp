@@ -316,13 +316,18 @@ export const seed = async ({
     data: {
       tabs: [
         {
-          label: 'Use Cases',
+          label: '主頁',
           enableDirectLink: true,
-          enableDropdown: true,
+          enableDropdown: false,
           link: {
-            type: 'custom',
+            type: 'reference',
+            reference: {
+              relationTo: 'pages',
+              value: '6727bf7db14129fd9b976477',
+            },
             url: '/use-cases',
           },
+          descriptionLinks: [],
           navItems: [
             {
               style: 'default',
@@ -335,6 +340,9 @@ export const seed = async ({
                 description:
                   'Create with a minimal, powerful editing experience. Extend effortlessly.',
               },
+              featuredLink: { links: [] },
+              listLinks: { links: [] },
+              id: '6727bf7d702514267b805cb5',
             },
             {
               style: 'default',
@@ -347,6 +355,9 @@ export const seed = async ({
                 description:
                   'Build sophisticated enterprise tools while reducing development costs.',
               },
+              featuredLink: { links: [] },
+              listLinks: { links: [] },
+              id: '6727bf7d702514267b805cb6',
             },
             {
               style: 'default',
@@ -359,6 +370,9 @@ export const seed = async ({
                 description:
                   'Manage all your content, alongside your products, in a single, powerful editing experience.',
               },
+              featuredLink: { links: [] },
+              listLinks: { links: [] },
+              id: '6727bf7d702514267b805cb7',
             },
             {
               style: 'default',
@@ -371,204 +385,24 @@ export const seed = async ({
                 description:
                   'Ensure brand consistency by seamlessly managing digital assets within your CMS.',
               },
+              featuredLink: { links: [] },
+              listLinks: { links: [] },
+              id: '6727bf7d702514267b805cb8',
             },
           ],
+          id: '6727bf7d702514267b805cb9',
         },
         {
-          label: 'Why Payload',
-          enableDirectLink: false,
-          enableDropdown: true,
-          navItems: [
-            {
-              style: 'default',
-              defaultLink: {
-                link: {
-                  type: 'custom',
-                  url: '/marketers',
-                  label: 'For Marketing Teams',
-                },
-                description:
-                  'Advanced features like Visual Editing and Live Preview are giving a head back to the headless CMS.',
-              },
-            },
-            {
-              style: 'default',
-              defaultLink: {
-                link: {
-                  type: 'custom',
-                  url: '/become-a-partner',
-                  label: 'For Agencies',
-                },
-                description:
-                  'Learn how Payload delivers for software consultancies with a content framework that can build anything.',
-              },
-            },
-            {
-              style: 'default',
-              defaultLink: {
-                link: {
-                  type: 'custom',
-                  url: '/developers',
-                  label: 'For Developers',
-                },
-                description:
-                  'Built with React & TypeScript, depart restrictive “no-code” options and write code you’re proud of.',
-              },
-            },
-          ],
-        },
-        {
-          label: 'Developers',
+          label: '自學資源',
           enableDirectLink: true,
           enableDropdown: true,
-          link: {
-            type: 'custom',
-            url: '/developers',
-          },
+          link: { type: 'custom', url: '/enterprise' },
+          descriptionLinks: [],
           navItems: [
             {
               style: 'list',
-              listLinks: {
-                label: 'Resources',
-                links: [
-                  {
-                    link: {
-                      type: 'custom',
-                      url: '/docs',
-                      label: 'Documentation',
-                    },
-                  },
-                  {
-                    link: {
-                      type: 'custom',
-                      url: 'https://github.com/payloadcms/payload/tree/main/examples',
-                      label: 'Examples',
-                      newTab: true,
-                    },
-                  },
-                  {
-                    link: {
-                      type: 'custom',
-                      url: 'https://github.com/payloadcms/payload/tree/main/templates',
-                      label: 'Templates',
-                      newTab: true,
-                    },
-                  },
-                  {
-                    link: {
-                      type: 'custom',
-                      url: 'https://github.com/payloadcms/payload',
-                      label: 'GitHub',
-                      newTab: true,
-                    },
-                  },
-                  {
-                    link: {
-                      type: 'custom',
-                      url: '/blog',
-                      label: 'Blog',
-                    },
-                  },
-                ],
-              },
-            },
-            {
-              style: 'list',
-              listLinks: {
-                label: 'Community',
-                links: [
-                  {
-                    link: {
-                      type: 'custom',
-                      url: 'https://github.com/payloadcms/payload/discussions/categories/roadmap',
-                      label: 'Roadmap',
-                      newTab: true,
-                    },
-                  },
-                  {
-                    link: {
-                      type: 'custom',
-                      url: 'https://discord.com/invite/r6sCXqVk3v',
-                      label: 'Discord',
-                      newTab: true,
-                    },
-                  },
-                  {
-                    link: {
-                      type: 'custom',
-                      url: '/community-help',
-                      label: 'Community Help',
-                    },
-                  },
-                ],
-              },
-            },
-            {
-              style: 'featured',
-              featuredLink: {
-                label: 'Payload Cloud',
-                content: {
-                  root: {
-                    type: 'root',
-                    children: [
-                      {
-                        children: [
-                          {
-                            detail: 0,
-                            format: 0,
-                            mode: 'normal',
-                            style: '',
-                            text: 'Deploy your entire stack in one place with Payload Cloud.',
-                            type: 'text',
-                            version: 1,
-                          },
-                        ],
-                        direction: 'ltr',
-                        format: '',
-                        indent: 0,
-                        type: 'paragraph',
-                        version: 1,
-                        textFormat: 0,
-                        textStyle: '',
-                      },
-                    ],
-                    direction: 'ltr',
-                    format: '',
-                    indent: 0,
-                    version: 1,
-                  },
-                },
-                links: [
-                  {
-                    link: {
-                      type: 'custom',
-                      url: '/login',
-                      label: 'Login',
-                    },
-                  },
-                  {
-                    link: {
-                      type: 'custom',
-                      url: '/cloud-pricing',
-                      label: 'Cloud Pricing',
-                    },
-                  },
-                ],
-              },
-            },
-          ],
-        },
-        {
-          label: 'Enterprise',
-          enableDirectLink: true,
-          enableDropdown: true,
-          link: {
-            type: 'custom',
-            url: '/enterprise',
-          },
-          navItems: [
-            {
-              style: 'list',
+              defaultLink: { link: { type: 'reference' } },
+              featuredLink: { links: [] },
               listLinks: {
                 label: 'Enterprise Features',
                 links: [
@@ -578,6 +412,7 @@ export const seed = async ({
                       url: '/enterprise/single-sign-on-sso',
                       label: 'SSO',
                     },
+                    id: '6727bf7d702514267b805ccc',
                   },
                   {
                     link: {
@@ -585,6 +420,7 @@ export const seed = async ({
                       url: '/enterprise/publishing-workflows',
                       label: 'Publishing Workflows',
                     },
+                    id: '6727bf7d702514267b805ccd',
                   },
                   {
                     link: {
@@ -592,6 +428,7 @@ export const seed = async ({
                       url: '/enterprise/visual-editor',
                       label: 'Visual Editor',
                     },
+                    id: '6727bf7d702514267b805cce',
                   },
                   {
                     link: {
@@ -599,6 +436,7 @@ export const seed = async ({
                       url: '/enterprise/headless-ab-variant-testing',
                       label: 'Static A/B testing',
                     },
+                    id: '6727bf7d702514267b805ccf',
                   },
                   {
                     link: {
@@ -606,12 +444,16 @@ export const seed = async ({
                       url: '/enterprise/enterprise-ai',
                       label: 'AI features',
                     },
+                    id: '6727bf7d702514267b805cd0',
                   },
                 ],
               },
+              id: '6727bf7d702514267b805cd1',
             },
             {
               style: 'list',
+              defaultLink: { link: { type: 'reference' } },
+              featuredLink: { links: [] },
               listLinks: {
                 label: 'Customer Stories',
                 links: [
@@ -621,6 +463,7 @@ export const seed = async ({
                       url: '/case-studies/microsoft',
                       label: 'Microsoft',
                     },
+                    id: '6727bf7d702514267b805cd2',
                   },
                   {
                     link: {
@@ -628,6 +471,7 @@ export const seed = async ({
                       url: '/case-studies/blue-origin-club-for-the-future',
                       label: 'Blue Origin',
                     },
+                    id: '6727bf7d702514267b805cd3',
                   },
                   {
                     link: {
@@ -635,6 +479,7 @@ export const seed = async ({
                       url: '/case-studies/hello-bello',
                       label: 'Hello Bello',
                     },
+                    id: '6727bf7d702514267b805cd4',
                   },
                   {
                     link: {
@@ -642,6 +487,7 @@ export const seed = async ({
                       url: '/case-studies/mythical-society',
                       label: 'Mythical Society',
                     },
+                    id: '6727bf7d702514267b805cd5',
                   },
                   {
                     link: {
@@ -649,12 +495,15 @@ export const seed = async ({
                       url: '/case-studies/tekton',
                       label: 'Tekton',
                     },
+                    id: '6727bf7d702514267b805cd6',
                   },
                 ],
               },
+              id: '6727bf7d702514267b805cd7',
             },
             {
               style: 'featured',
+              defaultLink: { link: { type: 'reference' } },
               featuredLink: {
                 label: 'Featured Customer Story',
                 content: {
@@ -695,20 +544,316 @@ export const seed = async ({
                       url: '/case-studies/microsoft',
                       label: 'Read the case study',
                     },
+                    id: '6727bf7d702514267b805cd8',
                   },
                 ],
               },
+              listLinks: { links: [] },
+              id: '6727bf7d702514267b805cd9',
             },
           ],
+          id: '6727bf7d702514267b805cda',
         },
         {
-          label: 'Docs',
+          label: '課程',
+          enableDirectLink: false,
+          enableDropdown: true,
+          link: { type: 'reference' },
+          description: '',
+          descriptionLinks: [],
+          navItems: [
+            {
+              style: 'list',
+              defaultLink: {
+                link: {
+                  type: 'custom',
+                  url: '/marketers',
+                  label: '催眠課程',
+                },
+                description:
+                  'Advanced features like Visual Editing and Live Preview are giving a head back to the headless CMS.',
+              },
+              featuredLink: { links: [] },
+              listLinks: {
+                label: '催眠課程',
+                links: [
+                  {
+                    link: {
+                      type: 'reference',
+                      reference: {
+                        relationTo: 'pages',
+                        value: '6727bf7db14129fd9b976480',
+                      },
+                      label: '基礎催眠證書課程',
+                    },
+                    id: '6728af468e998198866ee2bb',
+                  },
+                  {
+                    link: {
+                      type: 'reference',
+                      reference: {
+                        relationTo: 'pages',
+                        value: '6727bf7db14129fd9b976480',
+                      },
+                      label: '美國註冊催眠治療師課程',
+                    },
+                    id: '6728af7b8e998198866ee2bc',
+                  },
+                  {
+                    link: {
+                      type: 'reference',
+                      reference: {
+                        relationTo: 'pages',
+                        value: '6727bf7db14129fd9b976480',
+                      },
+                      label: '深化催眠專業認證課程',
+                    },
+                    id: '6728b0408e998198866ee2bd',
+                  },
+                  {
+                    link: {
+                      type: 'custom',
+                      newTab: true,
+                      url: 'https://promotion.hk-hphi.com/',
+                      label: '應用催眠心理學 短期進修課程',
+                    },
+                    id: '6728b6e38e998198866ee2c5',
+                  },
+                ],
+              },
+              id: '6727bf7d702514267b805cba',
+            },
+            {
+              style: 'list',
+              defaultLink: {
+                link: {
+                  type: 'custom',
+                  url: '/become-a-partner',
+                  label: 'NLP 課程',
+                },
+                description:
+                  'Learn how Payload delivers for software consultancies with a content framework that can build anything.',
+              },
+              featuredLink: { links: [] },
+              listLinks: {
+                label: 'NLP 課程',
+                links: [
+                  {
+                    link: {
+                      type: 'custom',
+                      newTab: true,
+                      reference: {
+                        relationTo: 'pages',
+                        value: '6727bf7db14129fd9b976480',
+                      },
+                      url: 'https://promotion.hk-hphi.com/nlp',
+                      label: 'NLP 人際交往及商業管理技巧證書課程',
+                    },
+                    id: '6728b1668e998198866ee2be',
+                  },
+                ],
+              },
+              id: '6727bf7d702514267b805cbb',
+            },
+          ],
+          id: '6727bf7d702514267b805cbd',
+        },
+        {
+          label: '服務',
           enableDirectLink: true,
           enableDropdown: false,
           link: {
-            type: 'custom',
-            url: '/docs',
+            type: 'reference',
+            reference: {
+              relationTo: 'pages',
+              value: '6727bf7db14129fd9b976477',
+            },
           },
+          descriptionLinks: [],
+          navItems: [],
+          id: '6728ac2b8e998198866ee2b8',
+        },
+        {
+          label: '導師',
+          enableDirectLink: true,
+          enableDropdown: true,
+          link: {
+            type: 'reference',
+            reference: {
+              relationTo: 'pages',
+              value: '6727bf7db14129fd9b976477',
+            },
+            url: '/developers',
+          },
+          descriptionLinks: [],
+          navItems: [
+            {
+              style: 'list',
+              defaultLink: {
+                link: {
+                  type: 'reference',
+                  reference: {
+                    relationTo: 'pages',
+                    value: '6727bf7db14129fd9b976480',
+                  },
+                  label: 'CW Leung',
+                },
+              },
+              featuredLink: { links: [] },
+              listLinks: {
+                label: '',
+                links: [
+                  {
+                    link: {
+                      type: 'reference',
+                      reference: {
+                        relationTo: 'pages',
+                        value: '6727bf7db14129fd9b976477',
+                      },
+                      url: '/docs',
+                      label: 'CW Leung',
+                    },
+                    id: '6727bf7d702514267b805cbe',
+                  },
+                  {
+                    link: {
+                      type: 'reference',
+                      newTab: false,
+                      reference: {
+                        relationTo: 'pages',
+                        value: '6727bf7db14129fd9b976477',
+                      },
+                      url: 'https://github.com/payloadcms/payload/tree/main/examples',
+                      label: 'Sam Sio',
+                    },
+                    id: '6727bf7d702514267b805cbf',
+                  },
+                  {
+                    link: {
+                      type: 'reference',
+                      newTab: false,
+                      reference: {
+                        relationTo: 'pages',
+                        value: '6727bf7db14129fd9b976477',
+                      },
+                      url: 'https://github.com/payloadcms/payload/tree/main/templates',
+                      label: 'Abby Chung 局目子',
+                    },
+                    id: '6727bf7d702514267b805cc0',
+                  },
+                  {
+                    link: {
+                      type: 'reference',
+                      newTab: false,
+                      reference: {
+                        relationTo: 'pages',
+                        value: '6727bf7db14129fd9b976477',
+                      },
+                      url: 'https://github.com/payloadcms/payload',
+                      label: 'Canace Yuen',
+                    },
+                    id: '6727bf7d702514267b805cc1',
+                  },
+                  {
+                    link: {
+                      type: 'reference',
+                      reference: {
+                        relationTo: 'pages',
+                        value: '6727bf7db14129fd9b976477',
+                      },
+                      url: '/blog',
+                      label: 'Roy W.G Choi',
+                    },
+                    id: '6727bf7d702514267b805cc2',
+                  },
+                  {
+                    link: {
+                      type: 'reference',
+                      reference: {
+                        relationTo: 'pages',
+                        value: '6727bf7db14129fd9b976477',
+                      },
+                      label: 'Jessica Ao',
+                    },
+                    id: '6728b5d48e998198866ee2c1',
+                  },
+                  {
+                    link: {
+                      type: 'reference',
+                      reference: {
+                        relationTo: 'pages',
+                        value: '6727bf7db14129fd9b976477',
+                      },
+                      label: 'Y CHAN',
+                    },
+                    id: '6728b5f18e998198866ee2c2',
+                  },
+                  {
+                    link: {
+                      type: 'reference',
+                      reference: {
+                        relationTo: 'pages',
+                        value: '6727bf7db14129fd9b976477',
+                      },
+                      label: 'Winson Kwok',
+                    },
+                    id: '6728b5f68e998198866ee2c3',
+                  },
+                  {
+                    link: {
+                      type: 'reference',
+                      reference: {
+                        relationTo: 'pages',
+                        value: '6727bf7db14129fd9b976477',
+                      },
+                      label: 'Samuel Cheung',
+                    },
+                    id: '6728b60e8e998198866ee2c4',
+                  },
+                ],
+              },
+              id: '6727bf7d702514267b805cc3',
+            },
+          ],
+          id: '6727bf7d702514267b805ccb',
+        },
+        {
+          label: '媒體報導',
+          enableDirectLink: true,
+          enableDropdown: false,
+          link: {
+            type: 'reference',
+            reference: {
+              relationTo: 'pages',
+              value: '6727bf7db14129fd9b976477',
+            },
+          },
+          descriptionLinks: [],
+          navItems: [],
+          id: '6728ac9d8e998198866ee2b9',
+        },
+        {
+          label: '文章分享',
+          enableDirectLink: true,
+          link: {
+            type: 'reference',
+            reference: {
+              relationTo: 'pages',
+              value: '6727bf7db14129fd9b976477',
+            },
+          },
+          descriptionLinks: [],
+          navItems: [],
+          id: '6728ad8f8e998198866ee2ba',
+        },
+        {
+          label: '聯絡我們',
+          enableDirectLink: true,
+          enableDropdown: false,
+          link: { type: 'custom', url: '/contact-us' },
+          descriptionLinks: [],
+          navItems: [],
+          id: '6727bf7d702514267b805cdb',
         },
       ],
     },
