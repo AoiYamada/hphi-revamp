@@ -12,6 +12,7 @@ import type { Post } from '@/payload-types'
 
 import { PostHero } from '@/heros/PostHero'
 import { generateMeta } from '@/utilities/generateMeta'
+import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 
 export async function generateStaticParams() {
   const payload = await getPayloadHMR({ config: configPromise })
@@ -45,29 +46,31 @@ export default async function Post({ params: paramsPromise }: Args) {
   if (!post) return <PayloadRedirects url={url} />
 
   return (
-    <article className="pt-16 pb-16">
-      {/* Allows redirects for valid pages too */}
-      <PayloadRedirects disableNotFound url={url} />
+    <MaxWidthWrapper>
+      <article className="pt-8 pb-16">
+        {/* Allows redirects for valid pages too */}
+        <PayloadRedirects disableNotFound url={url} />
 
-      <PostHero post={post} />
+        <PostHero post={post} />
 
-      <div className="flex flex-col items-center gap-4 pt-8">
-        <div className="container lg:mx-0 lg:grid lg:grid-cols-[1fr_48rem_1fr] grid-rows-[1fr]">
-          <RichText
-            className="lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[1fr]"
-            content={post.content}
-            enableGutter={false}
-          />
+        <div className="flex flex-col items-center gap-4 pt-8">
+          <div className="container lg:mx-0 lg:grid lg:grid-cols-[1fr_48rem_1fr] grid-rows-[1fr]">
+            <RichText
+              className="lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[1fr]"
+              content={post.content}
+              enableGutter={false}
+            />
+          </div>
+
+          {post.relatedPosts && post.relatedPosts.length > 0 && (
+            <RelatedPosts
+              className="mt-12"
+              docs={post.relatedPosts.filter((post) => typeof post === 'object')}
+            />
+          )}
         </div>
-
-        {post.relatedPosts && post.relatedPosts.length > 0 && (
-          <RelatedPosts
-            className="mt-12"
-            docs={post.relatedPosts.filter((post) => typeof post === 'object')}
-          />
-        )}
-      </div>
-    </article>
+      </article>
+    </MaxWidthWrapper>
   )
 }
 

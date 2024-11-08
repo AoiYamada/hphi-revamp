@@ -1,18 +1,18 @@
 import { formatDateTime } from 'src/utilities/formatDateTime'
-import React from 'react'
+import { Fragment, type FC } from 'react'
 
 import type { Post } from '@/payload-types'
 
 import { Media } from '@/components/Media'
 
-export const PostHero: React.FC<{
+export const PostHero: FC<{
   post: Post
 }> = ({ post }) => {
   const { categories, meta: { image: metaImage } = {}, populatedAuthors, publishedAt, title } = post
 
   return (
-    <div className="relative -mt-[10.4rem] flex items-end">
-      <div className="container z-10 relative lg:grid lg:grid-cols-[1fr_48rem_1fr] text-white pb-8">
+    <div className="relative flex items-end">
+      <div className="container z-10 relative lg:grid lg:grid-cols-[1fr_48rem_1fr] text-white py-8">
         <div className="col-start-1 col-span-1 md:col-start-2 md:col-span-2">
           <div className="uppercase text-sm mb-6">
             {categories?.map((category, index) => {
@@ -24,10 +24,10 @@ export const PostHero: React.FC<{
                 const isLast = index === categories.length - 1
 
                 return (
-                  <React.Fragment key={index}>
+                  <Fragment key={index}>
                     {titleToUse}
-                    {!isLast && <React.Fragment>, &nbsp;</React.Fragment>}
-                  </React.Fragment>
+                    {!isLast && <>, &nbsp;</>}
+                  </Fragment>
                 )
               }
               return null
@@ -50,18 +50,12 @@ export const PostHero: React.FC<{
                     const secondToLast = index === populatedAuthors.length - 2
 
                     return (
-                      <React.Fragment key={index}>
+                      <Fragment key={index}>
                         {name}
-                        {secondToLast && populatedAuthors.length > 2 && (
-                          <React.Fragment>, </React.Fragment>
-                        )}
-                        {secondToLast && populatedAuthors.length === 2 && (
-                          <React.Fragment> </React.Fragment>
-                        )}
-                        {!isLast && populatedAuthors.length > 1 && (
-                          <React.Fragment>and </React.Fragment>
-                        )}
-                      </React.Fragment>
+                        {secondToLast && populatedAuthors.length > 2 && <>, </>}
+                        {secondToLast && populatedAuthors.length === 2 && <> </>}
+                        {!isLast && populatedAuthors.length > 1 && <>and </>}
+                      </Fragment>
                     )
                   })}
                 </div>
@@ -77,7 +71,7 @@ export const PostHero: React.FC<{
           </div>
         </div>
       </div>
-      <div className="min-h-[80vh] select-none">
+      <div className="select-none">
         {metaImage && typeof metaImage !== 'string' && (
           <Media fill imgClassName="-z-10 object-cover" resource={metaImage} />
         )}

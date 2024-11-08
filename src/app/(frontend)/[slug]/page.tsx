@@ -12,6 +12,7 @@ import type { Page as PageType } from '@/payload-types'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
+import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 
 export async function generateStaticParams() {
   const payload = await getPayloadHMR({ config: configPromise })
@@ -61,13 +62,15 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { hero, layout } = page
 
   return (
-    <article className="pt-16 pb-24">
-      {/* Allows redirects for valid pages too */}
-      <PayloadRedirects disableNotFound url={url} />
+    <MaxWidthWrapper>
+      <article className="pt-8 pb-16">
+        {/* Allows redirects for valid pages too */}
+        <PayloadRedirects disableNotFound url={url} />
 
-      <RenderHero {...hero} />
-      <RenderBlocks blocks={layout} />
-    </article>
+        <RenderHero {...hero} />
+        <RenderBlocks blocks={layout} />
+      </article>
+    </MaxWidthWrapper>
   )
 }
 

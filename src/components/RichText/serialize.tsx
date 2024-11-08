@@ -17,6 +17,7 @@ import {
   IS_UNDERLINE,
 } from './nodeFormat'
 import type { Page } from '@/payload-types'
+import { cn } from '@/utilities'
 
 export type NodeTypes =
   | DefaultNodeTypes
@@ -111,7 +112,9 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             case 'mediaBlock':
               return (
                 <MediaBlock
-                  className="col-start-1 col-span-3"
+                  className={cn('col-start-2 col-span-1', {
+                    'col-start-1 col-span-3': block.position === 'fullscreen',
+                  })}
                   imgClassName="m-0"
                   key={index}
                   {...block}
@@ -162,7 +165,6 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                     aria-checked={node.checked ? 'true' : 'false'}
                     className={` ${node.checked ? '' : ''}`}
                     key={index}
-                    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
                     role="checkbox"
                     tabIndex={-1}
                     value={node?.value}
