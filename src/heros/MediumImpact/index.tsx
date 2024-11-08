@@ -7,7 +7,7 @@ import RichText from '@/components/RichText'
 export const MediumImpactHero: FC<Page['hero']> = ({ links, media, richText }) => {
   return (
     <div className="">
-      <div className="container mb-8">
+      <div className="w-full mb-8">
         {richText && <RichText className="mb-6" content={richText} enableGutter={false} />}
 
         {Array.isArray(links) && links.length > 0 && (
@@ -22,7 +22,7 @@ export const MediumImpactHero: FC<Page['hero']> = ({ links, media, richText }) =
           </ul>
         )}
       </div>
-      <div className="container ">
+      <div className="w-full">
         {media && typeof media === 'object' && (
           <div>
             <Media

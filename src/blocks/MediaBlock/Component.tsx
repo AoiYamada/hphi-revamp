@@ -40,7 +40,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
       className={cn(
         '',
         {
-          container: position === 'default' && enableGutter,
+          'w-full': position === 'default' && enableGutter,
         },
         className,
       )}
@@ -58,7 +58,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
           className={cn(
             'mt-6',
             {
-              container: position === 'fullscreen' && !disableInnerContainer,
+              'w-full': position === 'fullscreen' && !disableInnerContainer,
             },
             captionClassName,
           )}

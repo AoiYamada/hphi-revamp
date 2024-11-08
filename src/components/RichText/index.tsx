@@ -24,7 +24,7 @@ const RichText: FC<RichTextProps> = ({
     <div
       className={cn(
         {
-          container: enableGutter,
+          'w-full': enableGutter,
           'max-w-none': !enableGutter,
           'mx-auto prose dark:prose-invert': enableProse,
         },

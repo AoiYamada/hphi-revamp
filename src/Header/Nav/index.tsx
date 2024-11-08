@@ -15,11 +15,13 @@ import MenuItemLabel from './MenuItemLabel'
 import MenuItemContent from './MenuItemContent'
 import { cn } from '@/utilities'
 
-export const HeaderNav: FC<{ header: HeaderType }> = ({ header }) => {
+type HeaderNavProps = { header: HeaderType; className?: string }
+
+const HeaderNav: FC<HeaderNavProps> = ({ header, className }) => {
   const taps = header?.tabs || []
 
   return (
-    <NavigationMenu>
+    <NavigationMenu className={className}>
       <NavigationMenuList>
         {taps.map(({ label, link, enableDirectLink, enableDropdown, ...content }, i) => {
           const text = (
@@ -52,3 +54,5 @@ export const HeaderNav: FC<{ header: HeaderType }> = ({ header }) => {
     </NavigationMenu>
   )
 }
+
+export default HeaderNav

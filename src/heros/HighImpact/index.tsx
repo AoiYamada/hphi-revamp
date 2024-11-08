@@ -8,7 +8,7 @@ import RichText from '@/components/RichText'
 export const HighImpactHero: FC<Page['hero']> = ({ links, media, richText }) => {
   return (
     <div className="relative flex items-end">
-      <div className="container mb-8 z-10 relative">
+      <div className="w-full mb-8 z-10 relative">
         <div className="max-w-[34rem]">
           {richText && <RichText className="mb-6" content={richText} enableGutter={false} />}
           {Array.isArray(links) && links.length > 0 && (

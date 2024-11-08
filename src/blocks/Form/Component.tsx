@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 
 import { buildInitialFormState } from './buildInitialFormState'
 import { fields } from './fields'
+import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 
 export type Value = unknown
 
@@ -125,7 +126,7 @@ export const FormBlock: React.FC<
   )
 
   return (
-    <div className="container lg:max-w-[48rem] pb-20">
+    <MaxWidthWrapper className="lg:max-w-[48rem] pb-20">
       <FormProvider {...formMethods}>
         {enableIntro && introContent && !hasSubmitted && (
           <RichText className="mb-8" content={introContent} enableGutter={false} />
@@ -166,6 +167,6 @@ export const FormBlock: React.FC<
           </form>
         )}
       </FormProvider>
-    </div>
+    </MaxWidthWrapper>
   )
 }

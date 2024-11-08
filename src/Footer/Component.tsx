@@ -4,7 +4,7 @@ import React from 'react'
 
 import type { Footer } from '@/payload-types'
 
-import { Logo } from '@/components/Logo/Logo'
+import Logo from '@/components/Logo/Logo'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import FooterNavColumn from './FooterNavColumn'
 
@@ -19,7 +19,7 @@ export async function Footer() {
         <div className="flex w-full flex-col justify-between gap-4 md:flex-row md:gap-16 items-start">
           <Link className="flex flex-grow pb-8 items-center" href="/">
             <picture>
-              <Logo className="w-32 invert" />
+              <Logo className="w-32 invert" noText />
             </picture>
           </Link>
           {columns.length > 0 &&

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 const defaultLabels = {
   plural: 'Docs',
@@ -12,7 +12,7 @@ const defaultCollectionLabels = {
   },
 }
 
-export const PageRange: React.FC<{
+export const PageRange: FC<{
   className?: string
   collection?: string
   collectionLabels?: {

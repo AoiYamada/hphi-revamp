@@ -52,7 +52,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
 
   return (
     <div className="pt-24 pb-24">
-      <div className="container mb-16">
+      <div className="w-full mb-16">
         <div className="prose dark:prose-invert max-w-none">
           <h1 className="sr-only">Search</h1>
           <Search />
@@ -62,7 +62,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
       {posts.totalDocs > 0 ? (
         <CollectionArchive posts={posts.docs as unknown as Post[]} />
       ) : (
-        <div className="container">No results found.</div>
+        <div className="w-full">No results found.</div>
       )}
     </div>
   )

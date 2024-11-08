@@ -6,6 +6,7 @@ import { Pagination } from '@/components/Pagination'
 import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import React from 'react'
+import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -21,14 +22,14 @@ export default async function Page() {
   })
 
   return (
-    <div className="pt-24 pb-24">
-      <div className="container mb-16">
+    <MaxWidthWrapper className="pt-24 pb-24">
+      <div className="w-full mb-16">
         <div className="prose dark:prose-invert max-w-none">
           <h1>Posts</h1>
         </div>
       </div>
 
-      <div className="container mb-8">
+      <div className="w-full mb-8">
         <PageRange
           collection="posts"
           currentPage={posts.page}
@@ -39,12 +40,12 @@ export default async function Page() {
 
       <CollectionArchive posts={posts.docs} />
 
-      <div className="container">
+      <div className="w-full">
         {posts.totalPages > 1 && posts.page && (
           <Pagination page={posts.page} totalPages={posts.totalPages} />
         )}
       </div>
-    </div>
+    </MaxWidthWrapper>
   )
 }
 

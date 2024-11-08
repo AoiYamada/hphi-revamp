@@ -5,10 +5,11 @@ import type { PayloadAdminBarProps } from 'payload-admin-bar'
 import { cn } from '@/utilities/cn'
 import { useSelectedLayoutSegments } from 'next/navigation'
 import { PayloadAdminBar } from 'payload-admin-bar'
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import './index.scss'
+import MaxWidthWrapper from '../MaxWidthWrapper'
 
 const baseClass = 'admin-bar'
 
@@ -27,9 +28,9 @@ const collectionLabels = {
   },
 }
 
-const Title: React.FC = () => <span>Dashboard</span>
+const Title: FC = () => <span>Dashboard</span>
 
-export const AdminBar: React.FC<{
+export const AdminBar: FC<{
   adminBarProps?: PayloadAdminBarProps
 }> = (props) => {
   const { adminBarProps } = props || {}
@@ -49,7 +50,7 @@ export const AdminBar: React.FC<{
         hidden: !show,
       })}
     >
-      <div className="container">
+      <MaxWidthWrapper className="py-2">
         <PayloadAdminBar
           {...adminBarProps}
           className="py-2 text-white"
@@ -79,7 +80,7 @@ export const AdminBar: React.FC<{
             zIndex: 'unset',
           }}
         />
-      </div>
+      </MaxWidthWrapper>
     </div>
   )
 }

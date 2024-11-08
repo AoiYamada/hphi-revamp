@@ -26,8 +26,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       suppressHydrationWarning
     >
       <head>
-        <link href="/favicon.ico" rel="icon" sizes="32x32" />
-        <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+        <link href="/favicon/favicon.ico" rel="icon" sizes="32x32" />
+        <link href="/favicon/favicon-32x32.png" rel="icon" type="image/png" sizes="32x32" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body>
         <Providers>
@@ -37,7 +38,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             }}
           />
           <LivePreviewListener />
-
           <Header />
           {children}
           <Footer />

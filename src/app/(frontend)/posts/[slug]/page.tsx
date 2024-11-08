@@ -54,7 +54,7 @@ export default async function Post({ params: paramsPromise }: Args) {
         <PostHero post={post} />
 
         <div className="flex flex-col items-center gap-4 pt-8">
-          <div className="container lg:mx-0 lg:grid lg:grid-cols-[1fr_48rem_1fr] grid-rows-[1fr]">
+          <div className="w-full lg:mx-0 lg:grid lg:grid-cols-[1fr_48rem_1fr] grid-rows-[1fr]">
             <RichText
               className="lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[1fr]"
               content={post.content}

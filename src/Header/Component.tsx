@@ -3,8 +3,8 @@ import React from 'react'
 
 import type { Header } from '@/payload-types'
 import Link from 'next/link'
-import { Logo } from '@/components/Logo/Logo'
-import { HeaderNav } from './Nav'
+import Logo from '@/components/Logo/Logo'
+import HeaderNav from './Nav'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 
 export async function Header() {
@@ -16,7 +16,7 @@ export async function Header() {
         <Link href="/">
           <Logo />
         </Link>
-        <HeaderNav header={header} />
+        <HeaderNav header={header} className="hidden lg:block" />
       </MaxWidthWrapper>
     </header>
   )
