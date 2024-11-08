@@ -833,7 +833,7 @@ export const seed = async ({
           id: '6728ac9d8e998198866ee2b9',
         },
         {
-          label: '文章分享',
+          label: 'Blog',
           enableDirectLink: true,
           link: {
             type: 'reference',

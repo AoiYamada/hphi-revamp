@@ -19,6 +19,7 @@ import {
 import type { Page } from '@/payload-types'
 import { cn } from '@/utilities'
 import { FormBlock } from '@/blocks/Form/Component'
+import { ElementFormatType } from 'lexical'
 
 export type NodeTypes =
   | DefaultNodeTypes
@@ -116,6 +117,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                 <MediaBlock
                   className={cn('col-start-2 col-span-1', {
                     'col-start-1 col-span-3': block.position === 'fullscreen',
+                    ...getAlignment(node.format),
                   })}
                   imgClassName="m-0"
                   key={index}
@@ -126,14 +128,26 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                 />
               )
             case 'banner':
-              return <BannerBlock className="col-start-2 mb-4" key={index} {...block} />
+              return (
+                <BannerBlock
+                  className={cn('col-start-2 mb-4', getAlignment(node.format))}
+                  key={index}
+                  {...block}
+                />
+              )
             case 'code':
-              return <CodeBlock className="col-start-2" key={index} {...block} />
+              return (
+                <CodeBlock
+                  className={cn('col-start-2', getAlignment(node.format))}
+                  key={index}
+                  {...block}
+                />
+              )
             case 'formBlock':
               return (
                 /* @ts-expect-error */
                 <FormBlock
-                  className="col-start-2 p-0 md:p-0"
+                  className={cn('col-start-2 p-0 md:p-0', getAlignment(node.format))}
                   key={index}
                   {...block}
                   enableIntro={block.enableIntro ? true : false}
@@ -149,7 +163,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             }
             case 'paragraph': {
               return (
-                <p className="col-start-2" key={index}>
+                <p className={cn('col-start-2', getAlignment(node.format))} key={index}>
                   {serializedChildren}
                 </p>
               )
@@ -157,7 +171,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             case 'heading': {
               const Tag = node?.tag
               return (
-                <Tag className="col-start-2" key={index}>
+                <Tag className={cn('col-start-2', getAlignment(node.format))} key={index}>
                   {serializedChildren}
                 </Tag>
               )
@@ -165,7 +179,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             case 'list': {
               const Tag = node?.tag
               return (
-                <Tag className="list col-start-2" key={index}>
+                <Tag className={cn('col-start-2', getAlignment(node.format))} key={index}>
                   {serializedChildren}
                 </Tag>
               )
@@ -175,18 +189,18 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                 return (
                   <li
                     aria-checked={node.checked ? 'true' : 'false'}
-                    className={` ${node.checked ? '' : ''}`}
                     key={index}
                     role="checkbox"
                     tabIndex={-1}
                     value={node?.value}
+                    className={cn(getAlignment(node.format))}
                   >
                     {serializedChildren}
                   </li>
                 )
               } else {
                 return (
-                  <li key={index} value={node?.value}>
+                  <li key={index} value={node?.value} className={cn(getAlignment(node.format))}>
                     {serializedChildren}
                   </li>
                 )
@@ -194,7 +208,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             }
             case 'quote': {
               return (
-                <blockquote className="col-start-2" key={index}>
+                <blockquote className={cn('col-start-2', getAlignment(node.format))} key={index}>
                   {serializedChildren}
                 </blockquote>
               )
@@ -209,6 +223,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                   reference={fields.doc as any}
                   type={fields.linkType === 'internal' ? 'reference' : 'custom'}
                   url={fields.url}
+                  className={cn(getAlignment(node.format))}
                 >
                   {serializedChildren}
                 </CMSLink>
@@ -222,4 +237,15 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
       })}
     </Fragment>
   )
+}
+
+function getAlignment(format: ElementFormatType) {
+  return {
+    'text-left': format === 'left',
+    'text-center': format === 'center',
+    'text-right': format === 'right',
+    'text-justify': format === 'justify',
+    'text-start': format === 'start',
+    'text-end': format === 'end',
+  }
 }

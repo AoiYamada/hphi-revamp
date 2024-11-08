@@ -8,6 +8,7 @@ import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { searchPlugin } from '@payloadcms/plugin-search'
 import {
+  AlignFeature,
   BoldFeature,
   FixedToolbarFeature,
   HeadingFeature,
@@ -178,6 +179,7 @@ export default buildConfig({
                       ...rootFeatures,
                       FixedToolbarFeature(),
                       HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+                      AlignFeature(),
                     ]
                   },
                 }),

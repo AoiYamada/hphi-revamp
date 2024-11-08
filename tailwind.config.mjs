@@ -110,7 +110,7 @@ const config = {
             '--tw-prose-body': 'var(--text)',
             '--tw-prose-headings': 'var(--text)',
             h1: {
-              fontSize: '4rem',
+              fontSize: '3rem',
               fontWeight: 'normal',
               marginBottom: '0.25em',
             },
