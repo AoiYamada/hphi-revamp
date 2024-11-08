@@ -1,0 +1,4 @@
+/* Fix float above selection options bug */
+.rich-text-lexical__wrap > .fixed-toolbar {
+  z-index: 0;
+}

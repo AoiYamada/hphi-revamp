@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import { buildInitialFormState } from './buildInitialFormState'
 import { fields } from './fields'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
+import { cn } from '@/utilities'
 
 export type Value = unknown
 
@@ -29,18 +30,21 @@ export type FormBlockType = {
   introContent?: {
     [k: string]: unknown
   }[]
+  className?: string
 }
 
 export const FormBlock: React.FC<
   {
     id?: string
+    className?: string
   } & FormBlockType
 > = (props) => {
   const {
-    enableIntro,
+    enableIntro = false,
     form: formFromProps,
     form: { id: formID, confirmationMessage, confirmationType, redirect, submitButtonLabel } = {},
     introContent,
+    className,
   } = props
 
   const formMethods = useForm({
@@ -126,7 +130,7 @@ export const FormBlock: React.FC<
   )
 
   return (
-    <MaxWidthWrapper className="lg:max-w-[48rem] pb-20">
+    <MaxWidthWrapper className={cn('lg:max-w-[48rem] pb-20', className)}>
       <FormProvider {...formMethods}>
         {enableIntro && introContent && !hasSubmitted && (
           <RichText className="mb-8" content={introContent} enableGutter={false} />
@@ -137,7 +141,7 @@ export const FormBlock: React.FC<
         {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
         {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
         {!hasSubmitted && (
-          <form id={formID} onSubmit={handleSubmit(onSubmit)}>
+          <form id={formID} onSubmit={handleSubmit(onSubmit)} className={className}>
             <div className="mb-4 last:mb-0">
               {formFromProps &&
                 formFromProps.fields &&

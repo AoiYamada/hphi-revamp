@@ -18,6 +18,7 @@ import {
 } from './nodeFormat'
 import type { Page } from '@/payload-types'
 import { cn } from '@/utilities'
+import { FormBlock } from '@/blocks/Form/Component'
 
 export type NodeTypes =
   | DefaultNodeTypes
@@ -26,6 +27,7 @@ export type NodeTypes =
       | Extract<Page['layout'][0], { blockType: 'mediaBlock' }>
       | BannerBlockProps
       | CodeBlockProps
+      | Extract<Page['layout'][0], { blockType: 'formBlock' }>
     >
 
 type Props = {
@@ -127,6 +129,16 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
               return <BannerBlock className="col-start-2 mb-4" key={index} {...block} />
             case 'code':
               return <CodeBlock className="col-start-2" key={index} {...block} />
+            case 'formBlock':
+              return (
+                /* @ts-expect-error */
+                <FormBlock
+                  className="col-start-2 p-0 md:p-0"
+                  key={index}
+                  {...block}
+                  enableIntro={block.enableIntro ? true : false}
+                />
+              )
             default:
               return null
           }
