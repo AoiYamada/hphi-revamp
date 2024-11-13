@@ -20,6 +20,7 @@ const Logo: FC<LogoProps> = ({ className, noText = true }) => {
       <div
         className={cn('hidden lg:flex flex-col', {
           'lg:hidden': noText,
+          'sm:flex lg:hidden xl:flex': !noText,
         })}
       >
         <span className="text-nowrap">專業心理治療及催眠應用</span>
