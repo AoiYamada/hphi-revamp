@@ -11,7 +11,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
-import MenuItemLabel from './MenuItemLabel'
+import MenuItemLabel from '../MenuItemLabel'
 import MenuItemContent from './MenuItemContent'
 import { cn } from '@/utilities'
 
@@ -45,7 +45,7 @@ const HeaderNav: FC<HeaderNavProps> = ({ header, className }) => {
         <NavigationMenuItem className="py-2 px-4">
           <Link href="/search" legacyBehavior passHref>
             <NavigationMenuLink>
-              <span className="sr-only">Search</span>
+              <span className="sr-only">文章搜尋</span>
               <SearchIcon className="w-5 text-primary" />
             </NavigationMenuLink>
           </Link>

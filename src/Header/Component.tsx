@@ -12,14 +12,14 @@ export async function Header() {
   const header: Header = await getCachedGlobal('header', 1)
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/90">
+    <header className="sticky top-0 z-50 w-full bg-white">
       <MaxWidthWrapper>
         <div className="flex justify-between items-center lg:items-end px-2">
           <Link href="/">
             <Logo noText={false} />
           </Link>
           <MainNav header={header} className="hidden lg:block" />
-          <MobileNav className="lg:hidden" />
+          <MobileNav header={header} className="lg:hidden" />
         </div>
       </MaxWidthWrapper>
     </header>

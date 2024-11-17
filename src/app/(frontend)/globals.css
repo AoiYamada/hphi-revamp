@@ -62,3 +62,32 @@
 html {
   opacity: initial;
 }
+
+/* Ref: https://www.radix-ui.com/primitives/docs/components/collapsible */
+.collapsible-content {
+  overflow: hidden;
+}
+.collapsible-content[data-state='open'] {
+  animation: collapsible-slide-down 300ms ease-in;
+}
+.collapsible-content[data-state='closed'] {
+  animation: collapsible-slide-up 300ms ease-out;
+}
+
+@keyframes collapsible-slide-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+  }
+}
+
+@keyframes collapsible-slide-up {
+  from {
+    height: var(--radix-collapsible-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
