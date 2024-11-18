@@ -1,5 +1,5 @@
 import RichText from '@/components/RichText'
-import { MenuItemContentProps } from './MainNav/MenuItemContent'
+import { MenuItemContentProps } from './MenuItemContent'
 import { FC } from 'react'
 import { CMSLink } from '@/components/Link'
 

@@ -9,7 +9,7 @@ import type { Header as HeaderType } from '@/payload-types'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { cn } from '@/utilities'
 import MenuItemLabel from '../MenuItemLabel'
-import { DefaultLink, FeaturedLink, ListLinks } from '../Links'
+import { DefaultLink, FeaturedLink, ListLinks } from './Links'
 
 type MobileNavProps = {
   header: HeaderType
@@ -37,43 +37,39 @@ const MobileNav = ({ header, className }: MobileNavProps) => {
 
       {isOpen ? (
         <div className="fixed inset-0 z-0 w-full animate-in fade-in-20 slide-in-from-top-5">
-          <ul className="absolute mt-28 grid w-full gap-3 border-b border-zinc-200 bg-white px-10 py-8 shadow-xl backdrop-blur-lg">
-            <MaxWidthWrapper className="py-0">
-              {taps.map(
-                ({ label, link, enableDirectLink, enableDropdown, navItems, ...others }, i) => {
-                  if (others.description || others.descriptionLinks?.length) {
-                    return null
-                  }
+          <ul className="absolute mt-28 grid w-full gap-3 border-b border-zinc-200 bg-white pt-4 px-10 pb-8 shadow-xl backdrop-blur-lg max-h-[calc(100%-120px)] overflow-y-scroll">
+            {taps.map(
+              ({ label, link, enableDirectLink, enableDropdown, navItems, ...others }, i) => {
+                if (others.description || others.descriptionLinks?.length) {
+                  return null
+                }
 
-                  const text = (
-                    <MenuItemLabel
-                      label={label}
-                      enableDirectLink={enableDirectLink}
-                      link={link}
-                      className={cn({
-                        'py-2 px-4': !enableDropdown,
-                      })}
-                    />
-                  )
-
-                  return (
-                    <li key={i}>
+                return (
+                  <li key={i}>
+                    <MaxWidthWrapper className="p-0">
                       <MenuItem
                         enableDropdown={enableDropdown ?? false}
-                        text={text}
+                        label={label}
+                        enableDirectLink={enableDirectLink ?? false}
+                        link={link}
                         navItems={navItems}
                       />
-                    </li>
-                  )
-                },
-              )}
-              <li>
-                <Link className="flex w-full items-center font-semibold" href="/pricing">
-                  <SearchIcon className="mr-2 h-4 w-4" /> 文章搜尋
+                    </MaxWidthWrapper>
+                  </li>
+                )
+              },
+            )}
+            <li className="group">
+              <MaxWidthWrapper className="p-0">
+                <Link
+                  className="flex w-full items-center text-xl font-bold group-hover:text-red-500"
+                  href="/search"
+                >
+                  文章搜尋 <SearchIcon className="ml-2 h-4 w-4 group-hover:text-red-500" />
                 </Link>
-              </li>
-              {/* <li className="my-3 h-px w-full bg-gray-300" /> */}
-            </MaxWidthWrapper>
+              </MaxWidthWrapper>
+            </li>
+            {/* <li className="my-3 h-px w-full bg-gray-300" /> */}
           </ul>
         </div>
       ) : null}
@@ -85,22 +81,33 @@ export default MobileNav
 
 type MenuItemProps = {
   enableDropdown: boolean
-  text: JSX.Element
+  label: string
+  link: NonNullable<HeaderType['tabs']>[number]['link']
+  enableDirectLink: boolean
   navItems: NonNullable<HeaderType['tabs']>[number]['navItems']
 }
 
-const MenuItem = ({ enableDropdown, text, navItems }: MenuItemProps) => {
+const MenuItem = ({ enableDropdown, label, link, enableDirectLink, navItems }: MenuItemProps) => {
   if (enableDropdown) {
     return (
       <Collapsible>
-        <CollapsibleTrigger className="group flex flex-row items-center justify-start">
-          {text}
+        <CollapsibleTrigger className="group flex flex-row items-center justify-between w-full data-[state=open]:text-red-500 hover:text-red-500 transition-colors">
+          <MenuItemLabel
+            label={label}
+            enableDirectLink={enableDirectLink}
+            link={link}
+            className={cn(
+              'text-xl font-bold group-data-[state=open]:text-red-500 group-hover:text-red-500 transition-colors',
+            )}
+          />
           <ChevronRight
-            className={cn('ml-1 h-4 w-4 transition-all group-data-[state=open]:rotate-90')}
+            className={cn(
+              'ml-1 h-4 w-4 transition-all group-data-[state=open]:rotate-90 group-data-[state=open]:text-red-500',
+            )}
           />
         </CollapsibleTrigger>
-        <CollapsibleContent className="collapsible-content pl-4">
-          <ul>
+        <CollapsibleContent className="collapsible-content pl-2">
+          <ul className="border-l-2 pl-2 py-2 space-y-4">
             {navItems?.map(({ style, defaultLink, featuredLink, listLinks }, i) => {
               let item: JSX.Element | null = null
 
@@ -124,5 +131,14 @@ const MenuItem = ({ enableDropdown, text, navItems }: MenuItemProps) => {
     )
   }
 
-  return <>{text}</>
+  return (
+    <MenuItemLabel
+      label={label}
+      enableDirectLink={enableDirectLink}
+      link={link}
+      className={cn('text-xl font-bold w-full transition-colors', {
+        'hover:text-red-500': enableDirectLink,
+      })}
+    />
+  )
 }

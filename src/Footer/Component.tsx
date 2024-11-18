@@ -15,8 +15,8 @@ export async function Footer() {
 
   return (
     <footer id="footer" className="border-t border-border bg-primary text-primary-foreground">
-      <MaxWidthWrapper className="flex flex-col items-center justify-center gap-8 pb-4 pt-12">
-        <div className="flex w-full flex-col justify-between gap-4 md:flex-row md:gap-16 items-start">
+      <MaxWidthWrapper className="flex flex-col items-center justify-center gap-16 pb-4 pt-12">
+        <div className="flex w-full flex-col justify-between gap-8 md:flex-row md:gap-16 items-start">
           <Link className="flex flex-grow pb-8 items-center" href="/">
             <picture>
               <Logo className="w-32 invert" noText />

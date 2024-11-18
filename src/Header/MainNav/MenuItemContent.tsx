@@ -4,7 +4,7 @@ import type { Header as HeaderType } from '@/payload-types'
 import { cn } from '@/utilities'
 import { ExternalLink } from 'lucide-react'
 import { FC, ReactNode } from 'react'
-import { DefaultLink, FeaturedLink, ListLinks } from '../Links'
+import { DefaultLink, FeaturedLink, ListLinks } from './Links'
 
 export type MenuItemContentProps = Omit<
   NonNullable<HeaderType['tabs']>[number],
