@@ -7,9 +7,9 @@ import { Media } from '@/components/Media'
 
 export const PostHero: FC<{
   post: Post
-}> = ({ post }) => {
-  const { categories, meta: { image: metaImage } = {}, populatedAuthors, publishedAt, title } = post
-
+}> = ({
+  post: { categories, meta: { image: metaImage } = {}, populatedAuthors, publishedAt, title },
+}) => {
   return (
     <div className="relative flex items-end">
       <div className="w-full z-10 relative lg:grid lg:grid-cols-[1fr_48rem_1fr] text-white py-8">
