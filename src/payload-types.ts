@@ -599,6 +599,15 @@ export interface Course {
     [k: string]: unknown;
   } | null;
   description: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  timeSlots?:
+    | {
+        title: string;
+        time: string;
+        date: string;
+        instructors: string;
+        id?: string | null;
+      }[]
+    | null;
   meta?: {
     title?: string | null;
     image?: (string | null) | Media;

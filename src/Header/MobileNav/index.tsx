@@ -37,7 +37,7 @@ const MobileNav = ({ header, className }: MobileNavProps) => {
 
       {isOpen ? (
         <div className="fixed inset-0 z-0 w-full animate-in fade-in-20 slide-in-from-top-5">
-          <ul className="absolute mt-28 grid w-full gap-3 border-b border-zinc-200 bg-white pt-4 px-10 pb-8 shadow-xl backdrop-blur-lg max-h-[calc(100%-120px)] overflow-y-scroll">
+          <ul className="absolute mt-28 grid w-full gap-3 border-b border-zinc-200 bg-white/90 backdrop-blur pt-4 px-10 pb-8 shadow-xl max-h-[calc(100%-120px)] overflow-y-scroll">
             {taps.map(
               ({ label, link, enableDirectLink, enableDropdown, navItems, ...others }, i) => {
                 if (others.description || others.descriptionLinks?.length) {

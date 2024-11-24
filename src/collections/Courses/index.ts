@@ -75,6 +75,37 @@ const Courses: CollectionConfig = {
           label: 'Content',
         },
         {
+          fields: [
+            {
+              name: 'timeSlots',
+              type: 'array',
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'time',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'date',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'instructors',
+                  type: 'text',
+                  required: true,
+                },
+              ],
+            },
+          ],
+          label: 'Time slots',
+        },
+        {
           name: 'meta',
           label: 'SEO',
           fields: [

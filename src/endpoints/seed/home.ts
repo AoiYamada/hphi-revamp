@@ -38,7 +38,7 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
                 format: 0,
                 mode: 'normal',
                 style: '',
-                text: 'Payload Website Template',
+                text: '專業心理治療及催眠應用（香港）有限公司',
                 version: 1,
               },
             ],
@@ -662,7 +662,7 @@ export const home: RequiredDataFromCollectionSlug<'pages'> = {
     description: 'An open-source website built with Payload and Next.js.',
     // @ts-ignore
     image: '{{IMAGE_1}}',
-    title: 'Payload Website Template',
+    title: '專業心理治療及催眠應用（香港）有限公司',
   },
   title: 'Home',
 }

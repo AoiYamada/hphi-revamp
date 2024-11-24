@@ -14,8 +14,8 @@ export const generateMeta = async (args: { doc: Page | Post }): Promise<Metadata
     `${process.env.NEXT_PUBLIC_SERVER_URL}${doc.meta.image.url}`
 
   const title = doc?.meta?.title
-    ? doc?.meta?.title + ' | Payload Website Template'
-    : 'Payload Website Template'
+    ? doc?.meta?.title + ' | 專業心理治療及催眠應用（香港）有限公司'
+    : '專業心理治療及催眠應用（香港）有限公司'
 
   return {
     description: doc?.meta?.description,
