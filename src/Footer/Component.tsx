@@ -4,7 +4,7 @@ import React from 'react'
 
 import type { Footer } from '@/payload-types'
 
-import Logo from '@/components/Logo/Logo'
+import Logo from '@/components/Logo'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import FooterNavColumn from './FooterNavColumn'
 

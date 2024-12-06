@@ -3,7 +3,7 @@ import React from 'react'
 
 import type { Header } from '@/payload-types'
 import Link from 'next/link'
-import Logo from '@/components/Logo/Logo'
+import Logo from '@/components/Logo'
 import MainNav from './MainNav'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import MobileNav from './MobileNav'
