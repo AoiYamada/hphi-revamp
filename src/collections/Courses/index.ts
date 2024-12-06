@@ -33,6 +33,7 @@ const Courses: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
+    defaultColumns: ['title'],
   },
   fields: [
     {
