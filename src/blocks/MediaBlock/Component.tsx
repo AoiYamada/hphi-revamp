@@ -1,26 +1,24 @@
 import type { StaticImageData } from 'next/image'
 
 import { cn } from 'src/utilities/cn'
-import React from 'react'
+import React, { FC } from 'react'
 import RichText from '@/components/RichText'
 
-import type { Page } from '@/payload-types'
+import type { MediaBlock as MediaBlockProps } from '@/payload-types'
 
 import { Media } from '../../components/Media'
 
-type Props = Extract<Page['layout'][0], { blockType: 'mediaBlock' }> & {
+type Props = MediaBlockProps & {
   breakout?: boolean
   captionClassName?: string
   className?: string
   enableGutter?: boolean
-  id?: string
   imgClassName?: string
   staticImage?: StaticImageData
   disableInnerContainer?: boolean
-  position?: 'default' | 'fullscreen' | null
 }
 
-export const MediaBlock: React.FC<Props> = (props) => {
+export const MediaBlock: FC<Props> = (props) => {
   const {
     captionClassName,
     className,
@@ -29,7 +27,6 @@ export const MediaBlock: React.FC<Props> = (props) => {
     media,
     staticImage,
     disableInnerContainer,
-    position = 'default',
   } = props
 
   let caption
@@ -40,30 +37,27 @@ export const MediaBlock: React.FC<Props> = (props) => {
       className={cn(
         '',
         {
-          'w-full': position === 'default' && enableGutter,
+          'w-full': enableGutter,
         },
         className,
       )}
     >
-      {position === 'fullscreen' && (
-        <div className="relative">
-          <Media resource={media} src={staticImage} />
-        </div>
-      )}
-      {position === 'default' && (
-        <Media imgClassName={cn('rounded', imgClassName)} resource={media} src={staticImage} />
-      )}
+      <Media
+        imgClassName={cn('border border-border rounded-[0.8rem]', imgClassName)}
+        resource={media}
+        src={staticImage}
+      />
       {caption && (
         <div
           className={cn(
             'mt-6',
             {
-              'w-full': position === 'fullscreen' && !disableInnerContainer,
+              'w-full': !disableInnerContainer,
             },
             captionClassName,
           )}
         >
-          <RichText content={caption} enableGutter={false} />
+          <RichText data={caption} enableGutter={false} />
         </div>
       )}
     </div>

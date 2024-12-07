@@ -1,18 +1,12 @@
 import { cn } from 'src/utilities/cn'
-import React from 'react'
+import React, { FC } from 'react'
 import RichText from '@/components/RichText'
 
-import type { Page } from '@/payload-types'
+import type { ContentBlock as ContentBlockProps } from '@/payload-types'
 
 import { CMSLink } from '../../components/Link'
 
-type Props = Extract<Page['layout'][0], { blockType: 'content' }>
-
-export const ContentBlock: React.FC<
-  {
-    id?: string
-  } & Props
-> = (props) => {
+export const ContentBlock: FC<ContentBlockProps> = (props) => {
   const { columns } = props
 
   const colsSpanClasses = {
@@ -37,7 +31,7 @@ export const ContentBlock: React.FC<
                 })}
                 key={index}
               >
-                {richText && <RichText content={richText} enableGutter={false} />}
+                {richText && <RichText data={richText} enableGutter={false} />}
 
                 {enableLink && <CMSLink {...link} />}
               </div>

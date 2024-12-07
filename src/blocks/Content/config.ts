@@ -75,6 +75,9 @@ export const Content: Block = {
     {
       name: 'columns',
       type: 'array',
+      admin: {
+        initCollapsed: true,
+      },
       fields: columnFields,
     },
   ],

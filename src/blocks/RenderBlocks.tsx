@@ -21,7 +21,7 @@ export const RenderBlocks: FC<{
 }> = (props) => {
   const { blocks } = props
 
-  const hasBlocks = Array.isArray(blocks) && blocks.length > 0
+  const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0
 
   if (!hasBlocks) {
     return null
