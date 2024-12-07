@@ -6,8 +6,8 @@ WORKDIR /home/node/app
 COPY package*.json ./
 
 COPY . .
-RUN pnpm install
-RUN pnpm build
+RUN pnpm i
+RUN pnpm run build
 
 FROM base as runtime
 
@@ -17,7 +17,7 @@ WORKDIR /home/node/app
 COPY package*.json  ./
 COPY pnpm-lock.yaml ./
 
-RUN pnpm install --prod
+RUN pnpm i --prod
 
 EXPOSE 3000
 

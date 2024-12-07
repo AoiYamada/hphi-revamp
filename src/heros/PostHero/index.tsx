@@ -1,13 +1,15 @@
 import { formatDateTime } from 'src/utilities/formatDateTime'
-import { Fragment, type FC } from 'react'
+import type { FC } from 'react'
 
 import type { Post } from '@/payload-types'
 
 import { Media } from '@/components/Media'
 
-export const PostHero: FC<{
+type PostHeroProps = {
   post: Post
-}> = ({
+}
+
+export const PostHero: FC<PostHeroProps> = ({
   post: { categories, meta: { image: metaImage } = {}, populatedAuthors, publishedAt, title },
 }) => {
   return (
@@ -24,10 +26,10 @@ export const PostHero: FC<{
                 const isLast = index === categories.length - 1
 
                 return (
-                  <Fragment key={index}>
+                  <>
                     {titleToUse}
                     {!isLast && <>, &nbsp;</>}
-                  </Fragment>
+                  </>
                 )
               }
               return null
@@ -50,12 +52,12 @@ export const PostHero: FC<{
                     const secondToLast = index === populatedAuthors.length - 2
 
                     return (
-                      <Fragment key={index}>
+                      <>
                         {name}
                         {secondToLast && populatedAuthors.length > 2 && <>, </>}
                         {secondToLast && populatedAuthors.length === 2 && <> </>}
                         {!isLast && populatedAuthors.length > 1 && <>and </>}
-                      </Fragment>
+                      </>
                     )
                   })}
                 </div>

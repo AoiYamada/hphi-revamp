@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 import type { Page } from '@/payload-types'
 
@@ -16,7 +16,7 @@ const blockComponents = {
   mediaBlock: MediaBlock,
 }
 
-export const RenderBlocks: React.FC<{
+export const RenderBlocks: FC<{
   blocks: Page['layout'][0][]
 }> = (props) => {
   const { blocks } = props

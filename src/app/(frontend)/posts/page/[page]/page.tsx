@@ -4,7 +4,7 @@ import { CollectionArchive } from '@/components/CollectionArchive'
 import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
 import configPromise from '@payload-config'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 import React from 'react'
 import { notFound } from 'next/navigation'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
@@ -19,7 +19,7 @@ type Args = {
 
 export default async function Page({ params: paramsPromise }: Args) {
   const { page } = await paramsPromise
-  const payload = await getPayloadHMR({ config: configPromise })
+  const payload = await getPayload({ config: configPromise })
 
   const sanitizedPageNumber = Number(page)
 
@@ -69,18 +69,17 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
 }
 
 export async function generateStaticParams() {
-  const payload = await getPayloadHMR({ config: configPromise })
-  const posts = await payload.find({
+  const payload = await getPayload({ config: configPromise })
+  const { totalDocs } = await payload.count({
     collection: 'posts',
-    depth: 0,
-    limit: 10,
-    draft: false,
     overrideAccess: false,
   })
 
+  const totalPages = Math.ceil(totalDocs / 10)
+
   const pages: { page: string }[] = []
 
-  for (let i = 1; i <= posts.totalPages; i++) {
+  for (let i = 1; i <= totalPages; i++) {
     pages.push({ page: String(i) })
   }
 
