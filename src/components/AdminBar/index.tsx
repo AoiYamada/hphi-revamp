@@ -11,6 +11,8 @@ import { useRouter } from 'next/navigation'
 import './index.scss'
 import MaxWidthWrapper from '../MaxWidthWrapper'
 
+import { getClientSideURL } from '@/utilities/getURL'
+
 const baseClass = 'admin-bar'
 
 const collectionLabels = {
@@ -59,7 +61,7 @@ export const AdminBar: FC<{
             logo: 'text-white',
             user: 'text-white',
           }}
-          cmsURL={process.env.NEXT_PUBLIC_SERVER_URL}
+          cmsURL={getClientSideURL()}
           collection={collection}
           collectionLabels={{
             plural: collectionLabels[collection]?.plural || 'Pages',

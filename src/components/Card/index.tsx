@@ -2,16 +2,18 @@
 import { cn } from '@/utilities/cn'
 import useClickableCard from '@/utilities/useClickableCard'
 import Link from 'next/link'
-import React, { Fragment } from 'react'
+import React, { FC, Fragment } from 'react'
 
 import type { Post } from '@/payload-types'
 
 import { Media } from '@/components/Media'
 
-export const Card: React.FC<{
+export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>
+
+export const Card: FC<{
   alignItems?: 'center'
   className?: string
-  doc?: Post
+  doc?: CardPostData
   relationTo?: 'posts'
   showCategories?: boolean
   title?: string
@@ -37,7 +39,7 @@ export const Card: React.FC<{
     >
       <div className="relative w-full ">
         {!metaImage && <div className="">No image</div>}
-        {metaImage && typeof metaImage !== 'string' && <Media resource={metaImage} size="360px" />}
+        {metaImage && typeof metaImage !== 'string' && <Media resource={metaImage} size="33vw" />}
       </div>
       <div className="p-4">
         {showCategories && hasCategories && (

@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-const BeforeLogin: React.FC = () => {
+const BeforeLogin: FC = () => {
   return (
     <div>
       <p>

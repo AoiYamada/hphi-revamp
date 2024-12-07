@@ -1,43 +1,75 @@
-import { cn } from '@/utilities/cn'
-import type { FC } from 'react'
+import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical'
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import {
+  JSXConvertersFunction,
+  RichText as RichTextWithoutBlocks,
+} from '@payloadcms/richtext-lexical/react'
 
-import { serializeLexical } from './serialize'
+import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
+
+import type {
+  BannerBlock as BannerBlockProps,
+  CallToActionBlock as CTABlockProps,
+  MediaBlock as MediaBlockProps,
+} from '@/payload-types'
+import { BannerBlock } from '@/blocks/Banner/Component'
+import { CallToActionBlock } from '@/blocks/CallToAction/Component'
+import { cn } from '@/utilities/cn'
+import { FC, HTMLAttributes } from 'react'
+import { FormBlock, FormBlockType } from '@/blocks/Form/Component'
+
+type NodeTypes =
+  | DefaultNodeTypes
+  | SerializedBlockNode<
+      CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps | FormBlockType
+    >
+
+const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
+  ...defaultConverters,
+  blocks: {
+    banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
+    mediaBlock: ({ node }) => (
+      <MediaBlock
+        className="col-start-1 col-span-3"
+        imgClassName="m-0"
+        {...node.fields}
+        captionClassName="mx-auto max-w-[48rem]"
+        enableGutter={false}
+        disableInnerContainer={true}
+      />
+    ),
+    code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
+    cta: ({ node }) => <CallToActionBlock {...node.fields} />,
+    formBlock: ({ node }) => <FormBlock className="col-start-2 p-0 md:p-0" {...node.fields} />,
+  },
+})
 
 type RichTextProps = {
-  className?: string
-  content: Record<string, any>
+  data: SerializedEditorState
   enableGutter?: boolean
   enableProse?: boolean
-}
+} & HTMLAttributes<HTMLDivElement>
 
 const RichText: FC<RichTextProps> = ({
   className,
-  content,
-  enableGutter = true,
   enableProse = true,
+  enableGutter = true,
+  ...rest
 }) => {
-  if (!content) {
-    return null
-  }
-
   return (
-    <div
+    <RichTextWithoutBlocks
+      converters={jsxConverters}
       className={cn(
         {
           'w-full': enableGutter,
           'max-w-none': !enableGutter,
-          'mx-auto prose dark:prose-invert': enableProse,
+          'mx-auto prose md:prose-md dark:prose-invert ': enableProse,
         },
         className,
       )}
-    >
-      {content &&
-        !Array.isArray(content) &&
-        typeof content === 'object' &&
-        'root' in content &&
-        serializeLexical({ nodes: content?.root?.children })}
-    </div>
+      {...rest}
+    />
   )
 }
-
 export default RichText
