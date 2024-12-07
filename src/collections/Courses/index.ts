@@ -23,7 +23,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
-const Courses: CollectionConfig = {
+export const Courses: CollectionConfig = {
   slug: 'courses',
   access: {
     create: authenticated,
@@ -139,5 +139,3 @@ const Courses: CollectionConfig = {
     // afterChange: [revalidatePage],
   },
 }
-
-export default Courses
