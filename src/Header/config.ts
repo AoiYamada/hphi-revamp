@@ -19,7 +19,7 @@ export const Header: GlobalConfig = {
     {
       admin: {
         components: {
-          RowLabel: '/Header/RowLabels#Tabs',
+          RowLabel: '@/Header/RowLabels#Tabs',
         },
       },
       name: 'tabs',
@@ -85,7 +85,7 @@ export const Header: GlobalConfig = {
               type: 'array',
               admin: {
                 components: {
-                  RowLabel: '/Header/RowLabels#NavItem',
+                  RowLabel: '@/Header/RowLabels#NavItem',
                 },
               },
               fields: [

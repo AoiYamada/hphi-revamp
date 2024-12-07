@@ -1,6 +1,6 @@
 import type { Header as HeaderType } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
-import { FC, ReactNode } from 'react'
+import { FC } from 'react'
 
 type MenuItemLabelProps = Pick<
   NonNullable<HeaderType['tabs']>[number],
