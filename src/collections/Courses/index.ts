@@ -15,13 +15,6 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
-import {
-  AlignFeature,
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
 import { slugField } from '@/fields/slug'
 import { revalidateCourse, revalidateDelete } from './hooks/revalidatePage'
 
@@ -36,6 +29,10 @@ export const Courses: CollectionConfig = {
   defaultPopulate: {
     title: true,
     slug: true,
+    meta: {
+      image: true,
+      description: true,
+    },
   },
   admin: {
     useAsTitle: 'title',
@@ -56,22 +53,6 @@ export const Courses: CollectionConfig = {
         },
         {
           fields: [
-            {
-              name: 'introduction',
-              type: 'richText',
-              editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
-                  return [
-                    ...rootFeatures,
-                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    FixedToolbarFeature(),
-                    InlineToolbarFeature(),
-                    AlignFeature(),
-                  ]
-                },
-              }),
-              label: false,
-            },
             {
               name: 'description',
               type: 'blocks',

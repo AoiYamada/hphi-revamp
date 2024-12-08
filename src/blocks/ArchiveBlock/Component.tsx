@@ -1,6 +1,6 @@
-import type { Post, ArchiveBlock as ArchiveBlockProps } from '@/payload-types'
+import type { Post, ArchiveBlock as ArchiveBlockProps, Course } from '@/payload-types'
 
-import configPromise from '@payload-config'
+import config from '@payload-config'
 import { getPayload } from 'payload'
 import React, { FC } from 'react'
 import RichText from '@/components/RichText'
@@ -11,15 +11,21 @@ export const ArchiveBlock: FC<
   ArchiveBlockProps & {
     id?: string
   }
-> = async (props) => {
-  const { id, categories, introContent, limit: limitFromProps, populateBy, selectedDocs } = props
-
+> = async ({
+  id,
+  categories,
+  introContent,
+  relationTo,
+  limit: limitFromProps,
+  populateBy,
+  selectedDocs,
+}) => {
   const limit = limitFromProps || 3
 
-  let posts: Post[] = []
+  let posts: (Post | Course)[] = []
 
   if (populateBy === 'collection') {
-    const payload = await getPayload({ config: configPromise })
+    const payload = await getPayload({ config })
 
     const flattenedCategories = categories?.map((category) => {
       if (typeof category === 'object') return category.id
@@ -27,7 +33,7 @@ export const ArchiveBlock: FC<
     })
 
     const fetchedPosts = await payload.find({
-      collection: 'posts',
+      collection: relationTo ?? 'posts',
       depth: 1,
       limit,
       ...(flattenedCategories && flattenedCategories.length > 0
@@ -46,11 +52,13 @@ export const ArchiveBlock: FC<
     if (selectedDocs?.length) {
       const filteredSelectedPosts = selectedDocs.map((post) => {
         if (typeof post.value === 'object') return post.value
-      }) as Post[]
+      }) as (Post | Course)[]
 
       posts = filteredSelectedPosts
     }
   }
+
+  console.log('posts', posts)
 
   return (
     <div className="my-16" id={`block-${id}`}>
@@ -59,7 +67,7 @@ export const ArchiveBlock: FC<
           <RichText className="ml-0 max-w-[48rem]" data={introContent} enableGutter={false} />
         </div>
       )}
-      <CollectionArchive posts={posts} />
+      <CollectionArchive relationTo={relationTo ?? 'posts'} posts={posts} />
     </div>
   )
 }

@@ -12,11 +12,11 @@ export interface Config {
   };
   collections: {
     pages: Page;
+    courses: Course;
     posts: Post;
     media: Media;
     categories: Category;
     users: User;
-    courses: Course;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -28,11 +28,11 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
+    courses: CoursesSelect<false> | CoursesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
-    courses: CoursesSelect<false> | CoursesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -339,14 +339,20 @@ export interface ArchiveBlock {
     [k: string]: unknown;
   } | null;
   populateBy?: ('collection' | 'selection') | null;
-  relationTo?: 'posts' | null;
+  relationTo?: ('posts' | 'courses') | null;
   categories?: (string | Category)[] | null;
   limit?: number | null;
   selectedDocs?:
-    | {
-        relationTo: 'posts';
-        value: string | Post;
-      }[]
+    | (
+        | {
+            relationTo: 'posts';
+            value: string | Post;
+          }
+        | {
+            relationTo: 'courses';
+            value: string | Course;
+          }
+      )[]
     | null;
   id?: string | null;
   blockName?: string | null;
@@ -431,6 +437,69 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "courses".
+ */
+export interface Course {
+  id: string;
+  title: string;
+  hero: {
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?: {
+              relationTo: 'pages';
+              value: string | Page;
+            } | null;
+            url?: string | null;
+            label: string;
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    media?: (string | null) | Media;
+  };
+  description: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  timeSlots?:
+    | {
+        title: string;
+        time: string;
+        date: string;
+        tutors: string;
+        closed: boolean;
+        id?: string | null;
+      }[]
+    | null;
+  meta?: {
+    title?: string | null;
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -624,84 +693,6 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "courses".
- */
-export interface Course {
-  id: string;
-  title: string;
-  hero: {
-    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
-    richText?: {
-      root: {
-        type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    links?:
-      | {
-          link: {
-            type?: ('reference' | 'custom') | null;
-            newTab?: boolean | null;
-            reference?: {
-              relationTo: 'pages';
-              value: string | Page;
-            } | null;
-            url?: string | null;
-            label: string;
-            appearance?: ('default' | 'outline') | null;
-          };
-          id?: string | null;
-        }[]
-      | null;
-    media?: (string | null) | Media;
-  };
-  introduction?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  description: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
-  timeSlots?:
-    | {
-        title: string;
-        time: string;
-        date: string;
-        tutors: string;
-        closed: boolean;
-        id?: string | null;
-      }[]
-    | null;
-  meta?: {
-    title?: string | null;
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -780,6 +771,10 @@ export interface PayloadLockedDocument {
         value: string | Page;
       } | null)
     | ({
+        relationTo: 'courses';
+        value: string | Course;
+      } | null)
+    | ({
         relationTo: 'posts';
         value: string | Post;
       } | null)
@@ -794,10 +789,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: string | User;
-      } | null)
-    | ({
-        relationTo: 'courses';
-        value: string | Course;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -979,6 +970,134 @@ export interface PagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "courses_select".
+ */
+export interface CoursesSelect<T extends boolean = true> {
+  title?: T;
+  hero?:
+    | T
+    | {
+        type?: T;
+        richText?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        media?: T;
+      };
+  description?:
+    | T
+    | {
+        cta?:
+          | T
+          | {
+              richText?: T;
+              links?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          appearance?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        content?:
+          | T
+          | {
+              columns?:
+                | T
+                | {
+                    size?: T;
+                    richText?: T;
+                    enableLink?: T;
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          appearance?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        mediaBlock?:
+          | T
+          | {
+              media?: T;
+              id?: T;
+              blockName?: T;
+            };
+        archive?:
+          | T
+          | {
+              introContent?: T;
+              populateBy?: T;
+              relationTo?: T;
+              categories?: T;
+              limit?: T;
+              selectedDocs?: T;
+              id?: T;
+              blockName?: T;
+            };
+        formBlock?:
+          | T
+          | {
+              form?: T;
+              enableIntro?: T;
+              introContent?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  timeSlots?:
+    | T
+    | {
+        title?: T;
+        time?: T;
+        date?: T;
+        tutors?: T;
+        closed?: T;
+        id?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -1133,135 +1252,6 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "courses_select".
- */
-export interface CoursesSelect<T extends boolean = true> {
-  title?: T;
-  hero?:
-    | T
-    | {
-        type?: T;
-        richText?: T;
-        links?:
-          | T
-          | {
-              link?:
-                | T
-                | {
-                    type?: T;
-                    newTab?: T;
-                    reference?: T;
-                    url?: T;
-                    label?: T;
-                    appearance?: T;
-                  };
-              id?: T;
-            };
-        media?: T;
-      };
-  introduction?: T;
-  description?:
-    | T
-    | {
-        cta?:
-          | T
-          | {
-              richText?: T;
-              links?:
-                | T
-                | {
-                    link?:
-                      | T
-                      | {
-                          type?: T;
-                          newTab?: T;
-                          reference?: T;
-                          url?: T;
-                          label?: T;
-                          appearance?: T;
-                        };
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        content?:
-          | T
-          | {
-              columns?:
-                | T
-                | {
-                    size?: T;
-                    richText?: T;
-                    enableLink?: T;
-                    link?:
-                      | T
-                      | {
-                          type?: T;
-                          newTab?: T;
-                          reference?: T;
-                          url?: T;
-                          label?: T;
-                          appearance?: T;
-                        };
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        mediaBlock?:
-          | T
-          | {
-              media?: T;
-              id?: T;
-              blockName?: T;
-            };
-        archive?:
-          | T
-          | {
-              introContent?: T;
-              populateBy?: T;
-              relationTo?: T;
-              categories?: T;
-              limit?: T;
-              selectedDocs?: T;
-              id?: T;
-              blockName?: T;
-            };
-        formBlock?:
-          | T
-          | {
-              form?: T;
-              enableIntro?: T;
-              introContent?: T;
-              id?: T;
-              blockName?: T;
-            };
-      };
-  timeSlots?:
-    | T
-    | {
-        title?: T;
-        time?: T;
-        date?: T;
-        tutors?: T;
-        closed?: T;
-        id?: T;
-      };
-  meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-      };
-  slug?: T;
-  slugLock?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

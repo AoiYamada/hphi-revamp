@@ -13,8 +13,8 @@ export const PostHero: FC<PostHeroProps> = ({
   post: { categories, meta: { image: metaImage } = {}, populatedAuthors, publishedAt, title },
 }) => {
   return (
-    <div className="relative -mt-[10.4rem] flex items-end">
-      <div className="w-full z-10 relative lg:grid lg:grid-cols-[1fr_48rem_1fr] text-white pb-8">
+    <div className="relative flex items-end">
+      <div className="w-full z-10 relative lg:grid lg:grid-cols-[1fr_48rem_1fr] bg-primary/70 text-primary-foreground backdrop-blur-sm py-8">
         <div className="col-start-1 col-span-1 md:col-start-2 md:col-span-2">
           <div className="uppercase text-sm mb-6">
             {categories?.map((category, index) => {

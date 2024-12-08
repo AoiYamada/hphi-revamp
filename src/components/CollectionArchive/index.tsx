@@ -6,11 +6,12 @@ import type { Post } from '@/payload-types'
 import { Card, CardPostData } from '@/components/Card'
 
 export type Props = {
+  relationTo: 'posts' | 'courses'
   posts: CardPostData[]
 }
 
 export const CollectionArchive: FC<Props> = (props) => {
-  const { posts } = props
+  const { posts, relationTo } = props
 
   return (
     <div className={cn('w-full')}>
@@ -20,7 +21,7 @@ export const CollectionArchive: FC<Props> = (props) => {
             if (typeof result === 'object' && result !== null) {
               return (
                 <div className="col-span-4" key={index}>
-                  <Card className="h-full" doc={result} relationTo="posts" showCategories />
+                  <Card className="h-full" doc={result} relationTo={relationTo} showCategories />
                 </div>
               )
             }
