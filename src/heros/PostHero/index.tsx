@@ -1,5 +1,5 @@
 import { formatDateTime } from 'src/utilities/formatDateTime'
-import type { FC } from 'react'
+import { Fragment, type FC } from 'react'
 
 import type { Post } from '@/payload-types'
 
@@ -26,10 +26,10 @@ export const PostHero: FC<PostHeroProps> = ({
                 const isLast = index === categories.length - 1
 
                 return (
-                  <>
+                  <Fragment key={index}>
                     {titleToUse}
                     {!isLast && <>, &nbsp;</>}
-                  </>
+                  </Fragment>
                 )
               }
               return null
@@ -52,12 +52,12 @@ export const PostHero: FC<PostHeroProps> = ({
                     const secondToLast = index === populatedAuthors.length - 2
 
                     return (
-                      <>
+                      <Fragment key={index}>
                         {name}
                         {secondToLast && populatedAuthors.length > 2 && <>, </>}
                         {secondToLast && populatedAuthors.length === 2 && <> </>}
                         {!isLast && populatedAuthors.length > 1 && <>and </>}
-                      </>
+                      </Fragment>
                     )
                   })}
                 </div>

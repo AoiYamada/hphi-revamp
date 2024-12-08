@@ -7,7 +7,7 @@ COPY package*.json ./
 
 COPY . .
 RUN pnpm i
-RUN pnpm run build
+RUN pnpm build
 
 FROM base as runtime
 

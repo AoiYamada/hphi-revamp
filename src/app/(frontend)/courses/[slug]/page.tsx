@@ -7,17 +7,18 @@ import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
 import { homeStatic } from '@/endpoints/seed/home-static'
 
-import type { Page as PageType } from '@/payload-types'
+import type { Course as CourseType } from '@/payload-types'
 
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
+import TimeSlot from '@/components/sections/TimeSlot'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
   const pages = await payload.find({
-    collection: 'pages',
+    collection: 'courses',
     draft: false,
     limit: 1000,
     overrideAccess: false,
@@ -27,13 +28,9 @@ export async function generateStaticParams() {
     },
   })
 
-  const params = pages.docs
-    ?.filter((doc) => {
-      return doc.slug !== 'home'
-    })
-    .map(({ slug }) => {
-      return { slug }
-    })
+  const params = pages.docs.map(({ slug }) => {
+    return { slug }
+  })
 
   return params
 }
@@ -45,60 +42,61 @@ type Args = {
 }
 
 export default async function Page({ params: paramsPromise }: Args) {
-  const { slug = 'home' } = await paramsPromise
-  const url = '/' + slug
+  let { slug = '' } = await paramsPromise
+  slug = decodeURIComponent(slug)
 
-  let page: PageType | null
+  if (!slug) {
+    return <PayloadRedirects url="/" />
+  }
 
-  page = await queryPageBySlug({
+  const url = `/courses/${slug}`
+
+  let course: CourseType | null
+
+  course = await queryCourseBySlug({
     slug,
   })
 
-  // Remove this code once your website is seeded
-  if (!page && slug === 'home') {
-    page = homeStatic
-  }
-
-  if (!page) {
+  if (!course) {
     return <PayloadRedirects url={url} />
   }
 
-  const { hero, layout } = page
+  const {
+    hero,
+    // introduction,
+    description,
+    timeSlots,
+  } = course
 
   return (
     <MaxWidthWrapper>
       <article className="pt-8 pb-16">
         {/* Allows redirects for valid pages too */}
         <PayloadRedirects disableNotFound url={url} />
-
         <RenderHero {...hero} />
-        <RenderBlocks blocks={layout} />
+        <RenderBlocks blocks={description} />
+        {timeSlots ? <TimeSlot slots={timeSlots} /> : null}
       </article>
     </MaxWidthWrapper>
   )
 }
 
 export async function generateMetadata({ params: paramsPromise }): Promise<Metadata> {
-  let { slug = 'home' } = await paramsPromise
-  slug = decodeURIComponent(slug)
-  const page = await queryPageBySlug({
+  const { slug = 'home' } = await paramsPromise
+  const page = await queryCourseBySlug({
     slug,
   })
 
   return generateMeta({ doc: page })
 }
 
-const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
-  const { isEnabled: draft } = await draftMode()
-
+const queryCourseBySlug = cache(async ({ slug }: { slug: string }) => {
   const payload = await getPayload({ config: configPromise })
 
   const result = await payload.find({
-    collection: 'pages',
-    draft,
+    collection: 'courses',
     limit: 1,
     pagination: false,
-    overrideAccess: draft,
     where: {
       slug: {
         equals: slug,

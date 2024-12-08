@@ -22,6 +22,8 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
+import { slugField } from '@/fields/slug'
+import { revalidateCourse, revalidateDelete } from './hooks/revalidatePage'
 
 export const Courses: CollectionConfig = {
   slug: 'courses',
@@ -31,9 +33,13 @@ export const Courses: CollectionConfig = {
     read: anyone,
     update: authenticated,
   },
+  defaultPopulate: {
+    title: true,
+    slug: true,
+  },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title'],
+    defaultColumns: ['title', 'slug'],
   },
   fields: [
     {
@@ -97,8 +103,14 @@ export const Courses: CollectionConfig = {
                   required: true,
                 },
                 {
-                  name: 'instructors',
+                  name: 'tutors',
                   type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'closed',
+                  type: 'checkbox',
+                  defaultValue: false,
                   required: true,
                 },
               ],
@@ -134,8 +146,10 @@ export const Courses: CollectionConfig = {
         },
       ],
     },
+    ...slugField(),
   ],
   hooks: {
-    // afterChange: [revalidatePage],
+    afterChange: [revalidateCourse],
+    beforeDelete: [revalidateDelete],
   },
 }
