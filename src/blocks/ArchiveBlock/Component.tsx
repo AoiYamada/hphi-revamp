@@ -22,7 +22,7 @@ export const ArchiveBlock: FC<
 }) => {
   const limit = limitFromProps || 3
 
-  let posts: (Post | Course)[] = []
+  let posts: ((Post | Course) & { relationTo?: 'posts' | 'courses' })[] = []
 
   if (populateBy === 'collection') {
     const payload = await getPayload({ config })
@@ -51,14 +51,17 @@ export const ArchiveBlock: FC<
   } else {
     if (selectedDocs?.length) {
       const filteredSelectedPosts = selectedDocs.map((post) => {
-        if (typeof post.value === 'object') return post.value
+        if (typeof post.value === 'object') {
+          return {
+            ...post.value,
+            relationTo: post.relationTo,
+          }
+        }
       }) as (Post | Course)[]
 
       posts = filteredSelectedPosts
     }
   }
-
-  console.log('posts', posts)
 
   return (
     <div className="my-16" id={`block-${id}`}>

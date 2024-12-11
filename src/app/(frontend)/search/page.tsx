@@ -7,6 +7,7 @@ import React from 'react'
 import { Post } from '@/payload-types'
 import { Search } from '@/search/Component'
 import { CardPostData } from '@/components/Card'
+import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 
 type Args = {
   searchParams: Promise<{
@@ -60,7 +61,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
   })
 
   return (
-    <div className="pt-24 pb-24">
+    <MaxWidthWrapper className="pt-24 pb-24">
       <div className="w-full mb-16">
         <div className="prose dark:prose-invert max-w-none text-center">
           <h1 className="mb-8 lg:mb-16">Search</h1>
@@ -76,7 +77,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
       ) : (
         <div className="w-full">No results found.</div>
       )}
-    </div>
+    </MaxWidthWrapper>
   )
 }
 
