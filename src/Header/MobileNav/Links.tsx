@@ -60,7 +60,7 @@ export const FeaturedLink: FC<FeaturedLinkProps> = ({ label, content, links }) =
       {label && <p className="text-lg font-medium">{label}</p>}
       {content && (
         <div>
-          <RichText content={content} enableGutter={false} />
+          <RichText data={content} enableGutter={false} />
         </div>
       )}
       {links && links.length > 0 && (
