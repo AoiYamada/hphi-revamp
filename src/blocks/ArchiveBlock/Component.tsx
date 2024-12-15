@@ -22,7 +22,8 @@ export const ArchiveBlock: FC<
 }) => {
   const limit = limitFromProps || 3
 
-  let posts: ((Post | Course) & { relationTo?: 'posts' | 'courses' })[] = []
+  let posts: ((Post | Course) & { relationTo?: NonNullable<ArchiveBlockProps['relationTo']> })[] =
+    []
 
   if (populateBy === 'collection') {
     const payload = await getPayload({ config })

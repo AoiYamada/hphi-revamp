@@ -41,7 +41,7 @@ type Args = {
   }>
 }
 
-export default async function Page({ params: paramsPromise }: Args) {
+export default async function Course({ params: paramsPromise }: Args) {
   let { slug = '' } = await paramsPromise
   slug = decodeURIComponent(slug)
 

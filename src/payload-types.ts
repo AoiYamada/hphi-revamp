@@ -732,6 +732,11 @@ export interface Tutor {
     };
     [k: string]: unknown;
   };
+  meta?: {
+    title?: string | null;
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1156,6 +1161,13 @@ export interface TutorsSelect<T extends boolean = true> {
   title?: T;
   qualifications?: T;
   description?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
   slug?: T;
   slugLock?: T;
   updatedAt?: T;

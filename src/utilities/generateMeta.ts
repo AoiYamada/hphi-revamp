@@ -19,8 +19,14 @@ const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
   return url
 }
 
+type SeoMeta = Page['meta'] // all seo fields are equal to the page meta fields
+type Slug = Page['slug']
+
 export const generateMeta = async (args: {
-  doc: Partial<Page> | Partial<Post>
+  doc: {
+    meta?: SeoMeta
+    slug?: Slug
+  }
 }): Promise<Metadata> => {
   const { doc } = args || {}
 
