@@ -57,7 +57,7 @@ export const Footer: GlobalConfig = {
                   value: 'instagram',
                 },
                 {
-                  label: 'Youtube',
+                  label: 'YouTube',
                   value: 'youtube',
                 },
                 {

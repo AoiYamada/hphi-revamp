@@ -12,6 +12,7 @@ import {
 import { link } from '@/fields/link'
 import { Code } from '../Code/config'
 import { MediaBlock } from '../MediaBlock/config'
+import { YouTube } from '../YouTube/config'
 import { FormBlock } from '../Form/config'
 
 const columnFields: Field[] = [
@@ -46,7 +47,7 @@ const columnFields: Field[] = [
         return [
           ...rootFeatures,
           HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-          BlocksFeature({ blocks: [Code, MediaBlock, FormBlock] }),
+          BlocksFeature({ blocks: [Code, MediaBlock, YouTube, FormBlock] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
           AlignFeature(),

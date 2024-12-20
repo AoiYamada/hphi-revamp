@@ -12,17 +12,24 @@ import type {
   BannerBlock as BannerBlockProps,
   CallToActionBlock as CTABlockProps,
   MediaBlock as MediaBlockProps,
+  YouTube as YouTubeProps,
 } from '@/payload-types'
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { cn } from '@/utilities/cn'
 import { FC, HTMLAttributes } from 'react'
 import { FormBlock, FormBlockType } from '@/blocks/Form/Component'
+import { YouTube } from '@/blocks/YouTube/Component'
 
 type NodeTypes =
   | DefaultNodeTypes
   | SerializedBlockNode<
-      CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps | FormBlockType
+      | CTABlockProps
+      | MediaBlockProps
+      | YouTubeProps
+      | BannerBlockProps
+      | CodeBlockProps
+      | FormBlockType
     >
 
 const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
@@ -39,6 +46,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
         disableInnerContainer={true}
       />
     ),
+    youtubeBlock: ({ node }) => <YouTube className="col-start-2" {...node.fields} />,
     code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
     cta: ({ node }) => <CallToActionBlock {...node.fields} />,
     formBlock: ({ node }) => <FormBlock className="col-start-2 p-0 md:p-0" {...node.fields} />,

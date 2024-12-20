@@ -4,7 +4,7 @@ import { Footer } from '@/payload-types'
 import { WhatsApp } from '@/components/icons/WhatsApp'
 import { Instagram } from '@/components/icons/Instagram'
 import { Mail } from 'lucide-react'
-import { Youtube } from '@/components/icons/Youtube'
+import { YouTube } from '@/components/icons/YouTube'
 import { Facebook } from '@/components/icons/Facebook'
 import { CMSLink } from '@/components/Link'
 
@@ -14,7 +14,7 @@ const IconsMap = {
   none: undefined,
   whatsapp: <WhatsApp />,
   instagram: <Instagram />,
-  youtube: <Youtube />,
+  youtube: <YouTube />,
   facebook: <Facebook />,
   mail: <Mail />,
   phone: <Mail />,

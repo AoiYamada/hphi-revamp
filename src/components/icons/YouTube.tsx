@@ -5,7 +5,7 @@ type IconProps = {
   className?: string
 }
 
-export const Youtube: FC<IconProps> = ({ className }) => (
+export const YouTube: FC<IconProps> = ({ className }) => (
   <svg
     role="img"
     viewBox="0 0 24 24"
