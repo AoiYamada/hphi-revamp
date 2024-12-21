@@ -76,17 +76,17 @@ export const Courses: CollectionConfig = {
                 },
                 {
                   name: 'time',
-                  type: 'text',
+                  type: 'textarea',
                   required: true,
                 },
                 {
                   name: 'date',
-                  type: 'text',
+                  type: 'textarea',
                   required: true,
                 },
                 {
                   name: 'tutors',
-                  type: 'text',
+                  type: 'textarea',
                   required: true,
                 },
                 {

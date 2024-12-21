@@ -74,7 +74,11 @@ const ClassCard: FC<ClassCardProps> = ({ title, time, date, tutors, closed }) =>
         </div>
         <div className="flex flex-row">
           <div className="shrink-0">日期：</div>
-          <div>{date}</div>
+          <div className="flex flex-col">
+            {date.split('\n').map((date, idx) => (
+              <span key={idx}>{date}</span>
+            ))}
+          </div>
         </div>
         {tutors && tutors.length > 0 && (
           <div className="mt-4 flex flex-col">

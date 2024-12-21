@@ -19,7 +19,7 @@ export const YouTube: FC<Props> = ({ videoUrl, className }) => {
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-        className="h-[168px] w-[300px] max-w-full sm:h-[315px] sm:w-[560px] lg:h-[405px] lg:w-[720px]"
+        className="h-[168px] w-[300px] mx-auto max-w-full sm:h-[315px] sm:w-[560px] lg:h-[405px] lg:w-[720px]"
       ></iframe>
     </div>
   )

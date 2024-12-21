@@ -11,7 +11,13 @@ export const YouTubeComponent: FC<YouTubeComponentProps> = ({ field, path }) => 
   const [embedUrl, setEmbedUrl] = useState<string>('')
 
   useEffect(() => {
-    const videoId = value.split('v=')[1]
+    const videoId = (value ?? '').split('v=')[1]
+
+    if (!videoId) {
+      setEmbedUrl('')
+      return
+    }
+
     setEmbedUrl(`https://www.youtube.com/embed/${videoId}`)
   }, [value])
 
