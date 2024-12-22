@@ -68,7 +68,7 @@ export const ArchiveBlock: FC<
     <div className="my-16" id={`block-${id}`}>
       {introContent && (
         <div className="w-full mb-16">
-          <RichText className="ml-0 max-w-[48rem]" data={introContent} enableGutter={false} />
+          <RichText className="w-full" data={introContent} enableGutter={false} />
         </div>
       )}
       <CollectionArchive relationTo={relationTo ?? 'posts'} posts={posts} />
