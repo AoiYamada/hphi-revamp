@@ -18,7 +18,7 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
 
     payload.logger.info(`Revalidating page at path: ${path}`)
 
-    revalidatePath(path)
+    revalidatePath(encodeURI(path))
     revalidateTag('pages-sitemap')
   }
 
@@ -28,7 +28,7 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
 
     payload.logger.info(`Revalidating old page at path: ${oldPath}`)
 
-    revalidatePath(oldPath)
+    revalidatePath(encodeURI(oldPath))
     revalidateTag('pages-sitemap')
   }
 
