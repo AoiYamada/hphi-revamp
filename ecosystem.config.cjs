@@ -3,7 +3,7 @@ module.exports = {
     {
       name: 'hphi-revamp',
       script: 'node_modules/next/dist/bin/next',
-      args: 'start',
+      args: 'start -p 4002',
       cwd: '/home/yamada/workspace/hphi/hphi-revamp',
       exec_mode: 'cluster',
       instances: 4,
