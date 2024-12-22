@@ -70,20 +70,28 @@ const ClassCard: FC<ClassCardProps> = ({ title, time, date, tutors, closed }) =>
       <div className="flex flex-col">
         <div className="flex flex-row">
           <div className="shrink-0">時間：</div>
-          <div className="flex flex-col">{time}</div>
+          <div className="flex flex-col">
+            {time.split('\n').map((chunk, idx) => (
+              <span key={idx}>{chunk}</span>
+            ))}
+          </div>
         </div>
         <div className="flex flex-row">
           <div className="shrink-0">日期：</div>
           <div className="flex flex-col">
-            {date.split('\n').map((date, idx) => (
-              <span key={idx}>{date}</span>
+            {date.split('\n').map((chunk, idx) => (
+              <span key={idx}>{chunk}</span>
             ))}
           </div>
         </div>
         {tutors && tutors.length > 0 && (
           <div className="mt-4 flex flex-col">
             <div className="shrink-0">任教導師：</div>
-            <div>{tutors}</div>
+            <div>
+              {tutors.split('\n').map((tutor, idx) => (
+                <span key={idx}>{tutor}</span>
+              ))}
+            </div>
           </div>
         )}
       </div>

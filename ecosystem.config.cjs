@@ -6,7 +6,7 @@ module.exports = {
       args: 'start -p 4002',
       cwd: '/home/yamada/workspace/hphi/hphi-revamp',
       exec_mode: 'cluster',
-      instances: 4,
+      instances: 1,
       max_memory_restart: '1G',
       interpreter: '/home/yamada/.nvm/versions/node/v22.12.0/bin/node',
       time: false,
