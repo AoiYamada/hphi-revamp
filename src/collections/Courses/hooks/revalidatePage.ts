@@ -8,7 +8,7 @@ export const revalidateCourse: CollectionAfterChangeHook<Course> = ({
   doc,
   req: { payload, context },
 }) => {
-  if (context.disableRevalidate) {
+  if (context.disableRevalidate || !doc) {
     return doc
   }
 
@@ -23,11 +23,11 @@ export const revalidateCourse: CollectionAfterChangeHook<Course> = ({
 }
 
 export const revalidateDelete: CollectionAfterDeleteHook<Course> = ({ doc, req: { context } }) => {
-  if (context.disableRevalidate) {
+  if (context.disableRevalidate || !doc) {
     return doc
   }
 
-  const path = `/courses/${encodeURIComponent(doc.slug ?? '')}`
+  const path = `/courses/${encodeURIComponent(doc?.slug ?? '')}`
   revalidatePath(path)
   revalidateTag('pages-sitemap')
 
