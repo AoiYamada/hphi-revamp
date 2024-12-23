@@ -13,6 +13,7 @@ import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
+import { LivePreviewListener } from '@/components/LivePreviewListener'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -70,6 +71,7 @@ export default async function Page({ params: paramsPromise }: Args) {
       <article className="pt-8 pb-16">
         {/* Allows redirects for valid pages too */}
         <PayloadRedirects disableNotFound url={url} />
+        <LivePreviewListener />
 
         <RenderHero {...hero} />
         <RenderBlocks blocks={layout} />

@@ -8,7 +8,6 @@ import React, { ReactNode } from 'react'
 import { AdminBar } from '@/components/AdminBar'
 import { Footer } from '@/Footer/Component'
 import { Header } from '@/Header/Component'
-import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { Providers } from '@/providers'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { draftMode } from 'next/headers'
@@ -38,7 +37,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
               preview: isEnabled,
             }}
           />
-          <LivePreviewListener />
 
           <Header />
           {children}
