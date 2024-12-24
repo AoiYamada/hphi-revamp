@@ -17,7 +17,7 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
-import { revalidateCourse, revalidateDelete } from './hooks/revalidatePage'
+import { revalidateCourse, revalidateDelete } from './hooks/revalidateCourse'
 
 export const Courses: CollectionConfig = {
   slug: 'courses',

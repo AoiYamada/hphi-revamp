@@ -79,7 +79,6 @@ export const Tutors: CollectionConfig = {
             MetaImageField({
               relationTo: 'media',
             }),
-
             MetaDescriptionField({}),
             PreviewField({
               hasGenerateFn: true,
@@ -90,7 +89,7 @@ export const Tutors: CollectionConfig = {
         },
       ],
     },
-    ...slugField(),
+    ...slugField('name'),
   ],
   hooks: {
     // afterChange: [revalidateTutor],

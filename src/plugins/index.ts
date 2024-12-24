@@ -15,17 +15,21 @@ import {
 import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 
-import { Page, Post } from '@/payload-types'
+import { Course, Page, Post, Tutor } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
 
-const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
+const generateTitle: GenerateTitle<Post | Page | Course | Tutor> = ({ doc }) => {
   return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
 }
 
-const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
+const generateURL: GenerateURL<Post | Page | Course | Tutor> = ({ doc, collectionSlug }) => {
   const url = getServerSideURL()
 
-  return doc?.slug ? `${url}/${doc.slug}` : url
+  if (collectionSlug === 'pages') {
+    return doc?.slug ? `${url}/${doc.slug}` : url
+  }
+
+  return doc?.slug ? `${url}/${collectionSlug}/${doc.slug}` : url
 }
 
 export const plugins: Plugin[] = [
