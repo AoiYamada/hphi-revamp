@@ -70,11 +70,12 @@ export default async function Course({ params: paramsPromise }: Args) {
 
   return (
     <MaxWidthWrapper>
-      <article className="pt-8 pb-16">
-        {/* Allows redirects for valid pages too */}
+      <article className="pt-8 pb-16 space-y-8">
         <PayloadRedirects disableNotFound url={url} />
-        <RenderHero {...hero} />
-        <RenderBlocks blocks={description} />
+        <div>
+          <RenderHero {...hero} />
+          <RenderBlocks blocks={description} />
+        </div>
         {timeSlots ? <TimeSlot slots={timeSlots} /> : null}
       </article>
     </MaxWidthWrapper>

@@ -21,8 +21,8 @@ const AnimatedSection: FC<AnimatedSectionProps> = ({ children, className, id }) 
       className={cn(
         'duration-500 ease-in',
         {
-          'opacity-0': !isInView,
-          '-translate-y-12 opacity-100': isInView,
+          '-translate-y-12 opacity-0': !isInView,
+          'opacity-100': isInView,
         },
         className,
       )}
