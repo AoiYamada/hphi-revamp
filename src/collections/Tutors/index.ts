@@ -9,6 +9,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
+import { revalidateDelete, revalidateTutor } from './hooks/revalidateTutor'
 
 export const Tutors: CollectionConfig = {
   slug: 'tutors',
@@ -92,8 +93,8 @@ export const Tutors: CollectionConfig = {
     ...slugField('name'),
   ],
   hooks: {
-    // afterChange: [revalidateTutor],
-    // beforeDelete: [revalidateDelete],
+    afterChange: [revalidateTutor],
+    beforeDelete: [revalidateDelete],
   },
 }
 
