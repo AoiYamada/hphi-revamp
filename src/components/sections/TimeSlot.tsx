@@ -14,9 +14,9 @@ const TimeSlot: FC<TimeSlotProps> = ({ slots }) => {
   return (
     <AnimatedSection className="w-full" id="time-slot">
       <MaxWidthWrapper className="relative flex flex-col items-center justify-center gap-12 text-neutral">
-        <h1 className="flex flex-col items-center justify-center text-3xl font-semibold sm:flex-row sm:text-4xl lg:text-5xl">
-          開課時間
-        </h1>
+        <div className="max-w-none mx-auto prose md:prose-md dark:prose-invert">
+          <h1>開課時間</h1>
+        </div>
         <div className="grid grid-flow-row grid-cols-1 gap-16 lg:grid-cols-2 xl:md:grid-cols-3">
           {slots.map((slot, index) => (
             <ClassCard key={index} {...slot} />
