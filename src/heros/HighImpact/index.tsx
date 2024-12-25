@@ -4,12 +4,13 @@ import type { Page } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
+import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 
 export const HighImpactHero: FC<Page['hero']> = ({ links, media, richText }) => {
   return (
     <div className="relative flex items-center justify-center">
-      <div className="w-full mb-8 z-10 relative flex items-center">
-        <div className="max-w-[36.5rem]">
+      <MaxWidthWrapper className="mb-8 z-10 relative flex items-center">
+        <div className="max-w-[36.5rem] py-16">
           {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
           {Array.isArray(links) && links.length > 0 && (
             <ul className="flex gap-4">
@@ -23,8 +24,8 @@ export const HighImpactHero: FC<Page['hero']> = ({ links, media, richText }) => 
             </ul>
           )}
         </div>
-      </div>
-      <div className="min-h-[80vh] select-none">
+      </MaxWidthWrapper>
+      <div className="select-none">
         {media && typeof media === 'object' && (
           <Media
             fill

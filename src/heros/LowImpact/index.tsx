@@ -2,6 +2,7 @@ import type { FC, ReactNode } from 'react'
 import type { Page } from '@/payload-types'
 
 import RichText from '@/components/RichText'
+import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 
 type LowImpactHeroType =
   | {
@@ -15,10 +16,10 @@ type LowImpactHeroType =
 
 export const LowImpactHero: FC<LowImpactHeroType> = ({ children, richText }) => {
   return (
-    <div className="w-full mt-16">
+    <MaxWidthWrapper className="mt-16">
       <div className="max-w-[48rem]">
         {children || (richText && <RichText data={richText} enableGutter={false} />)}
       </div>
-    </div>
+    </MaxWidthWrapper>
   )
 }

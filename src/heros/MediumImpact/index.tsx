@@ -3,11 +3,12 @@ import type { Page } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
+import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 
 export const MediumImpactHero: FC<Page['hero']> = ({ links, media, richText }) => {
   return (
     <div className="">
-      <div className="w-full mb-8">
+      <MaxWidthWrapper className="mb-8">
         {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
 
         {Array.isArray(links) && links.length > 0 && (
@@ -21,8 +22,8 @@ export const MediumImpactHero: FC<Page['hero']> = ({ links, media, richText }) =
             })}
           </ul>
         )}
-      </div>
-      <div className="w-full">
+      </MaxWidthWrapper>
+      <MaxWidthWrapper>
         {media && typeof media === 'object' && (
           <div>
             <Media
@@ -39,7 +40,7 @@ export const MediumImpactHero: FC<Page['hero']> = ({ links, media, richText }) =
             )}
           </div>
         )}
-      </div>
+      </MaxWidthWrapper>
     </div>
   )
 }
