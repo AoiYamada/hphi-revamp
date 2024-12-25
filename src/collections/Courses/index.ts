@@ -2,7 +2,6 @@ import type { CollectionConfig } from 'payload'
 
 import { anyone } from '../../access/anyone'
 import { authenticated } from '../../access/authenticated'
-import { hero } from '@/heros/config'
 import { CallToAction } from '@/blocks/CallToAction/config'
 import { MediaBlock } from '@/blocks/MediaBlock/config'
 import { FormBlock } from '@/blocks/Form/config'
@@ -48,10 +47,6 @@ export const Courses: CollectionConfig = {
     {
       type: 'tabs',
       tabs: [
-        {
-          fields: [hero],
-          label: 'Hero',
-        },
         {
           fields: [
             {

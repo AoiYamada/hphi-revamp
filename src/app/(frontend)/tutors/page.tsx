@@ -54,7 +54,7 @@ export default async function Page() {
                     alt={image.alt ?? ''}
                     width={image.width ?? 0}
                     height={image.height ?? 0}
-                    className="w-full h-64 object-cover rounded-lg"
+                    className="w-full object-cover rounded-lg"
                   />
                 </div>
                 <div

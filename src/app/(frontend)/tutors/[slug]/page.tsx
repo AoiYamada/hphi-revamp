@@ -43,6 +43,8 @@ export default async function Tutor({ params: paramsPromise }: Args) {
   if (!tutor) return <PayloadRedirects url={url} />
   if (typeof tutor.image !== 'object') return null
 
+  console.log(tutor.image)
+
   return (
     <MaxWidthWrapper>
       <article className="pt-8 pb-16">
@@ -60,7 +62,7 @@ export default async function Tutor({ params: paramsPromise }: Args) {
               alt={tutor.image.alt ?? ''}
               width={tutor.image.width ?? 0}
               height={tutor.image.height ?? 0}
-              className="w-full max-w-lg h-64 object-cover rounded-lg border border-border md:hidden"
+              className="w-full max-w-lg object-cover rounded-lg border border-border md:hidden"
             />
             <RichText data={tutor.description} enableGutter={false} />
           </div>
@@ -70,8 +72,9 @@ export default async function Tutor({ params: paramsPromise }: Args) {
               alt={tutor.image.alt ?? ''}
               width={tutor.image.width ?? 0}
               height={tutor.image.height ?? 0}
-              className="w-full max-w-lg h-64 object-cover rounded-lg border border-border hidden md:block"
+              className="w-full max-w-lg object-cover rounded-lg border border-border hidden md:block"
             />
+            <h2 className="text-2xl font-semibold text-muted-foreground">專業資格</h2>
             <RichText data={tutor.qualifications} enableGutter={false} className="mx-0" />
           </div>
         </div>

@@ -3,14 +3,11 @@ import type { Metadata } from 'next'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
-import { homeStatic } from '@/endpoints/seed/home-static'
 
 import type { Course as CourseType } from '@/payload-types'
 
 import { RenderBlocks } from '@/blocks/RenderBlocks'
-import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import TimeSlot from '@/components/sections/TimeSlot'
@@ -62,23 +59,20 @@ export default async function Course({ params: paramsPromise }: Args) {
   }
 
   const {
-    hero,
     // introduction,
     description,
     timeSlots,
   } = course
 
   return (
-    <MaxWidthWrapper>
-      <article className="pt-8 pb-16 space-y-8">
-        <PayloadRedirects disableNotFound url={url} />
-        <div>
-          <RenderHero {...hero} />
-          <RenderBlocks blocks={description} />
-        </div>
+    <article className="pt-8 pb-16">
+      <PayloadRedirects disableNotFound url={url} />
+
+      <MaxWidthWrapper className="space-y-8">
+        <RenderBlocks blocks={description} />
         {timeSlots ? <TimeSlot slots={timeSlots} /> : null}
-      </article>
-    </MaxWidthWrapper>
+      </MaxWidthWrapper>
+    </article>
   )
 }
 
