@@ -7,6 +7,7 @@ import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import NextImage from 'next/image'
 import Link from 'next/link'
 import { cn } from '@/utilities'
+import { priority } from 'next-sitemap.config.cjs'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -26,7 +27,10 @@ export default async function Page() {
       image: true,
       meta: true,
       slug: true,
+      priority: true,
     },
+    // sort: ['-priority'],
+    sort: ['priority'],
   })
 
   return (

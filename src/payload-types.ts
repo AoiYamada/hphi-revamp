@@ -744,6 +744,7 @@ export interface Tutor {
   };
   slug?: string | null;
   slugLock?: boolean | null;
+  priority?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1115,6 +1116,7 @@ export interface TutorsSelect<T extends boolean = true> {
       };
   slug?: T;
   slugLock?: T;
+  priority?: T;
   updatedAt?: T;
   createdAt?: T;
 }

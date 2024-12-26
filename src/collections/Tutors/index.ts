@@ -27,7 +27,7 @@ export const Tutors: CollectionConfig = {
     description: true,
   },
   admin: {
-    defaultColumns: ['name', 'title', 'updatedAt'],
+    defaultColumns: ['name', 'title', 'priority', 'updatedAt'],
     useAsTitle: 'name',
   },
   fields: [
@@ -91,6 +91,15 @@ export const Tutors: CollectionConfig = {
       ],
     },
     ...slugField('name'),
+    {
+      name: 'priority',
+      type: 'number',
+      min: 1,
+      defaultValue: 1,
+      admin: {
+        position: 'sidebar',
+      },
+    },
   ],
   hooks: {
     afterChange: [revalidateTutor],
