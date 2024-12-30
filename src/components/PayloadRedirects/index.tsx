@@ -18,7 +18,8 @@ export const PayloadRedirects: React.FC<Props> = async ({ disableNotFound, url }
 
   if (redirectItem) {
     if (redirectItem.to?.url) {
-      redirect(redirectItem.to.url)
+      // TODO: PR to payload cms, url should be a encoded URI for support of special characters
+      redirect(encodeURI(redirectItem.to.url))
     }
 
     let redirectUrl: string
@@ -39,7 +40,7 @@ export const PayloadRedirects: React.FC<Props> = async ({ disableNotFound, url }
       }`
     }
 
-    if (redirectUrl) redirect(redirectUrl)
+    if (redirectUrl) redirect(encodeURI(redirectUrl))
   }
 
   if (disableNotFound) return null
