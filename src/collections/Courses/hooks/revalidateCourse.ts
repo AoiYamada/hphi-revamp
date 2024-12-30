@@ -16,6 +16,7 @@ export const revalidateCourse: CollectionAfterChangeHook<Course> = ({
   payload.logger.info(`Revalidating page at path: ${path}`)
 
   revalidatePath(path)
+  // revalidatePath('/courses')
   revalidateTag('pages-sitemap')
 
   return doc
@@ -28,6 +29,7 @@ export const revalidateDelete: CollectionAfterDeleteHook<Course> = ({ doc, req: 
 
   const path = encodeURI(`/courses/${doc.slug}`)
   revalidatePath(path)
+  // revalidatePath('/courses')
   revalidateTag('pages-sitemap')
 
   return doc

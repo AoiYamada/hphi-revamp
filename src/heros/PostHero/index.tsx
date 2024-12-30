@@ -14,7 +14,7 @@ export const PostHero: FC<PostHeroProps> = ({
 }) => {
   return (
     <div className="relative flex items-end">
-      <div className="w-full z-10 relative lg:grid lg:grid-cols-[1fr_48rem_1fr] bg-primary/70 text-primary-foreground backdrop-blur-sm py-8">
+      <div className="w-full z-10 relative lg:grid lg:grid-cols-[1fr_48rem_1fr] bg-primary/50 text-primary-foreground backdrop-blur-sm pt-16 pb-8">
         <div className="col-start-1 col-span-1 md:col-start-2 md:col-span-2">
           <div className="uppercase text-sm mb-6">
             {categories?.map((category, index) => {
@@ -73,7 +73,7 @@ export const PostHero: FC<PostHeroProps> = ({
           </div>
         </div>
       </div>
-      <div className="min-h-[80vh] select-none">
+      <div className="select-none">
         {metaImage && typeof metaImage !== 'string' && (
           <Media
             fill
