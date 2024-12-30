@@ -45,7 +45,7 @@ export default async function Post({ params: paramsPromise }: Args) {
   let { slug = '' } = await paramsPromise
   slug = decodeURIComponent(slug)
 
-  const url = '/posts/' + slug
+  const url = '/single-post/' + slug
   const post = await queryPostBySlug({ slug })
 
   if (!post) return <PayloadRedirects url={url} />
@@ -53,7 +53,6 @@ export default async function Post({ params: paramsPromise }: Args) {
   return (
     <MaxWidthWrapper>
       <article className="pb-16">
-        {/* Allows redirects for valid pages too */}
         <PayloadRedirects disableNotFound url={url} />
         <LivePreviewListener />
 

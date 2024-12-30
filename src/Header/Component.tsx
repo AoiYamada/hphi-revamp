@@ -12,7 +12,7 @@ export async function Header() {
   const header: Header = await getCachedGlobal('header', 1)
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur shadow-md">
+    <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur shadow-md">
       <MaxWidthWrapper>
         <div className="flex justify-between items-center lg:items-end px-2">
           <Link href="/">

@@ -65,7 +65,7 @@ export default async function Course({ params: paramsPromise }: Args) {
   } = course
 
   return (
-    <article className="pt-8 pb-16">
+    <article className="pb-16">
       <PayloadRedirects disableNotFound url={url} />
 
       <MaxWidthWrapper className="space-y-8">
