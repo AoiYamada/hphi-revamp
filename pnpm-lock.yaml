@@ -15,6 +15,9 @@ importers:
       '@payloadcms/db-mongodb':
         specifier: 3.12.0
         version: 3.12.0(@aws-sdk/credential-providers@3.679.0(@aws-sdk/client-sso-oidc@3.679.0(@aws-sdk/client-sts@3.679.0)))(payload@3.12.0(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2))(socks@2.8.3)
+      '@payloadcms/email-nodemailer':
+        specifier: ^3.12.0
+        version: 3.12.0(payload@3.12.0(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2))
       '@payloadcms/live-preview-react':
         specifier: 3.12.0
         version: 3.12.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -932,6 +935,12 @@ packages:
 
   '@payloadcms/db-mongodb@3.12.0':
     resolution: {integrity: sha512-2V/TlTCVaBvvfdhf8wtV9XZO75JW9sti2CDzLT/ldI79Q2jAN7RPJTXwvPYEy+AH1LwmkfrvMGnH6QUN4IEfSQ==}
+    peerDependencies:
+      payload: 3.12.0
+
+  '@payloadcms/email-nodemailer@3.12.0':
+    resolution: {integrity: sha512-q7a7Fi2WI3JYS4d7ySIK+uvas1RdRxcWP+7su44cHW2r3h1MZ1TIo/uD8gblolSvRqRCHnmwk5B+BKCd1NaqyA==}
+    engines: {node: ^18.20.2 || >=20.9.0}
     peerDependencies:
       payload: 3.12.0
 
@@ -3348,6 +3357,10 @@ packages:
   node-releases@2.0.18:
     resolution: {integrity: sha512-d9VeXT4SJ7ZeOqGX6R5EM022wpL+eWPooLI+5UpWn2jCT1aosUQEhQP214x33Wkwx3JQMvIm+tIoVOdodFS40g==}
 
+  nodemailer@6.9.10:
+    resolution: {integrity: sha512-qtoKfGFhvIFW5kLfrkw2R6Nm6Ur4LNUMykyqu6n9BRKJuyQrqEGwdXXUAbwWEKt33dlWUGXb7rzmJP/p4+O+CA==}
+    engines: {node: '>=6.0.0'}
+
   noms@0.0.0:
     resolution: {integrity: sha512-lNDU9VJaOPxUmXcLb+HQFeUgQQPtMI24Gt6hgfuMHRJgMRHMF/qZ4HJD3GDru4sSw9IQl2jPjAYnQrdIeLbwow==}
 
@@ -5440,6 +5453,11 @@ snapshots:
       - snappy
       - socks
       - supports-color
+
+  '@payloadcms/email-nodemailer@3.12.0(payload@3.12.0(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2))':
+    dependencies:
+      nodemailer: 6.9.10
+      payload: 3.12.0(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2)
 
   '@payloadcms/eslint-config@1.1.1(typescript@5.7.2)':
     dependencies:
@@ -8505,6 +8523,8 @@ snapshots:
       - babel-plugin-macros
 
   node-releases@2.0.18: {}
+
+  nodemailer@6.9.10: {}
 
   noms@0.0.0:
     dependencies:
