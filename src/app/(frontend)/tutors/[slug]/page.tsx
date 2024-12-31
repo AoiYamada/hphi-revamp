@@ -62,7 +62,7 @@ export default async function Tutor({ params: paramsPromise }: Args) {
               alt={tutor.image.alt ?? ''}
               width={tutor.image.width ?? 0}
               height={tutor.image.height ?? 0}
-              className="w-full max-w-lg object-cover rounded-lg border border-border md:hidden"
+              className="max-w-lg rounded-lg border border-border md:hidden"
             />
             <RichText data={tutor.description} enableGutter={false} />
           </div>
@@ -72,7 +72,7 @@ export default async function Tutor({ params: paramsPromise }: Args) {
               alt={tutor.image.alt ?? ''}
               width={tutor.image.width ?? 0}
               height={tutor.image.height ?? 0}
-              className="w-full max-w-lg object-cover rounded-lg border border-border hidden md:block"
+              className="max-w-lg rounded-lg border border-border hidden md:block"
             />
             <h2 className="text-2xl font-semibold text-muted-foreground">專業資格</h2>
             <RichText data={tutor.qualifications} enableGutter={false} className="mx-0" />
