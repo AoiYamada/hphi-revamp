@@ -58,7 +58,7 @@ export default async function Page() {
                     alt={image.alt ?? ''}
                     width={image.width ?? 0}
                     height={image.height ?? 0}
-                    className="w-full object-cover rounded-lg"
+                    className="mx-auto rounded-lg"
                   />
                 </div>
                 <div
