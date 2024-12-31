@@ -46,7 +46,7 @@ type Args = {
 }
 
 export default async function Page({ params: paramsPromise }: Args) {
-  let { slug = '' } = await paramsPromise
+  let { slug = 'home' } = await paramsPromise
   slug = decodeURIComponent(slug)
   const url = '/' + slug
 
