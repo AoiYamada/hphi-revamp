@@ -34,7 +34,7 @@ export default async function Page() {
   })
 
   return (
-    <MaxWidthWrapper className="py-24">
+    <MaxWidthWrapper className="pb-24">
       <div className="w-full my-16">
         <div className="max-w-none mx-auto prose md:prose-md dark:prose-invert">
           <h1 className="text-center">導師團隊</h1>
