@@ -41,7 +41,8 @@ export default async function Page() {
         </div>
       </div>
       <div className="grid grid-cols-1 gap-8">
-        {tutors.docs.map(({ id, image, name, title, meta, slug }, index) => {
+        {tutors.docs.map(({ id, name, title, image, meta, slug }, index) => {
+          image = meta?.image || image
           if (!image || typeof image === 'string') return null
 
           return (
