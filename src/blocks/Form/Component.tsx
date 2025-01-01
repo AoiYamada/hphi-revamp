@@ -46,11 +46,6 @@ export const FormBlock: FC<
     className,
   } = props
 
-  console.log(
-    'buildInitialFormState',
-    buildInitialFormState(formFromProps.fields),
-    formFromProps.fields,
-  )
   const formMethods = useForm({
     defaultValues: buildInitialFormState(formFromProps.fields),
   })

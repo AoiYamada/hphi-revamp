@@ -19,8 +19,6 @@ export const Radio: React.FC<
     >
   }
 > = ({ name, control, errors, label, options, required, width, defaultValue }) => {
-  console.log('defaultValue', defaultValue)
-
   return (
     <Width width={width}>
       <Label htmlFor={name}>{label}</Label>
