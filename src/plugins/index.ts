@@ -17,6 +17,7 @@ import { beforeSyncWithSearch } from '@/search/beforeSync'
 
 import { Course, Page, Post, Tutor } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
+import { Radio, Select } from '@/blocks/Form/custom-fields'
 
 const generateTitle: GenerateTitle<Post | Page | Course | Tutor> = ({ doc }) => {
   return doc?.title
@@ -66,6 +67,8 @@ export const plugins: Plugin[] = [
   }),
   formBuilderPlugin({
     fields: {
+      radio: Radio,
+      select: Select,
       payment: false,
     },
     formOverrides: {

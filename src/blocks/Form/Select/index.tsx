@@ -1,4 +1,4 @@
-import type { SelectField } from '@payloadcms/plugin-form-builder/types'
+import type { SelectField } from '../custom-fields'
 import type { Control, FieldErrorsImpl, FieldValues } from 'react-hook-form'
 
 import { Label } from '@/components/ui/label'
@@ -24,13 +24,13 @@ export const Select: React.FC<
       }>
     >
   }
-> = ({ name, control, errors, label, options, required, width }) => {
+> = ({ name, control, errors, label, options, required, width, defaultValue, placeholder }) => {
   return (
     <Width width={width}>
       <Label htmlFor={name}>{label}</Label>
       <Controller
         control={control}
-        defaultValue=""
+        defaultValue={defaultValue}
         name={name}
         render={({ field: { onChange, value } }) => {
           const controlledValue = options.find((t) => t.value === value)
@@ -38,7 +38,7 @@ export const Select: React.FC<
           return (
             <SelectComponent onValueChange={(val) => onChange(val)} value={controlledValue?.value}>
               <SelectTrigger className="w-full" id={name}>
-                <SelectValue placeholder={label} />
+                <SelectValue placeholder={placeholder} />
               </SelectTrigger>
               <SelectContent>
                 {options.map(({ label, value }) => {

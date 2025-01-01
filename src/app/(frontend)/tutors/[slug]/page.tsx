@@ -43,8 +43,6 @@ export default async function Tutor({ params: paramsPromise }: Args) {
   if (!tutor) return <PayloadRedirects url={url} />
   if (typeof tutor.image !== 'object') return null
 
-  console.log(tutor.image)
-
   return (
     <MaxWidthWrapper>
       <article className="pt-8 pb-16">

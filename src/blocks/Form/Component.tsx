@@ -1,5 +1,5 @@
 'use client'
-import type { Form as FormType } from '@payloadcms/plugin-form-builder/types'
+import type { Form as FormType } from './custom-fields'
 
 import { useRouter } from 'next/navigation'
 import React, { FC, useCallback, useState } from 'react'
@@ -46,6 +46,11 @@ export const FormBlock: FC<
     className,
   } = props
 
+  console.log(
+    'buildInitialFormState',
+    buildInitialFormState(formFromProps.fields),
+    formFromProps.fields,
+  )
   const formMethods = useForm({
     defaultValues: buildInitialFormState(formFromProps.fields),
   })
@@ -168,7 +173,7 @@ export const FormBlock: FC<
                 {submitButtonLabel}
               </Button>
 
-              {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
+              {isLoading && !hasSubmitted && <p>提交中，請稍候...</p>}
             </form>
           )}
         </FormProvider>
