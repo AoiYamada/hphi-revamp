@@ -97,7 +97,7 @@ const MenuItem = ({ enableDropdown, label, link, enableDirectLink, navItems }: M
             enableDirectLink={enableDirectLink}
             link={link}
             className={cn(
-              'text-xl font-bold group-data-[state=open]:text-red-500 group-hover:text-red-500 transition-colors',
+              'justify-start text-xl font-bold group-data-[state=open]:text-red-500 group-hover:text-red-500 transition-colors',
             )}
           />
           <ChevronRight
