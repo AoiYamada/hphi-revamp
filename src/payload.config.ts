@@ -30,6 +30,10 @@ export default buildConfig({
       // beforeLogin: ['@/components/BeforeLogin'],
       // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
       // beforeDashboard: ['@/components/BeforeDashboard'],
+      graphics: {
+        Logo: '@/components/Logo/CmsLogo#default',
+        Icon: '@/components/Logo/CmsIcon#default',
+      },
     },
     importMap: {
       baseDir: path.resolve(dirname),
@@ -54,6 +58,13 @@ export default buildConfig({
           name: 'desktop',
           width: 1440,
           height: 900,
+        },
+      ],
+    },
+    meta: {
+      icons: [
+        {
+          url: `${getServerSideURL()}/favicon/favicon.ico`,
         },
       ],
     },

@@ -23,8 +23,8 @@ import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloa
 import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { NavItem as NavItem_ef1d19bd137de0f79726892825092e0d } from '@/Header/RowLabels'
 import { Tabs as Tabs_ef1d19bd137de0f79726892825092e0d } from '@/Header/RowLabels'
-import { default as default_1a7510af427896d367a49dbf838d2de6 } from '@/components/BeforeDashboard'
-import { default as default_8a7ab0eb7ab5c511aba12e68480bfe5e } from '@/components/BeforeLogin'
+import { default as default_8247500a69e7bc67c2a2bcf1f5a10533 } from '@/components/Logo/CmsIcon'
+import { default as default_38780975205e7a22a9876efe805c3f57 } from '@/components/Logo/CmsLogo'
 
 export const importMap = {
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
@@ -52,6 +52,6 @@ export const importMap = {
   "@payloadcms/plugin-search/client#ReindexButton": ReindexButton_aead06e4cbf6b2620c5c51c9ab283634,
   "@/Header/RowLabels#NavItem": NavItem_ef1d19bd137de0f79726892825092e0d,
   "@/Header/RowLabels#Tabs": Tabs_ef1d19bd137de0f79726892825092e0d,
-  "@/components/BeforeDashboard#default": default_1a7510af427896d367a49dbf838d2de6,
-  "@/components/BeforeLogin#default": default_8a7ab0eb7ab5c511aba12e68480bfe5e
+  "@/components/Logo/CmsIcon#default": default_8247500a69e7bc67c2a2bcf1f5a10533,
+  "@/components/Logo/CmsLogo#default": default_38780975205e7a22a9876efe805c3f57
 }
