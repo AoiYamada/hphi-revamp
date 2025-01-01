@@ -23,7 +23,7 @@ const Logo: FC<LogoProps> = ({ className, noText = true }) => {
           'sm:flex lg:hidden xl:flex': !noText,
         })}
       >
-        <span className="text-nowrap">專業心理治療及催眠應用</span>
+        <span className="text-nowrap">專業心理治療及催眠應用（香港）有限公司</span>
         <span className="text-nowrap text-sm">HPHI EDUCATION LIMITED</span>
       </div>
     </div>

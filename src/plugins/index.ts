@@ -19,7 +19,9 @@ import { Course, Page, Post, Tutor } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
 
 const generateTitle: GenerateTitle<Post | Page | Course | Tutor> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
+  return doc?.title
+    ? `${doc.title} | 專業心理治療及催眠應用（香港）有限公司`
+    : '專業心理治療及催眠應用（香港）有限公司'
 }
 
 const generateURL: GenerateURL<Post | Page | Course | Tutor> = ({ doc, collectionSlug }) => {

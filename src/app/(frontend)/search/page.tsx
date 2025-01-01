@@ -83,6 +83,6 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
 
 export function generateMetadata(): Metadata {
   return {
-    title: `專業心理治療及催眠應用（香港）有限公司 Search`,
+    title: `Search Blog Posts | 專業心理治療及催眠應用（香港）有限公司`,
   }
 }
