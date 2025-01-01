@@ -83,7 +83,7 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `專業心理治療及催眠應用（香港）有限公司 | 導師`,
+    title: `導師團隊 | 專業心理治療及催眠應用（香港）有限公司`,
     description: '專業心理治療及催眠應用（香港）有限公司的導師團隊',
   }
 }
