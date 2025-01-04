@@ -135,7 +135,7 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | YouTube | ArchiveBlock | FormBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | YouTube | ArchiveBlock | CollapsibleBlock | FormBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -158,7 +158,15 @@ export interface Page {
 export interface Course {
   id: string;
   title: string;
-  description: (CallToActionBlock | ContentBlock | MediaBlock | YouTube | ArchiveBlock | FormBlock)[];
+  description: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | YouTube
+    | ArchiveBlock
+    | CollapsibleBlock
+    | FormBlock
+  )[];
   timeSlots?:
     | {
         title: string;
@@ -575,6 +583,36 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CollapsibleBlock".
+ */
+export interface CollapsibleBlock {
+  items?:
+    | {
+        title: string;
+        content: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'collapsibleBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -995,6 +1033,7 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         youtubeBlock?: T | YouTubeSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
+        collapsibleBlock?: T | CollapsibleBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
       };
   meta?:
@@ -1095,6 +1134,21 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CollapsibleBlock_select".
+ */
+export interface CollapsibleBlockSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        title?: T;
+        content?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "FormBlock_select".
  */
 export interface FormBlockSelect<T extends boolean = true> {
@@ -1118,6 +1172,7 @@ export interface CoursesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         youtubeBlock?: T | YouTubeSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
+        collapsibleBlock?: T | CollapsibleBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
       };
   timeSlots?:

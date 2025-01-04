@@ -8,6 +8,7 @@ import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { YouTube } from '@/blocks/YouTube/Component'
+import { CollapsibleBlock } from './Collapsible/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -16,6 +17,7 @@ const blockComponents = {
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
   youtubeBlock: YouTube,
+  collapsibleBlock: CollapsibleBlock,
 }
 
 export const RenderBlocks: FC<{

@@ -7,6 +7,7 @@ import { MediaBlock } from '@/blocks/MediaBlock/config'
 import { FormBlock } from '@/blocks/Form/config'
 import { Content } from '@/blocks/Content/config'
 import { Archive } from '@/blocks/ArchiveBlock/config'
+import { Collapsible } from '../../blocks/Collapsible/config'
 import { YouTube } from '@/blocks/YouTube/config'
 import {
   MetaDescriptionField,
@@ -52,7 +53,7 @@ export const Courses: CollectionConfig = {
             {
               name: 'description',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, YouTube, Archive, FormBlock],
+              blocks: [CallToAction, Content, MediaBlock, YouTube, Archive, Collapsible, FormBlock],
               required: true,
             },
           ],
