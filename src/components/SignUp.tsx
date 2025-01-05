@@ -6,9 +6,10 @@ import { CMSLink } from './Link'
 
 type SignUpProps = {
   className?: string
+  url?: string
 }
 
-const SignUp: FC<SignUpProps> = ({ className }) => {
+const SignUp: FC<SignUpProps> = ({ className, url }) => {
   const handleLinkClick = () => {
     document.getElementById('contact-us')?.scrollIntoView({
       behavior: 'smooth',
@@ -19,7 +20,7 @@ const SignUp: FC<SignUpProps> = ({ className }) => {
     <CMSLink
       type="custom"
       newTab={false}
-      url={'#contact-us'}
+      url={url || '#contact'}
       label="立即報名"
       appearance="default"
       className={className}

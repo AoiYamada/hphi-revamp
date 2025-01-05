@@ -18,6 +18,7 @@ import {
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
 import { revalidateCourse, revalidateDelete } from './hooks/revalidateCourse'
+import { TimeSlot } from '@/blocks/TimeSlot/config'
 
 export const Courses: CollectionConfig = {
   slug: 'courses',
@@ -53,48 +54,20 @@ export const Courses: CollectionConfig = {
             {
               name: 'description',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, YouTube, Archive, Collapsible, FormBlock],
+              blocks: [
+                CallToAction,
+                Content,
+                MediaBlock,
+                YouTube,
+                Archive,
+                Collapsible,
+                TimeSlot,
+                FormBlock,
+              ],
               required: true,
             },
           ],
           label: 'Content',
-        },
-        {
-          fields: [
-            {
-              name: 'timeSlots',
-              type: 'array',
-              fields: [
-                {
-                  name: 'title',
-                  type: 'text',
-                  required: true,
-                },
-                {
-                  name: 'time',
-                  type: 'textarea',
-                  required: true,
-                },
-                {
-                  name: 'date',
-                  type: 'textarea',
-                  required: true,
-                },
-                {
-                  name: 'tutors',
-                  type: 'textarea',
-                  required: true,
-                },
-                {
-                  name: 'closed',
-                  type: 'checkbox',
-                  defaultValue: false,
-                  required: true,
-                },
-              ],
-            },
-          ],
-          label: 'Time slots',
         },
         {
           name: 'meta',

@@ -23,6 +23,7 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { getServerSideURL } from '@/utilities/getURL'
+import { TimeSlot } from '@/blocks/TimeSlot/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -79,7 +80,16 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, YouTube, Archive, Collapsible, FormBlock],
+              blocks: [
+                CallToAction,
+                Content,
+                MediaBlock,
+                YouTube,
+                Archive,
+                Collapsible,
+                TimeSlot,
+                FormBlock,
+              ],
               required: true,
               admin: {
                 initCollapsed: true,

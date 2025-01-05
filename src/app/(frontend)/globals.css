@@ -122,3 +122,11 @@ html {
     height: 0;
   }
 }
+
+/* https://stackoverflow.com/questions/10732690/offsetting-an-html-anchor-to-adjust-for-fixed-header */
+a.anchor {
+  display: block;
+  position: relative;
+  top: -130px;
+  visibility: hidden;
+}

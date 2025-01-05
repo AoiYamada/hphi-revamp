@@ -61,7 +61,6 @@ export default async function Course({ params: paramsPromise }: Args) {
   const {
     // introduction,
     description,
-    timeSlots,
   } = course
 
   return (
@@ -70,7 +69,6 @@ export default async function Course({ params: paramsPromise }: Args) {
 
       <MaxWidthWrapper className="space-y-8">
         <RenderBlocks blocks={description} />
-        {timeSlots ? <TimeSlot slots={timeSlots} /> : null}
       </MaxWidthWrapper>
     </article>
   )

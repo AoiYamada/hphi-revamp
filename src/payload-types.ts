@@ -135,7 +135,16 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | YouTube | ArchiveBlock | CollapsibleBlock | FormBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | YouTube
+    | ArchiveBlock
+    | CollapsibleBlock
+    | TimeSlotBlock
+    | FormBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -165,18 +174,9 @@ export interface Course {
     | YouTube
     | ArchiveBlock
     | CollapsibleBlock
+    | TimeSlotBlock
     | FormBlock
   )[];
-  timeSlots?:
-    | {
-        title: string;
-        time: string;
-        date: string;
-        tutors: string;
-        closed: boolean;
-        id?: string | null;
-      }[]
-    | null;
   meta?: {
     title?: string | null;
     /**
@@ -616,11 +616,9 @@ export interface CollapsibleBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "FormBlock".
+ * via the `definition` "TimeSlotBlock".
  */
-export interface FormBlock {
-  form: string | Form;
-  enableIntro?: boolean | null;
+export interface TimeSlotBlock {
   introContent?: {
     root: {
       type: string;
@@ -636,9 +634,35 @@ export interface FormBlock {
     };
     [k: string]: unknown;
   } | null;
+  outroContent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  registrationForm?: (string | null) | Form;
+  timeSlots?:
+    | {
+        title: string;
+        time: string;
+        date: string;
+        tutors: string;
+        closed: boolean;
+        id?: string | null;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'formBlock';
+  blockType: 'timeSlotBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -830,6 +854,32 @@ export interface Form {
     | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FormBlock".
+ */
+export interface FormBlock {
+  form: string | Form;
+  enableIntro?: boolean | null;
+  introContent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'formBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1034,6 +1084,7 @@ export interface PagesSelect<T extends boolean = true> {
         youtubeBlock?: T | YouTubeSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         collapsibleBlock?: T | CollapsibleBlockSelect<T>;
+        timeSlotBlock?: T | TimeSlotBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
       };
   meta?:
@@ -1149,6 +1200,27 @@ export interface CollapsibleBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TimeSlotBlock_select".
+ */
+export interface TimeSlotBlockSelect<T extends boolean = true> {
+  introContent?: T;
+  outroContent?: T;
+  registrationForm?: T;
+  timeSlots?:
+    | T
+    | {
+        title?: T;
+        time?: T;
+        date?: T;
+        tutors?: T;
+        closed?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "FormBlock_select".
  */
 export interface FormBlockSelect<T extends boolean = true> {
@@ -1173,17 +1245,8 @@ export interface CoursesSelect<T extends boolean = true> {
         youtubeBlock?: T | YouTubeSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         collapsibleBlock?: T | CollapsibleBlockSelect<T>;
+        timeSlotBlock?: T | TimeSlotBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
-      };
-  timeSlots?:
-    | T
-    | {
-        title?: T;
-        time?: T;
-        date?: T;
-        tutors?: T;
-        closed?: T;
-        id?: T;
       };
   meta?:
     | T

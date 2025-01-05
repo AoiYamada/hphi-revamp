@@ -9,6 +9,7 @@ import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { YouTube } from '@/blocks/YouTube/Component'
 import { CollapsibleBlock } from './Collapsible/Component'
+import { TimeSlotBlock } from './TimeSlot/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -18,6 +19,7 @@ const blockComponents = {
   mediaBlock: MediaBlock,
   youtubeBlock: YouTube,
   collapsibleBlock: CollapsibleBlock,
+  timeSlotBlock: TimeSlotBlock,
 }
 
 export const RenderBlocks: FC<{

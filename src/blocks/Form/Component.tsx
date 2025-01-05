@@ -130,6 +130,7 @@ export const FormBlock: FC<
 
   return (
     <MaxWidthWrapper className={cn('lg:max-w-[48rem] pb-20', className)}>
+      <a className="anchor" id={`anchor-${formID}`}></a>
       {enableIntro && introContent && !hasSubmitted && (
         <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
       )}
