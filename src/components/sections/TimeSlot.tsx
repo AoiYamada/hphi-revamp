@@ -65,7 +65,7 @@ type ClassCardProps = {
 
 const ClassCard: FC<ClassCardProps> = ({ title, time, date, tutors, closed }) => {
   return (
-    <div className="flex flex-col items-center justify-start gap-4 rounded-lg border border-neutral/10 bg-basic/50 p-12 shadow-md">
+    <div className="flex flex-col items-center justify-start gap-4 rounded-lg border border-neutral/10 bg-basic/50 p-12 shadow-md bg-white">
       <h2 className="text-2xl font-semibold text-primary">{title}</h2>
       <div className="flex flex-col">
         <div className="flex flex-row">
