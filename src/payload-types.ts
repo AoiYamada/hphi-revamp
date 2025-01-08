@@ -901,6 +901,14 @@ export interface Redirect {
       | ({
           relationTo: 'posts';
           value: string | Post;
+        } | null)
+      | ({
+          relationTo: 'courses';
+          value: string | Course;
+        } | null)
+      | ({
+          relationTo: 'tutors';
+          value: string | Tutor;
         } | null);
     url?: string | null;
   };
