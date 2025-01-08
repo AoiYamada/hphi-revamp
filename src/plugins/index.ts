@@ -37,7 +37,7 @@ const generateURL: GenerateURL<Post | Page | Course | Tutor> = ({ doc, collectio
 
 export const plugins: Plugin[] = [
   redirectsPlugin({
-    collections: ['pages', 'posts'],
+    collections: ['pages', 'posts', 'courses', 'tutors'],
     overrides: {
       // @ts-expect-error
       fields: ({ defaultFields }) => {
