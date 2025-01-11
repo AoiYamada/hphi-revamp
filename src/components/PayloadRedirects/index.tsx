@@ -18,8 +18,15 @@ export const PayloadRedirects: React.FC<Props> = async ({ disableNotFound, url }
 
   if (redirectItem) {
     if (redirectItem.to?.url) {
+      const toUrl = encodeURI(redirectItem.to.url)
+
+      // Prevent infinite loop
+      if (encodeURI(url) === toUrl) {
+        return null
+      }
+
       // TODO: PR to payload cms, url should be a encoded URI for support of special characters
-      redirect(encodeURI(redirectItem.to.url))
+      redirect(toUrl)
     }
 
     let redirectUrl: string
@@ -29,18 +36,22 @@ export const PayloadRedirects: React.FC<Props> = async ({ disableNotFound, url }
       const id = redirectItem.to?.reference?.value
 
       const document = (await getCachedDocument(collection, id)) as Page | Post
-      redirectUrl = `${redirectItem.to?.reference?.relationTo !== 'pages' ? `/${redirectItem.to?.reference?.relationTo}` : ''}/${
-        document?.slug
-      }`
+      redirectUrl = encodeURI(
+        `${redirectItem.to?.reference?.relationTo !== 'pages' ? `/${redirectItem.to?.reference?.relationTo}` : ''}/${
+          document?.slug
+        }`,
+      )
     } else {
-      redirectUrl = `${redirectItem.to?.reference?.relationTo !== 'pages' ? `/${redirectItem.to?.reference?.relationTo}` : ''}/${
-        typeof redirectItem.to?.reference?.value === 'object'
-          ? redirectItem.to?.reference?.value?.slug
-          : ''
-      }`
+      redirectUrl = encodeURI(
+        `${redirectItem.to?.reference?.relationTo !== 'pages' ? `/${redirectItem.to?.reference?.relationTo}` : ''}/${
+          typeof redirectItem.to?.reference?.value === 'object'
+            ? redirectItem.to?.reference?.value?.slug
+            : ''
+        }`,
+      )
     }
 
-    if (redirectUrl) redirect(encodeURI(redirectUrl))
+    if (redirectUrl) redirect(redirectUrl)
   }
 
   if (disableNotFound) return null
