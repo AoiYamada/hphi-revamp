@@ -5,18 +5,18 @@ import Closed from '../Closed'
 import AnimatedSection from '../AnimatedSection'
 import { TimeSlotBlock as TimeSlotBlockProps } from '@/payload-types'
 import RichText from '../RichText'
+import { cn } from '@/utilities'
 
-const TimeSlot: FC<Omit<TimeSlotBlockProps, 'id' | 'blockName' | 'blockType'>> = ({
-  introContent,
-  outroContent,
-  timeSlots,
-  registrationForm,
-}) => {
+const TimeSlot: FC<
+  Omit<TimeSlotBlockProps, 'id' | 'blockName' | 'blockType'> & {
+    className?: string
+  }
+> = ({ introContent, outroContent, timeSlots, registrationForm, className }) => {
   const formId = typeof registrationForm === 'string' ? registrationForm : registrationForm?.id
 
   return (
-    <AnimatedSection className="w-full" id="time-slot">
-      <MaxWidthWrapper className="relative flex flex-col items-center justify-center gap-12 text-neutral">
+    <AnimatedSection className={cn('w-full', className)} id="time-slot">
+      <MaxWidthWrapper className="relative flex flex-col items-center justify-center gap-12">
         {introContent && <RichText data={introContent} className="w-full" />}
         <div className="grid grid-flow-row grid-cols-1 gap-16 lg:grid-cols-2 xl:md:grid-cols-3">
           {(timeSlots ?? []).map((slot, index) => (

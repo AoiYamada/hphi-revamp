@@ -18,7 +18,7 @@ const FooterNavLink: FC<FooterNavLinkProps> = ({ icon, link }) => {
       onClick={handleClick}
     >
       {icon ? <IconWrapper>{icon}</IconWrapper> : null}
-      <CMSLink {...link} appearance="link" className="text-primary-foreground" />
+      <CMSLink {...link} appearance="link" className="text-secondary-foreground" />
     </li>
   )
 }

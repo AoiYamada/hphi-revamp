@@ -14,7 +14,7 @@ export async function Footer() {
   const columns = footer?.columns || []
 
   return (
-    <footer id="footer" className="border-t border-border bg-primary text-primary-foreground">
+    <footer id="footer" className="border-t border-border bg-[#18181b] text-secondary-foreground">
       <MaxWidthWrapper className="flex flex-col items-center justify-center gap-16 pb-4 pt-12">
         <div className="flex w-full flex-col justify-between gap-8 md:flex-row md:gap-16 items-start">
           <Link className="flex flex-grow pb-8 items-center" href="/">

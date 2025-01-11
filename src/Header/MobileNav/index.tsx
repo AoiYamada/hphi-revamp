@@ -62,10 +62,10 @@ const MobileNav = ({ header, className }: MobileNavProps) => {
             <li className="group">
               <MaxWidthWrapper className="p-0">
                 <Link
-                  className="flex w-full items-center text-xl font-bold group-hover:text-red-500"
+                  className="flex w-full items-center text-xl font-bold group-hover:text-muted text-primary"
                   href="/search"
                 >
-                  文章搜尋 <SearchIcon className="ml-2 h-4 w-4 group-hover:text-red-500" />
+                  文章搜尋 <SearchIcon className="ml-2 h-4 w-4 group-hover:text-muted" />
                 </Link>
               </MaxWidthWrapper>
             </li>
@@ -91,18 +91,18 @@ const MenuItem = ({ enableDropdown, label, link, enableDirectLink, navItems }: M
   if (enableDropdown) {
     return (
       <Collapsible>
-        <CollapsibleTrigger className="group flex flex-row items-center justify-between w-full data-[state=open]:text-red-500 hover:text-red-500 transition-colors">
+        <CollapsibleTrigger className="group flex flex-row items-center justify-between w-full data-[state=open]:text-muted hover:text-muted transition-colors">
           <MenuItemLabel
             label={label}
             enableDirectLink={enableDirectLink}
             link={link}
             className={cn(
-              'justify-start text-xl font-bold group-data-[state=open]:text-red-500 group-hover:text-red-500 transition-colors',
+              'justify-start text-xl font-bold group-data-[state=open]:text-muted group-hover:text-muted transition-colors',
             )}
           />
           <ChevronRight
             className={cn(
-              'ml-1 h-4 w-4 transition-all group-data-[state=open]:rotate-90 group-data-[state=open]:text-red-500',
+              'ml-1 h-4 w-4 transition-all group-data-[state=open]:rotate-90 group-data-[state=open]:text-muted',
             )}
           />
         </CollapsibleTrigger>
@@ -137,7 +137,7 @@ const MenuItem = ({ enableDropdown, label, link, enableDirectLink, navItems }: M
       enableDirectLink={enableDirectLink}
       link={link}
       className={cn('text-xl font-bold w-full transition-colors', {
-        'hover:text-red-500': enableDirectLink,
+        'hover:text-muted': enableDirectLink,
       })}
     />
   )
