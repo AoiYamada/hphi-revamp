@@ -31,7 +31,7 @@ export default async function Page() {
     <MaxWidthWrapper className="pt-24 pb-24">
       <div className="w-full mb-16">
         <div className="prose dark:prose-invert max-w-none">
-          <h1>Posts</h1>
+          <h1>文章列表</h1>
         </div>
       </div>
 
@@ -57,6 +57,6 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `文章 | 專業心理治療及催眠應用（香港）有限公司`,
+    title: `文章列表 | 專業心理治療及催眠應用（香港）有限公司`,
   }
 }
