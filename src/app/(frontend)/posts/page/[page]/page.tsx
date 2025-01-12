@@ -64,7 +64,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { page } = await paramsPromise
   return {
-    title: `Blog Posts Page ${page || ''} | 專業心理治療及催眠應用（香港）有限公司`,
+    title: `所有文章 第 ${page || ''} 頁 | 專業心理治療及催眠應用（香港）有限公司`,
   }
 }
 

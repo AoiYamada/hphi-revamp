@@ -46,7 +46,7 @@ const HeaderNav: FC<HeaderNavProps> = ({ header, className }) => {
           <Link href="/search" legacyBehavior passHref>
             <NavigationMenuLink>
               <span className="sr-only">文章搜尋</span>
-              <SearchIcon className="w-5 text-primary" />
+              <SearchIcon className="w-5" />
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>

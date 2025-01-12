@@ -62,7 +62,7 @@ const MobileNav = ({ header, className }: MobileNavProps) => {
             <li className="group">
               <MaxWidthWrapper className="p-0">
                 <Link
-                  className="flex w-full items-center text-xl font-bold group-hover:text-muted text-primary"
+                  className="flex w-full items-center text-xl font-bold group-hover:text-muted"
                   href="/search"
                 >
                   文章搜尋 <SearchIcon className="ml-2 h-4 w-4 group-hover:text-muted" />

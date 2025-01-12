@@ -57,6 +57,6 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Blog Posts | 專業心理治療及催眠應用（香港）有限公司`,
+    title: `文章 | 專業心理治療及催眠應用（香港）有限公司`,
   }
 }

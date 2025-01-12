@@ -1,7 +1,6 @@
 import type { Header as HeaderType } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { FC } from 'react'
-import { cn } from '@/utilities'
 
 type MenuItemLabelProps = Pick<
   NonNullable<HeaderType['tabs']>[number],
@@ -12,7 +11,7 @@ const MenuItemLabel: FC<MenuItemLabelProps> = ({ label, enableDirectLink, link, 
   return enableDirectLink ? (
     <CMSLink label={label} {...link} appearance="link" className={className} />
   ) : (
-    <div className={cn('text-primary', className)}>{label}</div>
+    <div className={className}>{label}</div>
   )
 }
 
