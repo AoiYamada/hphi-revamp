@@ -46,7 +46,7 @@ export const PageRange: FC<{
       {(typeof totalDocs === 'undefined' || totalDocs === 0) && 'Search produced no results.'}
       {typeof totalDocs !== 'undefined' &&
         totalDocs > 0 &&
-        `正在顯示 ${totalDocs} 篇文章中的第 ${indexStart}${indexStart > 0 ? ` - ${indexEnd}` : ''}篇`}
+        `正在顯示 ${totalDocs} 篇文章中的第 ${indexStart}${indexStart > 0 ? ` - ${indexEnd}` : ''} 篇`}
     </div>
   )
 }

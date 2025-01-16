@@ -11,9 +11,15 @@ import { Header } from '@/Header/Component'
 import { Providers } from '@/providers'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { draftMode } from 'next/headers'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
+import FacebookPixel from '@/components/FacebookPixel'
+import { fbId } from '@/lib/f-pixel'
+
+const gaId = process.env.NEXT_PUBLIC_GA_ID
+const isDev = process.env.NEXT_PUBLIC_SERVER_URL === 'https://hk-hphi.com'
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const { isEnabled } = await draftMode()
@@ -21,7 +27,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html
       className={cn(GeistSans.variable, GeistMono.variable)}
-      lang="zh-Hant-TW"
+      lang="zh-HK"
       // to get rid of the hydration warning caused by extensions
       suppressHydrationWarning
     >
@@ -42,7 +48,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           {children}
           <Footer />
         </Providers>
+        {!isDev && fbId && <FacebookPixel fbId={fbId} />}
       </body>
+      {!isDev && gaId && <GoogleAnalytics gaId={gaId} />}
     </html>
   )
 }
@@ -52,6 +60,6 @@ export const metadata: Metadata = {
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',
-    creator: '@payloadcms',
+    creator: '@hphi',
   },
 }
