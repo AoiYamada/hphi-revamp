@@ -12,10 +12,10 @@ export const revalidateTutor: CollectionAfterChangeHook<Course> = ({
     return doc
   }
 
-  const path = encodeURI(`/tutors/${doc.slug}`)
+  const path = `/tutors/${doc.slug}`
   payload.logger.info(`Revalidating page at path: ${path}`)
 
-  revalidatePath(path)
+  revalidatePath(encodeURI(path))
   revalidatePath('/tutors')
   revalidateTag('pages-sitemap')
 
@@ -27,8 +27,8 @@ export const revalidateDelete: CollectionAfterDeleteHook<Course> = ({ doc, req: 
     return doc
   }
 
-  const path = encodeURI(`/tutors/${doc.slug}`)
-  revalidatePath(path)
+  const path = `/tutors/${doc.slug}`
+  revalidatePath(encodeURI(path))
   revalidatePath('/tutors')
   revalidateTag('pages-sitemap')
 
