@@ -1,3 +1,6 @@
+import animate from 'tailwindcss-animate'
+import typography from '@tailwindcss/typography'
+
 /** @type {import('tailwindcss').Config} */
 const config = {
   content: [
@@ -7,7 +10,7 @@ const config = {
     './src/**/*.{ts,tsx}',
   ],
   darkMode: ['selector', '[data-theme="dark"]', 'class'],
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
+  plugins: [animate, typography],
   prefix: '',
   safelist: [
     'lg:col-span-4',
