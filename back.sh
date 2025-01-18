@@ -11,3 +11,9 @@ git pull && nvm use && pnpm i && pnpm build && pm2 reload hphi-revamp
 hk-hphi.com	185.230.63.171
 hk-hphi.com	185.230.63.186
 hk-hphi.com	185.230.63.107
+
+# CNAME
+en.hk-hphi.com	cdn1.wixdns.net
+m.hk-hphi.com	www129.wixdns.net
+www.hk-hphi.com	cdn1.wixdns.net
+zh.hk-hphi.com	cdn1.wixdns.net
