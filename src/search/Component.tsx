@@ -23,7 +23,7 @@ export const Search: FC = () => {
         }}
       >
         <Label htmlFor="search" className="sr-only">
-          Search
+          文章搜尋
         </Label>
         <Input
           id="search"
@@ -31,9 +31,10 @@ export const Search: FC = () => {
             setValue(event.target.value)
           }}
           placeholder="Search"
+          className="bg-white"
         />
         <button type="submit" className="sr-only">
-          submit
+          搜尋
         </button>
       </form>
     </div>

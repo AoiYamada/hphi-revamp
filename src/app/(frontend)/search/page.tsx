@@ -19,7 +19,9 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
   const payload = await getPayload({ config: configPromise })
 
   const posts = await payload.find({
-    collection: 'search',
+    // Buggy, search plugin doesn't populate the categories field
+    // collection: 'search',
+    collection: 'posts',
     depth: 1,
     limit: 12,
     select: {
@@ -64,7 +66,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
     <MaxWidthWrapper className="pt-24 pb-24">
       <div className="w-full mb-16">
         <div className="prose dark:prose-invert max-w-none text-center">
-          <h1 className="mb-8 lg:mb-16">Search</h1>
+          <h1 className="mb-8 lg:mb-16">文章搜尋</h1>
 
           <div className="max-w-[50rem] mx-auto">
             <Search />
@@ -75,7 +77,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
       {posts.totalDocs > 0 ? (
         <CollectionArchive posts={posts.docs as CardPostData[]} />
       ) : (
-        <div className="w-full">No results found.</div>
+        <div className="w-full">找不到文章</div>
       )}
     </MaxWidthWrapper>
   )
