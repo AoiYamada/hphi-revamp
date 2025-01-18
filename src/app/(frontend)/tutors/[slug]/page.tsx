@@ -53,7 +53,7 @@ export default async function Tutor({ params: paramsPromise }: Args) {
           <div className="md:w-1/2 space-y-4">
             <div>
               <h1 className="text-4xl font-bold text-foreground">{tutor.name}</h1>
-              <h2 className="text-2xl font-semibold text-muted-foreground">{tutor.title}</h2>
+              <h2 className="text-2xl font-semibold text-muted">{tutor.title}</h2>
             </div>
             <NextImage
               src={tutor.image.url ?? ''}
@@ -72,7 +72,7 @@ export default async function Tutor({ params: paramsPromise }: Args) {
               height={tutor.image.height ?? 0}
               className="max-w-lg rounded-lg border border-border hidden md:block"
             />
-            <h2 className="text-2xl font-semibold text-muted-foreground">專業資格</h2>
+            <h2 className="text-2xl font-semibold text-muted">專業資格</h2>
             <RichText data={tutor.qualifications} enableGutter={false} className="mx-0" />
           </div>
         </div>

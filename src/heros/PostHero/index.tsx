@@ -44,7 +44,7 @@ export const PostHero: FC<PostHeroProps> = ({
             <div className="flex flex-col gap-4">
               {populatedAuthors && (
                 <div className="flex flex-col gap-1">
-                  <p className="text-sm">Author</p>
+                  <p className="text-sm">作者</p>
                   {populatedAuthors.map((author, index) => {
                     const { name } = author
 
@@ -65,7 +65,7 @@ export const PostHero: FC<PostHeroProps> = ({
             </div>
             {publishedAt && (
               <div className="flex flex-col gap-1">
-                <p className="text-sm">Date Published</p>
+                <p className="text-sm">出版日期</p>
 
                 <time dateTime={publishedAt}>{formatDateTime(publishedAt)}</time>
               </div>

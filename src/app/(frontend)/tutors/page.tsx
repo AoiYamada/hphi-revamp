@@ -69,7 +69,7 @@ export default async function Page() {
                   })}
                 >
                   <h2 className="text-xl font-bold text-primary">{name}</h2>
-                  <h3 className="text-lg text-muted-foreground">{title}</h3>
+                  <h3 className="text-lg text-muted">{title}</h3>
                   <p className="mt-2 text-foreground">{meta?.description}</p>
                 </div>
               </div>
