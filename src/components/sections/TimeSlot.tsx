@@ -23,7 +23,7 @@ const TimeSlot: FC<
             <ClassCard key={index} {...slot} formId={formId} />
           ))}
         </div>
-        {outroContent && <RichText data={outroContent} className="w-full" />}
+        {outroContent && <RichText data={outroContent} className="w-full max-w-full" />}
       </MaxWidthWrapper>
     </AnimatedSection>
   )
@@ -35,7 +35,7 @@ type ClassCardProps = {
   title: string
   time: string
   date: string
-  tutors?: string
+  tutors: NonNullable<TimeSlotBlockProps['timeSlots']>[number]['tutors']
   closed: boolean
   formId?: string
 }
@@ -61,16 +61,12 @@ const ClassCard: FC<ClassCardProps> = ({ title, time, date, tutors, closed, form
             ))}
           </div>
         </div>
-        {tutors && tutors.length > 0 && (
-          <div className="mt-4 flex flex-col">
-            <div className="shrink-0">任教導師：</div>
-            <div>
-              {tutors.split('\n').map((tutor, idx) => (
-                <span key={idx}>{tutor}</span>
-              ))}
-            </div>
+        <div className="mt-4 flex flex-col">
+          <div className="shrink-0">任教導師：</div>
+          <div>
+            <RichText data={tutors} className="w-full" />
           </div>
-        )}
+        </div>
       </div>
       {closed ? (
         <Closed className="w-[116px]" />

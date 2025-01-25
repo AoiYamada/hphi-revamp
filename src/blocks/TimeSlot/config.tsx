@@ -73,7 +73,12 @@ export const TimeSlot: Block = {
         },
         {
           name: 'tutors',
-          type: 'textarea',
+          type: 'richText',
+          editor: lexicalEditor({
+            features: ({ rootFeatures }) => {
+              return [...rootFeatures, FixedToolbarFeature(), InlineToolbarFeature()]
+            },
+          }),
           required: true,
         },
         {
