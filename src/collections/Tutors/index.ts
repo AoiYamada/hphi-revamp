@@ -25,6 +25,7 @@ export const Tutors: CollectionConfig = {
     image: true,
     qualifications: true,
     description: true,
+    slug: true,
   },
   admin: {
     defaultColumns: ['name', 'title', 'priority', 'updatedAt'],
