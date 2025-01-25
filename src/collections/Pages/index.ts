@@ -24,6 +24,7 @@ import {
 } from '@payloadcms/plugin-seo/fields'
 import { getServerSideURL } from '@/utilities/getURL'
 import { TimeSlot } from '@/blocks/TimeSlot/config'
+import { Timeline } from '@/blocks/Timeline/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -89,6 +90,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 Collapsible,
                 TimeSlot,
                 FormBlock,
+                Timeline,
               ],
               required: true,
               admin: {

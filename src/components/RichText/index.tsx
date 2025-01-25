@@ -87,7 +87,7 @@ const RichText: FC<RichTextProps> = ({
         {
           'w-full': enableGutter,
           'max-w-none': !enableGutter,
-          'mx-auto prose md:prose-md dark:prose-invert ': enableProse,
+          'mx-auto prose md:prose-md dark:prose-invert': enableProse,
         },
         className,
       )}

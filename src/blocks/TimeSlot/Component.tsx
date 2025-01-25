@@ -8,13 +8,11 @@ export const TimeSlotBlock: FC<
   }
 > = ({ introContent, outroContent, registrationForm, timeSlots }) => {
   return (
-    <div className="w-full">
-      <TimeSlot
-        timeSlots={timeSlots ?? []}
-        registrationForm={registrationForm}
-        introContent={introContent}
-        outroContent={outroContent}
-      />
-    </div>
+    <TimeSlot
+      timeSlots={timeSlots ?? []}
+      registrationForm={registrationForm}
+      introContent={introContent}
+      outroContent={outroContent}
+    />
   )
 }

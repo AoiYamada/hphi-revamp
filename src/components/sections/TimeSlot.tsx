@@ -1,4 +1,3 @@
-import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import SignUp from '../SignUp'
 import { FC } from 'react'
 import Closed from '../Closed'
@@ -15,16 +14,16 @@ const TimeSlot: FC<
   const formId = typeof registrationForm === 'string' ? registrationForm : registrationForm?.id
 
   return (
-    <AnimatedSection className={cn('w-full', className)} id="time-slot">
-      <MaxWidthWrapper className="relative flex flex-col items-center justify-center gap-12">
-        {introContent && <RichText data={introContent} className="w-full" />}
+    <AnimatedSection className={cn('w-full', className)}>
+      <div className="flex flex-col items-center justify-center gap-12 py-8">
+        {introContent && <RichText data={introContent} className="w-full max-w-full" />}
         <div className="grid grid-flow-row grid-cols-1 gap-16 lg:grid-cols-2 xl:md:grid-cols-3">
           {(timeSlots ?? []).map((slot, index) => (
             <ClassCard key={index} {...slot} formId={formId} />
           ))}
         </div>
         {outroContent && <RichText data={outroContent} className="w-full max-w-full" />}
-      </MaxWidthWrapper>
+      </div>
     </AnimatedSection>
   )
 }

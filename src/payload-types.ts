@@ -144,6 +144,7 @@ export interface Page {
     | CollapsibleBlock
     | TimeSlotBlock
     | FormBlock
+    | TimelineBlock
   )[];
   meta?: {
     title?: string | null;
@@ -176,6 +177,7 @@ export interface Course {
     | CollapsibleBlock
     | TimeSlotBlock
     | FormBlock
+    | TimelineBlock
   )[];
   meta?: {
     title?: string | null;
@@ -897,6 +899,67 @@ export interface FormBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TimelineBlock".
+ */
+export interface TimelineBlock {
+  introContent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  outroContent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  timelines?:
+    | {
+        time: string;
+        title: string;
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'timelineBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1108,6 +1171,7 @@ export interface PagesSelect<T extends boolean = true> {
         collapsibleBlock?: T | CollapsibleBlockSelect<T>;
         timeSlotBlock?: T | TimeSlotBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        timelineBlock?: T | TimelineBlockSelect<T>;
       };
   meta?:
     | T
@@ -1254,6 +1318,24 @@ export interface FormBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TimelineBlock_select".
+ */
+export interface TimelineBlockSelect<T extends boolean = true> {
+  introContent?: T;
+  outroContent?: T;
+  timelines?:
+    | T
+    | {
+        time?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "courses_select".
  */
 export interface CoursesSelect<T extends boolean = true> {
@@ -1269,6 +1351,7 @@ export interface CoursesSelect<T extends boolean = true> {
         collapsibleBlock?: T | CollapsibleBlockSelect<T>;
         timeSlotBlock?: T | TimeSlotBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        timelineBlock?: T | TimelineBlockSelect<T>;
       };
   meta?:
     | T

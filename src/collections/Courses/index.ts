@@ -19,6 +19,7 @@ import {
 import { slugField } from '@/fields/slug'
 import { revalidateCourse, revalidateDelete } from './hooks/revalidateCourse'
 import { TimeSlot } from '@/blocks/TimeSlot/config'
+import { Timeline } from '@/blocks/Timeline/config'
 
 export const Courses: CollectionConfig = {
   slug: 'courses',
@@ -63,6 +64,7 @@ export const Courses: CollectionConfig = {
                 Collapsible,
                 TimeSlot,
                 FormBlock,
+                Timeline,
               ],
               required: true,
             },

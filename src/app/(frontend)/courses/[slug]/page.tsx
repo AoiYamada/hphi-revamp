@@ -10,7 +10,6 @@ import type { Course as CourseType } from '@/payload-types'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { generateMeta } from '@/utilities/generateMeta'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
-import TimeSlot from '@/components/sections/TimeSlot'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })

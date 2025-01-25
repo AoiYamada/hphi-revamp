@@ -10,6 +10,7 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { YouTube } from '@/blocks/YouTube/Component'
 import { CollapsibleBlock } from './Collapsible/Component'
 import { TimeSlotBlock } from './TimeSlot/Component'
+import { TimelineBlock } from './Timeline/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -20,6 +21,7 @@ const blockComponents = {
   youtubeBlock: YouTube,
   collapsibleBlock: CollapsibleBlock,
   timeSlotBlock: TimeSlotBlock,
+  timelineBlock: TimelineBlock,
 }
 
 export const RenderBlocks: FC<{
@@ -44,7 +46,7 @@ export const RenderBlocks: FC<{
           if (Block) {
             return (
               <div className="my-8" key={index}>
-                {/* @ts-expect-error */}
+                {/* @ts-ignore */}
                 <Block {...block} />
               </div>
             )
