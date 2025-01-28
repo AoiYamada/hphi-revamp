@@ -17,6 +17,29 @@ export const Header: GlobalConfig = {
   },
   fields: [
     {
+      name: 'announcement',
+      label: 'Announcement',
+      type: 'group',
+      fields: [
+        {
+          name: 'enable',
+          type: 'checkbox',
+        },
+        {
+          name: 'content',
+          type: 'richText',
+          admin: {
+            condition: (_, { enable }) => Boolean(enable),
+          },
+          editor: lexicalEditor({
+            features: ({ rootFeatures }) => {
+              return [...rootFeatures, FixedToolbarFeature(), InlineToolbarFeature()]
+            },
+          }),
+        },
+      ],
+    },
+    {
       admin: {
         components: {
           RowLabel: '@/Header/RowLabels#Tabs',

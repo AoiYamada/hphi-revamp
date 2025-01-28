@@ -7,7 +7,6 @@ import {
   lexicalEditor,
   UnderlineFeature,
   AlignFeature,
-  EXPERIMENTAL_TableFeature,
 } from '@payloadcms/richtext-lexical'
 
 export const defaultLexical: Config['editor'] = lexicalEditor({
@@ -40,7 +39,6 @@ export const defaultLexical: Config['editor'] = lexicalEditor({
         },
       }),
       AlignFeature(),
-      EXPERIMENTAL_TableFeature(),
     ]
   },
 })

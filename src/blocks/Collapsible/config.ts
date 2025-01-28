@@ -1,5 +1,6 @@
 import {
   AlignFeature,
+  EXPERIMENTAL_TableFeature,
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
@@ -33,6 +34,7 @@ export const Collapsible: Block = {
                 FixedToolbarFeature(),
                 InlineToolbarFeature(),
                 AlignFeature(),
+                EXPERIMENTAL_TableFeature(),
               ]
             },
           }),

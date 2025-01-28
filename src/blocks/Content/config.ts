@@ -3,6 +3,7 @@ import type { Block, Field } from 'payload'
 import {
   AlignFeature,
   BlocksFeature,
+  EXPERIMENTAL_TableFeature,
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
@@ -51,6 +52,7 @@ const columnFields: Field[] = [
           FixedToolbarFeature(),
           InlineToolbarFeature(),
           AlignFeature(),
+          EXPERIMENTAL_TableFeature(),
         ]
       },
     }),
