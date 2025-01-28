@@ -126,7 +126,9 @@ const config = {
         DEFAULT: {
           css: [
             {
+              // colors are undefined here, so I can control with classes
               '--tw-prose-body': 'var(--text)',
+              '--tw-prose-links': 'var(--text)',
               '--tw-prose-headings': 'var(--text)',
               h1: {
                 fontWeight: 'normal',
