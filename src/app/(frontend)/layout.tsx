@@ -36,7 +36,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <link href="/favicon/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon/favicon-32x32.png" rel="icon" type="image/png" sizes="32x32" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        {googleSiteVerification ?? (
+        {googleSiteVerification && (
           <meta name="google-site-verification" content={googleSiteVerification} />
         )}
       </head>
