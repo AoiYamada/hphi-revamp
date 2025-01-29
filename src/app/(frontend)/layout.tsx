@@ -19,6 +19,7 @@ import FacebookPixel from '@/components/FacebookPixel'
 import { fbId } from '@/lib/f-pixel'
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID
+const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
 const isDev = process.env.NEXT_PUBLIC_SERVER_URL === 'https://hk-hphi.com'
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
@@ -35,6 +36,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <link href="/favicon/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon/favicon-32x32.png" rel="icon" type="image/png" sizes="32x32" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {googleSiteVerification ?? (
+          <meta name="google-site-verification" content={googleSiteVerification} />
+        )}
       </head>
       <body className="bg-primary/10">
         <Providers>
