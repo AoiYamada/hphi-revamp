@@ -12,7 +12,7 @@ module.exports = {
       time: false,
       watch: true,
       watch_delay: 10000,
-      ignore_watch: ['[/\\]./', 'node_modules', 'volumes', 'logs'],
+      ignore_watch: ['[/\\]./', 'node_modules', 'volumes', 'logs', '.next', 'public'],
       source_map_support: false,
       instance_var: 'NODE_APP_INSTANCE',
       error_file: '/home/yamada/workspace/hphi/hphi-revamp/logs/hphi-revamp-error.log',
