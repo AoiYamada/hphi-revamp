@@ -24,11 +24,12 @@ export const VideoMedia: FC<MediaProps> = (props) => {
   }, [])
 
   if (resource && typeof resource === 'object') {
-    const { filename } = resource
+    const { url } = resource
 
     return (
       <video className={cn(videoClassName)} controls onClick={onClick} playsInline ref={videoRef}>
-        <source src={`${getClientSideURL()}/media/${filename}`} />
+        {/* don't use filename and directly construct a mounted public link like /media/:filename, this path won't work until next process restart */}
+        <source src={`${getClientSideURL()}${url}`} />
       </video>
     )
   }
