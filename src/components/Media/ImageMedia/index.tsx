@@ -60,7 +60,7 @@ export const ImageMedia: FC<MediaProps> = (props) => {
         .join(', ')
 
   return (
-    <picture>
+    <picture className="my-0">
       <NextImage
         alt={alt || ''}
         className={cn(imgClassName)}

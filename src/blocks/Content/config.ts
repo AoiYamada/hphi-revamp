@@ -15,6 +15,7 @@ import { Code } from '../Code/config'
 import { MediaBlock } from '../MediaBlock/config'
 import { YouTube } from '../YouTube/config'
 import { FormBlock } from '../Form/config'
+import { Collapsible } from '../Collapsible/config'
 
 const columnFields: Field[] = [
   {
@@ -48,7 +49,7 @@ const columnFields: Field[] = [
         return [
           ...rootFeatures,
           HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-          BlocksFeature({ blocks: [Code, MediaBlock, YouTube, FormBlock] }),
+          BlocksFeature({ blocks: [Code, MediaBlock, YouTube, FormBlock, Collapsible] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
           AlignFeature(),

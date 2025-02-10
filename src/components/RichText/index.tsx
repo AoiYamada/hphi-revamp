@@ -18,6 +18,7 @@ import type {
   CallToActionBlock as CTABlockProps,
   MediaBlock as MediaBlockProps,
   YouTube as YouTubeProps,
+  CollapsibleBlock as CollapsibleProps,
 } from '@/payload-types'
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
@@ -25,6 +26,7 @@ import { cn } from '@/utilities/cn'
 import { FC, HTMLAttributes } from 'react'
 import { FormBlock, FormBlockType } from '@/blocks/Form/Component'
 import { YouTube } from '@/blocks/YouTube/Component'
+import { CollapsibleBlock } from '@/blocks/Collapsible/Component'
 
 type NodeTypes =
   | DefaultNodeTypes
@@ -35,6 +37,7 @@ type NodeTypes =
       | BannerBlockProps
       | CodeBlockProps
       | FormBlockType
+      | CollapsibleProps
     >
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
@@ -66,6 +69,11 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
     cta: ({ node }) => <CallToActionBlock {...node.fields} />,
     formBlock: ({ node }) => <FormBlock className="col-start-2 p-0 md:p-0" {...node.fields} />,
+    collapsibleBlock: ({ node }) => (
+      <div className="col-start-2">
+        <CollapsibleBlock {...node.fields} />
+      </div>
+    ),
   },
 })
 
