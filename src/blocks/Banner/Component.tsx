@@ -19,7 +19,9 @@ export const BannerBlock: FC<Props> = ({ className, content, style }) => {
           'border-warning bg-warning/30': style === 'warning',
         })}
       >
-        <RichText data={content} enableGutter={false} enableProse={false} />
+        <div className="mx-auto prose md:prose-md dark:prose-invert w-full max-w-full">
+          <RichText data={content} enableGutter={false} enableProse={false} />
+        </div>
       </div>
     </div>
   )
