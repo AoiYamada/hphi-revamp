@@ -24,6 +24,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
     collection: 'posts',
     depth: 1,
     limit: 12,
+    overrideAccess: false,
     select: {
       title: true,
       slug: true,
