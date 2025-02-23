@@ -20,6 +20,7 @@ import { slugField } from '@/fields/slug'
 import { revalidateCourse, revalidateDelete } from './hooks/revalidateCourse'
 import { TimeSlot } from '@/blocks/TimeSlot/config'
 import { Timeline } from '@/blocks/Timeline/config'
+import { Quote } from '@/blocks/Quote/config'
 
 export const Courses: CollectionConfig = {
   slug: 'courses',
@@ -65,6 +66,7 @@ export const Courses: CollectionConfig = {
                 TimeSlot,
                 FormBlock,
                 Timeline,
+                Quote,
               ],
               required: true,
             },

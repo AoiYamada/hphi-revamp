@@ -11,6 +11,7 @@ import { YouTube } from '@/blocks/YouTube/Component'
 import { CollapsibleBlock } from './Collapsible/Component'
 import { TimeSlotBlock } from './TimeSlot/Component'
 import { TimelineBlock } from './Timeline/Component'
+import { QuoteBlock } from './Quote/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -22,6 +23,7 @@ const blockComponents = {
   collapsibleBlock: CollapsibleBlock,
   timeSlotBlock: TimeSlotBlock,
   timelineBlock: TimelineBlock,
+  quoteBlock: QuoteBlock,
 }
 
 export const RenderBlocks: FC<{

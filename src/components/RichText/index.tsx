@@ -19,6 +19,7 @@ import type {
   MediaBlock as MediaBlockProps,
   YouTube as YouTubeProps,
   CollapsibleBlock as CollapsibleProps,
+  QuoteBlock as QuoteBlockProps,
 } from '@/payload-types'
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
@@ -27,6 +28,7 @@ import { FC, HTMLAttributes } from 'react'
 import { FormBlock, FormBlockType } from '@/blocks/Form/Component'
 import { YouTube } from '@/blocks/YouTube/Component'
 import { CollapsibleBlock } from '@/blocks/Collapsible/Component'
+import { QuoteBlock } from '@/blocks/Quote/Component'
 
 type NodeTypes =
   | DefaultNodeTypes
@@ -38,6 +40,7 @@ type NodeTypes =
       | CodeBlockProps
       | FormBlockType
       | CollapsibleProps
+      | QuoteBlockProps
     >
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
@@ -74,6 +77,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
         <CollapsibleBlock {...node.fields} />
       </div>
     ),
+    quoteBlock: ({ node }) => <QuoteBlock className="col-start-2" {...node.fields} />,
   },
 })
 

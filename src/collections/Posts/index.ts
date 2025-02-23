@@ -30,6 +30,7 @@ import { slugField } from '@/fields/slug'
 import { getServerSideURL } from '@/utilities/getURL'
 import { YouTube } from '@/blocks/YouTube/config'
 import { CallToAction } from '@/blocks/CallToAction/config'
+import { Quote } from '@/blocks/Quote/config'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -92,7 +93,9 @@ export const Posts: CollectionConfig<'posts'> = {
                   return [
                     ...rootFeatures,
                     HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    BlocksFeature({ blocks: [Banner, Code, MediaBlock, YouTube, CallToAction] }),
+                    BlocksFeature({
+                      blocks: [Banner, Code, MediaBlock, YouTube, CallToAction, Quote],
+                    }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),

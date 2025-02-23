@@ -7,7 +7,7 @@ import { CMSLink } from '@/components/Link'
 
 export const CallToActionBlock: FC<CTABlockProps> = ({ links, richText }) => {
   return (
-    <div className="w-full">
+    <div className="w-full mb-4">
       <div className="bg-card rounded border-border border p-4 flex flex-col gap-8 py-3 px-6 ">
         <div className="flex items-center">
           {richText && (

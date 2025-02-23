@@ -145,6 +145,7 @@ export interface Page {
     | TimeSlotBlock
     | FormBlock
     | TimelineBlock
+    | QuoteBlock
   )[];
   meta?: {
     title?: string | null;
@@ -178,6 +179,7 @@ export interface Course {
     | TimeSlotBlock
     | FormBlock
     | TimelineBlock
+    | QuoteBlock
   )[];
   meta?: {
     title?: string | null;
@@ -960,6 +962,17 @@ export interface TimelineBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "QuoteBlock".
+ */
+export interface QuoteBlock {
+  quote: string;
+  author: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'quoteBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1172,6 +1185,7 @@ export interface PagesSelect<T extends boolean = true> {
         timeSlotBlock?: T | TimeSlotBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         timelineBlock?: T | TimelineBlockSelect<T>;
+        quoteBlock?: T | QuoteBlockSelect<T>;
       };
   meta?:
     | T
@@ -1336,6 +1350,16 @@ export interface TimelineBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "QuoteBlock_select".
+ */
+export interface QuoteBlockSelect<T extends boolean = true> {
+  quote?: T;
+  author?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "courses_select".
  */
 export interface CoursesSelect<T extends boolean = true> {
@@ -1352,6 +1376,7 @@ export interface CoursesSelect<T extends boolean = true> {
         timeSlotBlock?: T | TimeSlotBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         timelineBlock?: T | TimelineBlockSelect<T>;
+        quoteBlock?: T | QuoteBlockSelect<T>;
       };
   meta?:
     | T
