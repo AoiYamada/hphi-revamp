@@ -126,7 +126,7 @@ const config = {
         DEFAULT: {
           css: [
             {
-              '--tw-prose-hr': 'var(--border)',
+              '--tw-prose-hr': 'hsl(var(--border))',
               // colors are undefined here, so I can control with classes
               '--tw-prose-body': 'var(--text)',
               '--tw-prose-links': 'var(--text)',
