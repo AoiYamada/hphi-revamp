@@ -1,6 +1,6 @@
 // Copied from: https://github.com/Tourniercy/shadcn-timeline/blob/main/src/components/timeline.tsx
 import * as React from 'react'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utilities'
 import { Badge } from '@/components/ui/badge'
 
 const Timeline = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(

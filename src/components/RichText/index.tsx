@@ -23,7 +23,7 @@ import type {
 } from '@/payload-types'
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
-import { cn } from '@/utilities/cn'
+import { cn } from '@/utilities'
 import { FC, HTMLAttributes } from 'react'
 import { FormBlock, FormBlockType } from '@/blocks/Form/Component'
 import { YouTube } from '@/blocks/YouTube/Component'

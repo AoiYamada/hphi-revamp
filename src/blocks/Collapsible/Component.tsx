@@ -1,7 +1,7 @@
 import RichText from '@/components/RichText'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utilities'
 import { CollapsibleBlock as CollapsibleBlockProps } from '@/payload-types'
 import { ChevronRight } from 'lucide-react'
 import { FC } from 'react'
