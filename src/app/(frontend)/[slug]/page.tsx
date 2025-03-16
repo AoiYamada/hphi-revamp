@@ -2,12 +2,9 @@ import type { Metadata } from 'next'
 
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
-import { getPayload } from 'payload'
+import { getPayload, type RequiredDataFromCollectionSlug } from 'payload'
 import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
-import { homeStatic } from '@/endpoints/seed/home-static'
-
-import type { Page as PageType } from '@/payload-types'
 
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
@@ -46,11 +43,12 @@ type Args = {
 }
 
 export default async function Page({ params: paramsPromise }: Args) {
+  const { isEnabled: draft } = await draftMode()
   let { slug = 'home' } = await paramsPromise
   slug = decodeURIComponent(slug)
   const url = '/' + slug
 
-  let page: PageType | null
+  let page: RequiredDataFromCollectionSlug<'pages'> | null
 
   page = await queryPageBySlug({
     slug,
@@ -63,10 +61,10 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { hero, layout } = page
 
   return (
-    <article className="pb-16">
+    <article className="pt-16 pb-24">
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
-      <LivePreviewListener />
+      {draft && <LivePreviewListener />}
 
       <RenderHero {...hero} />
       <MaxWidthWrapper>
@@ -76,7 +74,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   )
 }
 
-export async function generateMetadata({ params: paramsPromise }): Promise<Metadata> {
+export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   let { slug = 'home' } = await paramsPromise
   slug = decodeURIComponent(slug)
   const page = await queryPageBySlug({

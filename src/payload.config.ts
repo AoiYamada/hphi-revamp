@@ -81,6 +81,7 @@ export default buildConfig({
         siteName: '專業心理治療及催眠應用（香港）有限公司',
         title: '專業心理治療及催眠應用（香港）有限公司',
       },
+      titleSuffix: ' | HPHI',
     },
   },
   // This config helps us configure global or default features that the other editors can inherit

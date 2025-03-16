@@ -17,6 +17,7 @@ export const defaultLexical: Config['editor'] = lexicalEditor({
       UnderlineFeature(),
       BoldFeature(),
       ItalicFeature(),
+      // PRed: https://github.com/payloadcms/payload/pull/11713
       LinkFeature({
         enabledCollections: ['pages', 'posts', 'courses', 'tutors'],
         fields: ({ defaultFields }) => {
