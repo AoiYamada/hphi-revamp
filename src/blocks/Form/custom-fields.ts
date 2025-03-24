@@ -222,7 +222,45 @@ export type SelectField = OriginalSelectField & {
   placeholder: string
 }
 
-export type FormFieldBlock = OriginalFormFieldBlock | RadioField | OriginalSelectField
+export const Date: Block = {
+  slug: 'date',
+  fields: [
+    {
+      type: 'row',
+      fields: [
+        {
+          ...name,
+          admin: {
+            width: '50%',
+          },
+        },
+        {
+          ...label,
+          admin: {
+            width: '50%',
+          },
+        },
+      ],
+    },
+    width,
+    required,
+  ],
+  labels: {
+    plural: 'Date Fields',
+    singular: 'Date',
+  },
+}
+
+export type DateField = {
+  blockName?: string
+  blockType: 'date'
+  label?: string
+  name: string
+  required?: boolean
+  width?: number
+}
+
+export type FormFieldBlock = OriginalFormFieldBlock | RadioField | SelectField | DateField
 
 export type Form = OriginalForm & {
   fields: FormFieldBlock[]

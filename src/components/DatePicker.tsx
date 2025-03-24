@@ -23,23 +23,25 @@ const DatePicker: FC<DatePickerProps> = ({ defaultDate, onSelect }) => {
   }
 
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant={'outline'}
-          className={cn(
-            'w-[240px] justify-start text-left font-normal',
-            !date && 'text-muted-foreground',
-          )}
-        >
-          <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? format(date, 'PPP') : <span>Pick a date</span>}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
-        <Calendar mode="single" selected={date} onSelect={handleSelect} autoFocus />
-      </PopoverContent>
-    </Popover>
+    <div className="w-full">
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            variant={'outline'}
+            className={cn(
+              'w-[240px] justify-start text-left font-normal',
+              !date && 'text-foreground',
+            )}
+          >
+            <CalendarIcon className="mr-2 h-4 w-4" />
+            {date ? format(date, 'MM/dd/yyyy') : <span>請選擇日期</span>}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0" align="start">
+          <Calendar mode="single" selected={date} onSelect={handleSelect} autoFocus />
+        </PopoverContent>
+      </Popover>
+    </div>
   )
 }
 

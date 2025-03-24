@@ -16,7 +16,7 @@ export default function DateRangePicker({ className }: React.HTMLAttributes<HTML
   })
 
   return (
-    <div className={cn('grid gap-2', className)}>
+    <div className={cn('grid gap-2 w-full', className)}>
       <Popover>
         <PopoverTrigger asChild>
           <Button
@@ -24,7 +24,7 @@ export default function DateRangePicker({ className }: React.HTMLAttributes<HTML
             variant={'outline'}
             className={cn(
               'w-[300px] justify-start text-left font-normal',
-              !date && 'text-muted-foreground',
+              !date && 'text-foreground',
             )}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />

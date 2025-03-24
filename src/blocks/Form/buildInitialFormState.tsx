@@ -15,6 +15,7 @@ export const buildInitialFormState = (fields: FormFieldBlock[]) => {
       case 'email':
       case 'text':
       case 'state':
+      case 'date':
         return {
           ...initialSchema,
           [field.name]: '',

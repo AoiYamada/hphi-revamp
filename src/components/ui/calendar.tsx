@@ -1,3 +1,4 @@
+// copy from https://date-picker.luca-felix.com/
 'use client'
 
 import { Button, buttonVariants } from '@/components/ui/button'
@@ -89,10 +90,7 @@ function Calendar({
     props.monthCaptionClassName,
   )
   const _weekdaysClassName = cn('flex flex-row', props.weekdaysClassName)
-  const _weekdayClassName = cn(
-    'w-8 text-sm font-normal text-muted-foreground',
-    props.weekdayClassName,
-  )
+  const _weekdayClassName = cn('w-8 text-sm font-normal text-foreground', props.weekdayClassName)
   const _monthClassName = cn('w-full', props.monthClassName)
   const _captionClassName = cn(
     'relative flex items-center justify-center pt-1',
@@ -137,12 +135,9 @@ function Calendar({
     '[&>button]:bg-primary [&>button]:text-primary-foreground [&>button]:hover:bg-primary [&>button]:hover:text-primary-foreground',
     props.selectedClassName,
   )
-  const _todayClassName = cn(
-    '[&>button]:bg-accent [&>button]:text-accent-foreground',
-    props.todayClassName,
-  )
+  const _todayClassName = cn('[&>button]:bg-accent/30', props.todayClassName)
   const _outsideClassName = cn(
-    'day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30',
+    'day-outside text-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-foreground aria-selected:opacity-30',
     props.outsideClassName,
   )
   const _disabledClassName = cn('text-muted-foreground opacity-50', props.disabledClassName)
