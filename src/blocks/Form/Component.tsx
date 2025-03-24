@@ -71,7 +71,7 @@ export const FormBlock: FC<
         const dataToSend = Object.entries(data).map(([name, value]) => ({
           field: name,
           value:
-            typeof (value as Date).getMonth === 'function'
+            typeof (value as Date)?.getMonth === 'function'
               ? format(value as Date, 'MM/dd/yyyy')
               : value,
         }))

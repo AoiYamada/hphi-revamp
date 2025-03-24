@@ -260,7 +260,58 @@ export type DateField = {
   width?: number
 }
 
-export type FormFieldBlock = OriginalFormFieldBlock | RadioField | SelectField | DateField
+export const UploadImage: Block = {
+  slug: 'uploadImage',
+  fields: [
+    {
+      type: 'row',
+      fields: [
+        {
+          ...name,
+          admin: {
+            width: '50%',
+          },
+        },
+        {
+          ...label,
+          admin: {
+            width: '50%',
+          },
+        },
+      ],
+    },
+    width,
+    {
+      type: 'upload',
+      name: 'file',
+      relationTo: 'upload',
+      admin: {
+        hidden: true,
+      },
+    },
+    required,
+  ],
+  labels: {
+    plural: 'Upload Image Fields',
+    singular: 'Upload Image',
+  },
+}
+
+export type UploadImageField = {
+  blockType: 'uploadImage'
+  label?: string
+  name: string
+  required?: boolean
+  width?: number
+  file?: string // relationTo: 'upload'
+}
+
+export type FormFieldBlock =
+  | OriginalFormFieldBlock
+  | RadioField
+  | SelectField
+  | DateField
+  | UploadImageField
 
 export type Form = OriginalForm & {
   fields: FormFieldBlock[]

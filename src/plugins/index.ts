@@ -71,6 +71,7 @@ export const plugins: Plugin[] = [
       radio: Radio,
       select: Select,
       payment: false,
+      // uploadImage: UploadImage,
     },
     formOverrides: {
       fields: ({ defaultFields }) => {

@@ -9,6 +9,7 @@ import { Select } from './Select'
 import { State } from './State'
 import { Text } from './Text'
 import { Textarea } from './Textarea'
+// import { UploadImage } from './UploadImage'
 
 export const fields = {
   checkbox: Checkbox,
@@ -22,4 +23,5 @@ export const fields = {
   textarea: Textarea,
   radio: Radio,
   date: Date,
+  // uploadImage: UploadImage,
 }

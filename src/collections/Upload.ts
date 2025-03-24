@@ -27,6 +27,7 @@ export const Upload: CollectionConfig = {
     // Upload to the public/media directory in Next.js making them publicly accessible even outside of Payload
     staticDir: path.resolve(dirname, '../../private/media'),
     adminThumbnail: 'thumbnail',
+    mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
     imageSizes: [
       {
         name: 'thumbnail',

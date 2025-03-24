@@ -1,4 +1,3 @@
-import type { SelectField } from '@payloadcms/plugin-form-builder/types'
 import type { Control, FieldErrorsImpl } from 'react-hook-form'
 
 import { Label } from '@/components/ui/label'
@@ -8,6 +7,7 @@ import { Controller } from 'react-hook-form'
 
 import { Error } from '../Error'
 import { Width } from '../Width'
+import { SelectField } from '../custom-fields'
 
 export const Radio: React.FC<
   SelectField & {
