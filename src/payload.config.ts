@@ -19,6 +19,7 @@ import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 import Tutors from './collections/Tutors'
+// import { Upload } from './collections/Upload'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -89,7 +90,16 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Courses, Tutors, Posts, Media, Categories, Users],
+  collections: [
+    Pages,
+    Courses,
+    Tutors,
+    Posts,
+    Media,
+    Categories,
+    Users,
+    // Upload
+  ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [
