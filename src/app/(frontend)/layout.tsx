@@ -21,7 +21,7 @@ import WhatsAppUs from '@/components/WhatsAppUs'
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID
 const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
-const isDev = process.env.NEXT_PUBLIC_SERVER_URL !== 'https://hk-hphi.com'
+const isDev = process.env.NODE_ENV !== 'production'
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const { isEnabled } = await draftMode()
