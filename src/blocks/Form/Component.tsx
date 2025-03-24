@@ -13,15 +13,16 @@ import { fields } from './fields'
 import { getClientSideURL } from '@/utilities/getURL'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import { cn } from '@/utilities'
+import { format } from 'date-fns'
 
-export type Value = unknown
+type Value = unknown
 
-export interface Property {
+interface Property {
   [key: string]: Value
 }
 
-export interface Data {
-  [key: string]: Property | Property[]
+interface Data {
+  [key: string]: Value | Value[] | Property | Property[]
 }
 
 export type FormBlockType = {
@@ -69,7 +70,10 @@ export const FormBlock: FC<
 
         const dataToSend = Object.entries(data).map(([name, value]) => ({
           field: name,
-          value,
+          value:
+            typeof (value as Date).getMonth === 'function'
+              ? format(value as Date, 'MM/dd/yyyy')
+              : value,
         }))
 
         // delay loading indicator by 1s
@@ -142,7 +146,7 @@ export const FormBlock: FC<
           {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
           {!hasSubmitted && (
             <form id={formID} onSubmit={handleSubmit(onSubmit)}>
-              <div className="mb-4 last:mb-0">
+              <div className="mb-8 last:mb-0">
                 {formFromProps &&
                   formFromProps.fields &&
                   formFromProps.fields?.map((field, index) => {
