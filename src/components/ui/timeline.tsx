@@ -1,5 +1,5 @@
 // Copied from: https://github.com/Tourniercy/shadcn-timeline/blob/main/src/components/timeline.tsx
-import * as React from 'react'
+import React from 'react'
 import { cn } from '@/utilities'
 import { Badge } from '@/components/ui/badge'
 
