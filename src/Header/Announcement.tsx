@@ -14,7 +14,7 @@ const Announcement: FC<AnnouncementProps> = ({ enable, content }) => {
   if (!isVisible) return null
 
   return (
-    <div className="bg-primary text-primary-foreground">
+    <div className="bg-primary text-primary-foreground z-50">
       <MaxWidthWrapper className="py-2">
         <div className="w-full flex gap-2 items-start">
           <RichText data={content!} className="flex-grow max-w-full justify-between" />
