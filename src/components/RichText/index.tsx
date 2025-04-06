@@ -12,6 +12,7 @@ import {
 } from '@payloadcms/richtext-lexical/react'
 
 import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
+import { CEFCalculatorBlock } from '@/blocks/CEFCalculator/Component'
 
 import type {
   BannerBlock as BannerBlockProps,
@@ -20,6 +21,7 @@ import type {
   YouTube as YouTubeProps,
   CollapsibleBlock as CollapsibleProps,
   QuoteBlock as QuoteBlockProps,
+  CEFCalculatorBlock as CEFCalculatorBlockProps,
 } from '@/payload-types'
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
@@ -41,6 +43,7 @@ type NodeTypes =
       | FormBlockType
       | CollapsibleProps
       | QuoteBlockProps
+      | CEFCalculatorBlockProps
     >
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
@@ -78,6 +81,9 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
       </div>
     ),
     quoteBlock: ({ node }) => <QuoteBlock className="col-start-2" {...node.fields} />,
+    cefCalculatorBlock: ({ node }) => (
+      <CEFCalculatorBlock className="col-start-2" {...node.fields} />
+    ),
   },
 })
 

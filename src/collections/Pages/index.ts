@@ -14,6 +14,7 @@ import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
+import { CEFCalculator } from '@/blocks/CEFCalculator/config'
 
 import {
   MetaDescriptionField,
@@ -93,6 +94,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 FormBlock,
                 Timeline,
                 Quote,
+                CEFCalculator,
               ],
               required: true,
               admin: {

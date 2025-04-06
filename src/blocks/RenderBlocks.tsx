@@ -12,6 +12,7 @@ import { CollapsibleBlock } from './Collapsible/Component'
 import { TimeSlotBlock } from './TimeSlot/Component'
 import { TimelineBlock } from './Timeline/Component'
 import { QuoteBlock } from './Quote/Component'
+import { CEFCalculatorBlock } from './CEFCalculator/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -24,6 +25,7 @@ const blockComponents = {
   timeSlotBlock: TimeSlotBlock,
   timelineBlock: TimelineBlock,
   quoteBlock: QuoteBlock,
+  cefCalculatorBlock: CEFCalculatorBlock,
 }
 
 export const RenderBlocks: FC<{

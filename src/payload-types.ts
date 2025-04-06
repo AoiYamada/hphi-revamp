@@ -201,6 +201,7 @@ export interface Page {
     | FormBlock
     | TimelineBlock
     | QuoteBlock
+    | CEFCalculatorBlock
   )[];
   meta?: {
     title?: string | null;
@@ -235,6 +236,7 @@ export interface Course {
     | FormBlock
     | TimelineBlock
     | QuoteBlock
+    | CEFCalculatorBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1037,6 +1039,15 @@ export interface QuoteBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CEFCalculatorBlock".
+ */
+export interface CEFCalculatorBlock {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cefCalculatorBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1250,6 +1261,7 @@ export interface PagesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         timelineBlock?: T | TimelineBlockSelect<T>;
         quoteBlock?: T | QuoteBlockSelect<T>;
+        cefCalculatorBlock?: T | CEFCalculatorBlockSelect<T>;
       };
   meta?:
     | T
@@ -1424,6 +1436,14 @@ export interface QuoteBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CEFCalculatorBlock_select".
+ */
+export interface CEFCalculatorBlockSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "courses_select".
  */
 export interface CoursesSelect<T extends boolean = true> {
@@ -1441,6 +1461,7 @@ export interface CoursesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         timelineBlock?: T | TimelineBlockSelect<T>;
         quoteBlock?: T | QuoteBlockSelect<T>;
+        cefCalculatorBlock?: T | CEFCalculatorBlockSelect<T>;
       };
   meta?:
     | T

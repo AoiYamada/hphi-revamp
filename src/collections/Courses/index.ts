@@ -21,6 +21,7 @@ import { revalidateCourse, revalidateDelete } from './hooks/revalidateCourse'
 import { TimeSlot } from '@/blocks/TimeSlot/config'
 import { Timeline } from '@/blocks/Timeline/config'
 import { Quote } from '@/blocks/Quote/config'
+import { CEFCalculator } from '@/blocks/CEFCalculator/config'
 
 export const Courses: CollectionConfig = {
   slug: 'courses',
@@ -67,6 +68,7 @@ export const Courses: CollectionConfig = {
                 FormBlock,
                 Timeline,
                 Quote,
+                CEFCalculator,
               ],
               required: true,
             },

@@ -31,6 +31,7 @@ import { getServerSideURL } from '@/utilities/getURL'
 import { YouTube } from '@/blocks/YouTube/config'
 import { CallToAction } from '@/blocks/CallToAction/config'
 import { Quote } from '@/blocks/Quote/config'
+import { CEFCalculator } from '@/blocks/CEFCalculator/config'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -94,7 +95,15 @@ export const Posts: CollectionConfig<'posts'> = {
                     ...rootFeatures,
                     HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
                     BlocksFeature({
-                      blocks: [Banner, Code, MediaBlock, YouTube, CallToAction, Quote],
+                      blocks: [
+                        Banner,
+                        Code,
+                        MediaBlock,
+                        YouTube,
+                        CallToAction,
+                        Quote,
+                        CEFCalculator,
+                      ],
                     }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
