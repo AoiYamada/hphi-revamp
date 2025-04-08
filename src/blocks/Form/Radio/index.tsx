@@ -16,7 +16,7 @@ export const Radio: React.FC<
   }
 > = ({ name, control, errors, label, options, required, width, defaultValue }) => {
   return (
-    <Width width={width}>
+    <Width width={width} className="space-y-2">
       <Label htmlFor={name}>{label}</Label>
       <Controller
         control={control}

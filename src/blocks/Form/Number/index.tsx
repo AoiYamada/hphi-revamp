@@ -18,7 +18,7 @@ export const Number: React.FC<
   }
 > = ({ name, defaultValue, errors, label, register, required: requiredFromProps, width }) => {
   return (
-    <Width width={width}>
+    <Width width={width} className="space-y-2">
       <Label htmlFor={name}>{label}</Label>
       <Input
         defaultValue={defaultValue}

@@ -29,7 +29,7 @@ export const Textarea: React.FC<
   width,
 }) => {
   return (
-    <Width width={width}>
+    <Width width={width} className="space-y-2">
       <Label htmlFor={name}>{label}</Label>
 
       <TextAreaComponent

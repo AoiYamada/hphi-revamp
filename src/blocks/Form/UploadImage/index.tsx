@@ -55,7 +55,7 @@ export const UploadImage: React.FC<{
     // }
 
     // return (
-    // <Width width={width}>
+    // <Width width={width} className='space-y-2'>
     //   <Label htmlFor={name}>{label}</Label>
     //   <div className="w-full">
     //     <Controller

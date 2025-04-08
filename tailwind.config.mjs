@@ -137,6 +137,13 @@ const config = {
                 fontWeight: 'normal',
                 marginBottom: '0.25em',
               },
+              'table p': {
+                marginTop: '0.5em',
+                marginBottom: '0.5em',
+              },
+              th: {
+                whiteSpace: 'nowrap',
+              },
             },
           ],
         },

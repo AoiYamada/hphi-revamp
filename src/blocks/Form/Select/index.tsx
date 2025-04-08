@@ -26,7 +26,7 @@ export const Select: React.FC<
   }
 > = ({ name, control, errors, label, options, required, width, defaultValue, placeholder }) => {
   return (
-    <Width width={width}>
+    <Width width={width} className="space-y-2">
       <Label htmlFor={name}>{label}</Label>
       <Controller
         control={control}

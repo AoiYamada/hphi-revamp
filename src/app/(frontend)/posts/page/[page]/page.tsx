@@ -37,7 +37,7 @@ export default async function Page({ params: paramsPromise }: Args) {
     <MaxWidthWrapper className="pt-24 pb-24">
       <div className="w-full mb-16">
         <div className="prose dark:prose-invert max-w-none">
-          <h1>Posts</h1>
+          <h1>文章分享</h1>
         </div>
       </div>
 

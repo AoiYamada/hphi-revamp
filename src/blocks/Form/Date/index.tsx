@@ -16,7 +16,7 @@ export const Date: React.FC<
   }
 > = ({ name, control, errors, label, required, width }) => {
   return (
-    <Width width={width}>
+    <Width width={width} className="space-y-2">
       <Label htmlFor={name}>{label}</Label>
       <Controller
         control={control}
