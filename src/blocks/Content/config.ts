@@ -26,6 +26,10 @@ const columnFields: Field[] = [
     defaultValue: 'oneThird',
     options: [
       {
+        label: 'One Sixth',
+        value: 'oneSixth',
+      },
+      {
         label: 'One Third',
         value: 'oneThird',
       },
