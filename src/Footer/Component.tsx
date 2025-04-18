@@ -9,7 +9,7 @@ import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import FooterNavColumn from './FooterNavColumn'
 
 export async function Footer() {
-  const footer: Footer = await getCachedGlobal('footer')
+  const footer: Footer = await getCachedGlobal('footer', 1)
 
   const columns = footer?.columns || []
 
