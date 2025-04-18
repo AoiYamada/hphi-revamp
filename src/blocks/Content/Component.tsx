@@ -27,8 +27,11 @@ export const ContentBlock: FC<ContentBlockProps> = (props) => {
 
             return (
               <div
-                className={cn(`col-span-4 lg:col-span-${colsSpanClasses[size!]}`, {
-                  'md:col-span-2': size !== 'full',
+                className={cn(`lg:col-span-${colsSpanClasses[size ?? 'full']}`, {
+                  'col-span-2': size === 'oneSixth',
+                  'col-span-4': size !== 'oneSixth',
+                  'md:col-span-2': size !== 'full' && size !== 'oneSixth',
+                  'md:col-span-1': size === 'oneSixth',
                 })}
                 key={index}
               >
