@@ -10,11 +10,11 @@ export const ContentBlock: FC<ContentBlockProps> = (props) => {
   const { columns } = props
 
   const colsSpanClasses = {
-    full: '12',
-    half: '6',
-    oneSixth: '2',
-    oneThird: '4',
-    twoThirds: '8',
+    full: 'col-span-4 lg:col-span-12',
+    half: 'col-span-4 md:col-span-2 lg:col-span-6',
+    oneSixth: 'col-span-2 md:col-span-1 lg:col-span-2',
+    oneThird: 'col-span-4 md:col-span-2 lg:col-span-4',
+    twoThirds: 'col-span-4 md:col-span-2 lg:col-span-8',
   }
 
   return (
@@ -26,15 +26,7 @@ export const ContentBlock: FC<ContentBlockProps> = (props) => {
             const { enableLink, link, richText, size } = col
 
             return (
-              <div
-                className={cn(`lg:col-span-${colsSpanClasses[size ?? 'full']}`, {
-                  'col-span-2': size === 'oneSixth',
-                  'col-span-4': size !== 'oneSixth',
-                  'md:col-span-2': size !== 'full' && size !== 'oneSixth',
-                  'md:col-span-1': size === 'oneSixth',
-                })}
-                key={index}
-              >
+              <div className={colsSpanClasses[size ?? 'full']} key={index}>
                 {richText && <RichText data={richText} enableGutter={false} />}
 
                 {enableLink && <CMSLink {...link} />}
