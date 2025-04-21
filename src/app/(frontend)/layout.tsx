@@ -17,7 +17,7 @@ import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 import FacebookPixel from '@/components/FacebookPixel'
 import { fbId } from '@/lib/f-pixel'
-import WhatsAppUs from '@/components/WhatsAppUs'
+import AnimatedWhatsAppUs from '@/components/AnimatedWhatsAppUs'
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID
 const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
@@ -54,7 +54,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <Footer />
         </Providers>
         {!isDev && fbId && <FacebookPixel fbId={fbId} />}
-        <WhatsAppUs link="https://wa.me/85293098317" className="fixed bottom-5 right-5" />
+        <AnimatedWhatsAppUs />
       </body>
       {!isDev && gaId && <GoogleAnalytics gaId={gaId} />}
     </html>
