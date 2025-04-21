@@ -711,6 +711,7 @@ export interface TimeSlotBlock {
     [k: string]: unknown;
   } | null;
   registrationForm?: (string | null) | Form;
+  notes?: string | null;
   timeSlots?:
     | {
         title: string;
@@ -1382,6 +1383,7 @@ export interface TimeSlotBlockSelect<T extends boolean = true> {
   introContent?: T;
   outroContent?: T;
   registrationForm?: T;
+  notes?: T;
   timeSlots?:
     | T
     | {

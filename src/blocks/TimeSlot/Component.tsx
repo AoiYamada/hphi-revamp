@@ -6,13 +6,14 @@ export const TimeSlotBlock: FC<
   TimeSlotBlockProps & {
     id?: string
   }
-> = ({ introContent, outroContent, registrationForm, timeSlots }) => {
+> = ({ introContent, outroContent, registrationForm, notes, timeSlots }) => {
   return (
     <TimeSlot
       timeSlots={timeSlots ?? []}
       registrationForm={registrationForm}
       introContent={introContent}
       outroContent={outroContent}
+      notes={notes}
     />
   )
 }

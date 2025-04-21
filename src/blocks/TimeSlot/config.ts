@@ -53,6 +53,11 @@ export const TimeSlot: Block = {
       relationTo: 'forms',
     },
     {
+      name: 'notes',
+      type: 'textarea',
+      label: 'Notes',
+    },
+    {
       name: 'timeSlots',
       type: 'array',
       fields: [
