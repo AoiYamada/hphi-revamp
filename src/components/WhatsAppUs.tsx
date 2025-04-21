@@ -22,9 +22,9 @@ const WhatsAppUs: FC<WhatsAppUsProps> = ({ link, className }) => {
       <p
         className={cn(
           'text-nowrap overflow-hidden',
-          'm-0 group-hover:ml-7',
-          'w-0 group-hover:w-[calc-size(auto,size)]',
-          'opacity-0 group-hover:opacity-100',
+          'm-0 lg:group-hover:ml-7',
+          'w-0 lg:group-hover:w-[calc-size(auto,size)]',
+          'opacity-0 lg:group-hover:opacity-100',
           'transition-all duration-300 ease-in-out',
         )}
       >
