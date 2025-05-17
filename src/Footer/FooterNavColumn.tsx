@@ -3,7 +3,7 @@ import FooterNavLink from './FooterNavLink'
 import { Footer } from '@/payload-types'
 import { WhatsApp } from '@/components/icons/WhatsApp'
 import { Instagram } from '@/components/icons/Instagram'
-import { Mail } from 'lucide-react'
+import { Mail, Phone } from 'lucide-react'
 import { YouTube } from '@/components/icons/YouTube'
 import { Facebook } from '@/components/icons/Facebook'
 import { CMSLink } from '@/components/Link'
@@ -17,7 +17,7 @@ const IconsMap = {
   youtube: <YouTube />,
   facebook: <Facebook />,
   mail: <Mail />,
-  phone: <Mail />,
+  phone: <Phone />,
 }
 
 const FooterNavColumn: FC<FooterNavColumnProps> = ({ label, enableDirectLink, link, navItems }) => {
