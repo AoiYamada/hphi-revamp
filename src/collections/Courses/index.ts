@@ -22,6 +22,7 @@ import { TimeSlot } from '@/blocks/TimeSlot/config'
 import { Timeline } from '@/blocks/Timeline/config'
 import { Quote } from '@/blocks/Quote/config'
 import { CEFCalculator } from '@/blocks/CEFCalculator/config'
+import { Tabs } from '@/blocks/Tabs/config'
 
 export const Courses: CollectionConfig = {
   slug: 'courses',
@@ -69,6 +70,7 @@ export const Courses: CollectionConfig = {
                 Timeline,
                 Quote,
                 CEFCalculator,
+                Tabs,
               ],
               required: true,
             },

@@ -27,6 +27,7 @@ import { getServerSideURL } from '@/utilities/getURL'
 import { TimeSlot } from '@/blocks/TimeSlot/config'
 import { Timeline } from '@/blocks/Timeline/config'
 import { Quote } from '@/blocks/Quote/config'
+import { Tabs } from '@/blocks/Tabs/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -95,6 +96,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 Timeline,
                 Quote,
                 CEFCalculator,
+                Tabs,
               ],
               required: true,
               admin: {

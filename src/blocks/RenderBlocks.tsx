@@ -13,6 +13,7 @@ import { TimeSlotBlock } from './TimeSlot/Component'
 import { TimelineBlock } from './Timeline/Component'
 import { QuoteBlock } from './Quote/Component'
 import { CEFCalculatorBlock } from './CEFCalculator/Component'
+import { TabsBlock } from './Tabs/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -26,6 +27,7 @@ const blockComponents = {
   timelineBlock: TimelineBlock,
   quoteBlock: QuoteBlock,
   cefCalculatorBlock: CEFCalculatorBlock,
+  tabsBlock: TabsBlock,
 }
 
 export const RenderBlocks: FC<{

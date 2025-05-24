@@ -22,6 +22,7 @@ import type {
   CollapsibleBlock as CollapsibleProps,
   QuoteBlock as QuoteBlockProps,
   CEFCalculatorBlock as CEFCalculatorBlockProps,
+  TabsBlock as TabsBlockProps,
 } from '@/payload-types'
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
@@ -31,6 +32,7 @@ import { FormBlock, FormBlockType } from '@/blocks/Form/Component'
 import { YouTube } from '@/blocks/YouTube/Component'
 import { CollapsibleBlock } from '@/blocks/Collapsible/Component'
 import { QuoteBlock } from '@/blocks/Quote/Component'
+import { TabsBlock } from '@/blocks/Tabs/Component'
 
 type NodeTypes =
   | DefaultNodeTypes
@@ -44,6 +46,7 @@ type NodeTypes =
       | CollapsibleProps
       | QuoteBlockProps
       | CEFCalculatorBlockProps
+      | TabsBlockProps
     >
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
@@ -83,6 +86,11 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     quoteBlock: ({ node }) => <QuoteBlock className="col-start-2" {...node.fields} />,
     cefCalculatorBlock: ({ node }) => (
       <CEFCalculatorBlock className="col-start-2" {...node.fields} />
+    ),
+    tabsBlock: ({ node }) => (
+      <div className="col-start-2">
+        <TabsBlock {...node.fields} />,
+      </div>
     ),
   },
 })

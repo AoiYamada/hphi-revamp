@@ -32,6 +32,7 @@ import { YouTube } from '@/blocks/YouTube/config'
 import { CallToAction } from '@/blocks/CallToAction/config'
 import { Quote } from '@/blocks/Quote/config'
 import { CEFCalculator } from '@/blocks/CEFCalculator/config'
+import { Tabs } from '@/blocks/Tabs/config'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -103,6 +104,7 @@ export const Posts: CollectionConfig<'posts'> = {
                         CallToAction,
                         Quote,
                         CEFCalculator,
+                        Tabs,
                       ],
                     }),
                     FixedToolbarFeature(),
