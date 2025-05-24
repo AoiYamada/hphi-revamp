@@ -16,6 +16,7 @@ import { FormBlock } from '../Form/config'
 import { Collapsible } from '../Collapsible/config'
 import { Quote } from '../Quote/config'
 import { CEFCalculator } from '../CEFCalculator/config'
+import { Content } from '../Content/config'
 
 export const Tabs: Block = {
   slug: 'tabsBlock',
@@ -41,7 +42,16 @@ export const Tabs: Block = {
                 ...rootFeatures,
                 HeadingFeature({ enabledHeadingSizes: ['h4'] }),
                 BlocksFeature({
-                  blocks: [Code, MediaBlock, YouTube, FormBlock, Collapsible, Quote, CEFCalculator],
+                  blocks: [
+                    Code,
+                    Content,
+                    MediaBlock,
+                    YouTube,
+                    FormBlock,
+                    Collapsible,
+                    Quote,
+                    CEFCalculator,
+                  ],
                 }),
                 FixedToolbarFeature(),
                 InlineToolbarFeature(),

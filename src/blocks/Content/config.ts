@@ -18,7 +18,6 @@ import { FormBlock } from '../Form/config'
 import { Collapsible } from '../Collapsible/config'
 import { Quote } from '../Quote/config'
 import { CEFCalculator } from '../CEFCalculator/config'
-import { Tabs } from '../Tabs/config'
 
 const columnFields: Field[] = [
   {
@@ -57,7 +56,7 @@ const columnFields: Field[] = [
           ...rootFeatures,
           HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
           BlocksFeature({
-            blocks: [Code, MediaBlock, YouTube, FormBlock, Collapsible, Quote, CEFCalculator, Tabs],
+            blocks: [Code, MediaBlock, YouTube, FormBlock, Collapsible, Quote, CEFCalculator],
           }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
