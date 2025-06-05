@@ -43,12 +43,10 @@ const HeaderNav: FC<HeaderNavProps> = ({ header, className }) => {
           )
         })}
         <NavigationMenuItem className="py-2 px-4">
-          <Link href="/search" legacyBehavior passHref>
-            <NavigationMenuLink>
-              <span className="sr-only">文章搜尋</span>
-              <SearchIcon className="w-5" />
-            </NavigationMenuLink>
-          </Link>
+          <NavigationMenuLink href="/search">
+            <span className="sr-only">文章搜尋</span>
+            <SearchIcon className="w-5" />
+          </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

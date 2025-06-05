@@ -11,7 +11,7 @@ const LifeEnrichLikeTabs: FC<
     id?: string
   }
 > = ({ items }) => {
-  const [activeTab, setActiveTab] = useState(items?.[0].id ?? 0)
+  const [activeTab, setActiveTab] = useState(items?.[0]?.id ?? 0)
 
   if (!items || items.length === 0) {
     return null
