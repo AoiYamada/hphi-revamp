@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { TabsBlock as TabsBlockProps } from '@/payload-types'
 import { cn } from '@/utilities'
 import { FC, useState } from 'react'
+import { useRef, useEffect } from 'react'
 
 const LifeEnrichLikeTabs: FC<
   TabsBlockProps & {
@@ -12,9 +13,29 @@ const LifeEnrichLikeTabs: FC<
   }
 > = ({ items }) => {
   const [activeTab, setActiveTab] = useState(items?.[0]?.id ?? 0)
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
+
+  useEffect(() => {
+    const activeIdx = items?.findIndex((item, idx) => (item.id ?? idx) === activeTab)
+    if (typeof activeIdx === 'number' && activeIdx >= 0 && tabRefs.current[activeIdx]) {
+      tabRefs.current[activeIdx]?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'nearest',
+      })
+    }
+  }, [activeTab, items])
 
   if (!items || items.length === 0) {
     return null
+  }
+
+  const setRef = (idx: number) => (el: HTMLButtonElement | null) => {
+    if (el) {
+      tabRefs.current[idx] = el
+    } else {
+      tabRefs.current[idx] = null
+    }
   }
 
   return (
@@ -27,6 +48,7 @@ const LifeEnrichLikeTabs: FC<
           return (
             <Button
               key={id}
+              ref={setRef(idx)}
               variant="ghost"
               onClick={() => setActiveTab(item.id ?? idx)}
               data-active={isActive}
@@ -53,6 +75,7 @@ const LifeEnrichLikeTabs: FC<
               <div className="md:hidden mb-4">
                 <Button
                   key={id}
+                  ref={setRef(idx)}
                   variant="ghost"
                   onClick={() => setActiveTab(item.id ?? idx)}
                   data-active={isActive}
