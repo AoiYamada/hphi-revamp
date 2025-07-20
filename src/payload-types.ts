@@ -510,6 +510,9 @@ export interface ContentBlock {
  */
 export interface MediaBlock {
   media: string | Media;
+  /**
+   * Optional thumbnail for video
+   */
   thumbnail?: (string | null) | Media;
   id?: string | null;
   blockName?: string | null;

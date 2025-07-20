@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { populateMedia } from './hooks/populateMedia'
 
 export const MediaBlock: Block = {
   slug: 'mediaBlock',
@@ -16,10 +17,7 @@ export const MediaBlock: Block = {
       relationTo: 'media',
       required: false,
       admin: {
-        condition: (_, siblingData) =>
-          Boolean(
-            typeof siblingData.media === 'object' && siblingData.media.mimeType?.includes('video'),
-          ),
+        description: 'Optional thumbnail for video',
       },
     },
   ],
