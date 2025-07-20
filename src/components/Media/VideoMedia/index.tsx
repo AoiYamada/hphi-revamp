@@ -8,10 +8,11 @@ import type { Props as MediaProps } from '../types'
 import { getClientSideURL } from '@/utilities/getURL'
 
 export const VideoMedia: FC<MediaProps> = (props) => {
-  const { onClick, resource, videoClassName } = props
+  const { onClick, resource, videoClassName, thumbnail } = props
 
   const videoRef = useRef<HTMLVideoElement>(null)
   // const [showFallback] = useState<boolean>()
+  const poster = typeof thumbnail === 'object' ? thumbnail?.url || undefined : undefined
 
   useEffect(() => {
     const { current: video } = videoRef
@@ -33,6 +34,7 @@ export const VideoMedia: FC<MediaProps> = (props) => {
         onClick={onClick}
         playsInline
         ref={videoRef}
+        poster={poster}
         preload="none"
       >
         {/* don't use filename and directly construct a mounted public link like /media/:filename, this path won't work until next process restart */}

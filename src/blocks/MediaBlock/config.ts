@@ -10,5 +10,17 @@ export const MediaBlock: Block = {
       relationTo: 'media',
       required: true,
     },
+    {
+      name: 'thumbnail',
+      type: 'upload',
+      relationTo: 'media',
+      required: false,
+      admin: {
+        condition: (_, siblingData) =>
+          Boolean(
+            typeof siblingData.media === 'object' && siblingData.media.mimeType?.includes('video'),
+          ),
+      },
+    },
   ],
 }

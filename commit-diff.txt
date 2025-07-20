@@ -1,0 +1,218 @@
+/* This diff file is for AI ref to make new block for me */
+
+commit 5af9ceb91e64d0a16e0a3ee02f2f4f82509b08f4
+Author: AoiYamada <19519928+AoiYamada@users.noreply.github.com>
+Date:   Sun Feb 23 18:39:29 2025 +0800
+
+    feat: quote block
+
+diff --git a/src/blocks/Content/config.ts b/src/blocks/Content/config.ts
+index 5d88ee9..b87b95e 100644
+--- a/src/blocks/Content/config.ts
++++ b/src/blocks/Content/config.ts
+@@ -16,6 +16,7 @@ import { MediaBlock } from '../MediaBlock/config'
+ import { YouTube } from '../YouTube/config'
+ import { FormBlock } from '../Form/config'
+ import { Collapsible } from '../Collapsible/config'
++import { Quote } from '../Quote/config'
+
+ const columnFields: Field[] = [
+   {
+@@ -49,7 +50,7 @@ const columnFields: Field[] = [
+         return [
+           ...rootFeatures,
+           HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+-          BlocksFeature({ blocks: [Code, MediaBlock, YouTube, FormBlock, Collapsible] }),
++          BlocksFeature({ blocks: [Code, MediaBlock, YouTube, FormBlock, Collapsible, Quote] }),
+           FixedToolbarFeature(),
+           InlineToolbarFeature(),
+           AlignFeature(),
+diff --git a/src/blocks/Quote/Component.tsx b/src/blocks/Quote/Component.tsx
+new file mode 100644
+index 0000000..86f6e5a
+--- /dev/null
++++ b/src/blocks/Quote/Component.tsx
+@@ -0,0 +1,34 @@
++import { QuoteBlock as QuoteBlockProps } from '@/payload-types'
++import { cn } from '@/utilities'
++import { FC } from 'react'
++
++export const QuoteBlock: FC<
++  QuoteBlockProps & {
++    id?: string
++    className?: string
++  }
++> = ({ quote, author, className }) => {
++  return (
++    <div className="prose max-w-full">
++      <blockquote
++        className={cn(
++          'relative w-full text-primary before:absolute before:-left-3 before:-top-8 before:font-serif before:text-7xl before:italic before:text-primary/30 before:content-[open-quote] after:absolute after:-right-3 after:-top-8 after:font-serif after:text-7xl after:italic after:text-primary/30 after:content-[close-quote]',
++          'border-primary/30',
++          className,
++        )}
++      >
++        <div className="mb-4">
++          {quote.split('\n').map((line, index) => (
++            <p
++              key={index}
++              className="text-justify text-2xl font-bold leading-relaxed lg:text-4xl lg:leading-relaxed my-0 before:content-[''] after:content-['']"
++            >
++              {line}
++            </p>
++          ))}
++        </div>
++        <footer className="text-right text-xl font-bold text-primary">— {author}</footer>
++      </blockquote>
++    </div>
++  )
++}
+diff --git a/src/blocks/Quote/config.ts b/src/blocks/Quote/config.ts
+new file mode 100644
+index 0000000..bd59a86
+--- /dev/null
++++ b/src/blocks/Quote/config.ts
+@@ -0,0 +1,24 @@
++import { Block } from 'payload'
++
++export const Quote: Block = {
++  slug: 'quoteBlock',
++  interfaceName: 'QuoteBlock',
++  fields: [
++    {
++      label: 'Quote',
++      name: 'quote',
++      type: 'textarea',
++      required: true,
++    },
++    {
++      label: 'Author',
++      name: 'author',
++      type: 'text',
++      required: true,
++    },
++  ],
++  labels: {
++    singular: 'Quote',
++    plural: 'Quotes',
++  },
++}
+diff --git a/src/blocks/RenderBlocks.tsx b/src/blocks/RenderBlocks.tsx
+index bff1b1c..ab23327 100644
+--- a/src/blocks/RenderBlocks.tsx
++++ b/src/blocks/RenderBlocks.tsx
+@@ -11,6 +11,7 @@ import { YouTube } from '@/blocks/YouTube/Component'
+ import { CollapsibleBlock } from './Collapsible/Component'
+ import { TimeSlotBlock } from './TimeSlot/Component'
+ import { TimelineBlock } from './Timeline/Component'
++import { QuoteBlock } from './Quote/Component'
+
+ const blockComponents = {
+   archive: ArchiveBlock,
+@@ -22,6 +23,7 @@ const blockComponents = {
+   collapsibleBlock: CollapsibleBlock,
+   timeSlotBlock: TimeSlotBlock,
+   timelineBlock: TimelineBlock,
++  quoteBlock: QuoteBlock,
+ }
+
+ export const RenderBlocks: FC<{
+
+diff --git a/src/collections/Courses/index.ts b/src/collections/Courses/index.ts
+index a3d47f0..622edcd 100644
+--- a/src/collections/Courses/index.ts
++++ b/src/collections/Courses/index.ts
+@@ -20,6 +20,7 @@ import { slugField } from '@/fields/slug'
+ import { revalidateCourse, revalidateDelete } from './hooks/revalidateCourse'
+ import { TimeSlot } from '@/blocks/TimeSlot/config'
+ import { Timeline } from '@/blocks/Timeline/config'
++import { Quote } from '@/blocks/Quote/config'
+
+ export const Courses: CollectionConfig = {
+   slug: 'courses',
+@@ -65,6 +66,7 @@ export const Courses: CollectionConfig = {
+                 TimeSlot,
+                 FormBlock,
+                 Timeline,
++                Quote,
+               ],
+               required: true,
+             },
+diff --git a/src/collections/Pages/index.ts b/src/collections/Pages/index.ts
+index 7d385af..026e2d3 100644
+--- a/src/collections/Pages/index.ts
++++ b/src/collections/Pages/index.ts
+@@ -25,6 +25,7 @@ import {
+ import { getServerSideURL } from '@/utilities/getURL'
+ import { TimeSlot } from '@/blocks/TimeSlot/config'
+ import { Timeline } from '@/blocks/Timeline/config'
++import { Quote } from '@/blocks/Quote/config'
+
+ export const Pages: CollectionConfig<'pages'> = {
+   slug: 'pages',
+@@ -91,6 +92,7 @@ export const Pages: CollectionConfig<'pages'> = {
+                 TimeSlot,
+                 FormBlock,
+                 Timeline,
++                Quote,
+               ],
+               required: true,
+               admin: {
+diff --git a/src/collections/Posts/index.ts b/src/collections/Posts/index.ts
+index c4d243d..85cfb26 100644
+--- a/src/collections/Posts/index.ts
++++ b/src/collections/Posts/index.ts
+@@ -30,6 +30,7 @@ import { slugField } from '@/fields/slug'
+ import { getServerSideURL } from '@/utilities/getURL'
+ import { YouTube } from '@/blocks/YouTube/config'
+ import { CallToAction } from '@/blocks/CallToAction/config'
++import { Quote } from '@/blocks/Quote/config'
+
+ export const Posts: CollectionConfig<'posts'> = {
+   slug: 'posts',
+@@ -92,7 +93,9 @@ export const Posts: CollectionConfig<'posts'> = {
+                   return [
+                     ...rootFeatures,
+                     HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+-                    BlocksFeature({ blocks: [Banner, Code, MediaBlock, YouTube, CallToAction] }),
++                    BlocksFeature({
++                      blocks: [Banner, Code, MediaBlock, YouTube, CallToAction, Quote],
++                    }),
+                     FixedToolbarFeature(),
+                     InlineToolbarFeature(),
+                     HorizontalRuleFeature(),
+diff --git a/src/components/RichText/index.tsx b/src/components/RichText/index.tsx
+index cc26bcb..bd5d5ce 100644
+--- a/src/components/RichText/index.tsx
++++ b/src/components/RichText/index.tsx
+@@ -19,6 +19,7 @@ import type {
+   MediaBlock as MediaBlockProps,
+   YouTube as YouTubeProps,
+   CollapsibleBlock as CollapsibleProps,
++  QuoteBlock as QuoteBlockProps,
+ } from '@/payload-types'
+ import { BannerBlock } from '@/blocks/Banner/Component'
+ import { CallToActionBlock } from '@/blocks/CallToAction/Component'
+@@ -27,6 +28,7 @@ import { FC, HTMLAttributes } from 'react'
+ import { FormBlock, FormBlockType } from '@/blocks/Form/Component'
+ import { YouTube } from '@/blocks/YouTube/Component'
+ import { CollapsibleBlock } from '@/blocks/Collapsible/Component'
++import { QuoteBlock } from '@/blocks/Quote/Component'
+
+ type NodeTypes =
+   | DefaultNodeTypes
+@@ -38,6 +40,7 @@ type NodeTypes =
+       | CodeBlockProps
+       | FormBlockType
+       | CollapsibleProps
++      | QuoteBlockProps
+     >
+
+ const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
+@@ -74,6 +77,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters })
+         <CollapsibleBlock {...node.fields} />
+       </div>
+     ),
++    quoteBlock: ({ node }) => <QuoteBlock className="col-start-2" {...node.fields} />,
+   },
+ })

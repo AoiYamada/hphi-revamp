@@ -27,6 +27,7 @@ export const MediaBlock: FC<Props> = (props) => {
     imgClassName,
     videoClassName,
     media,
+    thumbnail,
     staticImage,
     disableInnerContainer,
   } = props
@@ -48,6 +49,7 @@ export const MediaBlock: FC<Props> = (props) => {
         imgClassName={cn('rounded-[0.8rem] mx-auto', imgClassName)}
         videoClassName={cn('rounded-[0.8rem] mx-auto', videoClassName)}
         resource={media}
+        thumbnail={thumbnail ? thumbnail : undefined}
         src={staticImage}
       />
       {caption && (
