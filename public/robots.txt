@@ -3,11 +3,11 @@ User-agent: *
 Disallow: /admin/*
 
 # Host
-Host: http://localhost:3000
+Host: https://www.hk-hphi.com
 
 # Sitemaps
-Sitemap: http://localhost:3000/sitemap.xml
-Sitemap: http://localhost:3000/pages-sitemap.xml
-Sitemap: http://localhost:3000/posts-sitemap.xml
-Sitemap: http://localhost:3000/courses-sitemap.xml
-Sitemap: http://localhost:3000/tutors-sitemap.xml
+Sitemap: https://www.hk-hphi.com/sitemap.xml
+Sitemap: https://www.hk-hphi.com/pages-sitemap.xml
+Sitemap: https://www.hk-hphi.com/posts-sitemap.xml
+Sitemap: https://www.hk-hphi.com/courses-sitemap.xml
+Sitemap: https://www.hk-hphi.com/tutors-sitemap.xml
