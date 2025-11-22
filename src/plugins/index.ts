@@ -6,18 +6,12 @@ import { searchPlugin } from '@payloadcms/plugin-search'
 import { Plugin } from 'payload'
 import { revalidateRedirects } from '@/hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
-import {
-  AlignFeature,
-  FixedToolbarFeature,
-  HeadingFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
 import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 
 import { Course, Page, Post, Tutor } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
-import { Date, Radio, Select } from '@/blocks/Form/custom-fields'
+import formBuilderPluginConfig from './formBuilderPlugin/config'
 
 const generateTitle: GenerateTitle<Post | Page | Course | Tutor> = ({ doc }) => {
   return doc?.title
@@ -65,37 +59,7 @@ export const plugins: Plugin[] = [
     generateTitle,
     generateURL,
   }),
-  formBuilderPlugin({
-    fields: {
-      date: Date,
-      radio: Radio,
-      select: Select,
-      payment: false,
-      // uploadImage: UploadImage,
-    },
-    formOverrides: {
-      fields: ({ defaultFields }) => {
-        return defaultFields.map((field) => {
-          if ('name' in field && field.name === 'confirmationMessage') {
-            return {
-              ...field,
-              editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
-                  return [
-                    ...rootFeatures,
-                    FixedToolbarFeature(),
-                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    AlignFeature(),
-                  ]
-                },
-              }),
-            }
-          }
-          return field
-        })
-      },
-    },
-  }),
+  formBuilderPlugin(formBuilderPluginConfig),
   searchPlugin({
     collections: ['posts'],
     beforeSync: beforeSyncWithSearch,

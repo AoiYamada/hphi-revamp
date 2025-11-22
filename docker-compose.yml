@@ -15,15 +15,17 @@ services:
   #     - .env
 
   mongo:
-    image: mongo:latest
+    image: mongo:5.0.6
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: $MONGO_ROOT_PASSWORD
     ports:
-      - '27017:27017'
+      - 27017:27017
+    restart: always
     command:
       - --storageEngine=wiredTiger
     volumes:
       - data:/data/db
-    logging:
-      driver: none
 
 volumes:
   data:
