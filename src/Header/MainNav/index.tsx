@@ -15,9 +15,9 @@ import MenuItemLabel from '../MenuItemLabel'
 import MenuItemContent from './MenuItemContent'
 import { cn } from '@/utilities'
 
-type HeaderNavProps = { header: HeaderType; className?: string }
+type MainNavProps = { header: HeaderType; className?: string }
 
-const HeaderNav: FC<HeaderNavProps> = ({ header, className }) => {
+const MainNav: FC<MainNavProps> = ({ header, className }) => {
   const taps = header?.tabs || []
 
   return (
@@ -53,4 +53,4 @@ const HeaderNav: FC<HeaderNavProps> = ({ header, className }) => {
   )
 }
 
-export default HeaderNav
+export default MainNav
