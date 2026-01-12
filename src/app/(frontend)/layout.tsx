@@ -19,6 +19,7 @@ import { getServerSideURL } from '@/utilities/getURL'
 import FacebookPixel from '@/components/FacebookPixel'
 import { fbId } from '@/lib/f-pixel'
 import AnimatedWhatsAppUs from '@/components/AnimatedWhatsAppUs'
+import GoogleTranslate from '@/components/GoogleTranslate'
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID
 const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
@@ -59,7 +60,12 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           />
 
           <Header />
-          {children}
+          <div className="relative">
+            <div className="fixed top-36 right-4 z-50">
+              <GoogleTranslate />
+            </div>
+            {children}
+          </div>
           <Footer />
         </Providers>
         {!isDev && fbId && <FacebookPixel fbId={fbId} />}
