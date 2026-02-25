@@ -6,9 +6,11 @@ node_modules
 .next
 .vercel
 .pnpm-store
+.opencode
 
 # Payload default media upload directory
 public/media/
 private/media/
 
 volumes
+*.pem

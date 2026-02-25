@@ -7,14 +7,14 @@ import RichText from '../RichText'
 import { cn } from '@/utilities'
 
 const TimeSlot: FC<
-  Omit<TimeSlotBlockProps, 'id' | 'blockName' | 'blockType'> & {
+  Omit<TimeSlotBlockProps, 'blockName' | 'blockType'> & {
     className?: string
   }
 > = ({ introContent, outroContent, timeSlots, registrationForm, notes, className }) => {
   const formId = typeof registrationForm === 'string' ? registrationForm : registrationForm?.id
 
   return (
-    <AnimatedSection className={cn('w-full', className)}>
+    <AnimatedSection id={`timeslot-for-${formId}`} className={cn('w-full', className)}>
       <div className="flex flex-col items-center justify-center gap-12 py-8">
         {introContent && <RichText data={introContent} className="w-full max-w-full" />}
         <div className="grid grid-flow-row grid-cols-1 gap-16 lg:grid-cols-2 xl:md:grid-cols-3">

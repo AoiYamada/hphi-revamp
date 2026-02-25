@@ -1061,7 +1061,28 @@ export interface TabsBlock {
   items?:
     | {
         title: string;
-        content: {
+        enableDirectLink?: boolean | null;
+        directLink?: {
+          link?: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'courses';
+                  value: string | Course;
+                } | null)
+              | ({
+                  relationTo: 'tutors';
+                  value: string | Tutor;
+                } | null);
+            url?: string | null;
+          };
+        };
+        content?: {
           root: {
             type: string;
             children: {
@@ -1075,7 +1096,7 @@ export interface TabsBlock {
             version: number;
           };
           [k: string]: unknown;
-        };
+        } | null;
         id?: string | null;
       }[]
     | null;
@@ -1491,6 +1512,19 @@ export interface TabsBlockSelect<T extends boolean = true> {
     | T
     | {
         title?: T;
+        enableDirectLink?: T;
+        directLink?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                  };
+            };
         content?: T;
         id?: T;
       };

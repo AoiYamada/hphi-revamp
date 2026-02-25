@@ -6,6 +6,29 @@ import { TabsBlock as TabsBlockProps } from '@/payload-types'
 import { cn } from '@/utilities'
 import { FC, useState } from 'react'
 import { useRef, useEffect } from 'react'
+import Link from 'next/link'
+
+type TabItem = NonNullable<TabsBlockProps['items']>[number]
+
+const getLinkUrl = (linkData: unknown): string | null => {
+  const link = linkData as
+    | {
+        type?: 'reference' | 'custom' | null
+        reference?: { relationTo: string; value: { slug: string } | string } | null
+        url?: string | null
+      }
+    | undefined
+  if (!link) return null
+  if (link.type === 'reference' && link.reference) {
+    const value = link.reference.value
+    const slug = typeof value === 'string' ? value : (value as { slug: string })?.slug
+    return slug ? `/${slug}` : null
+  }
+  if (link.type === 'custom' && link.url) {
+    return link.url
+  }
+  return null
+}
 
 const LifeEnrichLikeTabs: FC<
   TabsBlockProps & {
@@ -38,19 +61,48 @@ const LifeEnrichLikeTabs: FC<
     }
   }
 
+  const handleTabClick = (item: TabItem, idx: number) => {
+    const linkUrl = getLinkUrl(item.directLink?.link)
+    if (linkUrl) {
+      return
+    }
+    setActiveTab(item.id ?? idx)
+  }
+
   return (
     <div className="flex flex-col">
       <div className="hidden md:flex gap-4 mb-6 border-b border-muted-foreground/20 justify-center flex-wrap">
         {items.map((item, idx) => {
           const id = item.id ?? idx
           const isActive = activeTab === id
+          const linkUrl = getLinkUrl(item.directLink?.link)
+
+          if (linkUrl) {
+            return (
+              <Link
+                key={id}
+                href={linkUrl}
+                className={cn(
+                  'inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium h-8 px-8 py-6 transition-colors duration-200 text-xl rounded-none',
+                  {
+                    'text-accent-foreground bg-[#B34C4C] hover:bg-[#B34C4C] hover:text-accent-foreground':
+                      isActive,
+                    'text-accent hover:text-accent-foreground bg-[#FAFBFC] hover:bg-[#B34C4C]':
+                      !isActive,
+                  },
+                )}
+              >
+                {item.title}
+              </Link>
+            )
+          }
 
           return (
             <Button
               key={id}
               ref={setRef(idx)}
               variant="ghost"
-              onClick={() => setActiveTab(item.id ?? idx)}
+              onClick={() => handleTabClick(item, idx)}
               data-active={isActive}
               className={cn('px-8 py-6 transition-colors duration-200 text-xl rounded-none', {
                 'text-accent-foreground bg-[#B34C4C] hover:bg-[#B34C4C] hover:text-accent-foreground':
@@ -69,6 +121,11 @@ const LifeEnrichLikeTabs: FC<
         {items.map((item, idx) => {
           const id = item.id ?? idx
           const isActive = activeTab === id
+          const linkUrl = getLinkUrl(item.directLink?.link)
+
+          if (linkUrl) {
+            return null
+          }
 
           return (
             <div key={id}>
@@ -77,7 +134,7 @@ const LifeEnrichLikeTabs: FC<
                   key={id}
                   ref={setRef(idx)}
                   variant="ghost"
-                  onClick={() => setActiveTab(item.id ?? idx)}
+                  onClick={() => handleTabClick(item, idx)}
                   data-active={isActive}
                   className={cn(
                     'px-8 py-6 transition-colors duration-200 text-xl rounded-none w-full',
@@ -99,7 +156,7 @@ const LifeEnrichLikeTabs: FC<
                   block: isActive,
                 })}
               >
-                <RichText data={item.content} className="max-w-none" />
+                {item.content && <RichText data={item.content} className="max-w-none" />}
               </div>
             </div>
           )

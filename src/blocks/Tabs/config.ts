@@ -1,3 +1,4 @@
+import { link } from '@/fields/link'
 import {
   AlignFeature,
   BlocksFeature,
@@ -34,8 +35,29 @@ export const Tabs: Block = {
           required: true,
         },
         {
+          name: 'enableDirectLink',
+          type: 'checkbox',
+          label: 'Enable Direct Link',
+        },
+        {
+          name: 'directLink',
+          type: 'group',
+          admin: {
+            condition: (_, siblingData) => siblingData.enableDirectLink,
+          },
+          fields: [
+            link({
+              appearances: false,
+              disableLabel: true,
+            }),
+          ],
+        },
+        {
           name: 'content',
           type: 'richText',
+          admin: {
+            condition: (_, siblingData) => !siblingData.enableDirectLink,
+          },
           editor: lexicalEditor({
             features: ({ rootFeatures }) => {
               return [
