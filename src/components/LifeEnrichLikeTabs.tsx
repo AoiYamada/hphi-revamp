@@ -124,7 +124,24 @@ const LifeEnrichLikeTabs: FC<
           const linkUrl = getLinkUrl(item.directLink?.link)
 
           if (linkUrl) {
-            return null
+            return (
+              <div key={id} className="md:hidden mb-4">
+                <Link
+                  href={linkUrl}
+                  className={cn(
+                    'inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium h-8 px-8 py-6 transition-colors duration-200 text-xl rounded-none w-full',
+                    {
+                      'text-accent-foreground bg-[#B34C4C] hover:bg-[#B34C4C] hover:text-accent-foreground':
+                        isActive,
+                      'text-accent hover:text-accent-foreground bg-[#FAFBFC] hover:bg-[#B34C4C]':
+                        !isActive,
+                    },
+                  )}
+                >
+                  {item.title}
+                </Link>
+              </div>
+            )
           }
 
           return (
