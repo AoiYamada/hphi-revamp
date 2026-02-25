@@ -510,6 +510,7 @@ export interface ContentBlock {
  */
 export interface MediaBlock {
   media: string | Media;
+  isVideo?: boolean | null;
   /**
    * Optional thumbnail for video
    */
@@ -1392,6 +1393,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
  */
 export interface MediaBlockSelect<T extends boolean = true> {
   media?: T;
+  isVideo?: T;
   thumbnail?: T;
   id?: T;
   blockName?: T;

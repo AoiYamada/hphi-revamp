@@ -12,12 +12,18 @@ export const MediaBlock: Block = {
       required: true,
     },
     {
+      name: 'isVideo',
+      type: 'checkbox',
+      label: 'Is Video',
+    },
+    {
       name: 'thumbnail',
       type: 'upload',
       relationTo: 'media',
       required: false,
       admin: {
         description: 'Optional thumbnail for video',
+        condition: (_, siblingData) => siblingData.isVideo,
       },
     },
   ],

@@ -70,7 +70,8 @@ export default function GoogleTranslate() {
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
         strategy="lazyOnload"
         onLoad={() => {
-          if (window.google && window.google.translate) {
+          if (window.google && window.google.translate &&
+        window.google.translate?.TranslateElement?.InlineLayout?.SIMPLE) {
             new window.google.translate.TranslateElement(
               {
                 pageLanguage: 'zh-HK',
