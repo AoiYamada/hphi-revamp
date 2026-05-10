@@ -38,7 +38,7 @@ export const Card: FC<{
       )}
       ref={card.ref}
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
         {!metaImage && (
           <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
             No image

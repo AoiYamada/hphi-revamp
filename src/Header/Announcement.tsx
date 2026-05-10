@@ -19,6 +19,7 @@ const Announcement: FC<AnnouncementProps> = ({ enable, content }) => {
         <div className="flex w-full items-center gap-3">
           <RichText
             data={content!}
+            enableProse={false}
             className="flex-grow max-w-full text-sm [&_p]:m-0 [&_p]:leading-snug"
           />
           <button

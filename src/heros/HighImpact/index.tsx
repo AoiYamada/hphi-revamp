@@ -20,11 +20,7 @@ export const HighImpactHero: FC<Page['hero']> = ({ links, media, richText }) => 
         />
       )}
 
-      {/* Scrim — tonal anchor for legibility */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-foreground/70 via-foreground/30 to-foreground/10" />
-
       {/* Atmosphere */}
-      <Bloom position="bottom-right" intensity="subtle" size={75} />
       <IrisMark position="top-right" size={280} className="text-white/15" />
 
       <MaxWidthWrapper className="relative z-10 flex w-full items-center py-24 md:py-32">

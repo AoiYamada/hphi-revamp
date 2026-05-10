@@ -25,7 +25,7 @@ export const PostHero: FC<PostHeroProps> = ({
         />
       )}
 
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-foreground/75 via-foreground/40 to-foreground/5" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black to-transparent" />
 
       <MaxWidthWrapper className="relative z-10 w-full pb-12 pt-24 md:pb-16 md:pt-32">
         <div className="max-w-3xl text-primary-foreground">
