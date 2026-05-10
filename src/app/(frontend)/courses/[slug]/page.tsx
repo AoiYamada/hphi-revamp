@@ -10,6 +10,7 @@ import type { Course as CourseType } from '@/payload-types'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { generateMeta } from '@/utilities/generateMeta'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
+import { RenderHero } from '@/heros/RenderHero'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -57,15 +58,13 @@ export default async function Course({ params: paramsPromise }: Args) {
     return <PayloadRedirects url={url} />
   }
 
-  const {
-    // introduction,
-    description,
-  } = course
+  const { hero, description } = course
 
   return (
     <article className="pb-16">
       <PayloadRedirects disableNotFound url={url} />
 
+      {hero ? <RenderHero {...hero} /> : <></>}
       <MaxWidthWrapper className="space-y-8">
         <RenderBlocks blocks={description} />
       </MaxWidthWrapper>

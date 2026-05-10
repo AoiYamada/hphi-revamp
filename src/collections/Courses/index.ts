@@ -23,6 +23,7 @@ import { Timeline } from '@/blocks/Timeline/config'
 import { Quote } from '@/blocks/Quote/config'
 import { CEFCalculator } from '@/blocks/CEFCalculator/config'
 import { Tabs } from '@/blocks/Tabs/config'
+import { hero } from '@/heros/config'
 
 export const Courses: CollectionConfig = {
   slug: 'courses',
@@ -53,6 +54,10 @@ export const Courses: CollectionConfig = {
     {
       type: 'tabs',
       tabs: [
+        {
+          fields: [hero],
+          label: 'Hero',
+        },
         {
           fields: [
             {

@@ -5,6 +5,7 @@ import RichText from '@/components/RichText'
 import type { ContentBlock as ContentBlockProps } from '@/payload-types'
 
 import { CMSLink } from '../../components/Link'
+import { Media } from '@/components/Media'
 
 export const ContentBlock: FC<ContentBlockProps> = (props) => {
   const { columns } = props
@@ -23,7 +24,15 @@ export const ContentBlock: FC<ContentBlockProps> = (props) => {
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {
-            const { enableLink, link, linkPosition, richText, size } = col
+            const {
+              enableLink,
+              link,
+              linkPosition,
+              richText,
+              size,
+              enableBackground,
+              backgroundImage,
+            } = col
 
             const linkJustifyClass = {
               left: 'justify-start',
@@ -31,8 +40,26 @@ export const ContentBlock: FC<ContentBlockProps> = (props) => {
               right: 'justify-end',
             }[linkPosition ?? 'left']
 
+            const hasBackground =
+              enableBackground && backgroundImage && typeof backgroundImage === 'object'
+
             return (
-              <div className={colsSpanClasses[size ?? 'full']} key={index}>
+              <div
+                className={cn(colsSpanClasses[size ?? 'full'], {
+                  'relative isolate overflow-hidden p-6 md:p-8 space-y-4': hasBackground,
+                })}
+                key={index}
+              >
+                {hasBackground && (
+                  <Media
+                    fill
+                    imgClassName="-z-10 object-cover"
+                    priority={false}
+                    loading="lazy"
+                    resource={backgroundImage}
+                  />
+                )}
+
                 {richText && <RichText data={richText} enableGutter={false} />}
 
                 {enableLink && (

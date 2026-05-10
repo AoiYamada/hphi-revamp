@@ -101,6 +101,18 @@ const columnFields: Field[] = [
       condition: (_, { enableLink }) => Boolean(enableLink),
     },
   },
+  {
+    name: 'enableBackground',
+    type: 'checkbox',
+  },
+  {
+    name: 'backgroundImage',
+    type: 'upload',
+    relationTo: 'media',
+    admin: {
+      condition: (_, { enableBackground }) => Boolean(enableBackground),
+    },
+  },
 ]
 
 export const Content: Block = {
