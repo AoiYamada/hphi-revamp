@@ -5,6 +5,7 @@ import AnimatedSection from '../AnimatedSection'
 import { TimeSlotBlock as TimeSlotBlockProps } from '@/payload-types'
 import RichText from '../RichText'
 import { cn } from '@/utilities'
+import { Calendar, Clock, GraduationCap } from 'lucide-react'
 
 const TimeSlot: FC<
   Omit<TimeSlotBlockProps, 'blockName' | 'blockType'> & {
@@ -17,7 +18,7 @@ const TimeSlot: FC<
     <AnimatedSection id={`timeslot-for-${formId}`} className={cn('w-full', className)}>
       <div className="flex flex-col items-center justify-center gap-12 py-8">
         {introContent && <RichText data={introContent} className="w-full max-w-full" />}
-        <div className="grid grid-flow-row grid-cols-1 gap-16 lg:grid-cols-2 xl:md:grid-cols-3">
+        <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8 xl:grid-cols-3">
           {(timeSlots ?? []).map((slot, index) => (
             <ClassCard key={index} {...slot} formId={formId} notes={notes} />
           ))}
@@ -42,44 +43,66 @@ type ClassCardProps = {
 
 const ClassCard: FC<ClassCardProps> = ({ title, time, date, notes, tutors, closed, formId }) => {
   return (
-    <div className="flex flex-col items-center justify-start gap-4 rounded-lg border border-neutral/10 bg-basic/50 p-12 shadow-md bg-white">
-      <h2 className="text-2xl font-semibold text-primary">{title}</h2>
-      <div className="flex flex-col">
-        <div className="flex flex-row">
-          <div className="shrink-0">時間：</div>
-          <div className="flex flex-col">
-            {time.split('\n').map((chunk, idx) => (
-              <span key={idx}>{chunk}</span>
-            ))}
-          </div>
-        </div>
-        <div className="flex flex-row">
-          <div className="shrink-0">日期：</div>
-          <div className="flex flex-col">
-            {date.split('\n').map((chunk, idx) => (
-              <span key={idx}>{chunk}</span>
-            ))}
-          </div>
-        </div>
-        <div className="mt-4 flex flex-col">
-          <div className="shrink-0">任教導師：</div>
-          <div>
-            <RichText data={tutors} className="w-full" />
-          </div>
-        </div>
+    <div className="flex flex-col gap-5 rounded-lg border border-border bg-card p-7 text-card-foreground shadow-lift-1 transition-shadow duration-300 ease-out hover:shadow-lift-2">
+      <h2 className="text-xl font-semibold leading-snug text-secondary md:text-2xl">{title}</h2>
+
+      <div className="flex flex-col gap-3 text-sm">
+        <DetailRow icon={<Clock className="size-4" />} label="時間">
+          {time.split('\n').map((chunk, idx) => (
+            <span key={idx} className="block">
+              {chunk}
+            </span>
+          ))}
+        </DetailRow>
+
+        <DetailRow icon={<Calendar className="size-4" />} label="日期">
+          {date.split('\n').map((chunk, idx) => (
+            <span key={idx} className="block">
+              {chunk}
+            </span>
+          ))}
+        </DetailRow>
+
+        <DetailRow icon={<GraduationCap className="size-4" />} label="任教導師">
+          <RichText data={tutors} className="w-full max-w-none" enableProse={false} />
+        </DetailRow>
       </div>
-      {closed ? (
-        <Closed className="w-[116px]" />
-      ) : (
-        <SignUp className="w-[116px]" url={formId ? `#anchor-${formId}` : undefined} />
-      )}
+
+      <div className="mt-2">
+        {closed ? (
+          <Closed className="w-full sm:w-auto" />
+        ) : (
+          <SignUp className="w-full sm:w-auto" url={formId ? `#anchor-${formId}` : undefined} />
+        )}
+      </div>
+
       {notes && (
-        <div className="flex flex-col w-full mt-4">
+        <div className="border-t border-border pt-4 text-xs leading-relaxed text-muted-foreground">
           {notes.split('\n').map((chunk, idx) => (
-            <span key={idx}>{chunk}</span>
+            <span key={idx} className="block">
+              {chunk}
+            </span>
           ))}
         </div>
       )}
     </div>
   )
 }
+
+const DetailRow: FC<{
+  icon: React.ReactNode
+  label: string
+  children: React.ReactNode
+}> = ({ icon, label, children }) => (
+  <div className="flex items-start gap-3">
+    <div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-md bg-muted text-secondary">
+      {icon}
+    </div>
+    <div className="flex-1">
+      <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+        {label}
+      </div>
+      <div className="mt-0.5 text-foreground">{children}</div>
+    </div>
+  </div>
+)

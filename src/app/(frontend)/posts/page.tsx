@@ -28,14 +28,17 @@ export default async function Page() {
   })
 
   return (
-    <MaxWidthWrapper className="pt-24 pb-24">
-      <div className="w-full mb-16">
-        <div className="prose dark:prose-invert max-w-none">
-          <h1>文章列表</h1>
-        </div>
-      </div>
+    <MaxWidthWrapper className="py-16 md:py-24">
+      <header className="mb-12 max-w-3xl md:mb-16">
+        <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+          Articles
+        </p>
+        <h1 className="text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
+          文章列表
+        </h1>
+      </header>
 
-      <div className="w-full mb-8">
+      <div className="mb-8 text-sm text-muted-foreground">
         <PageRange
           collection="posts"
           currentPage={posts.page}
@@ -46,11 +49,9 @@ export default async function Page() {
 
       <CollectionArchive posts={posts.docs} />
 
-      <div className="w-full">
-        {posts.totalPages > 1 && posts.page && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
-        )}
-      </div>
+      {posts.totalPages > 1 && posts.page && (
+        <Pagination page={posts.page} totalPages={posts.totalPages} />
+      )}
     </MaxWidthWrapper>
   )
 }

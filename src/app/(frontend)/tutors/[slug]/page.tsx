@@ -45,35 +45,50 @@ export default async function Tutor({ params: paramsPromise }: Args) {
 
   return (
     <MaxWidthWrapper>
-      <article className="pt-8 pb-16">
-        {/* Allows redirects for valid pages too */}
+      <article className="py-16 md:py-24">
         <PayloadRedirects disableNotFound url={url} />
 
-        <div className="flex flex-col space-y-8 md:space-y-0 md:flex-row md:space-x-8">
-          <div className="md:w-1/2 space-y-4">
-            <div>
-              <h1 className="text-4xl font-bold text-primary">{tutor.name}</h1>
-              <h2 className="text-2xl font-semibold text-secondary">{tutor.title}</h2>
+        <header className="mb-12 max-w-3xl">
+          <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+            導師
+          </p>
+          <h1 className="mb-2 text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
+            {tutor.name}
+          </h1>
+          <p className="text-xl text-secondary md:text-2xl">{tutor.title}</p>
+        </header>
+
+        <div className="grid gap-12 md:grid-cols-2 md:gap-16">
+          <div className="flex flex-col gap-6">
+            <div className="overflow-hidden rounded-xl border border-border shadow-lift-1">
+              <NextImage
+                src={tutor.image.url ?? ''}
+                alt={tutor.image.alt ?? ''}
+                width={tutor.image.width ?? 0}
+                height={tutor.image.height ?? 0}
+                className="h-auto w-full"
+              />
             </div>
-            <NextImage
-              src={tutor.image.url ?? ''}
-              alt={tutor.image.alt ?? ''}
-              width={tutor.image.width ?? 0}
-              height={tutor.image.height ?? 0}
-              className="max-w-lg rounded-lg border border-border md:hidden"
-            />
-            <RichText data={tutor.description} enableGutter={false} />
           </div>
-          <div className="md:w-1/2 flex flex-col items-start space-y-4">
-            <NextImage
-              src={tutor.image.url ?? ''}
-              alt={tutor.image.alt ?? ''}
-              width={tutor.image.width ?? 0}
-              height={tutor.image.height ?? 0}
-              className="max-w-lg rounded-lg border border-border hidden md:block"
-            />
-            <h2 className="text-2xl font-semibold text-secondary">專業資格</h2>
-            <RichText data={tutor.qualifications} enableGutter={false} className="mx-0" />
+
+          <div className="flex flex-col gap-10">
+            <section>
+              <h2 className="mb-4 text-2xl font-semibold text-secondary">關於導師</h2>
+              <RichText
+                data={tutor.description}
+                enableGutter={false}
+                className="prose max-w-none"
+              />
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-2xl font-semibold text-secondary">專業資格</h2>
+              <RichText
+                data={tutor.qualifications}
+                enableGutter={false}
+                className="prose max-w-none"
+              />
+            </section>
           </div>
         </div>
       </article>

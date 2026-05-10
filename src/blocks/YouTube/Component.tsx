@@ -11,16 +11,16 @@ export const YouTube: FC<Props> = ({ videoUrl, className }) => {
   const embedUrl = `https://www.youtube.com/embed/${videoId}`
 
   return (
-    <div className={cn('youtube-block mx-auto my-8 w-full', className)}>
-      <iframe
-        width="560"
-        height="315"
-        src={embedUrl}
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        className="h-[168px] w-[300px] mx-auto max-w-full sm:h-[315px] sm:w-[560px] lg:h-[405px] lg:w-[720px]"
-      ></iframe>
+    <div className={cn('youtube-block mx-auto my-8 w-full max-w-3xl', className)}>
+      <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-border bg-muted shadow-lift-1">
+        <iframe
+          src={embedUrl}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="absolute inset-0 h-full w-full"
+        />
+      </div>
     </div>
   )
 }

@@ -27,7 +27,7 @@ export const TimelineBlock: FC<
                 <TimelineTime>{item.time}</TimelineTime>
                 <TimelineTitle>{item.title}</TimelineTitle>
               </TimelineHeader>
-              <TimelineDescription className="text-secondary">
+              <TimelineDescription className="text-muted-foreground">
                 <RichText data={item.description} className="w-full max-w-full" />
               </TimelineDescription>
             </TimelineItem>

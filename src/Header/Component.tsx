@@ -14,11 +14,11 @@ export async function Header() {
   const { announcement } = header
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur shadow-md">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md backdrop-saturate-150">
       <Announcement {...announcement} />
       <MaxWidthWrapper>
-        <div className="flex justify-between items-center lg:items-end px-2 w-full">
-          <Link href="/">
+        <div className="flex h-16 w-full items-center justify-between px-2 lg:h-20">
+          <Link href="/" className="flex items-center" aria-label="HPHI home">
             <Logo noText={false} />
           </Link>
           <MainNav header={header} className="hidden lg:block" />

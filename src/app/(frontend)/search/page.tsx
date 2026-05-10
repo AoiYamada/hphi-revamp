@@ -64,21 +64,23 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
   })
 
   return (
-    <MaxWidthWrapper className="pt-24 pb-24">
-      <div className="w-full mb-16">
-        <div className="prose dark:prose-invert max-w-none text-center">
-          <h1 className="mb-8 lg:mb-16">文章搜尋</h1>
-
-          <div className="max-w-[50rem] mx-auto">
-            <Search />
-          </div>
-        </div>
-      </div>
+    <MaxWidthWrapper className="py-16 md:py-24">
+      <header className="mx-auto mb-12 max-w-2xl text-center md:mb-16">
+        <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+          Search
+        </p>
+        <h1 className="mb-8 text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl">
+          文章搜尋
+        </h1>
+        <Search />
+      </header>
 
       {posts.totalDocs > 0 ? (
         <CollectionArchive posts={posts.docs as CardPostData[]} />
       ) : (
-        <div className="w-full">找不到文章</div>
+        <div className="mx-auto max-w-md rounded-lg border border-border bg-muted/40 px-6 py-10 text-center text-muted-foreground">
+          找不到文章
+        </div>
       )}
     </MaxWidthWrapper>
   )

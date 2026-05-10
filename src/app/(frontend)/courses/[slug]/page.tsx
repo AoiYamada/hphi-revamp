@@ -65,7 +65,7 @@ export default async function Course({ params: paramsPromise }: Args) {
       <PayloadRedirects disableNotFound url={url} />
 
       {hero ? <RenderHero {...hero} /> : <></>}
-      <MaxWidthWrapper className="space-y-8">
+      <MaxWidthWrapper className="flex flex-col gap-8 pt-8 md:pt-12">
         <RenderBlocks blocks={description} />
       </MaxWidthWrapper>
     </article>

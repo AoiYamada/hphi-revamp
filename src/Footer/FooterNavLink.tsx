@@ -9,16 +9,14 @@ export type FooterNavLinkProps = {
 }
 
 const FooterNavLink: FC<FooterNavLinkProps> = ({ icon, link }) => {
-  const handleClick = () => {}
-
   return (
-    <li
-      key={link.label}
-      className="flex flex-row items-center justify-start gap-3"
-      onClick={handleClick}
-    >
+    <li className="flex flex-row items-center justify-start gap-3">
       {icon ? <IconWrapper>{icon}</IconWrapper> : null}
-      <CMSLink {...link} appearance="link" className="text-secondary-foreground" />
+      <CMSLink
+        {...link}
+        appearance="link"
+        className="text-anchor-foreground/80 transition-colors duration-200 ease-out hover:text-anchor-foreground"
+      />
     </li>
   )
 }
@@ -27,7 +25,7 @@ export default FooterNavLink
 
 const IconWrapper: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className="flex h-5 w-5 flex-row items-center justify-center rounded-full text-basic">
+    <div className="flex size-5 flex-row items-center justify-center text-anchor-foreground/70">
       {children}
     </div>
   )

@@ -15,14 +15,18 @@ const MenuItemContent: FC<MenuItemContentProps> = ({ description, descriptionLin
   return (
     <NavigationMenuContent className="grid grid-cols-12 gap-6 p-6 w-fit">
       {(description || (descriptionLinks?.length ?? 0) > 0) && (
-        <div className="pt-1 col-span-3 space-y-4 border-r border-gray-200">
-          {description && <p className="text-lg font-medium text-gray-900">{description}</p>}
+        <div className="col-span-3 flex flex-col gap-4 border-r border-border pr-6 pt-1">
+          {description && (
+            <p className="text-lg font-medium text-foreground">{description}</p>
+          )}
           {descriptionLinks?.length ? (
-            <ul className="space-y-3">
+            <ul className="flex flex-col gap-3">
               {descriptionLinks.map(({ link }, i) => (
                 <li key={i} className="flex items-center gap-2 text-sm">
                   <CMSLink {...link} appearance="link" />
-                  {link.newTab && <ExternalLink className="h-3 w-3 text-gray-400" />}
+                  {link.newTab && (
+                    <ExternalLink className="size-3 text-muted-foreground" aria-hidden />
+                  )}
                 </li>
               ))}
             </ul>

@@ -30,8 +30,8 @@ export const Search: FC = () => {
           onChange={(event) => {
             setValue(event.target.value)
           }}
-          placeholder="Search"
-          className="bg-white"
+          placeholder="搜尋文章標題、內容、分類..."
+          className="h-12 text-base"
         />
         <button type="submit" className="sr-only">
           搜尋

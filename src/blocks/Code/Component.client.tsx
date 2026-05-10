@@ -14,7 +14,7 @@ export const Code: FC<Props> = ({ code, language = '' }) => {
   return (
     <Highlight code={code} language={language} theme={themes.vsDark}>
       {({ getLineProps, getTokenProps, tokens }) => (
-        <pre className="bg-black p-4 border text-xs border-border rounded overflow-x-auto">
+        <pre className="overflow-x-auto rounded-lg bg-foreground p-5 text-xs text-background shadow-lift-1">
           {tokens.map((line, i) => (
             <div key={i} {...getLineProps({ className: 'table-row', line })}>
               <span className="table-cell select-none text-right text-white/25">{i + 1}</span>

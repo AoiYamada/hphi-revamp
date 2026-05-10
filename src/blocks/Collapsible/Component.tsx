@@ -1,5 +1,4 @@
 import RichText from '@/components/RichText'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { cn } from '@/utilities'
 import { CollapsibleBlock as CollapsibleBlockProps } from '@/payload-types'
@@ -12,27 +11,35 @@ export const CollapsibleBlock: FC<
   }
 > = ({ items }) => {
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col gap-3">
       {(items ?? []).map((item, index) => (
-        <Card key={index}>
-          <Collapsible>
-            <CollapsibleTrigger className="group w-full max-w-none mx-auto prose md:prose-md dark:prose-invert">
-              <CardHeader>
-                <CardTitle className="flex flex-row items-center">
-                  {item.title}
-                  <ChevronRight
-                    className={cn('ml-1 h-4 w-4 transition-all group-data-[state=open]:rotate-90')}
-                  />
-                </CardTitle>
-              </CardHeader>
-            </CollapsibleTrigger>
-            <CollapsibleContent className="collapsible-content">
-              <CardContent>
-                <RichText data={item.content} className="max-w-none" />
-              </CardContent>
-            </CollapsibleContent>
-          </Collapsible>
-        </Card>
+        <Collapsible
+          key={index}
+          className="group rounded-lg border border-border bg-card text-card-foreground"
+        >
+          <CollapsibleTrigger
+            className={cn(
+              'flex w-full items-center justify-between gap-4 rounded-lg px-6 py-5 text-left',
+              'text-base font-semibold text-foreground md:text-lg',
+              'transition-colors duration-200 ease-out-quart hover:bg-muted/60',
+              'focus-visible:outline-none focus-visible:shadow-lift-focus',
+            )}
+          >
+            <span>{item.title}</span>
+            <ChevronRight
+              className={cn(
+                'size-4 shrink-0 text-muted-foreground',
+                'transition-transform duration-200 ease-out-quart',
+                'group-data-[state=open]:rotate-90',
+              )}
+            />
+          </CollapsibleTrigger>
+          <CollapsibleContent className="collapsible-content">
+            <div className="max-w-[65ch] px-6 pb-6">
+              <RichText data={item.content} className="max-w-none" />
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
       ))}
     </div>
   )

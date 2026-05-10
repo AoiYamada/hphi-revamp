@@ -14,48 +14,68 @@
   }
 
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    /* See DESIGN.md for the full token spec. Values are space-separated HSL
+       channels so Tailwind's `hsl(var(--x) / <alpha-value>)` pattern works. */
 
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    /* Surfaces — Calm Paper at the floor, Soft Bloom one tonal step up. */
+    --background: 280 27% 98%; /* Calm Paper */
+    --foreground: 268 15% 20%; /* Slate Plum */
+    --text: 268 15% 20%; /* alias consumed by prose */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --card: 280 27% 98%;
+    --card-foreground: 268 15% 20%;
 
-    /* Primary purple/indigo colors from the site's branding */
-    --primary: 268 38% 50%; /* Main purple used in buttons and headers */
-    --primary-foreground: 0 0% 100%; /* White text on primary */
+    --popover: 280 27% 98%;
+    --popover-foreground: 268 15% 20%;
 
-    --secondary: 269 24% 25%; /* Darker purple used in secondary elements */
-    --secondary-foreground: 0 0% 100%;
+    /* Brand voice — Iris Ink (committed) and Hyacinth (hover/secondary).
+       Tuned for button-scale: 40% read as too dark, 46% as too light, 44% sits
+       in the pocket. */
+    --primary: 261 42% 44%;
+    --primary-foreground: 280 27% 98%;
 
-    --muted: 269 42% 66%; /* Light purple background */
-    --muted-foreground: 0 0% 100%;
+    --secondary: 264 36% 56%;
+    --secondary-foreground: 280 27% 98%;
 
-    --accent: 268 50% 60%; /* Brighter purple for accents */
-    --accent-foreground: 0 0% 100%;
+    /* Anchor — deep purple for full-bleed dark surfaces (footer, hero scrim,
+       any future committed dark moment). Same color at button scale would feel
+       crushing; same primary at footer scale would feel diluted. Two tokens. */
+    --anchor: 261 38% 27%;
+    --anchor-foreground: 280 27% 98%;
 
-    --destructive: 0 84% 60%; /* Red for warning/delete actions */
-    --destructive-foreground: 0 0% 98%;
+    /* Soft Bloom — second tonal layer (cards-on-cards, hover, accordion bodies,
+       CTA panel). Pushed darker than the original 95% so it reads as a real
+       second step against Calm Paper, not a barely-different shade of white. */
+    --muted: 274 24% 90%;
+    --muted-foreground: 265 9% 43%; /* Quiet Plum */
 
-    --border: 269 42% 66%;
-    --input: 268 38% 50%;
-    --ring: 260 70% 50%;
+    /* Soft Violet — accent only. Never a panel bg or default border at rest. */
+    --accent: 266 26% 74%;
+    --accent-foreground: 268 15% 20%;
 
-    --radius: 0.5rem;
+    /* Hush Line — the only border tone at rest. */
+    --border: 270 21% 89%;
+    --input: 270 21% 89%;
+    --ring: 261 39% 40%;
 
-    /* Status colors */
-    --success: 142 72% 29%; /* Green */
-    --warning: 45 93% 47%; /* Orange/Yellow */
-    --error: 0 84% 60%; /* Red */
+    /* Madder. */
+    --destructive: 1 49% 48%;
+    --destructive-foreground: 280 27% 98%;
 
-    /* Chart colors - progressive shades of the brand purple */
-    --chart-1: 260 70% 50%;
-    --chart-2: 260 70% 40%;
-    --chart-3: 260 70% 30%;
-    --chart-4: 260 65% 25%;
-    --chart-5: 260 60% 20%;
+    /* One rounding source of truth. Tailwind's borderRadius scale derives from this. */
+    --radius: 0.875rem; /* 14px = rounded-lg = canonical card */
+
+    /* Status — Sage / Amber / Madder. */
+    --success: 133 21% 45%;
+    --warning: 38 63% 46%;
+    --error: 1 49% 48%;
+
+    /* Charts — iris through soft violet, with sage/amber for cross-series. */
+    --chart-1: 261 42% 44%;
+    --chart-2: 264 36% 56%;
+    --chart-3: 266 26% 74%;
+    --chart-4: 38 63% 46%;
+    --chart-5: 133 21% 45%;
   }
 }
 

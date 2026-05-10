@@ -35,42 +35,62 @@ export default async function Page() {
 
   return (
     <MaxWidthWrapper className="pb-24">
-      <div className="w-full my-16">
-        <div className="max-w-none mx-auto prose md:prose-md dark:prose-invert">
-          <h1 className="text-center">導師團隊</h1>
-        </div>
-      </div>
-      <div className="grid grid-cols-1 gap-8">
+      <header className="mx-auto my-16 max-w-2xl text-center md:my-24">
+        <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+          Our Team
+        </p>
+        <h1 className="text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
+          導師團隊
+        </h1>
+      </header>
+
+      <div className="flex flex-col gap-16 md:gap-24">
         {tutors.docs.map(({ id, name, title, image, meta, slug }, index) => {
           image = meta?.image || image
           if (!image || typeof image === 'string') return null
+          const isEven = index % 2 === 0
 
           return (
-            <Link key={id} href={`/tutors/${slug}`} passHref>
-              <div className="flex flex-col md:flex-row items-start mb-8 py-4 rounded-lg cursor-pointer">
+            <Link key={id} href={`/tutors/${slug}`} className="group block">
+              <div
+                className={cn(
+                  'grid items-center gap-8 md:grid-cols-12 md:gap-12 lg:gap-16',
+                )}
+              >
                 <div
-                  className={cn('w-full md:w-1/3', {
-                    'md:order-1': index % 2 === 0,
-                    'md:order-2': index % 2 !== 0,
-                  })}
+                  className={cn(
+                    'md:col-span-5',
+                    isEven ? 'md:order-1' : 'md:order-2',
+                  )}
                 >
-                  <NextImage
-                    src={image.url ?? ''}
-                    alt={image.alt ?? ''}
-                    width={image.width ?? 0}
-                    height={image.height ?? 0}
-                    className="mx-auto rounded-lg"
-                  />
+                  <div className="overflow-hidden rounded-xl border border-border shadow-lift-1 transition-shadow duration-300 ease-out group-hover:shadow-lift-2">
+                    <NextImage
+                      src={image.url ?? ''}
+                      alt={image.alt ?? ''}
+                      width={image.width ?? 0}
+                      height={image.height ?? 0}
+                      className="h-auto w-full transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                    />
+                  </div>
                 </div>
                 <div
-                  className={cn('w-full md:w-2/3 pt-8 md:p-0', {
-                    'md:pl-8 md:order-2': index % 2 === 0,
-                    'md:pr-8 md:order-1': index % 2 !== 0,
-                  })}
+                  className={cn(
+                    'md:col-span-7',
+                    isEven ? 'md:order-2' : 'md:order-1',
+                  )}
                 >
-                  <h2 className="text-xl font-bold text-primary">{name}</h2>
-                  <h3 className="text-lg text-secondary">{title}</h3>
-                  <p className="mt-2 text-foreground">{meta?.description}</p>
+                  <p className="mb-2 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                    {String(index + 1).padStart(2, '0')}
+                  </p>
+                  <h2 className="text-2xl font-semibold leading-tight text-foreground transition-colors duration-200 ease-out group-hover:text-secondary md:text-3xl lg:text-4xl">
+                    {name}
+                  </h2>
+                  <p className="mt-2 text-lg text-secondary">{title}</p>
+                  {meta?.description && (
+                    <p className="mt-4 max-w-prose leading-relaxed text-muted-foreground">
+                      {meta.description}
+                    </p>
+                  )}
                 </div>
               </div>
             </Link>

@@ -46,8 +46,8 @@ export const MediaBlock: FC<Props> = (props) => {
       )}
     >
       <Media
-        imgClassName={cn('rounded-[0.8rem] mx-auto', imgClassName)}
-        videoClassName={cn('rounded-[0.8rem] mx-auto', videoClassName)}
+        imgClassName={cn('rounded-lg mx-auto', imgClassName)}
+        videoClassName={cn('rounded-lg mx-auto', videoClassName)}
         resource={media}
         thumbnail={thumbnail ? thumbnail : undefined}
         src={staticImage}

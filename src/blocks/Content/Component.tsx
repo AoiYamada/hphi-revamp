@@ -46,7 +46,8 @@ export const ContentBlock: FC<ContentBlockProps> = (props) => {
             return (
               <div
                 className={cn(colsSpanClasses[size ?? 'full'], {
-                  'relative isolate overflow-hidden p-6 md:p-8 space-y-4': hasBackground,
+                  'relative isolate flex flex-col gap-4 overflow-hidden rounded-lg p-6 md:p-8':
+                    hasBackground,
                 })}
                 key={index}
               >

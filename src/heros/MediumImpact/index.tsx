@@ -4,43 +4,51 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
+import { Bloom } from '@/components/Decoration'
 
 export const MediumImpactHero: FC<Page['hero']> = ({ links, media, richText }) => {
   return (
-    <div className="">
-      <MaxWidthWrapper className="mb-8">
-        {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
+    <section className="relative isolate my-12 md:my-20">
+      <Bloom position="top-left" intensity="subtle" size={60} />
 
-        {Array.isArray(links) && links.length > 0 && (
-          <ul className="flex gap-4">
-            {links.map(({ link }, i) => {
-              return (
-                <li key={i}>
-                  <CMSLink {...link} />
-                </li>
-              )
-            })}
-          </ul>
-        )}
-      </MaxWidthWrapper>
       <MaxWidthWrapper>
-        {media && typeof media === 'object' && (
+        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
           <div>
-            <Media
-              className="-mx-4 md:-mx-8 2xl:-mx-16"
-              imgClassName=""
-              priority={false}
-              loading="lazy"
-              resource={media}
-            />
-            {media?.caption && (
-              <div className="mt-3">
-                <RichText data={media.caption} enableGutter={false} />
+            {richText && (
+              <div className="prose md:prose-lg mb-6 max-w-none">
+                <RichText data={richText} enableGutter={false} />
               </div>
             )}
+            {Array.isArray(links) && links.length > 0 && (
+              <ul className="flex flex-wrap gap-3">
+                {links.map(({ link }, i) => (
+                  <li key={i}>
+                    <CMSLink {...link} />
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
-        )}
+
+          {media && typeof media === 'object' && (
+            <div className="relative">
+              <div className="overflow-hidden rounded-xl border border-border shadow-lift-1">
+                <Media
+                  imgClassName="w-full h-auto object-cover"
+                  priority={false}
+                  loading="lazy"
+                  resource={media}
+                />
+              </div>
+              {media?.caption && (
+                <div className="prose prose-sm mt-3 text-muted-foreground">
+                  <RichText data={media.caption} enableGutter={false} />
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </MaxWidthWrapper>
-    </div>
+    </section>
   )
 }

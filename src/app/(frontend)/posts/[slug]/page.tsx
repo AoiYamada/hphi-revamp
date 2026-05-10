@@ -51,27 +51,33 @@ export default async function Post({ params: paramsPromise }: Args) {
   if (!post) return <PayloadRedirects url={url} />
 
   return (
-    <MaxWidthWrapper>
-      <article className="pb-16">
-        {/* Allows redirects for valid pages too */}
-        <PayloadRedirects disableNotFound url={url} />
-        <LivePreviewListener />
+    <article className="pb-24">
+      <PayloadRedirects disableNotFound url={url} />
+      <LivePreviewListener />
 
-        <PostHero post={post} />
+      <PostHero post={post} />
 
-        <div className="flex flex-col items-center gap-4 pt-8">
-          <div className="w-full">
-            <RichText className="mx-auto" data={post.content} enableGutter={false} />
-            {post.relatedPosts && post.relatedPosts.length > 0 && (
-              <RelatedPosts
-                className="mt-12 lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
-                docs={post.relatedPosts.filter((post) => typeof post === 'object')}
-              />
-            )}
-          </div>
+      <MaxWidthWrapper>
+        <div className="mx-auto mt-16 max-w-3xl">
+          <RichText
+            className="prose md:prose-lg max-w-none"
+            data={post.content}
+            enableGutter={false}
+          />
         </div>
-      </article>
-    </MaxWidthWrapper>
+
+        {post.relatedPosts && post.relatedPosts.length > 0 && (
+          <div className="mt-24 border-t border-border pt-16">
+            <div className="mb-8 flex items-end justify-between gap-4">
+              <h2 className="text-2xl font-semibold text-foreground md:text-3xl">相關文章</h2>
+            </div>
+            <RelatedPosts
+              docs={post.relatedPosts.filter((post) => typeof post === 'object')}
+            />
+          </div>
+        )}
+      </MaxWidthWrapper>
+    </article>
   )
 }
 

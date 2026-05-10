@@ -32,12 +32,12 @@ const MobileNav = ({ header, className }: MobileNavProps) => {
     <div className={className}>
       <Icon
         onClick={toggleOpen}
-        className="relative z-50 h-7 w-7 cursor-pointer text-zinc-700 select-none"
+        className="relative z-50 size-7 cursor-pointer select-none text-foreground transition-colors duration-200 ease-out hover:text-secondary"
       />
 
       {isOpen ? (
         <div className="fixed inset-0 z-0 w-full animate-in fade-in-20 slide-in-from-top-5">
-          <ul className="mt-28 grid w-full gap-3 bg-white pt-4 px-10 pb-8 shadow-md max-h-[calc(100vh-120px)] overflow-y-auto">
+          <ul className="mt-28 grid max-h-[calc(100vh-120px)] w-full gap-3 overflow-y-auto border-t border-border bg-card px-10 pb-8 pt-4 shadow-lift-1">
             {taps.map(
               ({ label, link, enableDirectLink, enableDropdown, navItems, ...others }, i) => {
                 if (others.description || others.descriptionLinks?.length) {
@@ -62,10 +62,10 @@ const MobileNav = ({ header, className }: MobileNavProps) => {
             <li className="group">
               <MaxWidthWrapper className="p-0">
                 <Link
-                  className="flex w-full items-center text-xl font-bold group-hover:text-muted"
+                  className="flex w-full items-center text-xl font-bold group-hover:text-secondary"
                   href="/search"
                 >
-                  文章搜尋 <SearchIcon className="ml-2 h-4 w-4 group-hover:text-muted" />
+                  文章搜尋 <SearchIcon className="ml-2 h-4 w-4 group-hover:text-secondary" />
                 </Link>
               </MaxWidthWrapper>
             </li>
@@ -91,18 +91,18 @@ const MenuItem = ({ enableDropdown, label, link, enableDirectLink, navItems }: M
   if (enableDropdown) {
     return (
       <Collapsible>
-        <CollapsibleTrigger className="group flex flex-row items-center justify-between w-full data-[state=open]:text-muted hover:text-muted transition-colors">
+        <CollapsibleTrigger className="group flex flex-row items-center justify-between w-full data-[state=open]:text-secondary hover:text-secondary transition-colors">
           <MenuItemLabel
             label={label}
             enableDirectLink={enableDirectLink}
             link={link}
             className={cn(
-              'justify-start text-xl font-bold group-data-[state=open]:text-muted group-hover:text-muted transition-colors',
+              'justify-start text-xl font-bold group-data-[state=open]:text-secondary group-hover:text-secondary transition-colors',
             )}
           />
           <ChevronRight
             className={cn(
-              'ml-1 h-4 w-4 transition-all group-data-[state=open]:rotate-90 group-data-[state=open]:text-muted',
+              'ml-1 h-4 w-4 transition-all group-data-[state=open]:rotate-90 group-data-[state=open]:text-secondary',
             )}
           />
         </CollapsibleTrigger>
@@ -137,7 +137,7 @@ const MenuItem = ({ enableDropdown, label, link, enableDirectLink, navItems }: M
       enableDirectLink={enableDirectLink}
       link={link}
       className={cn('text-xl font-bold w-full transition-colors', {
-        'hover:text-muted': enableDirectLink,
+        'hover:text-secondary': enableDirectLink,
       })}
     />
   )

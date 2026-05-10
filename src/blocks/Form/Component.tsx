@@ -138,7 +138,7 @@ export const FormBlock: FC<
       {enableIntro && introContent && !hasSubmitted && (
         <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
       )}
-      <div className="py-4 px-6 lg:py-6 lg:px-10 border border-border rounded-[0.8rem] bg-white">
+      <div className="rounded-lg border border-border bg-card px-6 py-6 shadow-lift-1 lg:px-10 lg:py-8">
         <FormProvider {...formMethods}>
           {!isLoading && hasSubmitted && confirmationType === 'message' && (
             <RichText data={confirmationMessage} />
@@ -169,11 +169,14 @@ export const FormBlock: FC<
                   })}
               </div>
 
-              <Button form={formID} type="submit" variant="default" disabled={isLoading}>
-                {submitButtonLabel}
-              </Button>
-
-              {isLoading && !hasSubmitted && <p>提交中，請稍候...</p>}
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Button form={formID} type="submit" variant="default" disabled={isLoading}>
+                  {submitButtonLabel}
+                </Button>
+                {isLoading && !hasSubmitted && (
+                  <p className="text-sm text-muted-foreground">提交中，請稍候...</p>
+                )}
+              </div>
             </form>
           )}
         </FormProvider>

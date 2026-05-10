@@ -2,11 +2,12 @@
 name: HPHI — 專業心理治療及催眠應用（香港）
 description: A considered, contemplative visual system for a Hong Kong psychotherapy and hypnosis institute.
 colors:
-  iris-ink: "#3c2865"
-  hyacinth: "#5a3f8e"
+  iris-ink: "#6241a0"
+  hyacinth: "#8865bb"
+  iris-anchor: "#3d2b5f"
   soft-violet: "#b9aacd"
   calm-paper: "#faf8fb"
-  soft-bloom: "#f3eff6"
+  soft-bloom: "#e8e1ec"
   hush-line: "#e3dde9"
   slate-plum: "#322b3a"
   quiet-plum: "#6b6376"
@@ -135,8 +136,9 @@ A restrained palette built around a single committed primary in the iris–hyaci
 
 ### Primary
 
-- **Iris Ink** (`#3c2865`, `oklch(0.32 0.10 290)`): The committed primary. Used on the primary button, on emphatic links, on the logotype, and on the small set of headline elements that carry brand voice. Dark enough to read confidently on `Calm Paper`; never used as a large background fill.
-- **Hyacinth** (`#5a3f8e`, `oklch(0.45 0.13 290)`): The hover and pressed state of the primary, and the color of secondary emphasis (sub-headings, active nav, focused field outline).
+- **Iris Ink** (`#6241a0`, `oklch(0.46 0.14 290)`): The committed primary, **tuned for button/badge/announcement scale**. At HSL L 40% it read as too dark on a button; at 46% as too light; 44% sits in the pocket. Used on the primary button, on emphatic links, on the logotype, and on the headline elements that carry brand voice. **Never apply Iris Ink to a full-bleed surface** (footer, hero scrim, full-page band) — the eye averages large color fields toward their ambient brightness, so what reads as "saturated purple" on a button reads as "diluted lavender" at footer scale. Use Iris Anchor for those moments.
+- **Hyacinth** (`#8865bb`, `oklch(0.55 0.13 290)`): The hover and pressed state of the primary, and the color of secondary emphasis (sub-headings, active nav, focused field outline). Reads as a clear lift off Iris Ink.
+- **Iris Anchor** (`#3d2b5f`, `oklch(0.30 0.10 290)`): The deep purple anchor for full-bleed dark surfaces — the footer is the canonical use. Same hue family as Iris Ink, deliberately darker so it reads as a confident anchor at large scale. Don't use Iris Anchor for buttons or chips: at small scale, a 27% L purple feels crushing.
 
 ### Accent
 
@@ -145,7 +147,7 @@ A restrained palette built around a single committed primary in the iris–hyaci
 ### Neutral
 
 - **Calm Paper** (`#faf8fb`, `oklch(0.985 0.005 290)`): Default page background. Reads white but carries 0.005 chroma toward the brand hue, which is what relates it to the rest of the palette.
-- **Soft Bloom** (`#f3eff6`, `oklch(0.965 0.008 290)`): Raised surfaces — cards, callouts, the CTA panel, the open state of accordions. The "second layer" without resorting to shadow.
+- **Soft Bloom** (`#e8e1ec`, `oklch(0.91 0.012 290)`): Raised surfaces — cards-on-cards, callouts, the CTA panel, hover states, the open body of accordions. The "second layer" without resorting to shadow. **The step from Calm Paper to Soft Bloom must be visible at a glance.** Earlier drafts at oklch(0.965) were indistinguishable from the page; this is the correction.
 - **Hush Line** (`#e3dde9`, `oklch(0.90 0.01 290)`): The divider/border tone. Quiet enough to disappear, present enough to structure. **The only border color in the system at rest.**
 - **Slate Plum** (`#322b3a`, `oklch(0.28 0.015 290)`): Body text. Warm-dark. Replaces the previous dead-gray `240 10% 3.9%`.
 - **Quiet Plum** (`#6b6376`, `oklch(0.50 0.015 290)`): Muted text — captions, meta, helper copy, breadcrumbs.
@@ -159,6 +161,8 @@ A restrained palette built around a single committed primary in the iris–hyaci
 ### Named Rules
 
 **The One Voice Rule.** Iris Ink + Hyacinth carry the brand. They appear on no more than ~10% of any given screen. Their rarity is what makes them read as voice, not noise.
+
+**The Scale-Aware Color Rule.** The same OKLCH value reads differently at button scale vs. footer scale — the eye averages large color fields toward their ambient brightness. That's why the system has *two* deep purples: **Iris Ink** (oklch 0.46) for small surfaces where a deeper purple would feel crushing, and **Iris Anchor** (oklch 0.30) for full-bleed dark surfaces where Iris Ink would read as diluted. **Never** stretch a single primary across both jobs — pick the token by surface scale, not by "it's the brand color."
 
 **The No-Lavender-Backgrounds Rule.** Soft Violet is never a fill. Not a card background. Not a section band. Not a hover state on a list item. If a panel needs a tinted surface, it is **Soft Bloom**. Not negotiable — this is the failure mode of the previous system and we will not return to it.
 
@@ -181,11 +185,23 @@ A restrained palette built around a single committed primary in the iris–hyaci
 - **Label** (500 weight, `0.75rem`, line-height 1, letter-spacing 0.06em, **uppercase Latin / unchanged Chinese**): Eyebrow tags, meta, button micro-labels.
 - **Mono** (400 weight, `0.875rem`): Tabular figures only.
 
+### Editorial heading stack (long-form prose only)
+
+Inside Tailwind's `prose` class — articles, post bodies, content-block rich text — headings use a tonal stack so readers can scan an article visually:
+
+- **h1** — Slate Plum, weight 300, large clamp (2.5–3.5rem). The signature, used once.
+- **h2** — Iris Ink (`--primary`), weight 600, 1.625–2.25rem. Section voice.
+- **h3** — Hyacinth (`--secondary`), weight 600, 1.25–1.625rem. The lift.
+- **h4** — Quiet Plum (`--muted-foreground`), weight 500, uppercase 0.875rem with 0.06em tracking. Label-style detail.
+- **Lede** — the first `<p>` immediately after an `<h1>` is rendered larger (1.125em) and in Quiet Plum, as opening voice.
+
+This is the only place in the system where heading color carries hierarchy. Outside prose, the Weight-Not-Color Rule applies.
+
 ### Named Rules
 
-**The Weight-Not-Color Rule.** Hierarchy comes from scale + weight contrast. **Never** color a heading Iris Ink to make it "more important" — that is the brand voice spent for nothing.
+**The Weight-Not-Color Rule (component scope).** In UI components — cards, panels, sections, navigation — hierarchy comes from scale + weight contrast. **Never** color a heading Iris Ink to make it "more important" within a card or panel; that spends the brand voice for nothing. The editorial heading stack above is the explicit exception, scoped to long-form prose.
 
-**The 65ch Rule.** Any block of body copy wider than 75ch is broken. Add a max-width or rebalance the layout.
+**The 65ch Rule.** Any block of body copy wider than 75ch is broken. Add a max-width or rebalance the layout. Prose inherits `max-width: 72ch` automatically.
 
 ## 4. Elevation
 
@@ -250,11 +266,12 @@ This is a **flat-by-default tonal-layering** system. Depth is conveyed by shifti
 
 ### Call-To-Action Panel (the existing `CallToActionBlock`)
 
-- **Container:** 20px radius (`rounded.xl`), Soft Bloom background, **no border**, **no shadow**. The tonal lift off Calm Paper is the entire elevation.
-- **Padding:** 32px on mobile, 48px on desktop.
-- **Layout:** Two-column on desktop (text left, action right) with a 32px gap; stack on mobile, action below text. **Not** centered + stacked + everything competing for attention.
+- **Structure (the canonical glass pattern).** A Soft Bloom backdrop carries the Bloom decorations. A frosted-glass panel sits on top: 35% Calm Paper (`bg-card/35`), `backdrop-blur-xl` + `backdrop-saturate-150`, 1px white-at-40% highlight border, `lift-1` shadow, 24px radius (`rounded.xl`). The blur refracts the Blooms into purple atmosphere visible through the panel; the panel surface itself stays light enough that text reads as if on a clean Calm Paper card. **The blur is the entire reason the panel feels alive** — without it this is just a tinted box.
+- **Padding:** 40px on mobile, 56–64px on desktop. Generous, deliberate.
+- **Layout:** Two-column on desktop (text left, action right) with a 48px gap; stack on mobile, action below text. **Not** centered + stacked + everything competing for attention.
 - **Heading:** Headline scale, Slate Plum, max 36ch.
 - **Action:** A single Primary button. If a secondary action is needed, it's a Ghost button to the right with 16px gap. **Two primary buttons side by side is forbidden.**
+- **Decoration:** One `committed` Bloom + one `medium` Bloom in opposing corners on the backdrop layer, plus one IrisMark inside the glass panel (so it stays crisp on top of the frost). No Grain on the CTA — the multiply blend stacks with Soft Bloom into "dirty paper".
 
 ### Content Block Columns (the existing `ContentBlock`)
 
@@ -262,13 +279,29 @@ This is a **flat-by-default tonal-layering** system. Depth is conveyed by shifti
 - **With background image:** 14px radius (`rounded.lg`), `relative isolate overflow-hidden`, 24px / 32px padding, image at `-z-10 object-cover`. Text gets a subtle gradient scrim if contrast falls below WCAG AA.
 - **Link position:** the `linkPosition` field maps to flex justification — this is correct, leave it alone.
 
+### Decorative Motifs
+
+The system has three named decorations. They earn their place by being almost-invisible at first glance and rewarding a second look. Lives in `src/components/Decoration`.
+
+- **Bloom.** A soft radial gradient backdrop, `hsl(var(--secondary) / 0.10–0.22)` to transparent, anchored to a corner of the surface. Adds atmosphere to large flat surfaces (CTA panel, hero, full-bleed sections) without breaking the restrained palette. Always behind content via `-z-10` and the parent must be `relative isolate overflow-hidden`. Three intensity levels: `subtle` (10%, default — section accents), `medium` (16% — secondary corner of a CTA), `committed` (22% — the dominant corner of a hero or CTA). **Never** apply to small UI (cards, accordions, inputs).
+- **IrisMark.** A 5-ring concentric circles SVG (54 / 42 / 30 / 18 / 2.5px radii, 0.6px stroke) at `text-accent/40`. Reads as "iris of the eye" or "ripple" — references the brand color name and the practice (focus, hypnosis, contemplation). Anchored to a corner with negative offset (`-12` / `-12`) so it bleeds gently off-canvas. Decorative only (`aria-hidden`).
+- **Grain.** Inline SVG fractalNoise overlay, mixed via `mix-blend-multiply` at 4–6% opacity. Adds material warmth to large flat surfaces — paper, not plastic. **Only** on hero, CTA, and section bands; never on cards, buttons, or controls. The grain texture should never be obvious. If you can see it without looking for it, the opacity is too high.
+
+#### Named Rules
+
+**The One-Decoration-Per-Type Rule.** A single surface gets at most one IrisMark and one Grain. Up to two Blooms are allowed (different corners, different intensities) because the gradient layers naturally compose into atmosphere; everything else stays singular. Never decoration in every corner. Restraint is the entire idea.
+
+**The Decoration-Behind-Content Rule.** Decorations are always `-z-10` and `pointer-events-none`. Nothing decorative ever blocks a click target. If the decoration would obscure content text, the decoration is too dense — reduce opacity, not increase contrast on the text.
+
+**The Bloom-Tier Rule.** Use `committed` Bloom intensity exactly once per surface, paired with `medium` or `subtle` in another corner. Stacking two `committed` Blooms makes the surface feel like a candy wrapper. The deepest moment is one corner; the rest is atmosphere.
+
 ## 6. Do's and Don'ts
 
 ### Do:
 
-- **Do** use **Iris Ink** (`#3c2865`) for the primary action and brand voice, **Hyacinth** (`#5a3f8e`) for hover and secondary emphasis.
+- **Do** use **Iris Ink** (`#593b91`) for the primary action and brand voice, **Hyacinth** (`#7c59b1`) for hover and secondary emphasis.
 - **Do** use **Soft Bloom** (`#f3eff6`) for raised surfaces (cards, CTA panel, accordion bodies). Tonal layering, not shadow stacks.
-- **Do** apply the rounding scale **consistently**: `rounded.sm` (6px) for chips, `rounded.md` (10px) for buttons + inputs, `rounded.lg` (14px) for cards + accordions + backgrounded columns, `rounded.xl` (20px) for the CTA panel. One scale, every component.
+- **Do** apply the rounding scale **consistently**: `rounded.sm` (6px) for chips, `rounded.md` (10px) for buttons + inputs, `rounded.lg` (16px) for cards + accordions + backgrounded columns, `rounded.xl` (24px) for the CTA panel + large hero objects. One scale, every component.
 - **Do** anchor focus state on the **Soft Violet ring outside the element**, not on a border-color flash inside it.
 - **Do** use weight (400 / 500 / 600) and scale to build hierarchy. Color is a last resort.
 - **Do** cap body measure at 65–75ch.
@@ -283,6 +316,19 @@ This is a **flat-by-default tonal-layering** system. Depth is conveyed by shifti
 - **Don't** use `bg-muted` as it's currently configured (the candy lavender). Either retire the token, or rebind it to **Soft Bloom**. The current value is not used anywhere it shouldn't be retired from.
 - **Don't** wrap the CTA in a card with a border, a shadow, AND a background tint. Pick one — and the answer is "background tint, no border, no shadow."
 - **Don't** write `border-left: 4px solid var(--primary)` as a callout accent. Side-stripe borders are forbidden across the system.
-- **Don't** introduce gradient text, glassmorphism panels, or "neon glow" hover states. None of those are the practice we're representing.
+- **Don't** introduce gradient text (`background-clip: text`) or "neon glow" hover states. Decorative *background* gradients (the Bloom motif) are permitted at the documented intensity tiers; decorative gradient text is not.
+- **Don't** scatter SVG decoration across every surface. The IrisMark belongs on hero, CTA, and at most one section per page, anchored to a corner. Decoration on every card or every section is noise, not voice.
+- **Don't** use `mix-blend-multiply` Grain on the CTA. The compound of Grain + Soft Bloom + Bloom radials darkens into "dirty mauve paper". Grain is for hero and section bands only.
+
+### Glassmorphism (permitted with constraints)
+
+Frosted-blur panels are allowed when they earn their place. The CTA's glass-on-Bloom-backdrop pattern is the canonical example: blur exists to refract decoration into atmosphere, not to look futuristic. Hard rules:
+
+- **Always behind a colored backdrop.** A glass panel with nothing meaningful behind it is just a translucent rectangle. Glass needs Bloom radials, an image, or a tinted surface to refract.
+- **Surface alpha 30–45% Calm Paper** (`bg-card/30` to `bg-card/45`). Lower and the text contrast collapses; higher and the blur stops reading.
+- **`backdrop-blur-xl` minimum** (24px) and `backdrop-saturate-150` to keep the colors saturated through the blur. Smaller blurs read as "translucency", not "frost".
+- **1px white-at-30–40% highlight border** to pick up the panel edge against the backdrop. No dark border on glass.
+- **`lift-1` shadow only.** Glass + heavy shadow looks like Vista.
+- **Maximum two glass surfaces per page** — the CTA, plus one other moment if the page genuinely calls for it. More than that and the system has no opinion.
 - **Don't** animate `width` / `height` / margin / padding. Animate `opacity` and `transform` only, with ease-out-quart at 200–300ms.
 - **Don't** ship a section in pure `#fff` against the rest of the page. Calm Paper is the floor.

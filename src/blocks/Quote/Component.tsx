@@ -9,26 +9,34 @@ export const QuoteBlock: FC<
   }
 > = ({ quote, author, className }) => {
   return (
-    <div className="prose max-w-full">
-      <blockquote
-        className={cn(
-          'relative w-full text-primary before:absolute before:-left-3 before:-top-8 before:font-serif before:text-7xl before:italic before:text-primary/30 before:content-[open-quote] after:absolute after:-right-3 after:-top-8 after:font-serif after:text-7xl after:italic after:text-primary/30 after:content-[close-quote]',
-          'border-primary/30',
-          className,
-        )}
-      >
-        <div className="mb-4">
+    <figure className={cn('my-12 w-full', className)}>
+      <blockquote className="relative rounded-xl bg-muted/60 px-8 py-10 md:px-14 md:py-14">
+        {/* Restrained opening quote — Soft Violet, decorative not loud */}
+        <span
+          aria-hidden
+          className="absolute left-6 top-4 select-none font-serif text-6xl leading-none text-accent/50 md:left-10 md:top-6 md:text-7xl"
+        >
+          &ldquo;
+        </span>
+
+        <div className="relative space-y-3">
           {quote.split('\n').map((line, index) => (
             <p
               key={index}
-              className="text-justify text-2xl font-bold leading-relaxed lg:text-4xl lg:leading-relaxed my-0 before:content-[''] after:content-['']"
+              className="text-xl font-light leading-relaxed text-foreground md:text-2xl md:leading-relaxed lg:text-3xl"
             >
               {line}
             </p>
           ))}
         </div>
-        <footer className="text-right text-xl font-bold text-primary">— {author}</footer>
+
+        {author && (
+          <figcaption className="mt-6 flex items-center gap-3 text-sm font-medium text-muted-foreground">
+            <span className="h-px w-6 bg-secondary" aria-hidden />
+            {author}
+          </figcaption>
+        )}
       </blockquote>
-    </div>
+    </figure>
   )
 }
