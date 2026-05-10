@@ -88,6 +88,19 @@ const columnFields: Field[] = [
       },
     },
   }),
+  {
+    name: 'linkPosition',
+    type: 'select',
+    defaultValue: 'left',
+    options: [
+      { label: 'Left', value: 'left' },
+      { label: 'Middle', value: 'middle' },
+      { label: 'Right', value: 'right' },
+    ],
+    admin: {
+      condition: (_, { enableLink }) => Boolean(enableLink),
+    },
+  },
 ]
 
 export const Content: Block = {

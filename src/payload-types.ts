@@ -497,6 +497,7 @@ export interface ContentBlock {
            */
           appearance?: ('default' | 'outline') | null;
         };
+        linkPosition?: ('left' | 'middle' | 'right') | null;
         id?: string | null;
       }[]
     | null;
@@ -1382,6 +1383,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
               label?: T;
               appearance?: T;
             };
+        linkPosition?: T;
         id?: T;
       };
   id?: T;

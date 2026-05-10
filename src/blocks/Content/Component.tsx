@@ -23,13 +23,23 @@ export const ContentBlock: FC<ContentBlockProps> = (props) => {
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {
-            const { enableLink, link, richText, size } = col
+            const { enableLink, link, linkPosition, richText, size } = col
+
+            const linkJustifyClass = {
+              left: 'justify-start',
+              middle: 'justify-center',
+              right: 'justify-end',
+            }[linkPosition ?? 'left']
 
             return (
               <div className={colsSpanClasses[size ?? 'full']} key={index}>
                 {richText && <RichText data={richText} enableGutter={false} />}
 
-                {enableLink && <CMSLink {...link} />}
+                {enableLink && (
+                  <div className={cn('flex', linkJustifyClass)}>
+                    <CMSLink {...link} />
+                  </div>
+                )}
               </div>
             )
           })}
