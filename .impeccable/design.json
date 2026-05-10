@@ -1,0 +1,308 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-11T00:00:00Z",
+  "title": "Design System: HPHI — 專業心理治療及催眠應用（香港）",
+  "extensions": {
+    "colorMeta": {
+      "iris-ink": {
+        "role": "primary",
+        "displayName": "Iris Ink",
+        "canonical": "oklch(0.32 0.10 290)",
+        "tonalRamp": [
+          "oklch(0.18 0.06 290)",
+          "oklch(0.24 0.08 290)",
+          "oklch(0.32 0.10 290)",
+          "oklch(0.40 0.12 290)",
+          "oklch(0.50 0.13 290)",
+          "oklch(0.62 0.11 290)",
+          "oklch(0.78 0.06 290)",
+          "oklch(0.92 0.02 290)"
+        ]
+      },
+      "hyacinth": {
+        "role": "primary",
+        "displayName": "Hyacinth",
+        "canonical": "oklch(0.45 0.13 290)",
+        "tonalRamp": [
+          "oklch(0.20 0.08 290)",
+          "oklch(0.28 0.10 290)",
+          "oklch(0.36 0.12 290)",
+          "oklch(0.45 0.13 290)",
+          "oklch(0.55 0.12 290)",
+          "oklch(0.66 0.10 290)",
+          "oklch(0.80 0.06 290)",
+          "oklch(0.94 0.02 290)"
+        ]
+      },
+      "soft-violet": {
+        "role": "accent",
+        "displayName": "Soft Violet",
+        "canonical": "oklch(0.78 0.06 290)",
+        "tonalRamp": [
+          "oklch(0.30 0.05 290)",
+          "oklch(0.42 0.06 290)",
+          "oklch(0.55 0.07 290)",
+          "oklch(0.66 0.07 290)",
+          "oklch(0.78 0.06 290)",
+          "oklch(0.86 0.04 290)",
+          "oklch(0.92 0.02 290)",
+          "oklch(0.97 0.008 290)"
+        ]
+      },
+      "calm-paper": {
+        "role": "neutral",
+        "displayName": "Calm Paper",
+        "canonical": "oklch(0.985 0.005 290)",
+        "tonalRamp": [
+          "oklch(0.20 0.015 290)",
+          "oklch(0.32 0.015 290)",
+          "oklch(0.50 0.015 290)",
+          "oklch(0.70 0.012 290)",
+          "oklch(0.85 0.010 290)",
+          "oklch(0.93 0.008 290)",
+          "oklch(0.965 0.008 290)",
+          "oklch(0.985 0.005 290)"
+        ]
+      },
+      "soft-bloom": {
+        "role": "neutral",
+        "displayName": "Soft Bloom",
+        "canonical": "oklch(0.965 0.008 290)",
+        "tonalRamp": [
+          "oklch(0.22 0.015 290)",
+          "oklch(0.34 0.015 290)",
+          "oklch(0.50 0.015 290)",
+          "oklch(0.66 0.012 290)",
+          "oklch(0.80 0.010 290)",
+          "oklch(0.90 0.010 290)",
+          "oklch(0.965 0.008 290)",
+          "oklch(0.985 0.005 290)"
+        ]
+      },
+      "hush-line": {
+        "role": "neutral",
+        "displayName": "Hush Line",
+        "canonical": "oklch(0.90 0.01 290)",
+        "tonalRamp": [
+          "oklch(0.22 0.015 290)",
+          "oklch(0.34 0.015 290)",
+          "oklch(0.50 0.015 290)",
+          "oklch(0.66 0.012 290)",
+          "oklch(0.80 0.010 290)",
+          "oklch(0.90 0.010 290)",
+          "oklch(0.965 0.008 290)",
+          "oklch(0.985 0.005 290)"
+        ]
+      },
+      "slate-plum": {
+        "role": "neutral",
+        "displayName": "Slate Plum",
+        "canonical": "oklch(0.28 0.015 290)",
+        "tonalRamp": [
+          "oklch(0.16 0.020 290)",
+          "oklch(0.22 0.018 290)",
+          "oklch(0.28 0.015 290)",
+          "oklch(0.40 0.015 290)",
+          "oklch(0.55 0.015 290)",
+          "oklch(0.70 0.012 290)",
+          "oklch(0.85 0.010 290)",
+          "oklch(0.965 0.008 290)"
+        ]
+      },
+      "quiet-plum": {
+        "role": "neutral",
+        "displayName": "Quiet Plum",
+        "canonical": "oklch(0.50 0.015 290)",
+        "tonalRamp": [
+          "oklch(0.16 0.020 290)",
+          "oklch(0.28 0.015 290)",
+          "oklch(0.40 0.015 290)",
+          "oklch(0.50 0.015 290)",
+          "oklch(0.62 0.015 290)",
+          "oklch(0.74 0.012 290)",
+          "oklch(0.86 0.010 290)",
+          "oklch(0.97 0.008 290)"
+        ]
+      },
+      "sage": {
+        "role": "tertiary",
+        "displayName": "Sage",
+        "canonical": "oklch(0.55 0.10 145)",
+        "tonalRamp": [
+          "oklch(0.20 0.05 145)",
+          "oklch(0.30 0.07 145)",
+          "oklch(0.42 0.09 145)",
+          "oklch(0.55 0.10 145)",
+          "oklch(0.68 0.09 145)",
+          "oklch(0.80 0.06 145)",
+          "oklch(0.90 0.03 145)",
+          "oklch(0.97 0.012 145)"
+        ]
+      },
+      "amber": {
+        "role": "tertiary",
+        "displayName": "Amber",
+        "canonical": "oklch(0.65 0.13 75)",
+        "tonalRamp": [
+          "oklch(0.25 0.06 75)",
+          "oklch(0.38 0.09 75)",
+          "oklch(0.52 0.12 75)",
+          "oklch(0.65 0.13 75)",
+          "oklch(0.76 0.11 75)",
+          "oklch(0.86 0.07 75)",
+          "oklch(0.93 0.04 75)",
+          "oklch(0.98 0.012 75)"
+        ]
+      },
+      "madder": {
+        "role": "tertiary",
+        "displayName": "Madder",
+        "canonical": "oklch(0.52 0.16 25)",
+        "tonalRamp": [
+          "oklch(0.22 0.07 25)",
+          "oklch(0.32 0.10 25)",
+          "oklch(0.42 0.13 25)",
+          "oklch(0.52 0.16 25)",
+          "oklch(0.65 0.14 25)",
+          "oklch(0.78 0.10 25)",
+          "oklch(0.90 0.05 25)",
+          "oklch(0.97 0.015 25)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headlines only. Light weight at large size — confidence over volume." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings on long pages." },
+      "title": { "displayName": "Title", "purpose": "Card titles, accordion headers." },
+      "body": { "displayName": "Body", "purpose": "Long-form content. Cap at 65–75ch." },
+      "label": { "displayName": "Label", "purpose": "Eyebrow tags, meta, button micro-labels. Uppercase Latin only; Chinese unchanged." },
+      "mono": { "displayName": "Mono", "purpose": "Tabular figures only." }
+    },
+    "shadows": [
+      { "name": "lift-1", "value": "0 1px 2px 0 oklch(0.32 0.10 290 / 0.06)", "purpose": "Resting elevation for clickable cards. Almost imperceptible." },
+      { "name": "lift-2", "value": "0 8px 24px -12px oklch(0.32 0.10 290 / 0.18)", "purpose": "Hover state on cards, open state on dropdowns/popovers." },
+      { "name": "lift-focus", "value": "0 0 0 3px oklch(0.78 0.06 290 / 0.45)", "purpose": "Keyboard focus ring. Soft Violet, outside the element." }
+    ],
+    "motion": [
+      { "name": "ease-out-quart", "value": "cubic-bezier(0.25, 1, 0.5, 1)", "purpose": "Default state-change easing. 200–300ms." },
+      { "name": "ease-out-quint", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Larger transitions (accordion expand, drawer)." },
+      { "name": "duration-fast", "value": "180ms", "purpose": "Hover, focus, button state." },
+      { "name": "duration-base", "value": "260ms", "purpose": "Most interaction transitions." },
+      { "name": "duration-slow", "value": "420ms", "purpose": "Layout reveal, accordion open/close." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" },
+      { "name": "2xl", "value": "1536px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Carries the primary action on a screen. Iris Ink fill, no shadow, hover shifts to Hyacinth.",
+      "html": "<button class=\"ds-btn-primary\">了解課程</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 20px; background: #3c2865; color: #faf8fb; border: none; border-radius: 10px; font-family: var(--font-geist-sans), ui-sans-serif, sans-serif; font-size: 15px; font-weight: 500; letter-spacing: 0.01em; cursor: pointer; transition: background-color 180ms cubic-bezier(0.25, 1, 0.5, 1); } .ds-btn-primary:hover { background: #5a3f8e; } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px oklch(0.78 0.06 290 / 0.45); }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary action. Calm Paper surface with a 1px Hush Line border, never a shadow.",
+      "html": "<button class=\"ds-btn-outline\">了解更多</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 20px; background: #faf8fb; color: #3c2865; border: 1px solid #e3dde9; border-radius: 10px; font-family: var(--font-geist-sans), ui-sans-serif, sans-serif; font-size: 15px; font-weight: 500; letter-spacing: 0.01em; cursor: pointer; transition: background-color 180ms cubic-bezier(0.25, 1, 0.5, 1), border-color 180ms cubic-bezier(0.25, 1, 0.5, 1); } .ds-btn-outline:hover { background: #f3eff6; border-color: #5a3f8e; } .ds-btn-outline:focus-visible { outline: none; box-shadow: 0 0 0 3px oklch(0.78 0.06 290 / 0.45); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Tertiary action used in dense UI. No surface at rest; gains Soft Bloom on hover.",
+      "html": "<button class=\"ds-btn-ghost\">取消</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 16px; background: transparent; color: #3c2865; border: none; border-radius: 10px; font-family: var(--font-geist-sans), ui-sans-serif, sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; transition: background-color 180ms cubic-bezier(0.25, 1, 0.5, 1); } .ds-btn-ghost:hover { background: #f3eff6; } .ds-btn-ghost:focus-visible { outline: none; box-shadow: 0 0 0 3px oklch(0.78 0.06 290 / 0.45); }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Standard card: 14px radius, 1px Hush Line border, almost-imperceptible lift-1 shadow.",
+      "html": "<article class=\"ds-card\"><h3 class=\"ds-card-title\">NLP 催眠師證書課程</h3><p class=\"ds-card-body\">六週密集課程，由國際認可導師主理，小班授課。</p><a class=\"ds-card-link\" href=\"#\">查看詳情 →</a></article>",
+      "css": ".ds-card { background: #faf8fb; color: #322b3a; border: 1px solid #e3dde9; border-radius: 14px; padding: 24px; box-shadow: 0 1px 2px 0 oklch(0.32 0.10 290 / 0.06); transition: box-shadow 260ms cubic-bezier(0.25, 1, 0.5, 1), transform 260ms cubic-bezier(0.25, 1, 0.5, 1); } .ds-card:hover { box-shadow: 0 8px 24px -12px oklch(0.32 0.10 290 / 0.18); } .ds-card-title { margin: 0 0 8px; font-family: var(--font-geist-sans), sans-serif; font-size: 18px; font-weight: 600; color: #322b3a; line-height: 1.35; } .ds-card-body { margin: 0 0 16px; font-size: 15px; line-height: 1.6; color: #6b6376; } .ds-card-link { font-size: 14px; font-weight: 500; color: #3c2865; text-decoration: none; } .ds-card-link:hover { color: #5a3f8e; }"
+    },
+    {
+      "name": "Call-To-Action Panel",
+      "kind": "custom",
+      "refersTo": "cta-panel",
+      "description": "Soft Bloom panel, 20px radius, no border, no shadow. Single primary action.",
+      "html": "<section class=\"ds-cta\"><div class=\"ds-cta-text\"><h2 class=\"ds-cta-title\">準備好開始你的催眠之旅了嗎？</h2><p class=\"ds-cta-body\">與我們的註冊催眠師預約初次諮詢。</p></div><a class=\"ds-cta-action\" href=\"#\">立即預約</a></section>",
+      "css": ".ds-cta { display: flex; align-items: center; justify-content: space-between; gap: 32px; background: #f3eff6; color: #322b3a; border-radius: 20px; padding: 48px; } @media (max-width: 768px) { .ds-cta { flex-direction: column; align-items: stretch; padding: 32px; } } .ds-cta-text { max-width: 36ch; } .ds-cta-title { margin: 0 0 8px; font-size: 28px; font-weight: 500; line-height: 1.2; letter-spacing: -0.01em; color: #322b3a; } .ds-cta-body { margin: 0; font-size: 16px; line-height: 1.6; color: #6b6376; } .ds-cta-action { display: inline-flex; align-items: center; justify-content: center; height: 48px; padding: 0 24px; background: #3c2865; color: #faf8fb; border-radius: 10px; font-size: 15px; font-weight: 500; text-decoration: none; transition: background-color 180ms cubic-bezier(0.25, 1, 0.5, 1); white-space: nowrap; } .ds-cta-action:hover { background: #5a3f8e; }"
+    },
+    {
+      "name": "Accordion Item",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Card-shaped accordion. Open/close is signalled by the chevron only — no border-color or background change.",
+      "html": "<details class=\"ds-acc\"><summary class=\"ds-acc-trigger\"><span>催眠是甚麼？會失去意識嗎？</span><svg class=\"ds-acc-chev\" viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 18l6-6-6-6\"/></svg></summary><div class=\"ds-acc-body\">催眠是高度專注的放鬆狀態，過程中你完全清醒，能聽到、回應、隨時退出。</div></details>",
+      "css": ".ds-acc { background: #faf8fb; color: #322b3a; border: 1px solid #e3dde9; border-radius: 14px; overflow: hidden; } .ds-acc + .ds-acc { margin-top: 12px; } .ds-acc-trigger { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; font-size: 16px; font-weight: 600; color: #322b3a; cursor: pointer; list-style: none; } .ds-acc-trigger::-webkit-details-marker { display: none; } .ds-acc-chev { color: #6b6376; transition: transform 260ms cubic-bezier(0.25, 1, 0.5, 1); flex-shrink: 0; } .ds-acc[open] .ds-acc-chev { transform: rotate(90deg); } .ds-acc-body { padding: 0 24px 24px; font-size: 15px; line-height: 1.6; color: #6b6376; max-width: 65ch; }"
+    },
+    {
+      "name": "Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Single-line text input. 1px Hush Line border, focuses to Hyacinth + 3px Soft Violet ring.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">電郵</span><input class=\"ds-input\" type=\"email\" placeholder=\"you@example.com\" /></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 6px; } .ds-field-label { font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: #6b6376; } .ds-input { height: 44px; padding: 0 14px; background: #faf8fb; color: #322b3a; border: 1px solid #e3dde9; border-radius: 10px; font-family: var(--font-geist-sans), ui-sans-serif, sans-serif; font-size: 15px; transition: border-color 180ms cubic-bezier(0.25, 1, 0.5, 1), box-shadow 180ms cubic-bezier(0.25, 1, 0.5, 1); } .ds-input::placeholder { color: #6b6376; } .ds-input:focus { outline: none; border-color: #5a3f8e; box-shadow: 0 0 0 3px oklch(0.78 0.06 290 / 0.45); }"
+    },
+    {
+      "name": "Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Tag/category pill. Soft Bloom resting state, Iris Ink when selected.",
+      "html": "<span class=\"ds-chip\">心理治療</span><span class=\"ds-chip ds-chip-selected\">催眠課程</span>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; padding: 4px 12px; background: #f3eff6; color: #3c2865; border-radius: 9999px; font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; } .ds-chip + .ds-chip { margin-left: 8px; } .ds-chip-selected { background: #3c2865; color: #faf8fb; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Considered Practice",
+    "overview": "This is the visual language of a working psychotherapy and hypnosis room — not the brochure for one. Calm, considered, contemplative, with the seriousness of a clinical practice and the warmth of a place you'd actually return to. The brand color is purple — but purple in the sense of iris ink and deep hyacinth, not the lavender soap aisle. Surfaces are warm-tinted near-whites. Type is restrained and confident. Motion is slow. Nothing competes for attention; the content does the talking. The previous system reads as flat-and-candy: a mid-saturation indigo applied flat to buttons, a too-bright lavender used as both background fill and default border, and dead-gray neutrals that don't relate to the brand. This system replaces those failures with one deep committed primary, one soft accent that is never used as a background or a border, warm purple-tinted neutrals as the surface family, and a single rounding scale applied consistently across every component.",
+    "keyCharacteristics": [
+      "Restrained color strategy: tinted neutrals do 90% of the work; the deep iris carries identity.",
+      "Warm purple-leaning neutrals — never pure #fff or #000.",
+      "One rounding scale (6 / 10 / 14 / 20 px). No more rounded, rounded-md, rounded-xl mixed by accident.",
+      "Tonal layering over shadow stacks. Depth comes from surface tone, not from drop shadow.",
+      "Type hierarchy through weight + scale, never color."
+    ],
+    "rules": [
+      { "name": "The One Voice Rule", "body": "Iris Ink + Hyacinth carry the brand. They appear on no more than ~10% of any given screen. Their rarity is what makes them read as voice, not noise.", "section": "colors" },
+      { "name": "The No-Lavender-Backgrounds Rule", "body": "Soft Violet is never a fill. Not a card background. Not a section band. Not a hover state on a list item. If a panel needs a tinted surface, it is Soft Bloom. Not negotiable — this is the failure mode of the previous system and we will not return to it.", "section": "colors" },
+      { "name": "The Hush-Line Rule", "body": "Borders, dividers, and field strokes are Hush Line and 1px. Not 2px. Not Soft Violet. Not Hyacinth. If a field is focused, the border becomes Hyacinth at 1px plus a 2px Soft-Violet ring outside it.", "section": "colors" },
+      { "name": "The Weight-Not-Color Rule", "body": "Hierarchy comes from scale + weight contrast. Never color a heading Iris Ink to make it more important — that is the brand voice spent for nothing.", "section": "typography" },
+      { "name": "The 65ch Rule", "body": "Any block of body copy wider than 75ch is broken. Add a max-width or rebalance the layout.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest. lift-1 is the only shadow allowed at rest, and only on cards-as-objects (course cards, post cards, tutor cards) — not on buttons, not on inputs, not on full-bleed sections.", "section": "elevation" },
+      { "name": "The No-Stacking Rule", "body": "A card with lift-1 and a 1px Hush Line border is the canonical card. Do not stack lift-1 + lift-2 + a glow + a border + a gradient. One layer of depth.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use Iris Ink (#3c2865) for the primary action and brand voice, Hyacinth (#5a3f8e) for hover and secondary emphasis.",
+      "Do use Soft Bloom (#f3eff6) for raised surfaces (cards, CTA panel, accordion bodies). Tonal layering, not shadow stacks.",
+      "Do apply the rounding scale consistently: rounded.sm (6px) for chips, rounded.md (10px) for buttons + inputs, rounded.lg (14px) for cards + accordions + backgrounded columns, rounded.xl (20px) for the CTA panel. One scale, every component.",
+      "Do anchor focus state on the Soft Violet ring outside the element, not on a border-color flash inside it.",
+      "Do use weight (400 / 500 / 600) and scale to build hierarchy. Color is a last resort.",
+      "Do cap body measure at 65–75ch.",
+      "Do tint every neutral toward the brand hue (chroma 0.005–0.01). No #fff. No #000."
+    ],
+    "donts": [
+      "Don't use Soft Violet (#b9aacd) as a background fill or as a default border. That single misuse — surviving from the previous system as --muted and --border — is the largest reason the site reads candy-flat. Soft Violet is an accent, not a surface.",
+      "Don't put a shadow on a button. Don't put a shadow on an input. Don't stack a shadow with a border with a gradient.",
+      "Don't use rounded (4px Tailwind default), rounded-xl (12px), or any radius that isn't in the scale. The audit test: if a screenshot of three components side-by-side shows three different corner curves, the screen has failed.",
+      "Don't color a heading Iris Ink for emphasis. Use weight.",
+      "Don't use bg-muted as it's currently configured (the candy lavender). Either retire the token, or rebind it to Soft Bloom.",
+      "Don't wrap the CTA in a card with a border, a shadow, AND a background tint. Pick one — and the answer is background tint, no border, no shadow.",
+      "Don't write border-left: 4px solid var(--primary) as a callout accent. Side-stripe borders are forbidden across the system.",
+      "Don't introduce gradient text, glassmorphism panels, or neon glow hover states. None of those are the practice we're representing.",
+      "Don't animate width / height / margin / padding. Animate opacity and transform only, with ease-out-quart at 200–300ms.",
+      "Don't ship a section in pure #fff against the rest of the page. Calm Paper is the floor."
+    ]
+  }
+}
