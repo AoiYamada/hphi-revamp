@@ -52,18 +52,9 @@ export default async function Page() {
 
           return (
             <Link key={id} href={`/tutors/${slug}`} className="group block">
-              <div
-                className={cn(
-                  'grid items-center gap-8 md:grid-cols-12 md:gap-12 lg:gap-16',
-                )}
-              >
-                <div
-                  className={cn(
-                    'md:col-span-5',
-                    isEven ? 'md:order-1' : 'md:order-2',
-                  )}
-                >
-                  <div className="overflow-hidden rounded-xl border border-border shadow-lift-1 transition-shadow duration-300 ease-out group-hover:shadow-lift-2">
+              <div className={cn('grid items-center gap-8 md:grid-cols-12 md:gap-12 lg:gap-16')}>
+                <div className={cn('md:col-span-5', isEven ? 'md:order-1' : 'md:order-2')}>
+                  <div className="overflow-hidden rounded-xl shadow-lift-1 transition-shadow duration-300 ease-out group-hover:shadow-lift-2">
                     <NextImage
                       src={image.url ?? ''}
                       alt={image.alt ?? ''}
@@ -73,12 +64,7 @@ export default async function Page() {
                     />
                   </div>
                 </div>
-                <div
-                  className={cn(
-                    'md:col-span-7',
-                    isEven ? 'md:order-2' : 'md:order-1',
-                  )}
-                >
+                <div className={cn('md:col-span-7', isEven ? 'md:order-2' : 'md:order-1')}>
                   <p className="mb-2 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
                     {String(index + 1).padStart(2, '0')}
                   </p>
