@@ -1,5 +1,5 @@
 import { FieldHook } from 'payload'
-import { Media } from 'src/payload-types'
+import { Media } from '@/payload-types'
 
 // Not work in sibling data when changing media field
 export const populateMedia: FieldHook = async ({ value, req, req: { payload } }) => {
