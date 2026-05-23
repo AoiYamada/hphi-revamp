@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "esModuleInterop": true,
     "target": "ES2022",
     "lib": [
@@ -10,6 +11,7 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
+    "noUncheckedSideEffectImports": false,
     "strict": false,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
