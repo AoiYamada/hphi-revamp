@@ -60,7 +60,7 @@ All packages pinned to the same version (Payload requires exact version alignmen
 | `@types/react-dom` | 19.0.4 | 19.2.3 |
 | `@types/jsonwebtoken` | 9.0.9 | 9.0.10 |
 
-Note: `package.json` also has an `overrides` section that hard-pins `@types/react` and `@types/react-dom` — these must be updated to match.
+Note: `package.json` has an `overrides` section that hard-pins `@types/react` and `@types/react-dom`. After the upgrade, attempt to **remove the overrides entirely** — they should no longer be needed once Payload 3.84.1 aligns its peer deps. If `pnpm build` produces type conflicts, fall back to updating the pinned versions to match the new type definitions.
 
 ---
 
