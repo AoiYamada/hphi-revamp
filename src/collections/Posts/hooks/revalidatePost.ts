@@ -17,7 +17,7 @@ export const revalidatePost: CollectionAfterChangeHook<Post> = ({
 
       revalidatePath(encodeURI(path))
       revalidatePath('/posts')
-      revalidateTag('posts-sitemap')
+      revalidateTag('posts-sitemap', 'max')
     } else if (
       // If the post was previously published, we need to revalidate the old path
       previousDoc._status === 'published'
@@ -28,7 +28,7 @@ export const revalidatePost: CollectionAfterChangeHook<Post> = ({
 
       revalidatePath(encodeURI(oldPath))
       revalidatePath('/posts')
-      revalidateTag('posts-sitemap')
+      revalidateTag('posts-sitemap', 'max')
     }
   }
   return doc
@@ -40,7 +40,7 @@ export const revalidateDelete: CollectionAfterDeleteHook<Post> = ({ doc, req: { 
 
     revalidatePath(path)
     revalidatePath('/posts')
-    revalidateTag('posts-sitemap')
+    revalidateTag('posts-sitemap', 'max')
   }
 
   return doc
