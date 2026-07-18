@@ -14,13 +14,14 @@ export const ContentBlock: FC<ContentBlockProps> = (props) => {
     full: 'col-span-4 lg:col-span-12',
     half: 'col-span-4 md:col-span-2 lg:col-span-6',
     oneSixth: 'col-span-2 md:col-span-1 lg:col-span-2',
+    oneFourth: 'col-span-2 md:col-span-2 lg:col-span-3',
     oneThird: 'col-span-4 md:col-span-2 lg:col-span-4',
     twoThirds: 'col-span-4 md:col-span-2 lg:col-span-8',
   }
 
   return (
-    <div className="w-full my-16">
-      <div className="grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16">
+    <div className="w-full my-8 md:my-16">
+      <div className="grid grid-cols-4 lg:grid-cols-12 gap-x-6 gap-y-6 md:gap-x-16 md:gap-y-8">
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {

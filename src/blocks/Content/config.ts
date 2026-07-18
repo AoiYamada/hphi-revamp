@@ -31,6 +31,10 @@ const columnFields: Field[] = [
         value: 'oneSixth',
       },
       {
+        label: 'One Fourth',
+        value: 'oneFourth',
+      },
+      {
         label: 'One Third',
         value: 'oneThird',
       },

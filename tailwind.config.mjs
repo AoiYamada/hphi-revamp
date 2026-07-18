@@ -13,6 +13,7 @@ const config = {
   plugins: [animate, typography],
   prefix: '',
   safelist: [
+    'lg:col-span-3',
     'lg:col-span-4',
     'lg:col-span-6',
     'lg:col-span-8',

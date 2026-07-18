@@ -509,7 +509,7 @@ export interface CallToActionBlock {
 export interface ContentBlock {
   columns?:
     | {
-        size?: ('oneSixth' | 'oneThird' | 'half' | 'twoThirds' | 'full') | null;
+        size?: ('oneSixth' | 'oneFourth' | 'oneThird' | 'half' | 'twoThirds' | 'full') | null;
         richText?: {
           root: {
             type: string;
