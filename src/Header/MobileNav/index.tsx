@@ -4,7 +4,7 @@ import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import { SearchIcon, Menu, X, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { JSX, useEffect, useState } from 'react'
+import { JSX, useState } from 'react'
 import type { Header as HeaderType } from '@/payload-types'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { cn } from '@/utilities'
@@ -21,10 +21,13 @@ const MobileNav = ({ header, className }: MobileNavProps) => {
   const [isOpen, setOpen] = useState<boolean>(false)
   const toggleOpen = () => setOpen((prev) => !prev)
   const pathname = usePathname()
+  const [openedOn, setOpenedOn] = useState(pathname)
 
-  useEffect(() => {
+  // Close the menu after navigating (state adjusted during render rather than in an effect)
+  if (pathname !== openedOn) {
+    setOpenedOn(pathname)
     setOpen(false)
-  }, [pathname])
+  }
 
   const Icon = isOpen ? X : Menu
 

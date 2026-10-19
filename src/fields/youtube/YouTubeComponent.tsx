@@ -1,5 +1,5 @@
 'use client'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import { TextFieldClientProps } from 'payload'
 import { useField, TextInput, FieldLabel } from '@payloadcms/ui'
 
@@ -8,18 +8,8 @@ type YouTubeComponentProps = TextFieldClientProps
 export const YouTubeComponent: FC<YouTubeComponentProps> = ({ field, path }) => {
   const { label } = field
   const { value, setValue } = useField<string>({ path: path || field.name })
-  const [embedUrl, setEmbedUrl] = useState<string>('')
-
-  useEffect(() => {
-    const videoId = (value ?? '').split('v=')[1]
-
-    if (!videoId) {
-      setEmbedUrl('')
-      return
-    }
-
-    setEmbedUrl(`https://www.youtube.com/embed/${videoId}`)
-  }, [value])
+  const videoId = (value ?? '').split('v=')[1]
+  const embedUrl = videoId ? `https://www.youtube.com/embed/${videoId}` : ''
 
   return (
     <div className="youtube-field-component">

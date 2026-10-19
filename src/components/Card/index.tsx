@@ -19,7 +19,10 @@ export const Card: FC<{
   showCategories?: boolean
   title?: string
 }> = (props) => {
-  const { card, link } = useClickableCard({})
+  const {
+    card: { ref: cardRef },
+    link: { ref: linkRef },
+  } = useClickableCard<HTMLElement>({})
   const { className, doc, relationTo, showCategories, title: titleFromProps } = props
 
   const { slug, categories, meta, title } = doc || {}
@@ -36,7 +39,7 @@ export const Card: FC<{
         'group flex cursor-pointer flex-col overflow-hidden rounded-lg border border-border bg-card text-card-foreground shadow-lift-1 transition-shadow duration-300 ease-out hover:shadow-lift-2',
         className,
       )}
-      ref={card.ref}
+      ref={cardRef}
     >
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
         {!metaImage && (
@@ -75,7 +78,7 @@ export const Card: FC<{
 
         {titleToUse && (
           <h3 className="text-lg font-semibold leading-snug text-foreground transition-colors duration-200 ease-out group-hover:text-secondary">
-            <Link className="not-prose" href={href} ref={link.ref}>
+            <Link className="not-prose" href={href} ref={linkRef}>
               {titleToUse}
             </Link>
           </h3>
