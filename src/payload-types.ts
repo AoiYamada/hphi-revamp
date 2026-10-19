@@ -2124,6 +2124,48 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: string;
+  /**
+   * QR codes shown at the very top of every page, above the header. Scrolls away with the page; visitors can close it for the rest of their visit.
+   */
+  socialStrip?: {
+    enable?: boolean | null;
+    showCaptionOnMobile?: boolean | null;
+    channels?:
+      | {
+          /**
+           * Platform name, e.g. Facebook. Shown in place of the caption when it is empty or hidden on mobile; also used for analytics and as the QR image fallback alt text.
+           */
+          name: string;
+          qrCode: string | Media;
+          /**
+           * Choose "Custom URL" for the platform link. Always opens in a new tab.
+           */
+          link?: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'courses';
+                  value: string | Course;
+                } | null)
+              | ({
+                  relationTo: 'tutors';
+                  value: string | Tutor;
+                } | null);
+            url?: string | null;
+          };
+          /**
+           * Line breaks are kept as typed.
+           */
+          caption?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
   announcement?: {
     enable?: boolean | null;
     content?: {
@@ -2357,6 +2399,28 @@ export interface Footer {
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
+  socialStrip?:
+    | T
+    | {
+        enable?: T;
+        showCaptionOnMobile?: T;
+        channels?:
+          | T
+          | {
+              name?: T;
+              qrCode?: T;
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                  };
+              caption?: T;
+              id?: T;
+            };
+      };
   announcement?:
     | T
     | {

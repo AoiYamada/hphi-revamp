@@ -31,6 +31,12 @@ type NavItem = {
   }
 }
 
+export const SocialChannel = () => {
+  const { data } = useRowLabel<{ name?: string }>()
+
+  return data.name || '...'
+}
+
 export const NavItem = () => {
   const { data } = useRowLabel<NavItem>()
 

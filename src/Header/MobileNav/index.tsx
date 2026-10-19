@@ -39,7 +39,7 @@ const MobileNav = ({ header, className }: MobileNavProps) => {
         // Anchored to the sticky <header> (nearest positioned ancestor) so it always opens right
         // below it, whatever the Announcement's height. `fixed` would resolve against the header
         // anyway (backdrop-filter makes it the containing block) and cover the Announcement.
-        <ul className="absolute inset-x-0 top-full grid max-h-[calc(100dvh-100%)] gap-3 overflow-y-auto border-t border-border bg-card px-10 pb-8 pt-4 shadow-lift-1 animate-in fade-in-20 slide-in-from-top-5">
+        <ul className="absolute inset-x-0 top-full z-10 grid max-h-[calc(100dvh-100%)] gap-3 overflow-y-auto border-t border-border bg-card px-10 pb-8 pt-4 shadow-lift-1 animate-in fade-in-20 slide-in-from-top-5">
           {taps.map(({ label, link, enableDirectLink, enableDropdown, navItems, ...others }, i) => {
             if (others.description || others.descriptionLinks?.length) {
               return null

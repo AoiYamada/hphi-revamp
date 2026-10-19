@@ -23,6 +23,7 @@ import { HorizontalRuleFeatureClient as HorizontalRuleFeatureClient_e70f5e05f09f
 import { BeforeListTableComponent as BeforeListTableComponent_2b443f4e9923d078bbff2265c51b532c } from '@/components/FormSubmissionOverrides/BeforeListTableComponent/index'
 import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
+import { SocialChannel as SocialChannel_ef1d19bd137de0f79726892825092e0d } from '@/Header/RowLabels'
 import { NavItem as NavItem_ef1d19bd137de0f79726892825092e0d } from '@/Header/RowLabels'
 import { Tabs as Tabs_ef1d19bd137de0f79726892825092e0d } from '@/Header/RowLabels'
 import { default as default_8247500a69e7bc67c2a2bcf1f5a10533 } from '@/components/Logo/CmsIcon'
@@ -56,6 +57,7 @@ export const importMap = {
   "@/components/FormSubmissionOverrides/BeforeListTableComponent/index#BeforeListTableComponent": BeforeListTableComponent_2b443f4e9923d078bbff2265c51b532c,
   "@payloadcms/plugin-search/client#LinkToDoc": LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634,
   "@payloadcms/plugin-search/client#ReindexButton": ReindexButton_aead06e4cbf6b2620c5c51c9ab283634,
+  "@/Header/RowLabels#SocialChannel": SocialChannel_ef1d19bd137de0f79726892825092e0d,
   "@/Header/RowLabels#NavItem": NavItem_ef1d19bd137de0f79726892825092e0d,
   "@/Header/RowLabels#Tabs": Tabs_ef1d19bd137de0f79726892825092e0d,
   "@/components/Logo/CmsIcon#default": default_8247500a69e7bc67c2a2bcf1f5a10533,

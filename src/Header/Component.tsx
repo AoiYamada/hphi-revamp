@@ -4,21 +4,30 @@ import React from 'react'
 import type { Header } from '@/payload-types'
 import Link from 'next/link'
 import Logo from '@/components/Logo'
+import GoogleTranslate from '@/components/GoogleTranslate'
 import MainNav from './MainNav'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import MobileNav from './MobileNav'
 import Announcement from './Announcement'
+import SocialStrip from './SocialStrip'
 import { DismissalGuard } from './Dismissal/DismissalGuard'
 import { getDismissalHash } from './Dismissal/getDismissalHash'
 
 export async function Header() {
   const header: Header = await getCachedGlobal('header', 1)
-  const { announcement } = header
+  const { announcement, socialStrip } = header
   const announcementHash = getDismissalHash(announcement?.content)
+  const socialStripHash = getDismissalHash(socialStrip?.channels)
 
   return (
     <>
-      <DismissalGuard entries={[{ id: 'announcement', hash: announcementHash }]} />
+      <DismissalGuard
+        entries={[
+          { id: 'social-strip', hash: socialStripHash },
+          { id: 'announcement', hash: announcementHash },
+        ]}
+      />
+      <SocialStrip {...socialStrip} dismissalHash={socialStripHash} />
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md backdrop-saturate-150">
         <Announcement {...announcement} dismissalHash={announcementHash} />
         <MaxWidthWrapper>
@@ -30,6 +39,10 @@ export async function Header() {
             <MobileNav header={header} className="lg:hidden" />
           </div>
         </MaxWidthWrapper>
+        {/* Hangs off the header's bottom edge so it follows the header whatever sits above it */}
+        <div className="absolute right-4 top-full mt-4">
+          <GoogleTranslate />
+        </div>
       </header>
     </>
   )

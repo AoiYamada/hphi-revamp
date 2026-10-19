@@ -17,6 +17,81 @@ export const Header: GlobalConfig = {
   },
   fields: [
     {
+      name: 'socialStrip',
+      label: 'Social Strip',
+      type: 'group',
+      admin: {
+        description:
+          'QR codes shown at the very top of every page, above the header. Scrolls away with the page; visitors can close it for the rest of their visit.',
+      },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'enable',
+              type: 'checkbox',
+            },
+            {
+              name: 'showCaptionOnMobile',
+              label: 'Show captions on mobile',
+              type: 'checkbox',
+              defaultValue: true,
+              admin: {
+                condition: (_, { enable }) => Boolean(enable),
+              },
+            },
+          ],
+        },
+        {
+          name: 'channels',
+          type: 'array',
+          maxRows: 4,
+          admin: {
+            condition: (_, { enable }) => Boolean(enable),
+            components: {
+              RowLabel: '@/Header/RowLabels#SocialChannel',
+            },
+          },
+          fields: [
+            {
+              name: 'name',
+              type: 'text',
+              required: true,
+              admin: {
+                description:
+                  'Platform name, e.g. Facebook. Shown in place of the caption when it is empty or hidden on mobile; also used for analytics and as the QR image fallback alt text.',
+              },
+            },
+            {
+              name: 'qrCode',
+              label: 'QR Code',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+            },
+            link({
+              appearances: false,
+              disableLabel: true,
+              overrides: {
+                admin: {
+                  description:
+                    'Choose "Custom URL" for the platform link. Always opens in a new tab.',
+                },
+              },
+            }),
+            {
+              name: 'caption',
+              type: 'textarea',
+              admin: {
+                description: 'Line breaks are kept as typed.',
+              },
+            },
+          ],
+        },
+      ],
+    },
+    {
       name: 'announcement',
       label: 'Announcement',
       type: 'group',
