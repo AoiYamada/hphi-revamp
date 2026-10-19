@@ -1,4 +1,4 @@
-import type { GlobalConfig } from 'payload'
+import type { Condition, GlobalConfig } from 'payload'
 
 import { link } from '@/fields/link'
 import { revalidateHeader } from './hooks/revalidateHeader'
@@ -9,6 +9,8 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
+const whenEnabled: Condition = (_, siblingData) => Boolean(siblingData?.enable)
+
 export const Header: GlobalConfig = {
   slug: 'header',
   access: {
@@ -16,6 +18,81 @@ export const Header: GlobalConfig = {
     update: authenticated,
   },
   fields: [
+    {
+      name: 'socialStrip',
+      label: 'Social Strip',
+      type: 'group',
+      admin: {
+        description:
+          "The institute's Social Channels, shown as QR codes at the very top of every page, above the header. Scrolls away with the page; visitors can close it for the rest of their visit.",
+      },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'enable',
+              type: 'checkbox',
+            },
+            {
+              name: 'showCaptionOnMobile',
+              label: 'Show captions on mobile',
+              type: 'checkbox',
+              defaultValue: true,
+              admin: {
+                condition: whenEnabled,
+              },
+            },
+          ],
+        },
+        {
+          name: 'channels',
+          type: 'array',
+          maxRows: 4,
+          admin: {
+            condition: whenEnabled,
+            components: {
+              RowLabel: '@/Header/RowLabels#SocialChannel',
+            },
+          },
+          fields: [
+            {
+              name: 'name',
+              type: 'text',
+              required: true,
+              admin: {
+                description:
+                  'Platform name, e.g. Facebook. Shown in place of the caption when it is empty or hidden on mobile; also used for analytics and as the QR image fallback alt text.',
+              },
+            },
+            {
+              name: 'qrCode',
+              label: 'QR Code',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+            },
+            link({
+              appearances: false,
+              disableLabel: true,
+              overrides: {
+                admin: {
+                  description:
+                    'Choose "Custom URL" for the platform link. Always opens in a new tab.',
+                },
+              },
+            }),
+            {
+              name: 'caption',
+              type: 'textarea',
+              admin: {
+                description: 'Line breaks are kept as typed.',
+              },
+            },
+          ],
+        },
+      ],
+    },
     {
       name: 'announcement',
       label: 'Announcement',
@@ -29,7 +106,7 @@ export const Header: GlobalConfig = {
           name: 'content',
           type: 'richText',
           admin: {
-            condition: (_, { enable }) => Boolean(enable),
+            condition: whenEnabled,
           },
           editor: lexicalEditor({
             features: ({ rootFeatures }) => {

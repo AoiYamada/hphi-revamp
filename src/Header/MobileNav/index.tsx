@@ -4,7 +4,7 @@ import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import { SearchIcon, Menu, X, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { JSX, useEffect, useState } from 'react'
+import { JSX, type MouseEvent, useState } from 'react'
 import type { Header as HeaderType } from '@/payload-types'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { cn } from '@/utilities'
@@ -19,12 +19,24 @@ type MobileNavProps = {
 const MobileNav = ({ header, className }: MobileNavProps) => {
   const taps = header?.tabs || []
   const [isOpen, setOpen] = useState<boolean>(false)
-  const toggleOpen = () => setOpen((prev) => !prev)
   const pathname = usePathname()
+  const [prevPathname, setPrevPathname] = useState(pathname)
 
-  useEffect(() => {
+  // Close the menu after navigating (state adjusted during render rather than in an effect)
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname)
     setOpen(false)
-  }, [pathname])
+  }
+
+  const toggleOpen = (event: MouseEvent<SVGSVGElement>) => {
+    if (!isOpen) {
+      // The Social Strip above the header scrolls with the page. Bring the header to the top so
+      // the menu, sized to the viewport space below the header, fits on screen.
+      const headerTop = event.currentTarget.closest('header')?.getBoundingClientRect().top ?? 0
+      if (headerTop > 0) window.scrollBy({ top: headerTop, behavior: 'smooth' })
+    }
+    setOpen((prev) => !prev)
+  }
 
   const Icon = isOpen ? X : Menu
 
@@ -36,42 +48,41 @@ const MobileNav = ({ header, className }: MobileNavProps) => {
       />
 
       {isOpen ? (
-        <div className="fixed inset-0 z-0 w-full animate-in fade-in-20 slide-in-from-top-5">
-          <ul className="mt-28 grid max-h-[calc(100vh-120px)] w-full gap-3 overflow-y-auto border-t border-border bg-card px-10 pb-8 pt-4 shadow-lift-1">
-            {taps.map(
-              ({ label, link, enableDirectLink, enableDropdown, navItems, ...others }, i) => {
-                if (others.description || others.descriptionLinks?.length) {
-                  return null
-                }
+        // Anchored to the sticky <header> (nearest positioned ancestor) so it always opens right
+        // below it, whatever the Announcement's height. `fixed` would resolve against the header
+        // anyway (backdrop-filter makes it the containing block) and cover the Announcement.
+        <ul className="absolute inset-x-0 top-full z-10 grid max-h-[calc(100dvh-100%)] gap-3 overflow-y-auto border-t border-border bg-card px-10 pb-8 pt-4 shadow-lift-1 animate-in fade-in-20 slide-in-from-top-5">
+          {taps.map(({ label, link, enableDirectLink, enableDropdown, navItems, ...others }, i) => {
+            if (others.description || others.descriptionLinks?.length) {
+              return null
+            }
 
-                return (
-                  <li key={i}>
-                    <MaxWidthWrapper className="p-0">
-                      <MenuItem
-                        enableDropdown={enableDropdown ?? false}
-                        label={label}
-                        enableDirectLink={enableDirectLink ?? false}
-                        link={link}
-                        navItems={navItems}
-                      />
-                    </MaxWidthWrapper>
-                  </li>
-                )
-              },
-            )}
-            <li className="group">
-              <MaxWidthWrapper className="p-0">
-                <Link
-                  className="flex w-full items-center text-xl font-bold group-hover:text-secondary"
-                  href="/search"
-                >
-                  文章搜尋 <SearchIcon className="ml-2 h-4 w-4 group-hover:text-secondary" />
-                </Link>
-              </MaxWidthWrapper>
-            </li>
-            {/* <li className="my-3 h-px w-full bg-gray-300" /> */}
-          </ul>
-        </div>
+            return (
+              <li key={i}>
+                <MaxWidthWrapper className="p-0">
+                  <MenuItem
+                    enableDropdown={enableDropdown ?? false}
+                    label={label}
+                    enableDirectLink={enableDirectLink ?? false}
+                    link={link}
+                    navItems={navItems}
+                  />
+                </MaxWidthWrapper>
+              </li>
+            )
+          })}
+          <li className="group">
+            <MaxWidthWrapper className="p-0">
+              <Link
+                className="flex w-full items-center text-xl font-bold group-hover:text-secondary"
+                href="/search"
+              >
+                文章搜尋 <SearchIcon className="ml-2 h-4 w-4 group-hover:text-secondary" />
+              </Link>
+            </MaxWidthWrapper>
+          </li>
+          {/* <li className="my-3 h-px w-full bg-gray-300" /> */}
+        </ul>
       ) : null}
     </div>
   )

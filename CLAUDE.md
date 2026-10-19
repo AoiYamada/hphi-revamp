@@ -21,7 +21,7 @@ pnpm dev              # Next dev server on :3000 (admin at /admin)
 pnpm build            # next build (followed automatically by next-sitemap postbuild)
 pnpm start            # production server
 pnpm dev:prod         # clean .next, rebuild, then start — for reproducing prod issues
-pnpm lint             # next lint
+pnpm lint             # eslint . (next lint was removed in Next 16)
 pnpm lint:fix
 pnpm gen:types        # regenerate src/payload-types.ts after collection/global edits
 pnpm gen:import       # regenerate Payload import map (run after adding admin custom components)
@@ -86,7 +86,7 @@ Each content collection (Pages, Posts, Courses, Tutors) has an `afterChange` `re
 - **Path aliases**: `@/*` → `src/*`, `@payload-config` → `src/payload.config.ts`. Use these consistently; relative `../../../` paths exist in older files but new code should use aliases.
 - **shadcn/ui** is configured (`components.json`, style `new-york`, base color `zinc`, `rsc: true`). UI primitives live in `src/components/ui/`. Do not check in shadcn-generated files outside the configured aliases.
 - **Tailwind** uses CSS variables (`hsl(var(--…))`) for theming; dark mode via `[data-theme="dark"]` selector or `class`. Custom tokens: `success`, `error`, `warning`, `chart-1..5`. Some classes (`lg:col-span-{4,6,8,12}`, status borders/bg) are in the `safelist` — keep them there if dynamically constructed.
-- **Prettier** (`.prettierrc.json`): `singleQuote`, no semicolons, `printWidth: 100`, `trailingComma: all`. ESLint extends `next` with `parserOptions.project` pointing at `tsconfig.json`.
+- **Prettier** (`.prettierrc.json`): `singleQuote`, no semicolons, `printWidth: 100`, `trailingComma: all`. ESLint 9 flat config in `eslint.config.mjs`, using `eslint-config-next`'s base preset (includes the react-hooks v7 React Compiler rules, e.g. no setState in effects, no ref reads during render).
 - **Live preview** breakpoints (Mobile 375×667, Tablet 768×1024, Desktop 1440×900) are configured in `payload.config.ts`. Use `generatePreviewPath` from `src/utilities/` rather than constructing preview URLs by hand.
 - **i18n**: a recent commit (`feat: auto translate`) added auto-translation; `GoogleTranslate.tsx` is in `src/components/`. Content is primarily Traditional Chinese — be careful editing copy and meta defaults (the Chinese strings in `payload.config.ts` are the canonical site title/description).
 

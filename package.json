@@ -12,8 +12,8 @@
     "gen:import": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "gen:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "ii": "cross-env NODE_OPTIONS=--no-deprecation pnpm --ignore-workspace install",
-    "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
-    "lint:fix": "cross-env NODE_OPTIONS=--no-deprecation next lint --fix",
+    "lint": "cross-env NODE_OPTIONS=--no-deprecation eslint .",
+    "lint:fix": "cross-env NODE_OPTIONS=--no-deprecation eslint . --fix",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "reinstall": "cross-env NODE_OPTIONS=--no-deprecation rm -rf node_modules && rm pnpm-lock.yaml && pnpm --ignore-workspace install",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
@@ -72,7 +72,7 @@
     "@types/react-dom": "19.2.3",
     "autoprefixer": "10.4.21",
     "copyfiles": "2.4.1",
-    "eslint": "8.57.1",
+    "eslint": "9.39.5",
     "eslint-config-next": "16.2.6",
     "postcss": "8.5.15",
     "prettier": "3.5.3",
@@ -83,5 +83,5 @@
   "engines": {
     "node": ">=22.12.0"
   },
-  "packageManager": "pnpm@11.2.2"
+  "packageManager": "pnpm@12.14.0"
 }
