@@ -8,23 +8,29 @@ import MainNav from './MainNav'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import MobileNav from './MobileNav'
 import Announcement from './Announcement'
+import { DismissalGuard } from './Dismissal/DismissalGuard'
+import { getDismissalHash } from './Dismissal/getDismissalHash'
 
 export async function Header() {
   const header: Header = await getCachedGlobal('header', 1)
   const { announcement } = header
+  const announcementHash = getDismissalHash(announcement?.content)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md backdrop-saturate-150">
-      <Announcement {...announcement} />
-      <MaxWidthWrapper>
-        <div className="flex h-16 w-full items-center justify-between px-2 lg:h-20">
-          <Link href="/" className="flex items-center" aria-label="HPHI home">
-            <Logo noText={false} />
-          </Link>
-          <MainNav header={header} className="hidden lg:block" />
-          <MobileNav header={header} className="lg:hidden" />
-        </div>
-      </MaxWidthWrapper>
-    </header>
+    <>
+      <DismissalGuard entries={[{ id: 'announcement', hash: announcementHash }]} />
+      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md backdrop-saturate-150">
+        <Announcement {...announcement} dismissalHash={announcementHash} />
+        <MaxWidthWrapper>
+          <div className="flex h-16 w-full items-center justify-between px-2 lg:h-20">
+            <Link href="/" className="flex items-center" aria-label="HPHI home">
+              <Logo noText={false} />
+            </Link>
+            <MainNav header={header} className="hidden lg:block" />
+            <MobileNav header={header} className="lg:hidden" />
+          </div>
+        </MaxWidthWrapper>
+      </header>
+    </>
   )
 }
