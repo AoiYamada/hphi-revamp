@@ -1,14 +1,14 @@
 import type { FC } from 'react'
 
 import {
-  type DismissibleId,
+  type Dismissal,
   dismissalAttribute,
   dismissalStorageKey,
   dismissibleAttribute,
 } from './dismissal'
 
 type DismissalGuardProps = {
-  entries: { id: DismissibleId; hash: string }[]
+  entries: Dismissal[]
 }
 
 // Hides already-dismissed elements before React hydrates, so a reload doesn't flash them and

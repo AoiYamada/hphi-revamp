@@ -4,7 +4,7 @@ import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import { SearchIcon, Menu, X, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { JSX, useState } from 'react'
+import { JSX, type MouseEvent, useState } from 'react'
 import type { Header as HeaderType } from '@/payload-types'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { cn } from '@/utilities'
@@ -19,14 +19,23 @@ type MobileNavProps = {
 const MobileNav = ({ header, className }: MobileNavProps) => {
   const taps = header?.tabs || []
   const [isOpen, setOpen] = useState<boolean>(false)
-  const toggleOpen = () => setOpen((prev) => !prev)
   const pathname = usePathname()
-  const [openedOn, setOpenedOn] = useState(pathname)
+  const [prevPathname, setPrevPathname] = useState(pathname)
 
   // Close the menu after navigating (state adjusted during render rather than in an effect)
-  if (pathname !== openedOn) {
-    setOpenedOn(pathname)
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname)
     setOpen(false)
+  }
+
+  const toggleOpen = (event: MouseEvent<SVGSVGElement>) => {
+    if (!isOpen) {
+      // The Social Strip above the header scrolls with the page. Bring the header to the top so
+      // the menu, sized to the viewport space below the header, fits on screen.
+      const headerTop = event.currentTarget.closest('header')?.getBoundingClientRect().top ?? 0
+      if (headerTop > 0) window.scrollBy({ top: headerTop, behavior: 'smooth' })
+    }
+    setOpen((prev) => !prev)
   }
 
   const Icon = isOpen ? X : Menu

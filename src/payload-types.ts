@@ -2125,7 +2125,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Header {
   id: string;
   /**
-   * QR codes shown at the very top of every page, above the header. Scrolls away with the page; visitors can close it for the rest of their visit.
+   * The institute's Social Channels, shown as QR codes at the very top of every page, above the header. Scrolls away with the page; visitors can close it for the rest of their visit.
    */
   socialStrip?: {
     enable?: boolean | null;

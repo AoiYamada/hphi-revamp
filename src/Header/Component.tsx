@@ -11,25 +11,24 @@ import MobileNav from './MobileNav'
 import Announcement from './Announcement'
 import SocialStrip from './SocialStrip'
 import { DismissalGuard } from './Dismissal/DismissalGuard'
-import { getDismissalHash } from './Dismissal/getDismissalHash'
+import { createDismissal } from './Dismissal/createDismissal'
+import { getVisibleContent } from './SocialStrip/channel'
 
 export async function Header() {
   const header: Header = await getCachedGlobal('header', 1)
   const { announcement, socialStrip } = header
-  const announcementHash = getDismissalHash(announcement?.content)
-  const socialStripHash = getDismissalHash(socialStrip?.channels)
+  const announcementDismissal = createDismissal('announcement', announcement?.content)
+  const socialStripDismissal = createDismissal(
+    'social-strip',
+    getVisibleContent(socialStrip?.channels),
+  )
 
   return (
     <>
-      <DismissalGuard
-        entries={[
-          { id: 'social-strip', hash: socialStripHash },
-          { id: 'announcement', hash: announcementHash },
-        ]}
-      />
-      <SocialStrip {...socialStrip} dismissalHash={socialStripHash} />
+      <DismissalGuard entries={[socialStripDismissal, announcementDismissal]} />
+      <SocialStrip {...socialStrip} dismissal={socialStripDismissal} />
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md backdrop-saturate-150">
-        <Announcement {...announcement} dismissalHash={announcementHash} />
+        <Announcement {...announcement} dismissal={announcementDismissal} />
         <MaxWidthWrapper>
           <div className="flex h-16 w-full items-center justify-between px-2 lg:h-20">
             <Link href="/" className="flex items-center" aria-label="HPHI home">

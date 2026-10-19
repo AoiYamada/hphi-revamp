@@ -5,20 +5,20 @@ import RichText from '@/components/RichText'
 import { Header } from '@/payload-types'
 import React, { FC } from 'react'
 import { X } from 'lucide-react'
-import { dismissibleProps } from './Dismissal/dismissal'
+import { type Dismissal, dismissibleProps } from './Dismissal/dismissal'
 import { useDismissal } from './Dismissal/useDismissal'
 
 type AnnouncementProps = NonNullable<Header['announcement']> & {
-  dismissalHash: string
+  dismissal: Dismissal
 }
 
-const Announcement: FC<AnnouncementProps> = ({ enable, content, dismissalHash }) => {
-  const { isDismissed, dismiss } = useDismissal('announcement', dismissalHash)
+const Announcement: FC<AnnouncementProps> = ({ enable, content, dismissal }) => {
+  const { isDismissed, dismiss } = useDismissal(dismissal)
 
   if (!enable || !content || isDismissed) return null
 
   return (
-    <div {...dismissibleProps('announcement')} className="z-50 bg-primary text-primary-foreground">
+    <div {...dismissibleProps(dismissal.id)} className="z-50 bg-primary text-primary-foreground">
       <MaxWidthWrapper className="py-2">
         <div className="flex w-full items-center gap-3">
           <RichText

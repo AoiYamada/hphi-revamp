@@ -2,7 +2,7 @@
 
 import { useCallback, useSyncExternalStore } from 'react'
 
-import { type DismissibleId, dismissalStorageKey } from './dismissal'
+import { type Dismissal, type DismissibleId, dismissalStorageKey } from './dismissal'
 
 // In-memory copy so dismissing still works for the current page view when sessionStorage is
 // unavailable (blocked storage, some private modes) — it just won't survive a reload.
@@ -34,7 +34,7 @@ const writeDismissedHash = (id: DismissibleId, hash: string) => {
   listeners.forEach((listener) => listener())
 }
 
-export const useDismissal = (id: DismissibleId, hash: string) => {
+export const useDismissal = ({ id, hash }: Dismissal) => {
   // The server snapshot (nothing dismissed) matches the SSR markup; DismissalGuard keeps an
   // already-dismissed element hidden until React switches to the client snapshot.
   const dismissedHash = useSyncExternalStore(

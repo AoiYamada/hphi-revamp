@@ -1,16 +1,14 @@
 'use client'
 
 import { CMSLink } from '@/components/Link'
-import type { Header } from '@/payload-types'
 import { cn } from '@/utilities'
 import { sendGAEvent } from '@next/third-parties/google'
 import { ArrowUpRight } from 'lucide-react'
 import NextImage from 'next/image'
 import type { FC } from 'react'
+import type { RenderableSocialChannel } from './channel'
 
-export type SocialChannel = NonNullable<NonNullable<Header['socialStrip']>['channels']>[number]
-
-type SocialChannelCardProps = SocialChannel & {
+type SocialChannelCardProps = RenderableSocialChannel & {
   showCaptionOnMobile: boolean
 }
 
@@ -23,8 +21,6 @@ const SocialChannelCard: FC<SocialChannelCardProps> = ({
   caption,
   showCaptionOnMobile,
 }) => {
-  if (typeof qrCode !== 'object' || !qrCode?.url) return null
-
   return (
     <CMSLink
       {...link}
@@ -32,13 +28,15 @@ const SocialChannelCard: FC<SocialChannelCardProps> = ({
       onClick={() => sendGAEvent('event', 'social_strip_click', { channel: name })}
       className="group flex h-full flex-col gap-2 rounded-lg focus-visible:outline-none focus-visible:shadow-lift-focus xl:flex-row xl:items-center xl:gap-4"
     >
-      <span className="relative block size-[7.5rem] shrink-0 rounded-md bg-white p-1 shadow-lift-1 transition-shadow duration-200 ease-out group-hover:shadow-lift-2 xl:size-[6.5rem]">
+      {/* Pure white on purpose (DESIGN.md's no-#fff rule is for surfaces): scanners need maximum
+          contrast and a light quiet zone around the code. Mobile: fills the card's width. */}
+      <span className="relative block aspect-square w-full shrink-0 rounded-md bg-white p-1 shadow-lift-1 transition-shadow duration-200 ease-out group-hover:shadow-lift-2 md:size-[7.5rem] xl:size-[6.5rem]">
         <NextImage
           src={qrCode.url}
           alt={qrCode.alt || `${name} QR code`}
           width={qrCode.width ?? 1024}
           height={qrCode.height ?? 1024}
-          sizes="(min-width: 1280px) 104px, 120px"
+          sizes="(min-width: 1280px) 104px, (min-width: 768px) 120px, 160px"
           className="size-full"
         />
         <ArrowUpRight

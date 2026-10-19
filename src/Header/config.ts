@@ -1,4 +1,4 @@
-import type { GlobalConfig } from 'payload'
+import type { Condition, GlobalConfig } from 'payload'
 
 import { link } from '@/fields/link'
 import { revalidateHeader } from './hooks/revalidateHeader'
@@ -8,6 +8,8 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
+
+const whenEnabled: Condition = (_, siblingData) => Boolean(siblingData?.enable)
 
 export const Header: GlobalConfig = {
   slug: 'header',
@@ -22,7 +24,7 @@ export const Header: GlobalConfig = {
       type: 'group',
       admin: {
         description:
-          'QR codes shown at the very top of every page, above the header. Scrolls away with the page; visitors can close it for the rest of their visit.',
+          "The institute's Social Channels, shown as QR codes at the very top of every page, above the header. Scrolls away with the page; visitors can close it for the rest of their visit.",
       },
       fields: [
         {
@@ -38,7 +40,7 @@ export const Header: GlobalConfig = {
               type: 'checkbox',
               defaultValue: true,
               admin: {
-                condition: (_, { enable }) => Boolean(enable),
+                condition: whenEnabled,
               },
             },
           ],
@@ -48,7 +50,7 @@ export const Header: GlobalConfig = {
           type: 'array',
           maxRows: 4,
           admin: {
-            condition: (_, { enable }) => Boolean(enable),
+            condition: whenEnabled,
             components: {
               RowLabel: '@/Header/RowLabels#SocialChannel',
             },
@@ -104,7 +106,7 @@ export const Header: GlobalConfig = {
           name: 'content',
           type: 'richText',
           admin: {
-            condition: (_, { enable }) => Boolean(enable),
+            condition: whenEnabled,
           },
           editor: lexicalEditor({
             features: ({ rootFeatures }) => {

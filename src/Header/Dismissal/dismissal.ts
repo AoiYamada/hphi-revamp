@@ -4,6 +4,9 @@
 
 export type DismissibleId = 'announcement' | 'social-strip'
 
+// What a dismissible element needs to know about itself; built on the server by createDismissal.
+export type Dismissal = { id: DismissibleId; hash: string }
+
 export const dismissalStorageKey = (id: DismissibleId) => `hphi:dismissed:${id}`
 
 // Set on <html> before first paint by DismissalGuard's inline script.
