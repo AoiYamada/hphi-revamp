@@ -16,9 +16,7 @@ const MenuItemContent: FC<MenuItemContentProps> = ({ description, descriptionLin
     <NavigationMenuContent className="grid grid-cols-12 gap-6 p-6 w-fit">
       {(description || (descriptionLinks?.length ?? 0) > 0) && (
         <div className="col-span-3 flex flex-col gap-4 border-r border-border pr-6 pt-1">
-          {description && (
-            <p className="text-lg font-medium text-foreground">{description}</p>
-          )}
+          {description && <p className="text-lg font-medium text-foreground">{description}</p>}
           {descriptionLinks?.length ? (
             <ul className="flex flex-col gap-3">
               {descriptionLinks.map(({ link }, i) => (
