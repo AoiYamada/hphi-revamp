@@ -8,7 +8,7 @@ module.exports = {
       exec_mode: 'cluster',
       instances: 1,
       max_memory_restart: '1G',
-      interpreter: '/home/yamada/.nvm/versions/node/v24.22.1/bin/node',
+      // Node = PM2 daemon's Node (cluster mode ignores `interpreter`); keep it in sync with .nvmrc
       time: false,
       watch: true,
       watch_delay: 10000,
