@@ -4,13 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-HPHI (專業心理治療及催眠應用（香港）有限公司) — a Hong Kong psychotherapy and hypnosis institute website built on the Payload CMS 3 + Next.js 15 "website" template. Forked from `payloadcms/payload/templates/website`; the upstream template's README is still in `README.md` and most of its conventions still apply.
+HPHI (專業心理治療及催眠應用（香港）有限公司) — a Hong Kong psychotherapy and hypnosis institute website built on the Payload CMS 3 + Next.js "website" template. Forked from `payloadcms/payload/templates/website`; the upstream template's README is still in `README.md` and most of its conventions still apply.
 
 ## Stack & runtime
 
-- Node `>=22.12.0` (`.nvmrc` pins `v22.12.0`), pnpm 9 (use `--ignore-workspace` — see scripts).
-- Next.js 15 App Router, React 19, TypeScript 5.7 (strict mode **off**, only `strictNullChecks`).
-- Payload 3.28 with MongoDB via `@payloadcms/db-mongodb` (mongoose). Local DB runs from `docker-compose.yml` (`mongo:5.0.6` on `:27017`, data persisted in `./volumes/mongo`).
+- Node `>=24.22.1` (`.nvmrc` pins `v24.22.1`), pnpm 12 (use `--ignore-workspace` — see scripts).
+- Next.js 16 App Router, React 19, TypeScript 6.0 (strict mode **off**, only `strictNullChecks`).
+- Payload 3.91 with MongoDB via `@payloadcms/db-mongodb` (mongoose). Local DB runs from `docker-compose.yml` (`mongo:5.0.6` on `:27017`, data persisted in `./volumes/mongo`).
 - Email via `@payloadcms/email-nodemailer` (SMTP, hard-coded `secure: true`, port 465 — see `src/payload.config.ts`).
 - Production deploys behind PM2 (`ecosystem.config.cjs`, port `4002`), not Vercel/Payload Cloud. The README's deployment instructions are inherited from the template and are **not** how this site is shipped — consult `back.sh` and `ecosystem.config.cjs` instead.
 

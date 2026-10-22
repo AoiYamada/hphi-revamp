@@ -1,7 +1,7 @@
 services:
   # may need to reinstall node_modules, package "sharp" is broken on MacOS
   # payload:
-  #   image: node:22.10-alpine
+  #   image: node:24.22.1-alpine
   #   ports:
   #     - 3000:3000
   #   volumes:
