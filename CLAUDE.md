@@ -8,7 +8,7 @@ HPHI (專業心理治療及催眠應用（香港）有限公司) — a Hong Kong
 
 ## Stack & runtime
 
-- Node `>=22.12.0` (`.nvmrc` pins `v22.12.0`), pnpm 9 (use `--ignore-workspace` — see scripts).
+- Node `>=24.22.1` (`.nvmrc` pins `v24.22.1`), pnpm 12 (use `--ignore-workspace` — see scripts).
 - Next.js 15 App Router, React 19, TypeScript 5.7 (strict mode **off**, only `strictNullChecks`).
 - Payload 3.28 with MongoDB via `@payloadcms/db-mongodb` (mongoose). Local DB runs from `docker-compose.yml` (`mongo:5.0.6` on `:27017`, data persisted in `./volumes/mongo`).
 - Email via `@payloadcms/email-nodemailer` (SMTP, hard-coded `secure: true`, port 465 — see `src/payload.config.ts`).

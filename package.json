@@ -66,7 +66,7 @@
     "@tailwindcss/typography": "0.5.16",
     "@types/escape-html": "1.0.4",
     "@types/jsonwebtoken": "9.0.10",
-    "@types/node": "22.13.10",
+    "@types/node": "24.19.2",
     "@types/react": "19.2.15",
     "@types/react-dom": "19.2.3",
     "autoprefixer": "10.4.21",
@@ -80,7 +80,7 @@
     "typescript": "6.0.3"
   },
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=24.22.1"
   },
-  "packageManager": "pnpm@12.14.0"
+  "packageManager": "pnpm@12.15.0"
 }

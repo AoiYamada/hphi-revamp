@@ -8,7 +8,7 @@ module.exports = {
       exec_mode: 'cluster',
       instances: 1,
       max_memory_restart: '1G',
-      interpreter: '/home/yamada/.nvm/versions/node/v24.16.0/bin/node',
+      interpreter: '/home/yamada/.nvm/versions/node/v24.22.1/bin/node',
       time: false,
       watch: true,
       watch_delay: 10000,
