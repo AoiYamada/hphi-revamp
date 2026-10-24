@@ -14,6 +14,7 @@ import { TimelineBlock } from './Timeline/Component'
 import { QuoteBlock } from './Quote/Component'
 import { CEFCalculatorBlock } from './CEFCalculator/Component'
 import { TabsBlock } from './Tabs/Component'
+import { BookListBlock } from './BookList/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -28,6 +29,7 @@ const blockComponents = {
   quoteBlock: QuoteBlock,
   cefCalculatorBlock: CEFCalculatorBlock,
   tabsBlock: TabsBlock,
+  bookListBlock: BookListBlock,
 }
 
 export const RenderBlocks: FC<{

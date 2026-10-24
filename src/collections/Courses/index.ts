@@ -23,6 +23,7 @@ import { Timeline } from '@/blocks/Timeline/config'
 import { Quote } from '@/blocks/Quote/config'
 import { CEFCalculator } from '@/blocks/CEFCalculator/config'
 import { Tabs } from '@/blocks/Tabs/config'
+import { BookList } from '@/blocks/BookList/config'
 import { hero } from '@/heros/config'
 
 export const Courses: CollectionConfig = {
@@ -76,6 +77,7 @@ export const Courses: CollectionConfig = {
                 Quote,
                 CEFCalculator,
                 Tabs,
+                BookList,
               ],
               required: true,
             },

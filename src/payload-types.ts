@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     pages: Page;
     courses: Course;
+    books: Book;
     tutors: Tutor;
     posts: Post;
     media: Media;
@@ -87,6 +88,7 @@ export interface Config {
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
+    books: BooksSelect<false> | BooksSelect<true>;
     tutors: TutorsSelect<false> | TutorsSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -108,10 +110,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    bookOrdering: BookOrdering;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    bookOrdering: BookOrderingSelect<false> | BookOrderingSelect<true>;
   };
   locale: null;
   widgets: {
@@ -208,6 +212,7 @@ export interface Page {
     | QuoteBlock
     | CEFCalculatorBlock
     | TabsBlock
+    | BookListBlock
   )[];
   meta?: {
     title?: string | null;
@@ -291,6 +296,7 @@ export interface Course {
     | QuoteBlock
     | CEFCalculatorBlock
     | TabsBlock
+    | BookListBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1162,6 +1168,64 @@ export interface TabsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BookListBlock".
+ */
+export interface BookListBlock {
+  heading: string;
+  /**
+   * All books are listed by priority, and new books appear automatically.
+   */
+  populateBy?: ('all' | 'selection') | null;
+  /**
+   * Drag to reorder.
+   */
+  selectedBooks?: (string | Book)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'bookListBlock';
+}
+/**
+ * Published books. Feature them on a page with the Book List block.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "books".
+ */
+export interface Book {
+  id: string;
+  title: string;
+  /**
+   * Optional. ISBN-10 or ISBN-13; hyphens and spaces are fine.
+   */
+  isbn?: string | null;
+  cover: {
+    media: string | Media;
+    isVideo?: boolean | null;
+    /**
+     * Optional thumbnail for video
+     */
+    thumbnail?: (string | null) | Media;
+  };
+  /**
+   * Shown when a visitor opens the book. Line breaks are kept.
+   */
+  description?: string | null;
+  /**
+   * HKD, whole dollars. Required while the book is orderable.
+   */
+  price?: number | null;
+  /**
+   * Untick to keep showing the book, marked 暫停發售, without letting visitors order it.
+   */
+  orderable?: boolean | null;
+  /**
+   * Lower numbers are listed first.
+   */
+  priority: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1272,6 +1336,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'courses';
         value: string | Course;
+      } | null)
+    | ({
+        relationTo: 'books';
+        value: string | Book;
       } | null)
     | ({
         relationTo: 'tutors';
@@ -1394,6 +1462,7 @@ export interface PagesSelect<T extends boolean = true> {
         quoteBlock?: T | QuoteBlockSelect<T>;
         cefCalculatorBlock?: T | CEFCalculatorBlockSelect<T>;
         tabsBlock?: T | TabsBlockSelect<T>;
+        bookListBlock?: T | BookListBlockSelect<T>;
       };
   meta?:
     | T
@@ -1610,6 +1679,17 @@ export interface TabsBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BookListBlock_select".
+ */
+export interface BookListBlockSelect<T extends boolean = true> {
+  heading?: T;
+  populateBy?: T;
+  selectedBooks?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "courses_select".
  */
 export interface CoursesSelect<T extends boolean = true> {
@@ -1651,6 +1731,7 @@ export interface CoursesSelect<T extends boolean = true> {
         quoteBlock?: T | QuoteBlockSelect<T>;
         cefCalculatorBlock?: T | CEFCalculatorBlockSelect<T>;
         tabsBlock?: T | TabsBlockSelect<T>;
+        bookListBlock?: T | BookListBlockSelect<T>;
       };
   meta?:
     | T
@@ -1661,6 +1742,27 @@ export interface CoursesSelect<T extends boolean = true> {
       };
   slug?: T;
   slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "books_select".
+ */
+export interface BooksSelect<T extends boolean = true> {
+  title?: T;
+  isbn?: T;
+  cover?:
+    | T
+    | {
+        media?: T;
+        isVideo?: T;
+        thumbnail?: T;
+      };
+  description?: T;
+  price?: T;
+  orderable?: T;
+  priority?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2388,6 +2490,25 @@ export interface Footer {
   createdAt?: string | null;
 }
 /**
+ * Shared by every Book List, so all pages send Order Requests to the same number and promise the same terms.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bookOrdering".
+ */
+export interface BookOrdering {
+  id: string;
+  /**
+   * Receives Order Requests.
+   */
+  whatsAppNumber: string;
+  /**
+   * Shown at the end of every Book List, e.g. postage and signing.
+   */
+  orderingTerms: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
@@ -2549,6 +2670,17 @@ export interface FooterSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bookOrdering_select".
+ */
+export interface BookOrderingSelect<T extends boolean = true> {
+  whatsAppNumber?: T;
+  orderingTerms?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
