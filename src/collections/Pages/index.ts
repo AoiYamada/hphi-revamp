@@ -28,6 +28,7 @@ import { TimeSlot } from '@/blocks/TimeSlot/config'
 import { Timeline } from '@/blocks/Timeline/config'
 import { Quote } from '@/blocks/Quote/config'
 import { Tabs } from '@/blocks/Tabs/config'
+import { BookList } from '@/blocks/BookList/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -97,6 +98,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 Quote,
                 CEFCalculator,
                 Tabs,
+                BookList,
               ],
               required: true,
               admin: {

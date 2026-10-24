@@ -24,3 +24,29 @@ _Avoid_: Social link, platform, QR
 
 **Caption（說明）**:
 Free-form text accompanying a Social Channel; editors decide its language(s) and line breaks.
+
+### Books
+
+**Book（書籍）**:
+A published title offered to visitors for purchase; editors maintain each Book once and feature it on any number of pages.
+_Avoid_: Product, item, publication
+
+**Book List（書單）**:
+A titled set of Books placed on a page — either every Book or an editor-picked few — from which visitors select Orderable Books and send one Order Request. Each Book List keeps its own selection; nothing carries over between Book Lists or pages.
+_Avoid_: Bookshelf, book block, cart
+
+**Orderable（可訂購）**:
+Whether a Book can currently be included in an Order Request. A Book that is not Orderable is still shown, marked 暫停發售, because the list also showcases the author's body of work.
+_Avoid_: In stock, sold out, active
+
+**Order Request（訂購查詢）**:
+A WhatsApp message a visitor sends to the institute listing the Books they want, one copy each; the site records nothing, and the institute confirms each Order Request by hand before posting the books.
+_Avoid_: Order, cart, checkout
+
+**Ordering Terms（訂購條款）**:
+The editor-written conditions shown with every Book List, such as free postage within Hong Kong; one set applies site-wide so no page can promise different terms.
+_Avoid_: Note, remark, disclaimer
+
+**Signed Copy（作者親筆簽名）**:
+A request, made once for a whole Order Request, that every Book in it be signed by the author; personal dedications（上款）are not offered.
+_Avoid_: Autograph

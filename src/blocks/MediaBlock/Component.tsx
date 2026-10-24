@@ -13,7 +13,9 @@ type Props = MediaBlockProps & {
   captionClassName?: string
   className?: string
   enableGutter?: boolean
+  fill?: boolean
   imgClassName?: string
+  size?: string
   videoClassName?: string
   staticImage?: StaticImageData
   disableInnerContainer?: boolean
@@ -24,7 +26,9 @@ export const MediaBlock: FC<Props> = (props) => {
     captionClassName,
     className,
     enableGutter = true,
+    fill,
     imgClassName,
+    size,
     videoClassName,
     media,
     thumbnail,
@@ -46,6 +50,8 @@ export const MediaBlock: FC<Props> = (props) => {
       )}
     >
       <Media
+        fill={fill}
+        size={size}
         imgClassName={cn('rounded-lg mx-auto', imgClassName)}
         videoClassName={cn('rounded-lg mx-auto', videoClassName)}
         resource={media}

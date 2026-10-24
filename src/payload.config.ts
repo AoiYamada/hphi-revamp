@@ -13,8 +13,10 @@ import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
 import { Courses } from './collections/Courses'
+import { Books } from './collections/Books'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
+import { BookOrdering } from './BookOrdering/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
@@ -93,6 +95,7 @@ export default buildConfig({
   collections: [
     Pages,
     Courses,
+    Books,
     Tutors,
     Posts,
     Media,
@@ -101,7 +104,7 @@ export default buildConfig({
     // Upload
   ],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
+  globals: [Header, Footer, BookOrdering],
   plugins: [
     ...plugins,
     // storage-adapter-placeholder

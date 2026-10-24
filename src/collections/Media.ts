@@ -14,6 +14,10 @@ import {
   revalidateHeaderOnMediaChange,
   revalidateHeaderOnMediaDelete,
 } from '@/Header/hooks/revalidateHeaderOnMediaChange'
+import {
+  revalidateBooksOnMediaChange,
+  revalidateBooksOnMediaDelete,
+} from '@/collections/Books/hooks/revalidateBooksOnMediaChange'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -43,8 +47,8 @@ export const Media: CollectionConfig = {
     },
   ],
   hooks: {
-    afterChange: [revalidateHeaderOnMediaChange],
-    afterDelete: [revalidateHeaderOnMediaDelete],
+    afterChange: [revalidateHeaderOnMediaChange, revalidateBooksOnMediaChange],
+    afterDelete: [revalidateHeaderOnMediaDelete, revalidateBooksOnMediaDelete],
   },
   upload: {
     // Upload to the public/media directory in Next.js making them publicly accessible even outside of Payload
