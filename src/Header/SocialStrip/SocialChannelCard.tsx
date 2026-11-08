@@ -28,9 +28,9 @@ const SocialChannelCard: FC<SocialChannelCardProps> = ({
       onClick={() => sendGAEvent('event', 'social_strip_click', { channel: name })}
       className="group flex h-full flex-col gap-1.5 rounded-sm focus-visible:outline-hidden focus-visible:shadow-focus md:gap-2 xl:flex-row xl:items-center xl:gap-4"
     >
-      {/* 白底的紙色（不用純白，符合 DESIGN.md 的 no-#fff 規則）；掃描需要的對比仍然足夠。
+      {/* QR 外框用純白（chrome-qr token，和原版一樣）：QR 圖本身是不透明的白底，外框若不同色會變成雙層框。
           手機約 64px（較緊湊），md 以上維持原本的尺寸。 */}
-      <span className="relative block aspect-square size-16 shrink-0 rounded-sm bg-paper-raised p-1 md:size-30 xl:size-26">
+      <span className="relative block aspect-square size-16 shrink-0 rounded-sm bg-chrome-qr p-1 md:size-30 xl:size-26">
         <NextImage
           src={qrCode.url}
           alt={qrCode.alt || `${name} QR code`}

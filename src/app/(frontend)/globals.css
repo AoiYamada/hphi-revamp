@@ -128,6 +128,8 @@
   --color-chrome-text: #322b3b;
   /* chrome 內的次要文字（下拉連結說明、社交條關閉鈕）。原版是 muted-foreground：rgb(108, 100, 120)。 */
   --color-chrome-text-muted: #6c6478;
+  /* 社交條 QR 外框：純白，和原版一樣，掃描時對比清楚（QR 圖本身是不透明的純白底）。 */
+  --color-chrome-qr: #ffffff;
 
   /* 公告列底色（原版 bg-primary，和 iris 幾乎相同）與公告上的文字。 */
   --color-chrome-announcement: #62419f;
