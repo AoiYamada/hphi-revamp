@@ -15,7 +15,7 @@ const FooterNavLink: FC<FooterNavLinkProps> = ({ icon, link }) => {
       <CMSLink
         {...link}
         appearance="link"
-        className="text-chrome-footer-foreground/80 transition-colors duration-200 ease-out hover:text-chrome-footer-foreground"
+        className="text-chrome-footer-foreground/80 transition-colors duration-200 ease-out hover:text-chrome-footer-foreground focus-visible:shadow-focus-inverse"
       />
     </li>
   )

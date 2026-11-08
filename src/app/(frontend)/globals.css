@@ -165,6 +165,8 @@
   --shadow-float: 0 16px 32px -16px rgb(43 38 34 / 0.35);
   /* focus 外圈：3px、品牌紫 25%。（再搭配 1px 的品牌紫邊框。） */
   --shadow-focus: 0 0 0 3px color-mix(in srgb, var(--color-iris) 25%, transparent);
+  /* 深色底上的焦點外框：品牌紫在公告列和 footer 上看不見，改用紙色 70%。 */
+  --shadow-focus-inverse: 0 0 0 3px color-mix(in srgb, var(--color-paper) 70%, transparent);
 }
 
 /* ---------- 七、動畫 ---------- */

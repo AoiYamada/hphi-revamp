@@ -31,7 +31,7 @@ const Announcement: FC<AnnouncementProps> = ({ enable, content, dismissal }) => 
           />
           <button
             onClick={dismiss}
-            className="shrink-0 rounded-full p-1.5 transition-colors duration-200 ease-out hover:bg-chrome-nav/40 focus-visible:outline-hidden focus-visible:shadow-focus"
+            className="shrink-0 rounded-full p-1.5 transition-colors duration-200 ease-out hover:bg-chrome-nav/40 focus-visible:outline-hidden focus-visible:shadow-focus-inverse"
             aria-label="Close announcement"
           >
             <X size={14} />

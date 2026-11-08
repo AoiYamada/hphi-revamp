@@ -45,7 +45,7 @@ const SocialStrip: FC<SocialStripProps> = ({
     >
       <MaxWidthWrapper className="flex items-start gap-2 py-3 xl:py-4">
         {/* Mobile card width = (row − the two gap-3 gaps) / 2.5, capped on wide phones */}
-        <ul className="-mx-1 -my-2 flex min-w-0 flex-1 snap-x snap-mandatory scroll-px-1 gap-3 overflow-x-auto px-1 py-2 scrollbar-none md:mx-0 md:grid md:px-0 md:auto-cols-fr md:grid-flow-col md:gap-6 md:overflow-visible xl:gap-0 xl:[&>li+li]:border-l [&::-webkit-scrollbar]:hidden">
+        <ul className="-mx-1 -my-2 flex min-w-0 flex-1 snap-x snap-mandatory scroll-px-1 gap-3 overflow-x-auto px-1 py-2 scrollbar-none md:mx-0 md:grid md:px-0 md:auto-cols-fr md:grid-flow-col md:gap-6 md:overflow-visible xl:gap-0 xl:[&>li+li]:border-l xl:[&>li+li]:border-chrome-strip-border [&::-webkit-scrollbar]:hidden">
           {visibleChannels.map((channel, i) => (
             <li
               key={channel.id ?? i}
