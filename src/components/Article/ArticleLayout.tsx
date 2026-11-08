@@ -9,6 +9,10 @@ import { annotateH2Anchors, splitLede } from '@/utilities/article/headings'
 import { estimateReadingMinutes } from '@/utilities/article/readingTime'
 
 import { ArticleHeader } from './ArticleHeader'
+import { MIN_HEADINGS } from './Toc/copy'
+import { DesktopToc } from './Toc/DesktopToc'
+import { InlineToc } from './Toc/InlineToc'
+import { TocBar } from './Toc/TocBar'
 
 /** Widest the cover and the related-posts row get; the 190 + 620 + 190 grid sits inside it. */
 const FRAME = 'mx-auto w-full max-w-[1160px]'
@@ -23,19 +27,21 @@ const hasNodes = (content: Content | null | undefined): content is Content =>
 
 /** Splits the body into lede + rest and numbers the H2s. A post without content gets neither. */
 const prepareBody = (content: Content | null | undefined) => {
-  if (!hasNodes(content)) return { lede: null, body: null, readingMinutes: null }
+  if (!hasNodes(content)) return { lede: null, body: null, headings: [], readingMinutes: null }
 
-  const { state } = annotateH2Anchors(content)
+  const { state, headings } = annotateH2Anchors(content)
   const { lede, body } = splitLede(state)
-  return { lede, body, readingMinutes: estimateReadingMinutes(content) }
+  return { lede, body, headings, readingMinutes: estimateReadingMinutes(content) }
 }
 
 /**
  * Book-style article page shared by /posts/[slug] and /single-post/[slug].
- * Header, optional cover, a three-column grid (TOC | 620px body | spare) and related posts.
+ * Header, optional cover, a three-column grid (TOC | 620px body | spare), the TOC surfaces
+ * (sticky sidebar, inline box, reading bar) and related posts.
  */
 export const ArticleLayout: FC<{ post: Post }> = ({ post }) => {
-  const { lede, body, readingMinutes } = prepareBody(post.content)
+  const { lede, body, headings, readingMinutes } = prepareBody(post.content)
+  const hasToc = headings.length >= MIN_HEADINGS
   const cover = post.meta?.image && typeof post.meta.image === 'object' ? post.meta.image : null
   const relatedPosts = (post.relatedPosts ?? []).filter(
     (related): related is Post => typeof related === 'object' && related !== null,
@@ -66,8 +72,9 @@ export const ArticleLayout: FC<{ post: Post }> = ({ post }) => {
           'xl:grid-cols-[190px_minmax(0,620px)_190px]',
         )}
       >
-        <aside data-toc-desktop className="hidden xl:block" />
-        <div className="article-body min-w-0">
+        <DesktopToc headings={headings} />
+        {/* Column 2 whether or not the TOC fills column 1, so the body never shifts. */}
+        <div className="article-body min-w-0 xl:col-start-2">
           {lede && (
             <RichText
               data={lede}
@@ -76,19 +83,20 @@ export const ArticleLayout: FC<{ post: Post }> = ({ post }) => {
               className="article-richtext article-lede"
             />
           )}
-          <div data-toc-inline />
+          <InlineToc headings={headings} />
           {body && (
             <RichText
               data={body}
               enableGutter={false}
               enableProse={false}
-              className={cn('article-richtext', !lede && 'article-richtext-first')}
+              className={cn('article-richtext', !lede && !hasToc && 'article-richtext-first')}
             />
           )}
         </div>
       </div>
 
       <div id="article-end" />
+      <TocBar headings={headings} />
 
       {relatedPosts.length > 0 && (
         <section className={cn(FRAME, 'mt-20 px-5 md:mt-28')}>

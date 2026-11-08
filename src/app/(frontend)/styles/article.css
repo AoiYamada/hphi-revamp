@@ -1,5 +1,5 @@
 /*
-  文章頁（/posts/[slug]、/single-post/[slug]）的排版：書卷風格。數值取自設計文件 5.1、5.2。
+  文章頁（/posts/[slug]、/single-post/[slug]）的排版：書卷風格。數值取自設計文件 5.1、5.2、5.3。
 
   這份 CSS 不依賴 @tailwindcss/typography（`prose`）。文章內文由 RichText 以 `enableProse={false}`
   輸出，每個節點都是 `.article-richtext` 的直接子元素，所以下面的內文規則一律用 `>` 只管最外層的節點：
@@ -243,7 +243,8 @@
     overflow: visible;
   }
   .article-richtext > hr::after {
-    content: '◆　◆　◆';
+    /* `/ ''` 是替代文字：讀屏軟體不會把這三顆菱形唸出來。 */
+    content: '◆　◆　◆' / '';
     font-size: 10px;
     line-height: 1;
     letter-spacing: 0.3em;
@@ -330,5 +331,42 @@
     height: 2px;
     margin: 14px auto 0;
     background: var(--color-iris);
+  }
+
+  /* ======================================================================================
+     四、目錄（TOC）與 sticky header
+     元件在 src/components/Article/Toc/，header 高度由 src/Header/HeaderHeightVar.tsx 寫進 --header-h。
+     ====================================================================================== */
+
+  /* sticky header 的高度。HeaderHeightVar 載入後會用實際高度（公告、換行都算進去）蓋掉這兩個預設值；
+     預設值只讓第一個畫面和沒有 JavaScript 時的跳轉也大致扣得對：手機 64px + 1px 邊線，lg 以上 80px + 1px。 */
+  :root {
+    --header-h: 65px;
+  }
+  @media (min-width: 64rem) {
+    :root {
+      --header-h: 81px;
+    }
+  }
+
+  /* 跳轉到章節時，標題上方留出「header + 手機目錄小條（36px）+ 16px 呼吸空間」。
+     桌面沒有小條，多出的 36px 只是讓標題不貼著 header，三個斷點的跳轉位置一致。
+     數字要和 Toc/viewport.ts 的 BAR_HEIGHT、JUMP_GAP 一致。 */
+  [id^='section-'] {
+    scroll-margin-top: calc(var(--header-h) + 36px + 16px);
+  }
+
+  /* Google 翻譯小工具掛在 header 下緣右側，和手機的目錄小條同一個位置。
+     TocBar 顯示時（<html data-toc-bar='visible'>）把小工具往下移一個小條的高度，不蓋住小條右邊的展開鈕。 */
+  [data-translate-widget] {
+    transition: transform 200ms ease-out;
+  }
+  html[data-toc-bar='visible'] [data-translate-widget] {
+    transform: translateY(36px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-translate-widget] {
+      transition: none;
+    }
   }
 }
