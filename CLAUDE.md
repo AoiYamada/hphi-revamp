@@ -8,7 +8,7 @@ HPHI (專業心理治療及催眠應用（香港）有限公司) — a Hong Kong
 
 ## Stack & runtime
 
-- Node `>=24.22.1` (`.nvmrc` pins `v24.22.1`), pnpm 12 (use `--ignore-workspace` — see scripts).
+- Node `>=24.22.1` (`.nvmrc` pins `v24.22.1`), pnpm 12.18 (pinned via `packageManager`; install with plain `pnpm install`, see Commands).
 - Next.js 16 App Router, React 19, TypeScript 6.0 (strict mode **off**, only `strictNullChecks`).
 - Payload 3.91 with MongoDB via `@payloadcms/db-mongodb` (mongoose). Local DB runs from `docker-compose.yml` (`mongo:5.0.6` on `:27017`, data persisted in `./volumes/mongo`).
 - Email via `@payloadcms/email-nodemailer` (SMTP, hard-coded `secure: true`, port 465 — see `src/payload.config.ts`).
@@ -26,7 +26,7 @@ pnpm lint:fix
 pnpm gen:types        # regenerate src/payload-types.ts after collection/global edits
 pnpm gen:import       # regenerate Payload import map (run after adding admin custom components)
 pnpm payload          # raw Payload CLI (e.g. pnpm payload migrate)
-pnpm ii               # pnpm install --ignore-workspace (use this, not bare `pnpm install`)
+pnpm install          # install dependencies. Use this, not `pnpm ii`: `pnpm ii` ignores pnpm-workspace.yaml (overrides + allowBuilds) and fails
 pnpm reinstall        # nuke node_modules + lockfile and reinstall
 ```
 
@@ -85,7 +85,9 @@ Each content collection (Pages, Posts, Courses, Tutors) has an `afterChange` `re
 
 - **Path aliases**: `@/*` → `src/*`, `@payload-config` → `src/payload.config.ts`. Use these consistently; relative `../../../` paths exist in older files but new code should use aliases.
 - **shadcn/ui** is configured (`components.json`, style `new-york`, base color `zinc`, `rsc: true`). UI primitives live in `src/components/ui/`. Do not check in shadcn-generated files outside the configured aliases.
-- **Tailwind** uses CSS variables (`hsl(var(--…))`) for theming; dark mode via `[data-theme="dark"]` selector or `class`. Custom tokens: `success`, `error`, `warning`, `chart-1..5`. Some classes (`lg:col-span-{4,6,8,12}`, status borders/bg) are in the `safelist` — keep them there if dynamically constructed.
+- **Tailwind** is v4 (`@tailwindcss/postcss`); there is no `tailwind.config.mjs` and no `safelist`. All design tokens (colours, radius, shadow, fonts) are in `src/app/(frontend)/globals.css` under `@theme`, with Chinese comments; `DESIGN.md` documents them. Light-only: no `dark:` classes, `color-scheme: only light`. Use token classes (`bg-paper`, `text-ink`, `border-line`), never raw colours (`bg-gray-*`, `text-white`); the WhatsApp green is the one exception.
+- **Fonts**: `src/app/(frontend)/fonts.ts` loads Noto Sans TC (黑體) and Noto Serif TC (明體) via `next/font/google`, exposed as `--font-noto-sans` / `--font-noto-serif` and mapped to `font-sans` / `font-serif` in `globals.css`. `pnpm build` needs network access to fetch them.
+- **Article layout**: `src/components/Article/` (`ArticleHeader`, `ArticleLayout`); the auto table of contents (generated from article H2s) is in `src/components/Article/Toc/`. Article and prose CSS is in `src/app/(frontend)/styles/`; the article body is plain CSS (no typography plugin).
 - **Prettier** (`.prettierrc.json`): `singleQuote`, no semicolons, `printWidth: 100`, `trailingComma: all`. ESLint 9 flat config in `eslint.config.mjs`, using `eslint-config-next`'s base preset (includes the react-hooks v7 React Compiler rules, e.g. no setState in effects, no ref reads during render).
 - **Live preview** breakpoints (Mobile 375×667, Tablet 768×1024, Desktop 1440×900) are configured in `payload.config.ts`. Use `generatePreviewPath` from `src/utilities/` rather than constructing preview URLs by hand.
 - **i18n**: a recent commit (`feat: auto translate`) added auto-translation; `GoogleTranslate.tsx` is in `src/components/`. Content is primarily Traditional Chinese — be careful editing copy and meta defaults (the Chinese strings in `payload.config.ts` are the canonical site title/description).
@@ -101,4 +103,5 @@ Required env (see `.env.example`): `DATABASE_URI`, `PAYLOAD_SECRET`, `NEXT_PUBLI
 - **Don't touch `payload-types.ts` manually** — it's overwritten by `pnpm gen:types`.
 - **Caching**: the upstream README mentions Payload Cloud / Cloudflare proxy caching and disabling Next caching with `force-dynamic` + `no-store`. This repo is self-hosted, so revalidation is driven by the `revalidatePage`/`revalidatePost`/etc. `afterChange` hooks. If you change ISR/SSR behavior, verify the hooks still fire the right `revalidatePath` calls.
 - **`back.sh`** contains a production deploy/backup recipe with hard-coded paths (`/home/yamada/...`) and DNS notes — read before editing rather than running.
+- **Side-effect files**: `next dev` rewrites `AGENTS.md` and `next-env.d.ts`; `pnpm build` rewrites `public/robots.txt` and `public/sitemap.xml`. Don't commit these by accident — restore them with `git checkout -- <file>` or stage only your own files.
 - **`commit-diff.txt`, `setup.log`, `nextfile.tar.gz`, `hphi-web.pem`** in the repo root are operational artifacts, not source. Don't import from them; treat them as opaque.

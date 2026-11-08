@@ -1,334 +1,244 @@
----
-name: HPHI — 專業心理治療及催眠應用（香港）
-description: A considered, contemplative visual system for a Hong Kong psychotherapy and hypnosis institute.
-colors:
-  iris-ink: "#6241a0"
-  hyacinth: "#8865bb"
-  iris-anchor: "#3d2b5f"
-  soft-violet: "#b9aacd"
-  calm-paper: "#faf8fb"
-  soft-bloom: "#e8e1ec"
-  hush-line: "#e3dde9"
-  slate-plum: "#322b3a"
-  quiet-plum: "#6b6376"
-  sage: "#5a8a64"
-  amber: "#c08a2b"
-  madder: "#b8413f"
-typography:
-  display:
-    fontFamily: "var(--font-geist-sans), Geist, ui-sans-serif, -apple-system, 'PingFang TC', 'Noto Sans TC', sans-serif"
-    fontSize: "clamp(2.25rem, 4.5vw, 3.5rem)"
-    fontWeight: 400
-    lineHeight: 1.1
-    letterSpacing: "-0.02em"
-  headline:
-    fontFamily: "var(--font-geist-sans), Geist, ui-sans-serif, sans-serif"
-    fontSize: "clamp(1.5rem, 2.4vw, 2rem)"
-    fontWeight: 500
-    lineHeight: 1.2
-    letterSpacing: "-0.01em"
-  title:
-    fontFamily: "var(--font-geist-sans), Geist, ui-sans-serif, sans-serif"
-    fontSize: "1.125rem"
-    fontWeight: 600
-    lineHeight: 1.35
-    letterSpacing: "normal"
-  body:
-    fontFamily: "var(--font-geist-sans), Geist, ui-sans-serif, sans-serif"
-    fontSize: "1rem"
-    fontWeight: 400
-    lineHeight: 1.6
-    letterSpacing: "normal"
-  label:
-    fontFamily: "var(--font-geist-sans), Geist, ui-sans-serif, sans-serif"
-    fontSize: "0.75rem"
-    fontWeight: 500
-    lineHeight: 1
-    letterSpacing: "0.06em"
-  mono:
-    fontFamily: "var(--font-geist-mono), 'Geist Mono', ui-monospace, monospace"
-    fontSize: "0.875rem"
-    fontWeight: 400
-    lineHeight: 1.5
-    letterSpacing: "normal"
-rounded:
-  sm: "6px"
-  md: "10px"
-  lg: "14px"
-  xl: "20px"
-  pill: "9999px"
-spacing:
-  xs: "8px"
-  sm: "12px"
-  md: "16px"
-  lg: "24px"
-  xl: "32px"
-  2xl: "48px"
-  3xl: "72px"
-components:
-  button-primary:
-    backgroundColor: "{colors.iris-ink}"
-    textColor: "{colors.calm-paper}"
-    rounded: "{rounded.md}"
-    padding: "12px 20px"
-    height: "44px"
-  button-primary-hover:
-    backgroundColor: "{colors.hyacinth}"
-    textColor: "{colors.calm-paper}"
-  button-outline:
-    backgroundColor: "{colors.calm-paper}"
-    textColor: "{colors.iris-ink}"
-    rounded: "{rounded.md}"
-    padding: "12px 20px"
-    height: "44px"
-  button-outline-hover:
-    backgroundColor: "{colors.soft-bloom}"
-    textColor: "{colors.iris-ink}"
-  button-ghost:
-    backgroundColor: "transparent"
-    textColor: "{colors.iris-ink}"
-    rounded: "{rounded.md}"
-    padding: "12px 16px"
-    height: "44px"
-  card:
-    backgroundColor: "{colors.calm-paper}"
-    textColor: "{colors.slate-plum}"
-    rounded: "{rounded.lg}"
-    padding: "24px"
-  cta-panel:
-    backgroundColor: "{colors.soft-bloom}"
-    textColor: "{colors.slate-plum}"
-    rounded: "{rounded.xl}"
-    padding: "32px"
-  input:
-    backgroundColor: "{colors.calm-paper}"
-    textColor: "{colors.slate-plum}"
-    rounded: "{rounded.md}"
-    padding: "12px 14px"
-    height: "44px"
-  chip:
-    backgroundColor: "{colors.soft-bloom}"
-    textColor: "{colors.iris-ink}"
-    rounded: "{rounded.pill}"
-    padding: "4px 12px"
----
+# HPHI 設計規範（書卷風格）
+
+本文件說明網站目前的視覺設計：顏色、字體、圓角、陰影，以及各類元件該怎麼用。
+
+> **token 的唯一來源是 `src/app/(frontend)/globals.css`。** 這裡列的數值是抄過去的，如果和 `globals.css` 不一樣，以 `globals.css` 為準，並且請更新本文件。
+
+## 1. 總覽
+
+- **風格**：書卷風格。米白紙色底、明體標題與內文、細線、小圓角、平時不用陰影。
+- **只做淺色**：沒有深色模式。`globals.css` 的 `:root` 寫了 `color-scheme: only light`，`layout.tsx` 也有同樣內容的 `<meta name="color-scheme">`，所以手機或瀏覽器的「自動深色」不會把網站轉成深色。整站不要寫任何 `dark:` class。
+- **紫色的用法**：品牌紫只用在小地方（小標籤、目錄高亮、連結底線、focus、公告列）。大面積的深紫（anchor）只用在主要按鈕、CTA 色帶和 footer。不要把淺紫當成背景或邊框。
+- **只用 token**：元件只能用 `globals.css` 定義的 token（例如 `bg-paper`、`text-ink`、`border-line`）。不要寫 `bg-gray-300`、`text-white`、`bg-black` 這類原始色。唯一例外是 WhatsApp 按鈕的品牌綠。
+
+## 2. 顏色 token
+
+Tailwind 的用法是 `bg-<名稱>`、`text-<名稱>`、`border-<名稱>`，例如 `bg-paper`、`text-ink-faint`、`border-line`。
+
+### 2.1 調色盤
+
+| 名稱 | token | 值 | 用途 |
+|---|---|---|---|
+| paper | `--color-paper` | `#f7f4ee` | 頁面底色（`body` 背景） |
+| paper-raised | `--color-paper-raised` | `#fbf9f5` | 卡片、輸入框、彈出層的背景（浮起的面） |
+| paper-sunken | `--color-paper-sunken` | `#efe9df` | 次要區塊底色、hover 底色（下沉的面） |
+| ink | `--color-ink` | `#2b2622` | 主要文字：內文、標題 |
+| ink-soft | `--color-ink-soft` | `#4a423b` | 副標題、hero 說明文字 |
+| ink-faint | `--color-ink-faint` | `#7a716a` | 輔助文字：日期、作者、圖說、placeholder |
+| line | `--color-line` | `#e2dbd0` | 邊框、分隔線、表格線 |
+| line-strong | `--color-line-strong` | `#d9d1c6` | Banner 上下線、卡片 hover 邊框 |
+| iris | `--color-iris` | `#6241a0` | 品牌紫：小標籤、目錄高亮、連結底線、focus、公告列 |
+| iris-soft | `--color-iris-soft` | `#8865bb` | 淡一階的品牌紫：H2 編號 |
+| lilac | `--color-lilac` | `#b9aacd` | 裝飾紫：分隔線菱形、標題下的細線 |
+| anchor | `--color-anchor` | `#3d2b5f` | 深紫：主要按鈕、CTA 色帶、footer、文章導言文字 |
+| success | `--color-success` | `#5a8a64` | 成功（sage）：色塊、線條 |
+| warning | `--color-warning` | `#c08a2b` | 警告（amber）：色塊、線條 |
+| error | `--color-error` | `#b8413f` | 錯誤（madder）：表單錯誤、Banner、危險按鈕 |
+| success-text | `--color-success-text` | `#44704e` | 成功色的文字版，給小字用（在紙色上對比 ≥ 4.5:1） |
+| warning-text | `--color-warning-text` | `#8f6410` | 警告色的文字版，給小字用（在紙色上對比 ≥ 4.5:1） |
+| green-500 | `--color-green-500` | `#22c55e` | 只給 WhatsApp 按鈕用（品牌綠，釘回 v3 的值） |
+
+**文字版狀態色**：`success`、`warning` 的本色深淺適合色塊和線條，拿來當小字對比不夠。小字（例如 Banner 的標籤）請用 `success-text`、`warning-text`。`error` 本身對比足夠，可以直接當文字用。
+
+### 2.2 語意 token（shadcn 元件用，指向上面的調色盤）
+
+| 名稱 | 指向 | 用途 |
+|---|---|---|
+| background | paper | 頁面背景 |
+| foreground | ink | 預設文字 |
+| card、popover | paper-raised | 卡片、彈出層背景 |
+| card-foreground、popover-foreground | ink | 卡片、彈出層上的文字 |
+| primary | anchor | 主要按鈕底色 |
+| primary-foreground | paper | 主要按鈕上的文字 |
+| secondary、muted、accent | paper-sunken | 次要、靜音、強調面的底色（只當底色，不要當文字色） |
+| secondary-foreground、accent-foreground | ink | 上面那幾種底色上的文字 |
+| muted-foreground | ink-faint | 輔助文字 |
+| destructive | error | 危險按鈕底色 |
+| destructive-foreground | paper | 危險按鈕上的文字 |
+| border、input | line | 預設邊框、輸入框邊框 |
+| ring | iris | focus 外圈顏色 |
+
+### 2.3 chrome token（保留原版外觀）
+
+社交條、公告列、選單（含下拉選單與手機選單）、footer 使用 `chrome-*` token。這些值是原版網站實際看到的顏色，**刻意和調色盤分開**，所以調色盤再怎麼改，頂部和 footer 的樣子都不會跟著變。除非真的要改原版的外觀，否則不要動這一段。
+
+| 名稱 | token | 值 | 用途 |
+|---|---|---|---|
+| strip | `--color-chrome-strip` | `#eae4f0` | 社交條底色 |
+| strip-border | `--color-chrome-strip-border` | `#e3dde9` | 社交條下緣的細線 |
+| header | `--color-chrome-header` | `#f8f6ff` | 選單列底色（用 `bg-chrome-header/80` 加模糊） |
+| header-border | `--color-chrome-header-border` | `#f0ecf3` | 選單列下緣的線 |
+| popover | `--color-chrome-popover` | `#faf9fb` | 桌面下拉選單底色 |
+| popover-border | `--color-chrome-popover-border` | `#e3dde9` | 桌面下拉選單外框 |
+| panel | `--color-chrome-panel` | 同 popover | 手機選單面板底色 |
+| text | `--color-chrome-text` | `#322b3b` | chrome 內的文字 |
+| text-muted | `--color-chrome-text-muted` | `#6c6478` | chrome 內的次要文字 |
+| qr | `--color-chrome-qr` | `#ffffff` | 社交條 QR 碼的白色外框 |
+| announcement | `--color-chrome-announcement` | `#62419f` | 公告列底色 |
+| announcement-foreground | `--color-chrome-announcement-foreground` | `#faf9fb` | 公告列上的文字 |
+| nav | `--color-chrome-nav` | `#8766b7` | 選單連結 |
+| nav-active | `--color-chrome-nav-active` | `#8766b7` | 選單連結「目前所在頁」（目前與 nav 相同） |
+| footer | `--color-chrome-footer` | `#3d2b5f` | footer 底色 |
+| footer-foreground | `--color-chrome-footer-foreground` | `#faf9fb` | footer 上的文字 |
+| footer-line | `--color-chrome-footer-line` | `#584975` | footer 內的分隔線 |
+
+`chrome-qr` 是整套 token 裡**唯一的純白**（QR 碼本身是純白底，外框要一樣白，掃描才清楚）。其他地方一律不用 `#fff`。
+
+## 3. 字體
+
+字體在 `src/app/(frontend)/fonts.ts` 用 `next/font/google` 載入，`globals.css` 的「四、字體」段落決定每個用途用哪一個字型。
+
+| 分工 | 字型 | 字重 | 用在哪裡 |
+|---|---|---|---|
+| 明體（serif） | Noto Serif TC | 500、600、700 | 所有標題（H1–H4）、文章內文、頁面長文（prose）、卡片標題、引言 |
+| 黑體（sans） | Noto Sans TC | 400、500、700 | 選單、按鈕、小標籤、表單、日期與作者等資訊、卡片摘要、表格、目錄、Banner 標籤 |
+| 等寬（mono） | 系統 `ui-monospace` | — | 只用在 Code 區塊 |
+
+- 預設字體是黑體（`body`）。標題在 `globals.css` 的 base 層自動套用明體；黑體的標題（例如 footer 的欄位標題）要自己加 `font-sans`。
+- fallback 順序：黑體依序是 `PingFang TC`、`Microsoft JhengHei`；明體依序是 `Songti TC`、`PMingLiU`。
+- `fonts.ts` 的 `preload: false`、`display: 'swap'`：中文字型切成很多片段，不預先載入，讓瀏覽器只抓頁面用得到的部分。
+- 字重只載入需要的。明體沒有 400，所以文章內文用 500、粗體用 700。
+- 移除了 Geist 字體，不要再用 `font-geist-*`。
 
-# Design System: HPHI — 專業心理治療及催眠應用（香港）
+## 4. 圓角
 
-## 1. Overview
+整站只有以下幾種圓角。**不要寫裸的 `rounded`**，也不要寫下表以外的尺寸（例如 `rounded-md`、`rounded-xl`）。
 
-**Creative North Star: "The Considered Practice"**
+| class | 大小 | 用在哪裡 |
+|---|---|---|
+| `rounded-none` | 0 | 不需要圓角的地方（例如全寬色帶） |
+| `rounded-xs` | 2px | 細部元素 |
+| `rounded-sm` | 4px（預設） | 按鈕、輸入框、卡片、圖片、Code 區塊 |
+| `rounded-lg` | 8px | 彈出視窗、下拉選單 |
+| `rounded-full` | 圓形 | 膠囊標籤、頭像、圓形圖示按鈕 |
 
-This is the visual language of a working psychotherapy and hypnosis room — not the brochure for one. Calm, considered, contemplative, with the seriousness of a clinical practice and the warmth of a place you'd actually return to. The brand color is purple — but purple in the sense of *iris ink* and *deep hyacinth*, not the lavender soap aisle. Surfaces are warm-tinted near-whites. Type is restrained and confident. Motion is slow. Nothing competes for attention; the content does the talking.
+方向變體可以用（例如 `rounded-t-sm`、`rounded-e-sm`），但圓角值仍然只能是上面的幾種。
 
-The previous system reads as flat-and-candy: a mid-saturation indigo applied flat to buttons, a too-bright lavender used as both background fill *and* default border, and dead-gray neutrals that don't relate to the brand. This system replaces those failures with: one deep committed primary, one soft accent that is **never** used as a background or a border, warm purple-tinted neutrals as the surface family, and a single rounding scale applied consistently across every component.
+## 5. 陰影
 
-**Key Characteristics:**
-- Restrained color strategy: tinted neutrals do 90% of the work; the deep iris carries identity.
-- Warm purple-leaning neutrals — **never** pure `#fff` or `#000`.
-- One rounding scale (6 / 10 / 14 / 20 px). No more `rounded`, `rounded-md`, `rounded-xl` mixed by accident.
-- Tonal layering over shadow stacks. Depth comes from surface tone, not from drop shadow.
-- Type hierarchy through weight + scale, never color.
+只有兩種，其他一律不用。
 
-## 2. Colors
+| class | 用在哪裡 |
+|---|---|
+| `shadow-float` | 浮在頁面上的東西：下拉選單、彈出視窗、手機目錄展開的面板 |
+| `shadow-focus` | focus 外圈：3px、品牌紫 25%（再搭配 1px 的品牌紫邊框） |
+| `shadow-focus-inverse` | 深色底（公告列、footer）上的 focus 外圈：品牌紫在深色底上看不見，改用紙色 70% |
 
-A restrained palette built around a single committed primary in the iris–hyacinth family, carried by warm neutrals tinted faintly toward the same hue. The candy lavender that previously filled `--muted` is retired from background and border roles and survives only as a rare accent.
+- **平時一律不用陰影**：卡片、按鈕、輸入框、整塊區域都是平的，靠底色和細線分層。
+- 不要在按鈕和輸入框上加陰影。
 
-### Primary
+## 6. 元件規則
 
-- **Iris Ink** (`#6241a0`, `oklch(0.46 0.14 290)`): The committed primary, **tuned for button/badge/announcement scale**. At HSL L 40% it read as too dark on a button; at 46% as too light; 44% sits in the pocket. Used on the primary button, on emphatic links, on the logotype, and on the headline elements that carry brand voice. **Never apply Iris Ink to a full-bleed surface** (footer, hero scrim, full-page band) — the eye averages large color fields toward their ambient brightness, so what reads as "saturated purple" on a button reads as "diluted lavender" at footer scale. Use Iris Anchor for those moments.
-- **Hyacinth** (`#8865bb`, `oklch(0.55 0.13 290)`): The hover and pressed state of the primary, and the color of secondary emphasis (sub-headings, active nav, focused field outline). Reads as a clear lift off Iris Ink.
-- **Iris Anchor** (`#3d2b5f`, `oklch(0.30 0.10 290)`): The deep purple anchor for full-bleed dark surfaces — the footer is the canonical use. Same hue family as Iris Ink, deliberately darker so it reads as a confident anchor at large scale. Don't use Iris Anchor for buttons or chips: at small scale, a 27% L purple feels crushing.
+### 6.1 按鈕
 
-### Accent
+- 三種樣式：
+  - **主要按鈕**：`bg-primary`（anchor 深紫）、`text-primary-foreground`（紙色）。
+  - **次要按鈕**：紙色底或透明底、ink 色文字、1px `border-ink` 外框。
+  - **文字按鈕**：沒有底色和外框，文字用 ink 或 iris。
+- 高度 44px、圓角 `rounded-sm`。
+- hover 只換底色或文字色，不要放大、不要位移、不要加陰影。
+- 一個區塊裡最多一個主要按鈕（CTA 的第二個按鈕用白色外框，見 6.4）。
 
-- **Soft Violet** (`#b9aacd`, `oklch(0.78 0.06 290)`): Reserved for tiny moments — a divider in a footer, a drop cap, a hover halo, a chart series. **Never** a panel background. **Never** a default border.
+### 6.2 輸入框與表單
 
-### Neutral
+- 高 44px、`rounded-sm`、1px `border-line`、底色 `bg-paper-raised`、文字 ink、placeholder 用 `ink-faint`。
+- focus：1px `border-iris` 加 `shadow-focus`。
+- 錯誤：`border-error` 加錯誤說明文字（`text-error`）。
+- 停用：底色 `paper-sunken`，文字 `ink-faint`。
+- checkbox、radio 使用 iris。
+- 適用於：表單（Form）、預約時段（TimeSlot）、書單（BookList）、CEF 計算器、搜尋框。
 
-- **Calm Paper** (`#faf8fb`, `oklch(0.985 0.005 290)`): Default page background. Reads white but carries 0.005 chroma toward the brand hue, which is what relates it to the rest of the palette.
-- **Soft Bloom** (`#e8e1ec`, `oklch(0.91 0.012 290)`): Raised surfaces — cards-on-cards, callouts, the CTA panel, hover states, the open body of accordions. The "second layer" without resorting to shadow. **The step from Calm Paper to Soft Bloom must be visible at a glance.** Earlier drafts at oklch(0.965) were indistinguishable from the page; this is the correction.
-- **Hush Line** (`#e3dde9`, `oklch(0.90 0.01 290)`): The divider/border tone. Quiet enough to disappear, present enough to structure. **The only border color in the system at rest.**
-- **Slate Plum** (`#322b3a`, `oklch(0.28 0.015 290)`): Body text. Warm-dark. Replaces the previous dead-gray `240 10% 3.9%`.
-- **Quiet Plum** (`#6b6376`, `oklch(0.50 0.015 290)`): Muted text — captions, meta, helper copy, breadcrumbs.
+### 6.3 卡片（課程、文章、搜尋結果、相關文章）
 
-### Status
+- 底色 `bg-paper-raised`、1px `border-line`、`rounded-sm`、沒有陰影。
+- 圖片比例 4:3。
+- 內容：有分類才顯示分類小標籤（黑體 12px、iris、字距加寬）→ 明體 700 約 19px 的標題 → 黑體 14px 的摘要（最多 3 行）→ 底部一行加底線的文字連結（課程「了解課程」、文章「閱讀全文」，其他「了解更多」）。
+- 整張卡片都可以點。hover 時邊框變 `border-line-strong`、標題加底線，**不浮起來**。
 
-- **Sage** (`#5a8a64`, `oklch(0.55 0.10 145)`): Success.
-- **Amber** (`#c08a2b`, `oklch(0.65 0.13 75)`): Warning.
-- **Madder** (`#b8413f`, `oklch(0.52 0.16 25)`): Error / destructive. Not the default-Tailwind tomato red.
+`/tutors` 導師列表不是卡片，而是「人像＋文字」左右交替的版面，保留原樣，只換字體、顏色和圓角。
 
-### Named Rules
+### 6.4 CTA 色帶（CallToAction）
 
-**The One Voice Rule.** Iris Ink + Hyacinth carry the brand. They appear on no more than ~10% of any given screen. Their rarity is what makes them read as voice, not noise.
+- 滿版 `bg-anchor` 深紫色帶，沒有毛玻璃、裝飾和浮水印。
+- 左邊明體標題（紙色，約 30px）加黑體副標題（淡紫灰），右邊按鈕：第一個是紙色底、深紫字；第二個是白色（紙色）外框。
+- 文章裡的 CTA 限制在內文欄內，`rounded-sm`，不滿版。
 
-**The Scale-Aware Color Rule.** The same OKLCH value reads differently at button scale vs. footer scale — the eye averages large color fields toward their ambient brightness. That's why the system has *two* deep purples: **Iris Ink** (oklch 0.46) for small surfaces where a deeper purple would feel crushing, and **Iris Anchor** (oklch 0.30) for full-bleed dark surfaces where Iris Ink would read as diluted. **Never** stretch a single primary across both jobs — pick the token by surface scale, not by "it's the brand color."
+### 6.5 頁面大圖（Hero）
 
-**The No-Lavender-Backgrounds Rule.** Soft Violet is never a fill. Not a card background. Not a section band. Not a hover state on a list item. If a panel needs a tinted surface, it is **Soft Bloom**. Not negotiable — this is the failure mode of the previous system and we will not return to it.
+- **HighImpact**：圖片滿版。桌面（≥ 1024px）是由左到右的漸層（紙色 97% → 34% 處 90% → 66% 處透明），文字直接放在淡掉的那一側。**手機與平板（< 1024px）**圖片在上，往下淡成紙色，文字放在下面。原因是窄螢幕上左右漸層的文字對比不夠。
+- **MediumImpact**：左文右圖各半。手機上文字在上、圖片在下。圖片 `rounded-sm`，不加邊框和陰影。
+- **LowImpact**：只有文字，置中的明體大標題，沒有圖片。
+- hero 的標題是明體 700（手機 30px，md 起 46px），說明文字 ink-soft。hero 的文字是編輯寫的富文字，**對齊以編輯設定為準**，CSS 只寫預設值，不用 `!important`。
 
-**The Hush-Line Rule.** Borders, dividers, and field strokes are `Hush Line` and **1px**. Not 2px. Not Soft Violet. Not Hyacinth. If a field is focused, the border becomes Hyacinth at 1px plus a 2px Soft-Violet ring outside it.
+### 6.6 文章頁
 
-## 3. Typography
+- **頂部**：分類小標籤 → 明體標題（桌面約 40px、手機約 24px）→ 作者、日期、閱讀時間（黑體、ink-faint）→ 40px 長的 lilac 細線。封面圖在標題下方，寬度等於內容容器，比例約 2:1，手機 4:3。**沒有封面圖就不顯示**，不會留空白框。
+- **內文**：內文欄約 620px，明體 500，桌面 18px、行高 2.0。第一段是導言（約 20px、600、`anchor` 色）；如果第一個節點不是段落（例如圖片），就沒有導言樣式。
+- **H2**：明體 700，約 27–32px，**預設置中**，上方有 `01`、`02` 形式的編號（黑體、iris-soft）。編輯器設定的 `start`／`left` 對齊會呈現為置中；明確設定的置中、靠右、兩端對齊會照設定。
+- **H3**：明體 700 約 21px，靠左。**H4**：黑體小字、iris、字距加寬。
+- **分隔線**：不畫線，改成置中的三顆 lilac 小菱形。
+- **連結**：ink 文字加 iris 底線，hover 時文字變 iris。
+- **表格**：黑體 15px、靠左、每列 1px `line`、表頭下方 2px `ink` 線。表格外層可以橫向捲動，手機上不會撐破版面。
+- **引言（Quote）**：置中、明體 600 約 25px、`anchor` 色，前後加「」；作者用黑體小字、ink-faint。
+- **提示框（Banner）**：不用色塊，上下各一條 `line-strong` 細線，上方一個黑體小標籤。顏色依樣式：info（提示）iris、success（重點）success-text、warning（注意）warning-text、error（重要）error。
+- **圖片（MediaBlock）與影片（YouTube）**：寬度等於內文欄，不向兩側延伸，圖說黑體 13px、ink-faint、置中。
+- **Code**：深色底（ink）、`rounded-sm`，保留複製按鈕。
+- **相關文章**：標題「相關文章」（明體、置中、下方 iris 短線），下面三欄卡片。
 
-**Display / Body Font:** Geist (`var(--font-geist-sans)`), with `PingFang TC, Noto Sans TC` ahead in the stack so Traditional Chinese content (the canonical content of this site) gets the right glyph metrics.
+### 6.7 目錄（TOC）
 
-**Mono Font:** Geist Mono (`var(--font-geist-mono)`) — for tabular figures, code blocks, and the rare occasion where a label needs technical voice.
+- 由文章內的 **H2** 自動產生，編輯不用做事。H2 少於 2 個就不顯示目錄。
+- 每個 H2 會加上 `section-N` 的 `id`，目錄連結跳到那裡。
+- **桌面（≥ 1280px）**：目錄放在內文欄左側，跟著捲動（sticky），目前閱讀的那一節用 ink 粗體加 iris 編號標示。
+- **手機與平板（< 1280px）**：
+  - 導言後面有一個內嵌目錄框，預設收起，點「展開」看完整清單。
+  - 捲過目錄框之後，header 下方出現 36px 的置頂小條，附 2px iris 閱讀進度條。點小條從上方展開目錄，點選一節後平滑捲動過去（有 `prefers-reduced-motion` 時不用平滑）。
+- 跳轉時會扣掉 header 與小條的高度，標題不會被蓋住。
+- 目錄面板的 `aria-expanded` 要正確，可以用鍵盤操作。
 
-**Character:** Geist is geometric, contemporary, slightly literary at heavier weights. Paired with PingFang's well-proportioned Traditional Chinese, the type feels like a serious institution rather than a wellness app. We get our personality from **weight contrast and scale ratio** — never from a decorative display face, never from gradient text.
+### 6.8 手風琴（CollapsibleBlock）
 
-### Hierarchy
+- 不用一張張卡片，改成上下細線分隔的清單。標題明體，右邊 chevron；展開後顯示內容。展開動畫在 `globals.css` 的 `.collapsible-content`。
 
-- **Display** (400 weight, `clamp(2.25rem, 4.5vw, 3.5rem)`, line-height 1.1, letter-spacing −0.02em): Hero headlines only. Lighter weight at large sizes — the optical illusion is that big + light reads quieter and more confident than big + bold.
-- **Headline** (500 weight, `clamp(1.5rem, 2.4vw, 2rem)`, line-height 1.2, letter-spacing −0.01em): Section headings on long pages.
-- **Title** (600 weight, `1.125rem`, line-height 1.35): Card titles, accordion headers, in-block sub-headings.
-- **Body** (400 weight, `1rem`, line-height 1.6): Long-form Chinese content reads at slightly more line-height than Latin convention; 1.6 is intentional. Cap measure at **65–75ch**.
-- **Label** (500 weight, `0.75rem`, line-height 1, letter-spacing 0.06em, **uppercase Latin / unchanged Chinese**): Eyebrow tags, meta, button micro-labels.
-- **Mono** (400 weight, `0.875rem`): Tabular figures only.
+### 6.9 Tabs、Timeline、分頁
 
-### Editorial heading stack (long-form prose only)
+- **Tabs**：黑體分頁標籤，選中的是 ink 字加 2px iris 底線。
+- **Timeline**：`line` 色直線、iris 圓點、明體標題。
+- **分頁（Pagination）**：黑體數字，目前頁用 ink 粗體加底線。
 
-Inside Tailwind's `prose` class — articles, post bodies, content-block rich text — headings use a tonal stack so readers can scan an article visually:
+### 6.10 內容區塊（ContentBlock）與學員分享
 
-- **h1** — Slate Plum, weight 300, large clamp (2.5–3.5rem). The signature, used once.
-- **h2** — Iris Ink (`--primary`), weight 600, 1.625–2.25rem. Section voice.
-- **h3** — Hyacinth (`--secondary`), weight 600, 1.25–1.625rem. The lift.
-- **h4** — Quiet Plum (`--muted-foreground`), weight 500, uppercase 0.875rem with 0.06em tracking. Label-style detail.
-- **Lede** — the first `<p>` immediately after an `<h1>` is rendered larger (1.125em) and in Quiet Plum, as opening voice.
+- 沒有底色時透明、不加內距。有背景圖時用 `rounded-sm`，文字對比不足時加漸層遮罩。
+- 「學員分享」（圖片＋名字＋身分＋內文）：名字明體約 21px，身分用黑體小字 iris，內文明體，圖片 `rounded-sm`。
 
-This is the only place in the system where heading color carries hierarchy. Outside prose, the Weight-Not-Color Rule applies.
+### 6.11 頁面長文（prose）
 
-### Named Rules
+- 明體約 16.5px、行高 2.0。H2 是區塊大標題（明體 700 約 28–34px），下方一條 32px 的 iris 短線，短線跟著標題對齊（置中標題，短線就置中）。
 
-**The Weight-Not-Color Rule (component scope).** In UI components — cards, panels, sections, navigation — hierarchy comes from scale + weight contrast. **Never** color a heading Iris Ink to make it "more important" within a card or panel; that spends the brand voice for nothing. The editorial heading stack above is the explicit exception, scoped to long-form prose.
+## 7. 保留原版的部分（chrome）
 
-**The 65ch Rule.** Any block of body copy wider than 75ch is broken. Add a max-width or rebalance the layout. Prose inherits `max-width: 72ch` automatically.
+以下部分保留目前的版面、顏色和樣子（業主明確說原版比較好看）：
 
-## 4. Elevation
+- **社交條**、**公告列**、**選單**（含桌面下拉選單與手機選單）、**footer**。
+- 顏色全部由 `chrome-*` token 指定（見 2.3），不是由調色盤間接得到。
+- 允許的改動只有：圓角改用新的圓角尺寸、字體跟著全站換成 Noto Sans TC、程式碼整理。
+- **只在手機（< 768px）** 把社交條和公告列縮小一點（QR 縮小、上下內距和字級減少），讓文章內容早一點出現。
+- 公告列和 footer 是深色底，focus 外圈用 `shadow-focus-inverse`。
+- WhatsApp 浮動按鈕、Google 翻譯小工具外觀不變。Google 翻譯小工具會避開手機目錄小條，不蓋住它的展開按鈕。
 
-This is a **flat-by-default tonal-layering** system. Depth is conveyed by shifting the surface tone (`Calm Paper` → `Soft Bloom`), not by stacking shadows. Shadows exist as a small, ambient vocabulary for state and floating elements only.
+## 8. 要改顏色或字體時，改哪裡
 
-### Shadow Vocabulary
+| 想改的東西 | 改哪裡 |
+|---|---|
+| 主色（深紫、品牌紫）、紙色、墨色、線色 | `src/app/(frontend)/globals.css` 的「一、調色盤」那一段，改 hex 值即可 |
+| 按鈕、標籤、卡片等用到哪個顏色 | `globals.css` 的「二、語意顏色」，它只是指向調色盤，通常不用改 |
+| 頂部社交條、公告列、選單、footer 的顏色 | `globals.css` 的「三、chrome」。這一段是原版外觀，改之前先截圖比較 |
+| 標題、內文用的字型 | `src/app/(frontend)/fonts.ts` 換 Google 字型名稱和字重；`globals.css` 的「四、字體」決定 fallback |
+| 圓角、陰影 | `globals.css` 的「五、圓角」和「六、陰影」 |
+| 文章頁的字級、間距、H2 樣式 | `src/app/(frontend)/styles/article.css` 和 `prose.css` |
+| 大圖的漸層與文字 | `src/app/(frontend)/styles/hero.css` |
+| CTA 色帶的文字樣式 | `src/app/(frontend)/styles/cta.css` |
 
-- **lift-1** (`box-shadow: 0 1px 2px 0 oklch(0.32 0.10 290 / 0.06)`): The resting elevation of a card with content the user can act on. Almost imperceptible — it's there to pull the surface off the page by half a millimeter, not to announce itself.
-- **lift-2** (`box-shadow: 0 8px 24px -12px oklch(0.32 0.10 290 / 0.18)`): Hover state on cards, the open state of dropdowns and popovers. One step up.
-- **lift-focus** (`box-shadow: 0 0 0 3px oklch(0.78 0.06 290 / 0.45)`): Keyboard focus ring. Always Soft Violet at 45% opacity, always 3px outside the element. Never replaces the border — it sits **outside** it.
-
-### Named Rules
-
-**The Flat-By-Default Rule.** Surfaces are flat at rest. `lift-1` is the *only* shadow allowed at rest, and only on cards-as-objects (course cards, post cards, tutor cards) — not on buttons, not on inputs, not on full-bleed sections.
-
-**The No-Stacking Rule.** A card with `lift-1` and a 1px Hush Line border is the canonical card. **Do not** stack `lift-1` + `lift-2` + a glow + a border + a gradient. One layer of depth.
-
-## 5. Components
-
-### Buttons
-
-- **Shape:** softly rounded (10px / `rounded.md`). Same radius across every variant. **Pill buttons are reserved for chips and tags — not actions.**
-- **Height:** 44px default (touch-comfortable, generous on desktop), 36px small, 52px large.
-- **Primary:** Iris Ink background, Calm Paper text, no shadow. Hover: background shifts to Hyacinth, no transform, no scale. Focus: `lift-focus` ring + Hyacinth border.
-- **Outline:** Calm Paper background, Iris Ink text, 1px Hush Line border. Hover: background to Soft Bloom, border to Hyacinth.
-- **Ghost:** No background, Iris Ink text. Hover: background to Soft Bloom. Used in dense UI where a third button would feel busy.
-- **Link:** Hyacinth text, no background, underline on hover only. Used inline with body copy.
-- **States:** Disabled drops opacity to 0.5 and removes interaction. Loading replaces the label with a spinner *inline*, never a covering scrim.
-- **Bans:** No `box-shadow` on buttons. No gradient buttons. No `transform: translateY` on hover. No "shimmer" pseudo-elements.
-
-### Chips / Tags
-
-- **Style:** Soft Bloom background, Iris Ink text, `rounded.pill`, 4px / 12px padding, label typography (12px 500, 0.06em tracking).
-- **Selected state:** Iris Ink background, Calm Paper text. No border switch.
-
-### Cards
-
-- **Corner Style:** 14px (`rounded.lg`). Same radius across course cards, post cards, tutor cards, accordion items, content-block backgrounds-on, and FAQ panels. **No `rounded-xl` (12px hardcoded). No mixed radii.**
-- **Background:** Calm Paper at rest. Soft Bloom for "secondary surface" cards inside a Soft-Bloom section (so the card is one tonal step lighter, not darker).
-- **Shadow Strategy:** `lift-1` at rest, `lift-2` on hover for *clickable* cards. Static cards stay flat.
-- **Border:** 1px Hush Line. Always.
-- **Internal Padding:** 24px (`spacing.lg`) default. 32px on the CTA panel. Never less than 16px.
-
-### Inputs
-
-- **Style:** 1px Hush Line border, Calm Paper background, 10px radius, 12px / 14px padding, 44px height. Slate Plum text, Quiet Plum placeholder.
-- **Focus:** Hyacinth 1px border + 3px Soft Violet ring outside. No glow inside the field.
-- **Error:** Madder 1px border + 3px Madder-at-30%-opacity ring. Helper text below in Madder.
-- **Disabled:** Hush Line background, Quiet Plum text, no border change.
-
-### Navigation
-
-- **Style:** Sticky header on Calm Paper with `lift-1` only after scroll. Top-level links: 15px label-style, Slate Plum at rest, Iris Ink at hover/active. Underline is a 1px Hyacinth bar appearing under the active item, **not** a background pill.
-- **Mobile:** Full-screen overlay, Calm Paper background, 18px Title-weight links, generous 16px vertical rhythm. Close button top-right at icon size.
-
-### Collapsible / Accordion (the existing `CollapsibleBlock`)
-
-- **Container:** Card-shape (14px radius, 1px Hush Line, Calm Paper). One per item with 12px gap between items.
-- **Trigger row:** 20px / 24px padding, Title-weight label, chevron right at 16px in Quiet Plum, rotating 90° to open.
-- **Open state:** No border-color change, no background change. The chevron rotation and the content reveal are the entire affordance. The previous "card with shadow + chevron + state-color shift" was three signals for one event.
-- **Content area:** 24px padding, Body type, max-width 65ch.
-
-### Call-To-Action Panel (the existing `CallToActionBlock`)
-
-- **Structure (the canonical glass pattern).** A Soft Bloom backdrop carries the Bloom decorations. A frosted-glass panel sits on top: 35% Calm Paper (`bg-card/35`), `backdrop-blur-xl` + `backdrop-saturate-150`, 1px white-at-40% highlight border, `lift-1` shadow, 24px radius (`rounded.xl`). The blur refracts the Blooms into purple atmosphere visible through the panel; the panel surface itself stays light enough that text reads as if on a clean Calm Paper card. **The blur is the entire reason the panel feels alive** — without it this is just a tinted box.
-- **Padding:** 40px on mobile, 56–64px on desktop. Generous, deliberate.
-- **Layout:** Two-column on desktop (text left, action right) with a 48px gap; stack on mobile, action below text. **Not** centered + stacked + everything competing for attention.
-- **Heading:** Headline scale, Slate Plum, max 36ch.
-- **Action:** A single Primary button. If a secondary action is needed, it's a Ghost button to the right with 16px gap. **Two primary buttons side by side is forbidden.**
-- **Decoration:** One `committed` Bloom + one `medium` Bloom in opposing corners on the backdrop layer, plus one IrisMark inside the glass panel (so it stays crisp on top of the frost). No Grain on the CTA — the multiply blend stacks with Soft Bloom into "dirty paper".
-
-### Content Block Columns (the existing `ContentBlock`)
-
-- **No background:** transparent, no padding (the grid gap handles rhythm). This is the existing default; do not change.
-- **With background image:** 14px radius (`rounded.lg`), `relative isolate overflow-hidden`, 24px / 32px padding, image at `-z-10 object-cover`. Text gets a subtle gradient scrim if contrast falls below WCAG AA.
-- **Link position:** the `linkPosition` field maps to flex justification — this is correct, leave it alone.
-
-### Decorative Motifs
-
-The system has three named decorations. They earn their place by being almost-invisible at first glance and rewarding a second look. Lives in `src/components/Decoration`.
-
-- **Bloom.** A soft radial gradient backdrop, `hsl(var(--secondary) / 0.10–0.22)` to transparent, anchored to a corner of the surface. Adds atmosphere to large flat surfaces (CTA panel, hero, full-bleed sections) without breaking the restrained palette. Always behind content via `-z-10` and the parent must be `relative isolate overflow-hidden`. Three intensity levels: `subtle` (10%, default — section accents), `medium` (16% — secondary corner of a CTA), `committed` (22% — the dominant corner of a hero or CTA). **Never** apply to small UI (cards, accordions, inputs).
-- **IrisMark.** A 5-ring concentric circles SVG (54 / 42 / 30 / 18 / 2.5px radii, 0.6px stroke) at `text-accent/40`. Reads as "iris of the eye" or "ripple" — references the brand color name and the practice (focus, hypnosis, contemplation). Anchored to a corner with negative offset (`-12` / `-12`) so it bleeds gently off-canvas. Decorative only (`aria-hidden`).
-- **Grain.** Inline SVG fractalNoise overlay, mixed via `mix-blend-multiply` at 4–6% opacity. Adds material warmth to large flat surfaces — paper, not plastic. **Only** on hero, CTA, and section bands; never on cards, buttons, or controls. The grain texture should never be obvious. If you can see it without looking for it, the opacity is too high.
-
-#### Named Rules
-
-**The One-Decoration-Per-Type Rule.** A single surface gets at most one IrisMark and one Grain. Up to two Blooms are allowed (different corners, different intensities) because the gradient layers naturally compose into atmosphere; everything else stays singular. Never decoration in every corner. Restraint is the entire idea.
-
-**The Decoration-Behind-Content Rule.** Decorations are always `-z-10` and `pointer-events-none`. Nothing decorative ever blocks a click target. If the decoration would obscure content text, the decoration is too dense — reduce opacity, not increase contrast on the text.
-
-**The Bloom-Tier Rule.** Use `committed` Bloom intensity exactly once per surface, paired with `medium` or `subtle` in another corner. Stacking two `committed` Blooms makes the surface feel like a candy wrapper. The deepest moment is one corner; the rest is atmosphere.
-
-## 6. Do's and Don'ts
-
-### Do:
-
-- **Do** use **Iris Ink** (`#593b91`) for the primary action and brand voice, **Hyacinth** (`#7c59b1`) for hover and secondary emphasis.
-- **Do** use **Soft Bloom** (`#f3eff6`) for raised surfaces (cards, CTA panel, accordion bodies). Tonal layering, not shadow stacks.
-- **Do** apply the rounding scale **consistently**: `rounded.sm` (6px) for chips, `rounded.md` (10px) for buttons + inputs, `rounded.lg` (16px) for cards + accordions + backgrounded columns, `rounded.xl` (24px) for the CTA panel + large hero objects. One scale, every component.
-- **Do** anchor focus state on the **Soft Violet ring outside the element**, not on a border-color flash inside it.
-- **Do** use weight (400 / 500 / 600) and scale to build hierarchy. Color is a last resort.
-- **Do** cap body measure at 65–75ch.
-- **Do** tint every neutral toward the brand hue (chroma 0.005–0.01). No `#fff`. No `#000`.
-
-### Don't:
-
-- **Don't** use **Soft Violet** (`#b9aacd`) as a background fill or as a default border. That single misuse — surviving from the previous system as `--muted` and `--border` — is the largest reason the site reads candy-flat. Soft Violet is an accent, not a surface.
-- **Don't** put a shadow on a button. **Don't** put a shadow on an input. **Don't** stack a shadow with a border with a gradient.
-- **Don't** use `rounded` (4px Tailwind default), `rounded-xl` (12px), or any radius that isn't in the scale. The audit test: if a screenshot of three components side-by-side shows three different corner curves, the screen has failed.
-- **Don't** color a heading Iris Ink for "emphasis." Use weight.
-- **Don't** use `bg-muted` as it's currently configured (the candy lavender). Either retire the token, or rebind it to **Soft Bloom**. The current value is not used anywhere it shouldn't be retired from.
-- **Don't** wrap the CTA in a card with a border, a shadow, AND a background tint. Pick one — and the answer is "background tint, no border, no shadow."
-- **Don't** write `border-left: 4px solid var(--primary)` as a callout accent. Side-stripe borders are forbidden across the system.
-- **Don't** introduce gradient text (`background-clip: text`) or "neon glow" hover states. Decorative *background* gradients (the Bloom motif) are permitted at the documented intensity tiers; decorative gradient text is not.
-- **Don't** scatter SVG decoration across every surface. The IrisMark belongs on hero, CTA, and at most one section per page, anchored to a corner. Decoration on every card or every section is noise, not voice.
-- **Don't** use `mix-blend-multiply` Grain on the CTA. The compound of Grain + Soft Bloom + Bloom radials darkens into "dirty mauve paper". Grain is for hero and section bands only.
-
-### Glassmorphism (permitted with constraints)
-
-Frosted-blur panels are allowed when they earn their place. The CTA's glass-on-Bloom-backdrop pattern is the canonical example: blur exists to refract decoration into atmosphere, not to look futuristic. Hard rules:
-
-- **Always behind a colored backdrop.** A glass panel with nothing meaningful behind it is just a translucent rectangle. Glass needs Bloom radials, an image, or a tinted surface to refract.
-- **Surface alpha 30–45% Calm Paper** (`bg-card/30` to `bg-card/45`). Lower and the text contrast collapses; higher and the blur stops reading.
-- **`backdrop-blur-xl` minimum** (24px) and `backdrop-saturate-150` to keep the colors saturated through the blur. Smaller blurs read as "translucency", not "frost".
-- **1px white-at-30–40% highlight border** to pick up the panel edge against the backdrop. No dark border on glass.
-- **`lift-1` shadow only.** Glass + heavy shadow looks like Vista.
-- **Maximum two glass surfaces per page** — the CTA, plus one other moment if the page genuinely calls for it. More than that and the system has no opinion.
-- **Don't** animate `width` / `height` / margin / padding. Animate `opacity` and `transform` only, with ease-out-quart at 200–300ms.
-- **Don't** ship a section in pure `#fff` against the rest of the page. Calm Paper is the floor.
+- 改了 `globals.css` 或 `fonts.ts` 後，請重新整理頁面；如果字型沒有變，停掉 `pnpm dev` 再啟動。
+- 字重改了之後，記得同步 `fonts.ts` 的 `weight` 陣列，否則瀏覽器會找不到字重。
+- 改 token 名稱（不只是值）會影響所有用到它的元件，請全站搜尋後再改。

@@ -58,8 +58,9 @@
   /* 狀態色：錯誤（madder），表單錯誤、Banner、destructive 按鈕。 */
   --color-error: #b8413f;
 
-  /* 狀態色的文字版：小字（例如 Banner 的 13px 標籤）用，在紙色底上對比 ≥ 4.5:1。success、warning 本色只用在色塊和線條。 */
+  /* 成功色的文字版（sage 深一階）：小字（例如 Banner 的 13px 標籤）用，在紙色底上對比 ≥ 4.5:1。success 本色只用在色塊和線條。 */
   --color-success-text: #44704e;
+  /* 警告色的文字版（amber 深一階）：小字用，在紙色底上對比 ≥ 4.5:1。warning 本色只用在色塊和線條。 */
   --color-warning-text: #8f6410;
 
   /* 第三方品牌色：WhatsApp 按鈕的綠（bg-green-500）。v4 預設色盤改用 oklch，顏色會更鮮豔，這裡釘回 v3 的值。 */
@@ -68,39 +69,50 @@
 
 /* ---------- 二、語意顏色（shadcn 元件用的名稱，全部指向調色盤） ---------- */
 @theme static {
-  /* 頁面背景與預設文字。 */
+  /* 頁面背景（紙色）。 */
   --color-background: var(--color-paper);
+  /* 預設文字顏色（墨色）。 */
   --color-foreground: var(--color-ink);
 
-  /* 卡片背景與卡片上的文字。 */
+  /* 卡片背景（浮起的紙）。 */
   --color-card: var(--color-paper-raised);
+  /* 卡片上的文字（墨色）。 */
   --color-card-foreground: var(--color-ink);
 
-  /* 彈出層（Dialog、Popover、下拉選單）背景與文字。 */
+  /* 彈出層（Dialog、Popover、下拉選單）背景（浮起的紙）。 */
   --color-popover: var(--color-paper-raised);
+  /* 彈出層上的文字（墨色）。 */
   --color-popover-foreground: var(--color-ink);
 
-  /* 主色（主要按鈕）與主色上的文字。 */
+  /* 主色（主要按鈕）底色：深紫 anchor。 */
   --color-primary: var(--color-anchor);
+  /* 主色上的文字（紙色）。 */
   --color-primary-foreground: var(--color-paper);
 
-  /* 次要面、輔助面、強調面：都是「下沉的紙」，只當作底色用；要紫色文字請直接用 iris／iris-soft／lilac。 */
+  /* 次要面的底色（下沉的紙）。只當作底色用；要紫色文字請直接用 iris／iris-soft／lilac。 */
   --color-secondary: var(--color-paper-sunken);
+  /* 次要面上的文字（墨色）。 */
   --color-secondary-foreground: var(--color-ink);
+  /* 靜音面的底色（下沉的紙）。 */
   --color-muted: var(--color-paper-sunken);
+  /* 強調面的底色（下沉的紙）。 */
   --color-accent: var(--color-paper-sunken);
+  /* 強調面上的文字（墨色）。 */
   --color-accent-foreground: var(--color-ink);
 
   /* 輔助文字（日期、作者、圖說、placeholder）。 */
   --color-muted-foreground: var(--color-ink-faint);
 
-  /* 危險操作（destructive 按鈕）與其上的文字。 */
+  /* 危險操作（destructive 按鈕）底色：madder 紅。 */
   --color-destructive: var(--color-error);
+  /* 危險操作按鈕上的文字（紙色）。 */
   --color-destructive-foreground: var(--color-paper);
 
-  /* 預設邊框色、輸入框邊框、focus 外圈顏色。 */
+  /* 預設邊框色（淡線）。 */
   --color-border: var(--color-line);
+  /* 輸入框邊框色（淡線）。 */
   --color-input: var(--color-line);
+  /* focus 外圈顏色（品牌紫）。 */
   --color-ring: var(--color-iris);
 }
 
@@ -123,8 +135,9 @@
   /* 選單列下緣的線（已經疊在選單列底色上的結果）。 */
   --color-chrome-header-border: #f0ecf3;
 
-  /* 桌面下拉選單的底色與外框。原版是 popover（rgb(250, 249, 251)）和 border（rgb(227, 221, 233)）。 */
+  /* 桌面下拉選單的底色。原版是 popover（rgb(250, 249, 251)）。 */
   --color-chrome-popover: #faf9fb;
+  /* 桌面下拉選單的外框。原版是 border（rgb(227, 221, 233)）。 */
   --color-chrome-popover-border: #e3dde9;
   /* 手機選單面板的不透明底色。原版是 card，和 popover 同色。 */
   --color-chrome-panel: var(--color-chrome-popover);
@@ -135,16 +148,19 @@
   /* 社交條 QR 外框：純白，和原版一樣，掃描時對比清楚（QR 圖本身是不透明的純白底）。 */
   --color-chrome-qr: #ffffff;
 
-  /* 公告列底色（原版 bg-primary，和 iris 幾乎相同）與公告上的文字。 */
+  /* 公告列底色（原版 bg-primary，和 iris 幾乎相同）。 */
   --color-chrome-announcement: #62419f;
+  /* 公告列上的文字（紙色）。 */
   --color-chrome-announcement-foreground: #faf9fb;
 
-  /* 選單連結顏色。原版沒有分「目前所在頁」的樣式，所以兩個值相同。 */
+  /* 選單連結的一般顏色。原版沒有分「目前所在頁」的樣式，所以和 chrome-nav-active 相同。 */
   --color-chrome-nav: #8766b7;
+  /* 選單連結「目前所在頁」的顏色。目前與 chrome-nav 相同。 */
   --color-chrome-nav-active: #8766b7;
 
-  /* footer 底色與文字（淡一點的文字用 `text-chrome-footer-foreground/70` 這類寫法）。 */
+  /* footer 底色（深紫 anchor 的原版值）。 */
   --color-chrome-footer: #3d2b5f;
+  /* footer 上的文字（紙色）。淡一點的文字用 `text-chrome-footer-foreground/70` 這類寫法。 */
   --color-chrome-footer-foreground: #faf9fb;
   /* footer 內的分隔線（原版是文字色 15% 疊在 footer 底色上）。 */
   --color-chrome-footer-line: #584975;
@@ -187,14 +203,17 @@
 
 /* ---------- 七、動畫 ---------- */
 @theme {
-  /* 緩動曲線 */
+  /* 緩動曲線（四次方減速），用在 transform、opacity 這類短動畫。 */
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  /* 緩動曲線（五次方減速），比 quart 更慢收尾。 */
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* Radix accordion 展開和收合 */
+  /* Radix accordion 展開動畫（高度從 0 撐到內容高度）。 */
   --animate-accordion-down: accordion-down 0.2s ease-out;
+  /* Radix accordion 收合動畫（高度從內容高度縮到 0）。 */
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
+  /* accordion 展開的關鍵影格。 */
   @keyframes accordion-down {
     from {
       height: 0;
@@ -204,6 +223,7 @@
     }
   }
 
+  /* accordion 收合的關鍵影格。 */
   @keyframes accordion-up {
     from {
       height: var(--radix-accordion-content-height);
@@ -299,17 +319,22 @@ html {
   opacity: initial;
 }
 
-/* Ref: https://www.radix-ui.com/primitives/docs/components/collapsible */
+/* 手風琴（CollapsibleBlock）的展開內容：Radix Collapsible 的 data-state 配合動畫。
+   Ref: https://www.radix-ui.com/primitives/docs/components/collapsible */
+/* 內容超出高度時裁切，動畫收合時才不會露出內容。 */
 .collapsible-content {
   overflow: hidden;
 }
+/* 展開時播放「往下滑開」動畫（300ms）。 */
 .collapsible-content[data-state='open'] {
   animation: collapsible-slide-down 300ms ease-in;
 }
+/* 收合時播放「往上收起」動畫（300ms）。 */
 .collapsible-content[data-state='closed'] {
   animation: collapsible-slide-up 300ms ease-out;
 }
 
+/* 展開動畫的關鍵影格：高度從 0 撐到 Radix 量出來的內容高度。 */
 @keyframes collapsible-slide-down {
   from {
     height: 0;
@@ -319,6 +344,7 @@ html {
   }
 }
 
+/* 收合動畫的關鍵影格：高度從 Radix 量出來的內容高度縮到 0。 */
 @keyframes collapsible-slide-up {
   from {
     height: var(--radix-collapsible-content-height);
@@ -328,10 +354,14 @@ html {
   }
 }
 
-/* https://stackoverflow.com/questions/10732690/offsetting-an-html-anchor-to-adjust-for-fixed-header */
+/* 錨點（a.anchor）：讓頁內跳轉時，目標會停在固定 header 的下方，不會被蓋住。
+   Ref: https://stackoverflow.com/questions/10732690/offsetting-an-html-anchor-to-adjust-for-fixed-header */
+/* 錨點本身變成區塊，才能用 top 往上位移。 */
 a.anchor {
   display: block;
   position: relative;
+  /* 往上位移 130px，約等於 header 的高度。header 高度改變時要一起調整。 */
   top: -130px;
+  /* 錨點只用來定位，不顯示。 */
   visibility: hidden;
 }
