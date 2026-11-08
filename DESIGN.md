@@ -97,7 +97,8 @@ Tailwind 的用法是 `bg-<名稱>`、`text-<名稱>`、`border-<名稱>`，例�
 - 預設字體是黑體（`body`）。標題在 `globals.css` 的 base 層自動套用明體；黑體的標題（例如 footer 的欄位標題）要自己加 `font-sans`。
 - fallback 順序：黑體依序是 `PingFang TC`、`Microsoft JhengHei`；明體依序是 `Songti TC`、`PMingLiU`。
 - `fonts.ts` 的 `preload: false`、`display: 'swap'`：中文字型切成很多片段，不預先載入，讓瀏覽器只抓頁面用得到的部分。
-- 字重只載入需要的。明體沒有 400，所以文章內文用 500、粗體用 700。
+- 兩個字型都用 `weight: 'variable'`（可變字型）載入：不用列字重，瀏覽器會照 CSS 的 `font-weight` 直接渲染。字型檔（woff2）的大小和之前列 3 個字重時一樣，但 `@font-face` 規則從 650 條減到 218 條，字型 CSS 從約 728 KB 降到約 300 KB。
+- 設計上用到的字重還是：黑體 400、500、700；明體 500、600、700（明體內文用 500、粗體用 700）。可變字型會照字面渲染其他字重，所以黑體的 `font-semibold`（600）是真的 600、`font-light`（300）是真的 300，`<strong>` 放在 700 的明體標題裡會變 `bolder`（900）。要維持原本的樣子就用上面列的字重。
 - 移除了 Geist 字體，不要再用 `font-geist-*`。
 
 ## 4. 圓角
@@ -240,5 +241,5 @@ Tailwind 的用法是 `bg-<名稱>`、`text-<名稱>`、`border-<名稱>`，例�
 | CTA 色帶的文字樣式 | `src/app/(frontend)/styles/cta.css` |
 
 - 改了 `globals.css` 或 `fonts.ts` 後，請重新整理頁面；如果字型沒有變，停掉 `pnpm dev` 再啟動。
-- 字重改了之後，記得同步 `fonts.ts` 的 `weight` 陣列，否則瀏覽器會找不到字重。
+- `fonts.ts` 用可變字型（`weight: 'variable'`），改字重不需要動 `fonts.ts`；如果換成沒有可變版的 Google 字型，才要改回字重陣列。
 - 改 token 名稱（不只是值）會影響所有用到它的元件，請全站搜尋後再改。
