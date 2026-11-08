@@ -13,9 +13,9 @@ export const DefaultLink: FC<DefaultLinkProps> = ({ link, description }) => {
       <CMSLink
         {...link}
         appearance="inline"
-        className="text-lg font-medium text-foreground whitespace-break-spaces"
+        className="text-lg font-medium text-chrome-text whitespace-break-spaces"
       />
-      {description && <p className="text-sm text-muted-foreground">{description}</p>}
+      {description && <p className="text-sm text-chrome-text-muted">{description}</p>}
     </div>
   )
 }
@@ -27,7 +27,7 @@ type ListLinksProps = NonNullable<
 export const ListLinks: FC<ListLinksProps> = ({ label, links }) => {
   return (
     <div className="space-y-3">
-      {label && <p className="text-lg font-medium text-foreground">{label}</p>}
+      {label && <p className="text-lg font-medium text-chrome-text">{label}</p>}
       {links && links.length > 0 && (
         <ul className="space-y-2">
           {links.map(({ link }, i) => (
@@ -35,7 +35,7 @@ export const ListLinks: FC<ListLinksProps> = ({ label, links }) => {
               <CMSLink
                 {...link}
                 appearance="link"
-                className="text-sm text-muted-foreground hover:text-chrome-nav transition-colors duration-200 ease-out whitespace-break-spaces"
+                className="text-sm text-chrome-text-muted hover:text-chrome-nav transition-colors duration-200 ease-out whitespace-break-spaces"
               />
             </li>
           ))}
@@ -52,7 +52,7 @@ type FeaturedLinkProps = NonNullable<
 export const FeaturedLink: FC<FeaturedLinkProps> = ({ label, content, links }) => {
   return (
     <div className="space-y-3">
-      {label && <p className="text-lg font-medium text-foreground">{label}</p>}
+      {label && <p className="text-lg font-medium text-chrome-text">{label}</p>}
       {content && (
         <div>
           <RichText data={content} enableGutter={false} />
@@ -65,7 +65,7 @@ export const FeaturedLink: FC<FeaturedLinkProps> = ({ label, content, links }) =
               <CMSLink
                 {...link}
                 appearance="link"
-                className="text-sm text-muted-foreground hover:text-chrome-nav transition-colors duration-200 ease-out whitespace-break-spaces"
+                className="text-sm text-chrome-text-muted hover:text-chrome-nav transition-colors duration-200 ease-out whitespace-break-spaces"
               />
             </li>
           ))}

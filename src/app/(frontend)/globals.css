@@ -113,11 +113,21 @@
   /*
     選單列底色，用法是 `bg-chrome-header/80`（和原版一樣 80% 不透明加 backdrop-blur）。
     這個值是疊上去的那一層（不是疊完的結果）：疊在新的米白底和飽和度 150% 的模糊背景上，
-    看起來和原版一樣是 rgb(248, 246, 251)。手機選單面板直接用它當不透明底色。
+    看起來和原版一樣是 rgb(248, 246, 251)。
   */
   --color-chrome-header: #f8f6ff;
   /* 選單列下緣的線（已經疊在選單列底色上的結果）。 */
   --color-chrome-header-border: #f0ecf3;
+
+  /* 桌面下拉選單的底色與外框。原版是 popover（rgb(250, 249, 251)）和 border（rgb(227, 221, 233)）。 */
+  --color-chrome-popover: #faf9fb;
+  --color-chrome-popover-border: #e3dde9;
+  /* 手機選單面板的不透明底色。原版是 card，和 popover 同色。 */
+  --color-chrome-panel: #faf9fb;
+  /* chrome 內的文字（選單、社交條標題、下拉選單標題）。原版是 foreground：rgb(50, 43, 59)。 */
+  --color-chrome-text: #322b3b;
+  /* chrome 內的次要文字（下拉連結說明、社交條關閉鈕）。原版是 muted-foreground：rgb(108, 100, 120)。 */
+  --color-chrome-text-muted: #6c6478;
 
   /* 公告列底色（原版 bg-primary，和 iris 幾乎相同）與公告上的文字。 */
   --color-chrome-announcement: #62419f;

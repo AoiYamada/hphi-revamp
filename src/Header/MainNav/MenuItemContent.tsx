@@ -13,17 +13,18 @@ export type MenuItemContentProps = Omit<
 
 const MenuItemContent: FC<MenuItemContentProps> = ({ description, descriptionLinks, navItems }) => {
   return (
-    <NavigationMenuContent className="grid grid-cols-12 gap-6 p-6 w-fit">
+    // 顏色用原版的 chrome token（下拉選單底色、外框、分隔線、文字），不跟著通用的 popover／border 走。
+    <NavigationMenuContent className="grid grid-cols-12 gap-6 p-6 w-fit border-chrome-popover-border bg-chrome-popover text-chrome-text">
       {(description || (descriptionLinks?.length ?? 0) > 0) && (
-        <div className="col-span-3 flex flex-col gap-4 border-r border-border pr-6 pt-1">
-          {description && <p className="text-lg font-medium text-foreground">{description}</p>}
+        <div className="col-span-3 flex flex-col gap-4 border-r border-chrome-popover-border pr-6 pt-1">
+          {description && <p className="text-lg font-medium text-chrome-text">{description}</p>}
           {descriptionLinks?.length ? (
             <ul className="flex flex-col gap-3">
               {descriptionLinks.map(({ link }, i) => (
                 <li key={i} className="flex items-center gap-2 text-sm">
-                  <CMSLink {...link} appearance="link" />
+                  <CMSLink {...link} appearance="link" className="text-chrome-nav" />
                   {link.newTab && (
-                    <ExternalLink className="size-3 text-muted-foreground" aria-hidden />
+                    <ExternalLink className="size-3 text-chrome-text-muted" aria-hidden />
                   )}
                 </li>
               ))}

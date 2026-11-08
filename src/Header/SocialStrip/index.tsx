@@ -41,9 +41,10 @@ const SocialStrip: FC<SocialStripProps> = ({
     <aside
       {...dismissibleProps(dismissal.id)}
       aria-label="關注我們"
-      className="border-b border-chrome-strip-border bg-chrome-strip"
+      className="border-b border-chrome-strip-border bg-chrome-strip text-chrome-text"
     >
-      <MaxWidthWrapper className="flex items-start gap-2 py-3 xl:py-4">
+      {/* 手機較緊湊（py-1.5）；md 以上維持原本的 py-3、xl 的 py-4。 */}
+      <MaxWidthWrapper className="flex items-start gap-2 py-1.5 md:py-3 xl:py-4">
         {/* Mobile card width = (row − the two gap-3 gaps) / 2.5, capped on wide phones */}
         <ul className="-mx-1 -my-2 flex min-w-0 flex-1 snap-x snap-mandatory scroll-px-1 gap-3 overflow-x-auto px-1 py-2 scrollbar-none md:mx-0 md:grid md:px-0 md:auto-cols-fr md:grid-flow-col md:gap-6 md:overflow-visible xl:gap-0 xl:[&>li+li]:border-l xl:[&>li+li]:border-chrome-strip-border [&::-webkit-scrollbar]:hidden">
           {visibleChannels.map((channel, i) => (
@@ -57,7 +58,7 @@ const SocialStrip: FC<SocialStripProps> = ({
         </ul>
         <button
           onClick={handleDismiss}
-          className="shrink-0 rounded-md p-1.5 text-muted-foreground transition-colors duration-200 ease-out hover:bg-chrome-strip-border hover:text-foreground focus-visible:outline-hidden focus-visible:shadow-focus"
+          className="shrink-0 rounded-sm p-1.5 text-chrome-text-muted transition-colors duration-200 ease-out hover:bg-chrome-strip-border hover:text-chrome-text focus-visible:outline-hidden focus-visible:shadow-focus"
           aria-label="Close social strip"
         >
           <X size={14} />

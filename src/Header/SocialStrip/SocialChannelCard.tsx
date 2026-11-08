@@ -26,11 +26,11 @@ const SocialChannelCard: FC<SocialChannelCardProps> = ({
       {...link}
       newTab
       onClick={() => sendGAEvent('event', 'social_strip_click', { channel: name })}
-      className="group flex h-full flex-col gap-2 rounded-lg focus-visible:outline-hidden focus-visible:shadow-focus xl:flex-row xl:items-center xl:gap-4"
+      className="group flex h-full flex-col gap-1.5 rounded-sm focus-visible:outline-hidden focus-visible:shadow-focus md:gap-2 xl:flex-row xl:items-center xl:gap-4"
     >
-      {/* Pure white on purpose (DESIGN.md's no-#fff rule is for surfaces): scanners need maximum
-          contrast and a light quiet zone around the code. Mobile: fills the card's width. */}
-      <span className="relative block aspect-square w-full shrink-0 rounded-md bg-white p-1 shadow-lift-1 transition-shadow duration-200 ease-out group-hover:shadow-lift-2 md:size-30 xl:size-26">
+      {/* 白底的紙色（不用純白，符合 DESIGN.md 的 no-#fff 規則）；掃描需要的對比仍然足夠。
+          手機約 64px（較緊湊），md 以上維持原本的尺寸。 */}
+      <span className="relative block aspect-square size-16 shrink-0 rounded-sm bg-paper-raised p-1 md:size-30 xl:size-26">
         <NextImage
           src={qrCode.url}
           alt={qrCode.alt || `${name} QR code`}
@@ -47,7 +47,7 @@ const SocialChannelCard: FC<SocialChannelCardProps> = ({
       {caption ? (
         <span
           className={cn(
-            'min-w-0 whitespace-pre-line wrap-break-word text-xs leading-snug text-foreground xl:text-sm/5',
+            'min-w-0 whitespace-pre-line wrap-break-word text-xs leading-tight text-chrome-text md:leading-snug xl:text-sm/5',
             showCaptionOnMobile ? 'block' : 'hidden md:block',
           )}
         >
@@ -57,7 +57,7 @@ const SocialChannelCard: FC<SocialChannelCardProps> = ({
       {/* Without any text the QR codes are indistinguishable, so fall back to the platform name */}
       {!caption || !showCaptionOnMobile ? (
         <span
-          className={cn('block min-w-0 truncate text-xs font-medium text-foreground xl:text-sm', {
+          className={cn('block min-w-0 truncate text-xs font-medium text-chrome-text xl:text-sm', {
             'md:hidden': caption,
           })}
         >

@@ -27,7 +27,7 @@ export async function Header() {
     <>
       <DismissalGuard entries={[socialStripDismissal, announcementDismissal]} />
       <SocialStrip {...socialStrip} dismissal={socialStripDismissal} />
-      <header className="sticky top-0 z-50 w-full border-b border-chrome-header-border bg-chrome-header/80 backdrop-blur-md backdrop-saturate-150">
+      <header className="sticky top-0 z-50 w-full border-b border-chrome-header-border bg-chrome-header/80 text-chrome-text backdrop-blur-md backdrop-saturate-150">
         <Announcement {...announcement} dismissal={announcementDismissal} />
         <MaxWidthWrapper>
           <div className="flex h-16 w-full items-center justify-between px-2 lg:h-20">

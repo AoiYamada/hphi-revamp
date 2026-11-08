@@ -44,14 +44,14 @@ const MobileNav = ({ header, className }: MobileNavProps) => {
     <div className={className}>
       <Icon
         onClick={toggleOpen}
-        className="relative z-50 size-7 cursor-pointer select-none text-foreground transition-colors duration-200 ease-out hover:text-chrome-nav"
+        className="relative z-50 size-7 cursor-pointer select-none text-chrome-text transition-colors duration-200 ease-out hover:text-chrome-nav"
       />
 
       {isOpen ? (
         // Anchored to the sticky <header> (nearest positioned ancestor) so it always opens right
         // below it, whatever the Announcement's height. `fixed` would resolve against the header
         // anyway (backdrop-filter makes it the containing block) and cover the Announcement.
-        <ul className="absolute inset-x-0 top-full z-10 grid max-h-[calc(100dvh-100%)] gap-3 overflow-y-auto border-t border-chrome-strip-border bg-chrome-header px-10 pb-8 pt-4 shadow-lift-1 animate-in fade-in-20 slide-in-from-top-5">
+        <ul className="absolute inset-x-0 top-full z-10 grid max-h-[calc(100dvh-100%)] gap-3 overflow-y-auto border-t border-chrome-strip-border bg-chrome-panel px-10 pb-8 pt-4 text-chrome-text animate-in fade-in-20 slide-in-from-top-5">
           {taps.map(({ label, link, enableDirectLink, enableDropdown, navItems, ...others }, i) => {
             if (others.description || others.descriptionLinks?.length) {
               return null

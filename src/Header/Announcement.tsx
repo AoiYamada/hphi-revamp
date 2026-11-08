@@ -22,12 +22,13 @@ const Announcement: FC<AnnouncementProps> = ({ enable, content, dismissal }) => 
       {...dismissibleProps(dismissal.id)}
       className="z-50 bg-chrome-announcement text-chrome-announcement-foreground"
     >
-      <MaxWidthWrapper className="py-2">
+      {/* 手機：上下 6px、13px 字（較緊湊）；md 以上維持原本的 py-2、text-sm。 */}
+      <MaxWidthWrapper className="py-1.5 md:py-2">
         <div className="flex w-full items-center gap-3">
           <RichText
             data={content}
             enableProse={false}
-            className="grow max-w-full text-sm [&_p]:m-0 [&_p]:leading-snug"
+            className="grow max-w-full text-[13px] md:text-sm [&_p]:m-0 [&_p]:leading-snug"
           />
           <button
             onClick={dismiss}

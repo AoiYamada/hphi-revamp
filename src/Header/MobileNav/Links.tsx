@@ -40,7 +40,7 @@ export const ListLinks: FC<ListLinksProps> = ({ label, links }) => {
               <CMSLink
                 {...link}
                 appearance="link"
-                className="text-base  font-normal whitespace-break-spaces"
+                className="text-base font-normal text-chrome-nav whitespace-break-spaces"
               />
             </li>
           ))}
@@ -70,7 +70,7 @@ export const FeaturedLink: FC<FeaturedLinkProps> = ({ label, content, links }) =
               <CMSLink
                 {...link}
                 appearance="link"
-                className="text-base  font-normal whitespace-break-spaces"
+                className="text-base font-normal text-chrome-nav whitespace-break-spaces"
               />
             </li>
           ))}
