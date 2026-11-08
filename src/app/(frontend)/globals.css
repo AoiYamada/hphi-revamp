@@ -4,6 +4,7 @@
 @import './styles/prose.css';
 @import './styles/article.css';
 @import './styles/cta.css';
+@import './styles/hero.css';
 
 /*
   整站只做淺色，沒有 `dark:` 變體（深色模式的處理見下方 base layer 的 color-scheme）。

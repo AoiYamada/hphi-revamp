@@ -1,0 +1,71 @@
+/*
+  頁面大圖（src/heros 的 HighImpact、MediumImpact、LowImpact）的文字與漸層。數值取自設計文件 6.1、6.2
+  和草稿 hero-options.html（業主選了第 3 個方案）。
+
+  大圖的文字是編輯在後台寫的富文字，仍然用 `prose` 輸出（連結、粗體、清單等照頁面長文的樣子），
+  再加上 `hero-copy`。`hero-copy` 做兩件事：
+  1. prose.css 的 H1／H2 區塊標題規則（字級、邊距、iris 短線）不套用在它裡面，因為大圖的標題是頁面標題；
+  2. 由這份檔案決定大圖標題與說明文字的樣子。
+
+  編輯設定的對齊（Lexical 輸出的 inline `text-align`）優先權比任何 stylesheet 高。這裡對 `text-align`
+  什麼都不寫，各個大圖在外層元件決定預設對齊（LowImpact 預設置中），而且絕對不用 `!important`。
+  用 `@layer components`，大圖元件自己帶的工具類別排在後面，永遠蓋得過這裡。
+*/
+
+@layer components {
+  /*
+    標題（H1，H2 同樣處理）：明體 700、ink 色、字距 0.05em、行高 1.3。手機 30px，md 起 46px。
+    標題後面緊接說明文字時，間距由標題的下邊距決定（prose 會把標題後面元素的上邊距清成 0）；
+    標題是最後一個元素時不留下邊距，和按鈕之間的距離由大圖元件決定。
+  */
+  .hero-copy :where(h1, h2) {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.05em;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+  .hero-copy :where(h1, h2):not(:last-child) {
+    margin-bottom: 18px;
+  }
+  @media (min-width: 48rem) {
+    .hero-copy :where(h1, h2) {
+      font-size: 46px;
+    }
+  }
+
+  /* 說明文字：明體 500（prose 預設）、ink-soft 色、行高 1.95。`pretty` 避免最後一行只剩一個字。 */
+  .hero-copy :where(p) {
+    line-height: 1.95;
+    color: var(--color-ink-soft);
+    text-wrap: pretty;
+  }
+
+  /*
+    HighImpact 的圖片漸層。
+    桌面（lg 起）：圖片滿版，由左到右從 paper 97% → 34% 處 90% → 66% 處透明，文字直接放在淡掉的地方，
+    不用方框。
+    手機與平板（< lg）：左右漸層在窄螢幕上效果不好，圖片改成放在上面，由上到下漸漸淡成 paper
+    （最下緣是純 paper，和下面的文字區沒有接縫）。
+  */
+  .hero-fade {
+    background-image: linear-gradient(
+      180deg,
+      transparent 40%,
+      color-mix(in srgb, var(--color-paper) 55%, transparent) 72%,
+      var(--color-paper) 100%
+    );
+  }
+  @media (min-width: 64rem) {
+    .hero-fade {
+      background-image: linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--color-paper) 97%, transparent) 0%,
+        color-mix(in srgb, var(--color-paper) 90%, transparent) 34%,
+        transparent 66%
+      );
+    }
+  }
+}

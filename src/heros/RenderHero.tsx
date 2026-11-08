@@ -21,10 +21,5 @@ export const RenderHero: React.FC<Page['hero']> = (props) => {
 
   if (!HeroToRender) return null
 
-  // `data-hero`：prose.css 靠它讓 hero 標題維持頁面標題的樣子（沒有區塊標題的短線）。
-  return (
-    <div data-hero>
-      <HeroToRender {...props} />
-    </div>
-  )
+  return <HeroToRender {...props} />
 }

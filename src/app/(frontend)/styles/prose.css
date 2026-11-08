@@ -51,8 +51,9 @@
   /*
     H1、H2：區塊大標題，明體 700。手機 28px、md 起 34px，字距 0.08em。
     首頁等頁面的區塊標題，編輯常選 H1，所以 H1 和 H2 同一個樣式。
+    頁面大圖（`hero-copy`，見 hero.css）裡的 H1、H2 是頁面標題，不是區塊標題：不套用這組規則，也沒有短線。
   */
-  .prose :where(h1, h2):not(:where(.not-prose, .not-prose *)) {
+  .prose :where(h1, h2):not(:where(.not-prose, .not-prose *, .hero-copy *)) {
     margin-block: 1.8em 1.1em;
     font-size: 28px;
     font-weight: 700;
@@ -62,7 +63,7 @@
     text-wrap: balance;
   }
   @media (min-width: 48rem) {
-    .prose :where(h1, h2):not(:where(.not-prose, .not-prose *)) {
+    .prose :where(h1, h2):not(:where(.not-prose, .not-prose *, .hero-copy *)) {
       font-size: 34px;
     }
   }
@@ -73,7 +74,7 @@
     Lexical 把對齊寫成 inline style（`text-align:center`，有的版本會多一個空格），兩種寫法都要比對。
     完全空白的標題（沒有任何內容）不畫短線。
   */
-  .prose :where(h1, h2):not(:where(.not-prose, .not-prose *))::after {
+  .prose :where(h1, h2):not(:where(.not-prose, .not-prose *, .hero-copy *))::after {
     content: '';
     display: block;
     width: 32px;
@@ -95,26 +96,6 @@
   }
   .prose :where(h1, h2):empty::after {
     display: none;
-  }
-
-  /*
-    首頁大圖（HighImpact 等 hero）的標題也是 prose 裡的 H1，但它是頁面標題，不是區塊標題：
-    不畫短線、字級大一點。RenderHero 在最外層加了 `data-hero`。
-    hero 的樣式之後由 src/heros 自己接手，這裡只是讓它在那之前維持原本的樣子。
-  */
-  [data-hero] .prose :where(h1, h2)::after {
-    content: none;
-  }
-  [data-hero] .prose :where(h1) {
-    margin-block: 0 0.5em;
-    font-size: 40px;
-    line-height: 1.3;
-    letter-spacing: 0.04em;
-  }
-  @media (min-width: 48rem) {
-    [data-hero] .prose :where(h1) {
-      font-size: 48px;
-    }
   }
 
   /* H3：明體 700，約 21px。「學員分享」的名字就是 H3。 */
