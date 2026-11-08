@@ -147,7 +147,8 @@
     color: var(--color-iris);
   }
   .prose :where(a):not(:where(.not-prose, .not-prose *)):focus-visible {
-    outline: none;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
     border-radius: var(--radius-xs);
     box-shadow: var(--shadow-focus);
   }

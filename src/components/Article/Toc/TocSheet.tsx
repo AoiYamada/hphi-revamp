@@ -67,7 +67,7 @@ export const TocSheet: FC<TocSheetProps> = ({ id, headings, activeId, onClose })
             type="button"
             aria-label="關閉目錄"
             onClick={onClose}
-            className="-mr-3 flex size-11 items-center justify-center rounded-xs text-ink-faint transition-colors duration-200 ease-out hover:text-ink focus-visible:shadow-focus focus-visible:outline-none"
+            className="-mr-3 flex size-11 items-center justify-center rounded-xs text-ink-faint transition-colors duration-200 ease-out hover:text-ink focus-visible:shadow-focus focus-visible:outline-hidden"
           >
             <X size={16} aria-hidden="true" />
           </button>

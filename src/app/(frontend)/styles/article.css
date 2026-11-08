@@ -198,8 +198,9 @@
   }
   .article-richtext > :is(p, h1, h2, h3, h4, ul, ol, blockquote) a:focus-visible,
   .article-richtext .lexical-table-container a:focus-visible {
-    outline: none;
-    border-radius: 2px;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
     box-shadow: var(--shadow-focus);
   }
 
@@ -243,7 +244,8 @@
     overflow: visible;
   }
   .article-richtext > hr::after {
-    /* `/ ''` 是替代文字：讀屏軟體不會把這三顆菱形唸出來。 */
+    /* 第二行的 `/ ''` 是替代文字：讀屏軟體不會把這三顆菱形唸出來；不支援的瀏覽器（Safari 16.4–17.3）用第一行。 */
+    content: '◆　◆　◆';
     content: '◆　◆　◆' / '';
     font-size: 10px;
     line-height: 1;

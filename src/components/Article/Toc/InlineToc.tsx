@@ -25,7 +25,7 @@ const InlineTocBox: FC<{ headings: TocHeading[] }> = ({ headings }) => {
         aria-expanded={open}
         aria-controls={listId}
         onClick={() => setOpen((wasOpen) => !wasOpen)}
-        className="flex min-h-11 w-full items-center justify-between px-0.5 text-left text-[13px] focus-visible:shadow-focus focus-visible:outline-none"
+        className="flex min-h-11 w-full items-center justify-between px-0.5 text-left text-[13px] focus-visible:shadow-focus focus-visible:outline-hidden"
       >
         <span className="tracking-[0.2em] text-iris">{TOC_LABEL}</span>
         <span className="text-xs text-ink-faint">

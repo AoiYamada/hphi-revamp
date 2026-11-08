@@ -49,7 +49,7 @@ export const TocList: FC<TocListProps> = ({ headings, variant, activeId = null, 
               aria-current={isActive ? 'location' : undefined}
               onClick={(event) => handleClick(event, id)}
               className={cn(
-                'grid grid-cols-[22px_1fr] rounded-xs text-sm text-ink-soft transition-colors duration-200 ease-out hover:text-ink focus-visible:shadow-focus focus-visible:outline-none',
+                'grid grid-cols-[22px_1fr] rounded-xs text-sm text-ink-soft transition-colors duration-200 ease-out hover:text-ink focus-visible:shadow-focus focus-visible:outline-hidden',
                 ITEM_STYLE[variant],
                 isActive && 'font-semibold text-ink',
               )}

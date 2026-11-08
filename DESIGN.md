@@ -143,7 +143,8 @@ Tailwind 的用法是 `bg-<名稱>`、`text-<名稱>`、`border-<名稱>`，例�
 ### 6.2 輸入框與表單
 
 - 高 44px、`rounded-sm`、1px `border-line`、底色 `bg-paper-raised`、文字 ink、placeholder 用 `ink-faint`。
-- focus：1px `border-iris` 加 `shadow-focus`。
+- focus：1px `border-iris` 加 `shadow-focus`。要隱藏瀏覽器預設的 outline 時，用 `outline-hidden`（Tailwind）或 CSS 的 `outline: 2px solid transparent; outline-offset: 2px`，不要用 `outline: none`：Windows 強制色彩模式只會畫透明的 outline，`none` 會讓 focus 完全消失。
+- 下拉選單（Select）：被選到（鍵盤或滑鼠停留）的選項是 `bg-iris/10` 底色加 ink 文字；已選的項目右側有勾號。
 - 錯誤：`border-error` 加錯誤說明文字（`text-error`）。
 - 停用：底色 `paper-sunken`，文字 `ink-faint`。
 - checkbox、radio 使用 iris。
