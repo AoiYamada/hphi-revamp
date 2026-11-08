@@ -65,7 +65,7 @@ export default function GoogleTranslate() {
 
   return (
     <>
-      <div id="google-translate-element" className="!m-0" />
+      <div id="google-translate-element" className="m-0!" />
       <Script
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
         strategy="lazyOnload"

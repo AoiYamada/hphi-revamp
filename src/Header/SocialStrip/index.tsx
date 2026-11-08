@@ -45,11 +45,11 @@ const SocialStrip: FC<SocialStripProps> = ({
     >
       <MaxWidthWrapper className="flex items-start gap-2 py-3 xl:py-4">
         {/* Mobile card width = (row − the two gap-3 gaps) / 2.5, capped on wide phones */}
-        <ul className="-mx-1 -my-2 flex min-w-0 flex-1 snap-x snap-mandatory scroll-px-1 gap-3 overflow-x-auto px-1 py-2 [scrollbar-width:none] md:mx-0 md:grid md:px-0 md:auto-cols-fr md:grid-flow-col md:gap-6 md:overflow-visible xl:gap-0 xl:divide-x xl:divide-border [&::-webkit-scrollbar]:hidden">
+        <ul className="-mx-1 -my-2 flex min-w-0 flex-1 snap-x snap-mandatory scroll-px-1 gap-3 overflow-x-auto px-1 py-2 scrollbar-none md:mx-0 md:grid md:px-0 md:auto-cols-fr md:grid-flow-col md:gap-6 md:overflow-visible xl:gap-0 xl:[&>li+li]:border-l [&::-webkit-scrollbar]:hidden">
           {visibleChannels.map((channel, i) => (
             <li
               key={channel.id ?? i}
-              className="w-[min(calc((100%_-_1.5rem)/2.5),10rem)] shrink-0 snap-start md:w-auto md:min-w-0 xl:px-6 xl:first:pl-0 xl:last:pr-0"
+              className="w-[min(calc((100%-1.5rem)/2.5),10rem)] shrink-0 snap-start md:w-auto md:min-w-0 xl:px-6 xl:first:pl-0 xl:last:pr-0"
             >
               <SocialChannelCard {...channel} showCaptionOnMobile={showCaptionOnMobile ?? true} />
             </li>
@@ -57,7 +57,7 @@ const SocialStrip: FC<SocialStripProps> = ({
         </ul>
         <button
           onClick={handleDismiss}
-          className="shrink-0 rounded-md p-1.5 text-muted-foreground transition-colors duration-200 ease-out hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:shadow-lift-focus"
+          className="shrink-0 rounded-md p-1.5 text-muted-foreground transition-colors duration-200 ease-out hover:bg-muted hover:text-foreground focus-visible:outline-hidden focus-visible:shadow-lift-focus"
           aria-label="Close social strip"
         >
           <X size={14} />

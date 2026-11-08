@@ -26,11 +26,11 @@ const SocialChannelCard: FC<SocialChannelCardProps> = ({
       {...link}
       newTab
       onClick={() => sendGAEvent('event', 'social_strip_click', { channel: name })}
-      className="group flex h-full flex-col gap-2 rounded-lg focus-visible:outline-none focus-visible:shadow-lift-focus xl:flex-row xl:items-center xl:gap-4"
+      className="group flex h-full flex-col gap-2 rounded-lg focus-visible:outline-hidden focus-visible:shadow-lift-focus xl:flex-row xl:items-center xl:gap-4"
     >
       {/* Pure white on purpose (DESIGN.md's no-#fff rule is for surfaces): scanners need maximum
           contrast and a light quiet zone around the code. Mobile: fills the card's width. */}
-      <span className="relative block aspect-square w-full shrink-0 rounded-md bg-white p-1 shadow-lift-1 transition-shadow duration-200 ease-out group-hover:shadow-lift-2 md:size-[7.5rem] xl:size-[6.5rem]">
+      <span className="relative block aspect-square w-full shrink-0 rounded-md bg-white p-1 shadow-lift-1 transition-shadow duration-200 ease-out group-hover:shadow-lift-2 md:size-30 xl:size-26">
         <NextImage
           src={qrCode.url}
           alt={qrCode.alt || `${name} QR code`}
@@ -47,7 +47,7 @@ const SocialChannelCard: FC<SocialChannelCardProps> = ({
       {caption ? (
         <span
           className={cn(
-            'min-w-0 whitespace-pre-line break-words text-xs leading-snug text-foreground xl:text-sm',
+            'min-w-0 whitespace-pre-line wrap-break-word text-xs leading-snug text-foreground xl:text-sm/5',
             showCaptionOnMobile ? 'block' : 'hidden md:block',
           )}
         >

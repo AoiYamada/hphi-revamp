@@ -39,7 +39,7 @@ export default async function Page() {
         <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
           Our Team
         </p>
-        <h1 className="text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
+        <h1 className="text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl/none lg:text-6xl/none">
           導師團隊
         </h1>
       </header>
@@ -68,7 +68,7 @@ export default async function Page() {
                   <p className="mb-2 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
                     {String(index + 1).padStart(2, '0')}
                   </p>
-                  <h2 className="text-2xl font-semibold leading-tight text-foreground transition-colors duration-200 ease-out group-hover:text-secondary md:text-3xl lg:text-4xl">
+                  <h2 className="text-2xl font-semibold leading-tight text-foreground transition-colors duration-200 ease-out group-hover:text-secondary md:text-3xl/9 lg:text-4xl/10">
                     {name}
                   </h2>
                   <p className="mt-2 text-lg text-secondary">{title}</p>

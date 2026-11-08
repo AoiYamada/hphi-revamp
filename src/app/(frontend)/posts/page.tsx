@@ -33,7 +33,7 @@ export default async function Page() {
         <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
           Articles
         </p>
-        <h1 className="text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
+        <h1 className="text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl/none lg:text-6xl/none">
           文章列表
         </h1>
       </header>

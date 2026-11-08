@@ -52,7 +52,7 @@ export default async function Tutor({ params: paramsPromise }: Args) {
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
             導師
           </p>
-          <h1 className="mb-2 text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
+          <h1 className="mb-2 text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl/none lg:text-6xl/none">
             {tutor.name}
           </h1>
           <p className="text-xl text-secondary md:text-2xl">{tutor.title}</p>

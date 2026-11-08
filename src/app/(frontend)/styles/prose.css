@@ -1,0 +1,15 @@
+/*
+  文章排版（@tailwindcss/typography 的 `prose`）。
+
+  客製內容放在同目錄的 typography.config.mjs，這裡只負責用 `@config` 載入。
+
+  為什麼不直接寫成 CSS：plugin 會把設定合併進它自己的規則，位置不變，所以 plugin 排在後面的重設規則
+  （`h2 + *`、`:first-child`、`thead th:first-child`、`h2 strong`、`md:prose-lg` 的字級）仍然蓋得過
+  這些客製值。v4 的 `@utility` 排在哪裡由屬性排序決定，沒辦法固定排在 plugin 規則之後；
+  `.prose h2 { ... }` 的優先權又高過 plugin 的 `:where()` 規則。兩種寫法都會讓上述重設失效：
+  緊接在 h2 後面的 h3 會多出上邊距、第一個子元素不再貼齊容器、表格第一欄會多出左內距、
+  `md:prose-lg` 的標題字級會被蓋掉。
+
+  之後重寫文章排版時，可以整份改成純 CSS，再移除 typography.config.mjs。
+*/
+@config './typography.config.mjs';

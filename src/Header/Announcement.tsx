@@ -24,11 +24,11 @@ const Announcement: FC<AnnouncementProps> = ({ enable, content, dismissal }) => 
           <RichText
             data={content}
             enableProse={false}
-            className="flex-grow max-w-full text-sm [&_p]:m-0 [&_p]:leading-snug"
+            className="grow max-w-full text-sm [&_p]:m-0 [&_p]:leading-snug"
           />
           <button
             onClick={dismiss}
-            className="shrink-0 rounded-full p-1.5 transition-colors duration-200 ease-out hover:bg-secondary/40 focus-visible:outline-none focus-visible:shadow-lift-focus"
+            className="shrink-0 rounded-full p-1.5 transition-colors duration-200 ease-out hover:bg-secondary/40 focus-visible:outline-hidden focus-visible:shadow-lift-focus"
             aria-label="Close announcement"
           >
             <X size={14} />

@@ -1,151 +1,18 @@
-import animate from 'tailwindcss-animate'
-import typography from '@tailwindcss/typography'
+/**
+ * Typography customisations for @tailwindcss/typography, ported verbatim from the old
+ * tailwind.config.mjs (`theme.extend.typography`). This is the only JS config left; globals.css
+ * loads it through `@config` in styles/prose.css.
+ *
+ * It has to stay a config object: the plugin merges these values into its own rules in place, so
+ * the plugin's later resets (`h2 + *`, `:first-child`, `thead th:first-child`, `h2 strong`, the
+ * `md:prose-lg` size modifiers) keep winning over them exactly as before. Rewriting them as
+ * `@utility` or `.prose h2 { ... }` rules changes the cascade order (see styles/prose.css).
+ */
 
 /** @type {import('tailwindcss').Config} */
 const config = {
-  content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-  ],
-  darkMode: ['selector', '[data-theme="dark"]', 'class'],
-  plugins: [animate, typography],
-  prefix: '',
-  safelist: [
-    'lg:col-span-3',
-    'lg:col-span-4',
-    'lg:col-span-6',
-    'lg:col-span-8',
-    'lg:col-span-12',
-    'border-border',
-    'bg-card',
-    'border-error',
-    'bg-error/30',
-    'border-success',
-    'bg-success/30',
-    'border-warning',
-    'bg-warning/30',
-  ],
   theme: {
-    container: {
-      center: true,
-      padding: {
-        '2xl': '2rem',
-        DEFAULT: '1rem',
-        lg: '2rem',
-        md: '2rem',
-        sm: '1rem',
-        xl: '2rem',
-      },
-      screens: {
-        '2xl': '86rem',
-        lg: '64rem',
-        md: '48rem',
-        sm: '40rem',
-        xl: '80rem',
-      },
-    },
     extend: {
-      animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
-      },
-      borderRadius: {
-        // One rounding scale, applied across every component. See DESIGN.md.
-        // Values lifted from the original 6/10/14/20 to give surfaces a more
-        // confident curve at scale (cards, panels) while keeping interactive
-        // controls touch-precise.
-        DEFAULT: '10px',
-        sm: '6px',
-        md: '10px',
-        lg: '16px',
-        xl: '24px',
-      },
-      colors: {
-        // Channel-mode hsl(... / <alpha-value>) so utilities like bg-primary/45 work.
-        accent: {
-          DEFAULT: 'hsl(var(--accent) / <alpha-value>)',
-          foreground: 'hsl(var(--accent-foreground) / <alpha-value>)',
-        },
-        background: 'hsl(var(--background) / <alpha-value>)',
-        border: 'hsl(var(--border) / <alpha-value>)',
-        card: {
-          DEFAULT: 'hsl(var(--card) / <alpha-value>)',
-          foreground: 'hsl(var(--card-foreground) / <alpha-value>)',
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive) / <alpha-value>)',
-          foreground: 'hsl(var(--destructive-foreground) / <alpha-value>)',
-        },
-        foreground: 'hsl(var(--foreground) / <alpha-value>)',
-        input: 'hsl(var(--input) / <alpha-value>)',
-        muted: {
-          DEFAULT: 'hsl(var(--muted) / <alpha-value>)',
-          foreground: 'hsl(var(--muted-foreground) / <alpha-value>)',
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover) / <alpha-value>)',
-          foreground: 'hsl(var(--popover-foreground) / <alpha-value>)',
-        },
-        primary: {
-          DEFAULT: 'hsl(var(--primary) / <alpha-value>)',
-          foreground: 'hsl(var(--primary-foreground) / <alpha-value>)',
-        },
-        anchor: {
-          DEFAULT: 'hsl(var(--anchor) / <alpha-value>)',
-          foreground: 'hsl(var(--anchor-foreground) / <alpha-value>)',
-        },
-        ring: 'hsl(var(--ring) / <alpha-value>)',
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary) / <alpha-value>)',
-          foreground: 'hsl(var(--secondary-foreground) / <alpha-value>)',
-        },
-        success: 'hsl(var(--success) / <alpha-value>)',
-        error: 'hsl(var(--error) / <alpha-value>)',
-        warning: 'hsl(var(--warning) / <alpha-value>)',
-        chart: {
-          1: 'hsl(var(--chart-1) / <alpha-value>)',
-          2: 'hsl(var(--chart-2) / <alpha-value>)',
-          3: 'hsl(var(--chart-3) / <alpha-value>)',
-          4: 'hsl(var(--chart-4) / <alpha-value>)',
-          5: 'hsl(var(--chart-5) / <alpha-value>)',
-        },
-      },
-      boxShadow: {
-        // Flat-by-default tonal layering. lift-1 is the resting elevation for
-        // clickable cards. lift-2 is the hover step. lift-focus is the keyboard
-        // focus ring (Soft Violet, sits outside the element).
-        'lift-1': '0 1px 2px 0 hsl(var(--primary) / 0.06)',
-        'lift-2': '0 8px 24px -12px hsl(var(--primary) / 0.18)',
-        'lift-focus': '0 0 0 3px hsl(var(--accent) / 0.45)',
-      },
-      transitionTimingFunction: {
-        'out-quart': 'cubic-bezier(0.25, 1, 0.5, 1)',
-        'out-quint': 'cubic-bezier(0.22, 1, 0.36, 1)',
-      },
-      fontFamily: {
-        mono: ['var(--font-geist-mono)'],
-        sans: ['var(--font-geist-sans)'],
-      },
-      keyframes: {
-        'accordion-down': {
-          from: {
-            height: '0',
-          },
-          to: {
-            height: 'var(--radix-accordion-content-height)',
-          },
-        },
-        'accordion-up': {
-          from: {
-            height: 'var(--radix-accordion-content-height)',
-          },
-          to: {
-            height: '0',
-          },
-        },
-      },
       typography: () => ({
         DEFAULT: {
           css: {

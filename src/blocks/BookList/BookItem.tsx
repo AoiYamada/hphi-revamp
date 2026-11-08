@@ -48,7 +48,7 @@ export const BookItem: FC<Props> = ({ book, idPrefix, selected, onOpen, onToggle
           inert
         />
         <div className="flex min-w-0 flex-1 items-center justify-between gap-3 text-sm text-muted-foreground md:flex-col md:items-start md:justify-start md:gap-1.5 md:p-4 md:text-base md:text-foreground">
-          <h3 className="min-w-0 text-base font-semibold leading-snug text-foreground md:text-lg">
+          <h3 className="min-w-0 text-base font-semibold leading-snug text-foreground md:text-lg/7">
             <button
               type="button"
               data-book-opener
@@ -56,7 +56,7 @@ export const BookItem: FC<Props> = ({ book, idPrefix, selected, onOpen, onToggle
               className={cn(
                 'text-left transition-colors duration-200 ease-out-quart group-hover:text-secondary',
                 'after:absolute after:inset-0 after:rounded-md md:after:rounded-none',
-                'focus-visible:outline-none focus-visible:after:shadow-lift-focus md:focus-visible:after:shadow-none',
+                'focus-visible:outline-hidden focus-visible:after:shadow-lift-focus md:focus-visible:after:shadow-none',
               )}
             >
               {book.title}

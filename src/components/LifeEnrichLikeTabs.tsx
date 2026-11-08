@@ -30,7 +30,7 @@ const getLinkUrl = (linkData: unknown): string | null => {
 }
 
 const tabBaseClass =
-  'relative inline-flex items-center justify-center whitespace-nowrap px-6 py-4 text-base font-medium transition-colors duration-200 ease-out-quart focus-visible:outline-none focus-visible:shadow-lift-focus md:text-lg'
+  'relative inline-flex items-center justify-center whitespace-nowrap px-6 py-4 text-base font-medium transition-colors duration-200 ease-out-quart focus-visible:outline-hidden focus-visible:shadow-lift-focus md:text-lg'
 
 const tabActiveClass =
   'text-secondary after:absolute after:inset-x-4 after:bottom-0 after:h-0.5 after:rounded-full after:bg-secondary'
@@ -141,7 +141,7 @@ const LifeEnrichLikeTabs: FC<
                   onClick={() => handleTabClick(idx)}
                   data-active={isActive}
                   className={cn(
-                    'flex w-full items-center justify-center rounded-md border px-6 py-4 text-base font-medium transition-colors duration-200 ease-out-quart focus-visible:outline-none focus-visible:shadow-lift-focus',
+                    'flex w-full items-center justify-center rounded-md border px-6 py-4 text-base font-medium transition-colors duration-200 ease-out-quart focus-visible:outline-hidden focus-visible:shadow-lift-focus',
                     isActive
                       ? 'border-primary bg-primary text-primary-foreground'
                       : 'border-border bg-card text-foreground hover:bg-muted/60',

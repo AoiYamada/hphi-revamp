@@ -1,4 +1,5 @@
-// Keep these in sync with the CSS variables in your tailwind configuration
+// Keep these in sync with Tailwind's breakpoints. globals.css does not override them, so these are
+// the v4 defaults (sm 40rem, md 48rem, lg 64rem, xl 80rem, 2xl 96rem; 3xl is not a CSS breakpoint).
 
 export const cssVariables = {
   breakpoints: {

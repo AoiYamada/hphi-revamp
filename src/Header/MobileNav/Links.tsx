@@ -14,7 +14,7 @@ type DefaultLinkProps = NonNullable<
 
 export const DefaultLink: FC<DefaultLinkProps> = ({ link, description }) => {
   return (
-    <div className="space-y-2">
+    <div className="legacy-space-y-2">
       <CMSLink
         {...link}
         appearance="inline"

@@ -11,7 +11,7 @@ const Logo: FC<LogoProps> = ({ className, noText = true }) => {
   return (
     <div className="flex cursor-pointer flex-row items-center justify-between gap-4">
       <Image
-        className={cn('max-w-[9.375rem]', className)}
+        className={cn('max-w-37.5', className)}
         src="/hphi-logo.png"
         alt="專業心理治療及催眠應用（香港）有限公司（HPHI） Logo"
         width={45 * 1.7}

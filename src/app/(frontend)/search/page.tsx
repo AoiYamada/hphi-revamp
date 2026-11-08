@@ -69,7 +69,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
         <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
           Search
         </p>
-        <h1 className="mb-8 text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl">
+        <h1 className="mb-8 text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl/none">
           文章搜尋
         </h1>
         <Search />

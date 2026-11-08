@@ -14,7 +14,7 @@ type Props = {
 // The placeholder sits underneath, so it also shows through a video cover with no poster.
 export const CoverFrame: FC<Props> = ({ cover, className, inert }) => (
   <div
-    className={cn('relative aspect-[2/3] shrink-0 overflow-hidden bg-muted', className)}
+    className={cn('relative aspect-2/3 shrink-0 overflow-hidden bg-muted', className)}
     inert={inert}
   >
     <BookOpen aria-hidden className="absolute inset-0 m-auto size-5 text-muted-foreground" />

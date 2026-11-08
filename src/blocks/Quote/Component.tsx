@@ -23,7 +23,7 @@ export const QuoteBlock: FC<
           {quote.split('\n').map((line, index) => (
             <p
               key={index}
-              className="text-xl font-light leading-relaxed text-foreground md:text-2xl md:leading-relaxed lg:text-3xl"
+              className="text-xl font-light leading-relaxed text-foreground md:text-2xl md:leading-relaxed lg:text-3xl/9"
             >
               {line}
             </p>

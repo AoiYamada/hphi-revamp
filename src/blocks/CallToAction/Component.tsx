@@ -29,7 +29,7 @@ export const CallToActionBlock: FC<CTABlockProps> = ({ links, richText }) => {
             )}
 
             {Array.isArray(links) && links.length > 0 && (
-              <div className="flex flex-row flex-wrap gap-3 md:flex-shrink-0 md:flex-nowrap">
+              <div className="flex flex-row flex-wrap gap-3 md:shrink-0 md:flex-nowrap">
                 {links.map(({ link }, i) => (
                   <CMSLink key={i} {...link} />
                 ))}

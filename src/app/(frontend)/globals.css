@@ -1,6 +1,161 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* 只掃描 src/，和 v3 的 content 範圍一致（避免掃到 docs、log 之類的檔案）。 */
+@import 'tailwindcss' source('../../');
+@import 'tw-animate-css';
+@plugin '@tailwindcss/typography';
+@import './styles/prose.css';
+/* typography.config.mjs 裡的註解有 `prose-lg` 這類字眼，不要被當成 class 掃描。 */
+@source not './styles/typography.config.mjs';
+
+/*
+  v3 的 `darkMode` 是 selector 模式（`[data-theme="dark"]`），而且沒有任何地方設定 data-theme，
+  所以 `dark:` 一直沒有生效。v4 預設改成跟著 prefers-color-scheme，深色模式的裝置會變色，
+  所以改回 selector 模式，維持 `dark:` 不生效。（Task 3 會移除所有 `dark:`。）
+*/
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/*
+  v4 的 `hover:` 只在支援 hover 的裝置生效（`@media (hover: hover)`），v3 則是任何裝置點一下都會套用。
+  這次遷移不改行為，所以還原成 v3 的寫法。`group-hover:` 也跟著走這個定義。
+*/
+@custom-variant hover (&:hover);
+
+/*
+  顏色、陰影、字體。數值放在 :root 的 CSS 變數（顏色是以空白分隔的 HSL 三元組）或 layout 設定的
+  字體變數，所以用 `inline`：在使用的位置才解析，不在 :root 先解析一次。
+*/
+@theme inline {
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-background: hsl(var(--background));
+  --color-border: hsl(var(--border));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-foreground: hsl(var(--foreground));
+  --color-input: hsl(var(--input));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-anchor: hsl(var(--anchor));
+  --color-anchor-foreground: hsl(var(--anchor-foreground));
+  --color-ring: hsl(var(--ring));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-success: hsl(var(--success));
+  --color-error: hsl(var(--error));
+  --color-warning: hsl(var(--warning));
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+
+  /* 陰影：lift-1 是可點擊卡片平時的高度，lift-2 是 hover 時，lift-focus 是鍵盤 focus 外圈。 */
+  --shadow-lift-1: 0 1px 2px 0 hsl(var(--primary) / 0.06);
+  --shadow-lift-2: 0 8px 24px -12px hsl(var(--primary) / 0.18);
+  --shadow-lift-focus: 0 0 0 3px hsl(var(--accent) / 0.45);
+
+  /* 字體：變數由 layout.tsx 的 geist 設定。 */
+  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans);
+}
+
+@theme {
+  /* 圓角：整站共用一組。（原本的 DEFAULT 10px 沒有任何地方用到，不搬。） */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* 緩動曲線 */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* 動畫：Radix accordion 展開和收合 */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  /* WhatsApp 品牌綠（WhatsAppUs 的 bg-green-500）。v4 預設色盤改用 oklch，顏色會更鮮豔，這裡釘回 v3 的值。 */
+  --color-green-500: #22c55e;
+}
+
+/*
+  和 v3 的 container 設定相同：置中、左右 1rem（md 起 2rem）、最大寬度跟著斷點，2xl 起固定 86rem。
+  v4 內建的 container 在 96rem 起會把最大寬度放到 96rem，這裡的 86rem 規則排在後面，所以會蓋掉它。
+*/
+@utility container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1rem;
+
+  @media (width >= 40rem) {
+    max-width: 40rem;
+    padding-inline: 1rem;
+  }
+  @media (width >= 48rem) {
+    max-width: 48rem;
+    padding-inline: 2rem;
+  }
+  @media (width >= 64rem) {
+    max-width: 64rem;
+    padding-inline: 2rem;
+  }
+  @media (width >= 80rem) {
+    max-width: 80rem;
+    padding-inline: 2rem;
+  }
+  @media (width >= 86rem) {
+    max-width: 86rem;
+    padding-inline: 2rem;
+  }
+}
+
+/* v3 的 `space-y-2`：第二個起每個可見的兄弟元素加上邊距。v4 改成「除了最後一個以外加下邊距」，
+   第一個子元素是 inline（表單的 label、導覽的行內連結）時，垂直邊距不生效，間距會不見。
+   只用在第一個子元素可能是 inline 的容器，其他地方照常用 `space-y-*`。 */
+@utility legacy-space-y-2 {
+  & > :not([hidden]) ~ :not([hidden]) {
+    margin-top: calc(var(--spacing) * 2);
+  }
+}
+
+/* v4 預設值改變後，這裡把 v3 的行為補回來。 */
+@layer base {
+  /* v3 的預設邊框色來自設定；v4 改成 currentcolor。 */
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-border);
+  }
+
+  /* v3 的 button 預設是手指游標；v4 改成一般箭頭。 */
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
 
 @layer base {
   h1,
@@ -15,7 +170,7 @@
 
   :root {
     /* See DESIGN.md for the full token spec. Values are space-separated HSL
-       channels so Tailwind's `hsl(var(--x) / <alpha-value>)` pattern works. */
+       channels; the @theme block above wraps them in hsl() for the colour utilities. */
 
     /* Surfaces — Calm Paper at the floor, Soft Bloom one tonal step up. */
     --background: 280 27% 98%; /* Calm Paper */
@@ -80,9 +235,6 @@
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
   body {
     @apply bg-background text-foreground;
   }

@@ -71,7 +71,9 @@ export const BookListClient: FC<Props> = ({ heading, books, whatsAppNumber, orde
         {heading}
       </h2>
 
-      <ul className="divide-y divide-border rounded-lg border border-border bg-card md:grid md:grid-cols-3 md:gap-6 md:divide-y-0 md:rounded-none md:border-0 md:bg-transparent lg:grid-cols-4 xl:grid-cols-5">
+      {/* From md up, every card after the first has no top/bottom border. Tailwind v3's
+          md:divide-y-0 did that by accident; kept as-is for the v4 migration. */}
+      <ul className="divide-y divide-border rounded-lg border border-border bg-card md:grid md:grid-cols-3 md:gap-6 md:[&>li+li]:border-y-0 md:rounded-none md:border-0 md:bg-transparent lg:grid-cols-4 xl:grid-cols-5">
         {books.map((book) => (
           <BookItem
             key={book.id}
