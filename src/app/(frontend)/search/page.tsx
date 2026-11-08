@@ -7,6 +7,7 @@ import React from 'react'
 import { Post } from '@/payload-types'
 import { Search } from '@/search/Component'
 import { CardPostData } from '@/components/Card'
+import { PageHeader } from '@/components/PageHeader'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 
 type Args = {
@@ -65,20 +66,16 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
 
   return (
     <MaxWidthWrapper className="py-16 md:py-24">
-      <header className="mx-auto mb-12 max-w-2xl text-center md:mb-16">
-        <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-          Search
-        </p>
-        <h1 className="mb-8 text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl/none">
-          文章搜尋
-        </h1>
-        <Search />
-      </header>
+      <PageHeader kicker="Search" title="文章搜尋" align="center" className="mb-12 md:mb-16">
+        <div className="mt-8">
+          <Search />
+        </div>
+      </PageHeader>
 
       {posts.totalDocs > 0 ? (
         <CollectionArchive posts={posts.docs as CardPostData[]} />
       ) : (
-        <div className="mx-auto max-w-md rounded-lg border border-border bg-muted/40 px-6 py-10 text-center text-muted-foreground">
+        <div className="mx-auto max-w-md rounded-sm border border-line bg-paper-sunken px-6 py-10 text-center text-ink-faint">
           找不到文章
         </div>
       )}

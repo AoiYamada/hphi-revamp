@@ -24,7 +24,7 @@ export async function Footer() {
             <Logo className="w-32 invert" noText />
           </Link>
           {columns.length > 0 && (
-            <div className="grid w-full grid-cols-2 gap-x-8 gap-y-10 md:flex md:w-auto md:flex-row md:gap-16">
+            <div className="grid w-full grid-cols-2 gap-x-8 gap-y-10 lg:flex lg:w-auto lg:flex-row lg:gap-16">
               {columns.map((column, i) => (
                 <FooterNavColumn key={i} {...column} />
               ))}

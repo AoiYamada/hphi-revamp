@@ -1,3 +1,4 @@
+import { cn } from '@/utilities'
 import React, { FC } from 'react'
 
 const defaultLabels = {
@@ -42,8 +43,8 @@ export const PageRange: FC<{
   //   collectionLabelsFromProps || defaultCollectionLabels[collection || ''] || defaultLabels || {}
 
   return (
-    <div className={[className, 'font-semibold'].filter(Boolean).join(' ')}>
-      {(typeof totalDocs === 'undefined' || totalDocs === 0) && 'Search produced no results.'}
+    <div className={cn('font-sans text-sm text-ink-faint', className)}>
+      {(typeof totalDocs === 'undefined' || totalDocs === 0) && '找不到文章'}
       {typeof totalDocs !== 'undefined' &&
         totalDocs > 0 &&
         `正在顯示 ${totalDocs} 篇文章中的第 ${indexStart}${indexStart > 0 ? ` - ${indexEnd}` : ''} 篇`}

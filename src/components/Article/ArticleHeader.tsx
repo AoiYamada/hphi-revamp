@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 
 import type { Post } from '@/payload-types'
+import { CATEGORY_SEPARATOR, categoryTitles } from '@/utilities/categoryTitles'
 import { formatDateZh } from '@/utilities/article/formatDateZh'
 import { joinNames } from '@/utilities/article/joinNames'
 
@@ -9,15 +10,6 @@ type ArticleHeaderProps = {
   /** null when the article has no readable body: the reading-time item is then left out. */
   readingMinutes: number | null
 }
-
-const CATEGORY_SEPARATOR = ' · '
-
-const categoryTitles = (categories: Post['categories']): string[] =>
-  (categories ?? []).flatMap((category) => {
-    if (typeof category !== 'object' || category === null) return []
-    const title = category.title?.trim()
-    return title ? [title] : []
-  })
 
 const authorNames = (authors: Post['populatedAuthors']): string =>
   joinNames((authors ?? []).map((author) => author?.name ?? ''))

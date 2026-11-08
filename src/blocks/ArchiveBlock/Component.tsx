@@ -67,7 +67,7 @@ export const ArchiveBlock: FC<
   return (
     <div className="my-16" id={`block-${id}`}>
       {introContent && (
-        <div className="w-full mb-16">
+        <div className="mb-12 w-full">
           <RichText className="w-full" data={introContent} enableGutter={false} />
         </div>
       )}

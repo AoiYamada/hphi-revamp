@@ -13,7 +13,7 @@ export const CollectionArchive: FC<Props> = (props) => {
 
   return (
     <div className={cn('w-full')}>
-      <div className="grid grid-cols-4 gap-6 sm:grid-cols-8 lg:grid-cols-12 lg:gap-8">
+      <div className="grid grid-cols-4 gap-6 sm:grid-cols-8 lg:grid-cols-12 lg:gap-7">
         {posts?.map((result, index) => {
           if (typeof result === 'object' && result !== null) {
             return (

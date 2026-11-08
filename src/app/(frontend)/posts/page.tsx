@@ -1,6 +1,7 @@
 import type { Metadata } from 'next/types'
 
 import { CollectionArchive } from '@/components/CollectionArchive'
+import { PageHeader } from '@/components/PageHeader'
 import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
 import configPromise from '@payload-config'
@@ -29,23 +30,15 @@ export default async function Page() {
 
   return (
     <MaxWidthWrapper className="py-16 md:py-24">
-      <header className="mb-12 max-w-3xl md:mb-16">
-        <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-          Articles
-        </p>
-        <h1 className="text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl/none lg:text-6xl/none">
-          文章列表
-        </h1>
-      </header>
+      <PageHeader kicker="Articles" title="文章列表" className="mb-12 md:mb-16" />
 
-      <div className="mb-8 text-sm text-muted-foreground">
-        <PageRange
-          collection="posts"
-          currentPage={posts.page}
-          limit={12}
-          totalDocs={posts.totalDocs}
-        />
-      </div>
+      <PageRange
+        className="mb-8"
+        collection="posts"
+        currentPage={posts.page}
+        limit={12}
+        totalDocs={posts.totalDocs}
+      />
 
       <CollectionArchive posts={posts.docs} />
 

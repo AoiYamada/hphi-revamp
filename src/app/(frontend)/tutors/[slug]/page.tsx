@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 import { cache } from 'react'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
+import { PageHeader } from '@/components/PageHeader'
 import RichText from '@/components/RichText'
 import NextImage from 'next/image'
 
@@ -48,19 +49,13 @@ export default async function Tutor({ params: paramsPromise }: Args) {
       <article className="py-16 md:py-24">
         <PayloadRedirects disableNotFound url={url} />
 
-        <header className="mb-12 max-w-3xl">
-          <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-            導師
-          </p>
-          <h1 className="mb-2 text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl/none lg:text-6xl/none">
-            {tutor.name}
-          </h1>
-          <p className="text-xl text-iris-soft md:text-2xl">{tutor.title}</p>
-        </header>
+        <PageHeader kicker="導師" title={tutor.name} className="mb-12">
+          <p className="mt-2 font-sans text-xl text-iris md:text-2xl">{tutor.title}</p>
+        </PageHeader>
 
         <div className="grid gap-12 md:grid-cols-2 md:gap-16">
           <div className="flex flex-col gap-6">
-            <div className="overflow-hidden rounded-xl border border-border shadow-lift-1">
+            <div className="overflow-hidden rounded-sm border border-line">
               <NextImage
                 src={tutor.image.url ?? ''}
                 alt={tutor.image.alt ?? ''}
@@ -73,7 +68,7 @@ export default async function Tutor({ params: paramsPromise }: Args) {
 
           <div className="flex flex-col gap-10">
             <section>
-              <h2 className="mb-4 text-2xl font-semibold text-iris-soft">關於導師</h2>
+              <h2 className="mb-4 font-serif text-2xl font-bold text-ink">關於導師</h2>
               <RichText
                 data={tutor.description}
                 enableGutter={false}
@@ -82,7 +77,7 @@ export default async function Tutor({ params: paramsPromise }: Args) {
             </section>
 
             <section>
-              <h2 className="mb-4 text-2xl font-semibold text-iris-soft">專業資格</h2>
+              <h2 className="mb-4 font-serif text-2xl font-bold text-ink">專業資格</h2>
               <RichText
                 data={tutor.qualifications}
                 enableGutter={false}

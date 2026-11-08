@@ -1,6 +1,7 @@
 import type { Metadata } from 'next/types'
 
 import { CollectionArchive } from '@/components/CollectionArchive'
+import { PageHeader } from '@/components/PageHeader'
 import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
 import configPromise from '@payload-config'
@@ -34,29 +35,22 @@ export default async function Page({ params: paramsPromise }: Args) {
   })
 
   return (
-    <MaxWidthWrapper className="pt-24 pb-24">
-      <div className="w-full mb-16">
-        <div className="prose max-w-none">
-          <h1>文章分享</h1>
-        </div>
-      </div>
+    <MaxWidthWrapper className="py-16 md:py-24">
+      <PageHeader kicker="Articles" title="文章列表" className="mb-12 md:mb-16" />
 
-      <div className="w-full mb-8">
-        <PageRange
-          collection="posts"
-          currentPage={posts.page}
-          limit={12}
-          totalDocs={posts.totalDocs}
-        />
-      </div>
+      <PageRange
+        className="mb-8"
+        collection="posts"
+        currentPage={posts.page}
+        limit={12}
+        totalDocs={posts.totalDocs}
+      />
 
       <CollectionArchive posts={posts.docs} />
 
-      <div className="w-full">
-        {posts.totalPages > 1 && posts.page && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
-        )}
-      </div>
+      {posts.totalPages > 1 && posts.page && (
+        <Pagination page={posts.page} totalPages={posts.totalPages} />
+      )}
     </MaxWidthWrapper>
   )
 }

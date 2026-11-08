@@ -6,6 +6,7 @@ import React from 'react'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import NextImage from 'next/image'
 import Link from 'next/link'
+import { PageHeader } from '@/components/PageHeader'
 import { cn } from '@/utilities'
 import { priority } from 'next-sitemap.config.cjs'
 
@@ -35,14 +36,7 @@ export default async function Page() {
 
   return (
     <MaxWidthWrapper className="pb-24">
-      <header className="mx-auto my-16 max-w-2xl text-center md:my-24">
-        <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-          Our Team
-        </p>
-        <h1 className="text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl/none lg:text-6xl/none">
-          導師團隊
-        </h1>
-      </header>
+      <PageHeader kicker="Our Team" title="導師團隊" align="center" className="my-16 md:my-24" />
 
       <div className="flex flex-col gap-16 md:gap-24">
         {tutors.docs.map(({ id, name, title, image, meta, slug }, index) => {
@@ -54,26 +48,26 @@ export default async function Page() {
             <Link key={id} href={`/tutors/${slug}`} className="group block">
               <div className={cn('grid items-center gap-8 md:grid-cols-12 md:gap-12 lg:gap-16')}>
                 <div className={cn('md:col-span-5', isEven ? 'md:order-1' : 'md:order-2')}>
-                  <div className="overflow-hidden rounded-xl shadow-lift-1 transition-shadow duration-300 ease-out group-hover:shadow-lift-2">
+                  <div className="overflow-hidden rounded-sm">
                     <NextImage
                       src={image.url ?? ''}
                       alt={image.alt ?? ''}
                       width={image.width ?? 0}
                       height={image.height ?? 0}
-                      className="h-auto w-full transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                      className="h-auto w-full"
                     />
                   </div>
                 </div>
                 <div className={cn('md:col-span-7', isEven ? 'md:order-2' : 'md:order-1')}>
-                  <p className="mb-2 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                  <p className="mb-2 font-sans text-[13px] font-medium tracking-[0.2em] text-iris">
                     {String(index + 1).padStart(2, '0')}
                   </p>
-                  <h2 className="text-2xl font-semibold leading-tight text-foreground transition-colors duration-200 ease-out group-hover:text-iris-soft md:text-3xl/9 lg:text-4xl/10">
+                  <h2 className="font-serif text-2xl font-bold leading-tight text-ink group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4 md:text-3xl/9 lg:text-4xl/10">
                     {name}
                   </h2>
-                  <p className="mt-2 text-lg text-iris-soft">{title}</p>
+                  <p className="mt-2 font-sans text-lg text-iris">{title}</p>
                   {meta?.description && (
-                    <p className="mt-4 max-w-prose leading-relaxed text-muted-foreground">
+                    <p className="mt-4 max-w-prose font-sans leading-relaxed text-ink-soft">
                       {meta.description}
                     </p>
                   )}
