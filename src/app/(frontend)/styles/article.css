@@ -1,7 +1,7 @@
 /*
   文章頁（/posts/[slug]、/single-post/[slug]）的排版：書卷風格。數值取自設計文件 5.1、5.2、5.3。
 
-  這份 CSS 不依賴 @tailwindcss/typography（`prose`）。文章內文由 RichText 以 `enableProse={false}`
+  這份 CSS 不依賴 Tailwind 的 typography 外掛（`prose`）。文章內文由 RichText 以 `enableProse={false}`
   輸出，每個節點都是 `.article-richtext` 的直接子元素，所以下面的內文規則一律用 `>` 只管最外層的節點：
   Quote、Banner、Collapsible、Tabs、表單這些區塊自己的內部排版不會被誤傷。
 

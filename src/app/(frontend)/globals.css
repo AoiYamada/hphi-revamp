@@ -7,7 +7,7 @@
 @import './styles/hero.css';
 
 /*
-  整站只做淺色，沒有 `dark:` 變體（深色模式的處理見下方 base layer 的 color-scheme）。
+  整站只做淺色，沒有深色模式的變體（深色模式的處理見下方 base layer 的 color-scheme）。
 
   v4 的 `hover:` 只在支援 hover 的裝置生效（`@media (hover: hover)`），v3 則是任何裝置點一下都會套用。
   這次遷移不改行為，所以還原成 v3 的寫法。`group-hover:` 也跟著走這個定義。
@@ -127,7 +127,7 @@
   --color-chrome-popover: #faf9fb;
   --color-chrome-popover-border: #e3dde9;
   /* 手機選單面板的不透明底色。原版是 card，和 popover 同色。 */
-  --color-chrome-panel: #faf9fb;
+  --color-chrome-panel: var(--color-chrome-popover);
   /* chrome 內的文字（選單、社交條標題、下拉選單標題）。原版是 foreground：rgb(50, 43, 59)。 */
   --color-chrome-text: #322b3b;
   /* chrome 內的次要文字（下拉連結說明、社交條關閉鈕）。原版是 muted-foreground：rgb(108, 100, 120)。 */

@@ -1,7 +1,7 @@
 /*
   頁面裡的長文（`prose`）：書卷風格。數值取自設計文件 6.5。
 
-  這是純 CSS，不依賴 @tailwindcss/typography（已移除）。富文字（RichText）預設會套上 `prose`，
+  這是純 CSS，不依賴 Tailwind 的 typography 外掛（已移除）。富文字（RichText）預設會套上 `prose`，
   Content、Collapsible、Tabs、Timeline 等區塊的文字都靠這份檔案排版。文章頁（/posts、/single-post）
   不用 `prose`，它的排版在 article.css。
 

@@ -47,7 +47,7 @@ export const AdminBar: FC<{
 
   return (
     <div
-      className={cn(baseClass, 'py-2 bg-black text-white', {
+      className={cn(baseClass, 'py-2 bg-ink text-paper', {
         block: show,
         hidden: !show,
       })}
@@ -55,11 +55,11 @@ export const AdminBar: FC<{
       <MaxWidthWrapper className="py-2">
         <PayloadAdminBar
           {...adminBarProps}
-          className="py-2 text-white"
+          className="py-2 text-paper"
           classNames={{
-            controls: 'font-medium text-white',
-            logo: 'text-white',
-            user: 'text-white',
+            controls: 'font-medium text-paper',
+            logo: 'text-paper',
+            user: 'text-paper',
           }}
           cmsURL={getClientSideURL()}
           collection={collection}

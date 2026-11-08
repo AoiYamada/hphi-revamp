@@ -81,7 +81,6 @@ const MobileNav = ({ header, className }: MobileNavProps) => {
               </Link>
             </MaxWidthWrapper>
           </li>
-          {/* <li className="my-3 h-px w-full bg-gray-300" /> */}
         </ul>
       ) : null}
     </div>
