@@ -15,7 +15,7 @@ const FooterNavLink: FC<FooterNavLinkProps> = ({ icon, link }) => {
       <CMSLink
         {...link}
         appearance="link"
-        className="text-anchor-foreground/80 transition-colors duration-200 ease-out hover:text-anchor-foreground"
+        className="text-chrome-footer-foreground/80 transition-colors duration-200 ease-out hover:text-chrome-footer-foreground"
       />
     </li>
   )
@@ -25,7 +25,7 @@ export default FooterNavLink
 
 const IconWrapper: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className="flex size-5 flex-row items-center justify-center text-anchor-foreground/70">
+    <div className="flex size-5 flex-row items-center justify-center text-chrome-footer-foreground/70">
       {children}
     </div>
   )

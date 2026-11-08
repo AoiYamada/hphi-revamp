@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 
 import { cn } from '@/utilities'
-import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
 import React, { ReactNode } from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
@@ -15,6 +13,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from 'next/script'
 
 import './globals.css'
+import { fontSans, fontSerif } from './fonts'
 import { getServerSideURL } from '@/utilities/getURL'
 import FacebookPixel from '@/components/FacebookPixel'
 import { fbId } from '@/lib/f-pixel'
@@ -29,7 +28,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 
   return (
     <html
-      className={cn(GeistSans.variable, GeistMono.variable)}
+      className={cn(fontSans.variable, fontSerif.variable)}
       lang="zh-HK"
       // to get rid of the hydration warning caused by extensions
       suppressHydrationWarning
@@ -38,6 +37,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <link href="/favicon/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon/favicon-32x32.png" rel="icon" type="image/png" sizes="32x32" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {/* 只做淺色：和 globals.css 的 `color-scheme: only light` 一起，擋住瀏覽器的自動深色 */}
+        <meta name="color-scheme" content="only light" />
         {googleSiteVerification && (
           <meta name="google-site-verification" content={googleSiteVerification} />
         )}
@@ -50,7 +51,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           </Script>
         )}
       </head>
-      <body className="bg-primary/10">
+      <body>
         <Providers>
           <AdminBar
             adminBarProps={{

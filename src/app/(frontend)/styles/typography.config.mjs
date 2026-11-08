@@ -16,26 +16,25 @@ const config = {
       typography: () => ({
         DEFAULT: {
           css: {
-            // Wire prose tokens to the design system. Earlier drafts referenced
-            // `var(--text)` directly which injected bare HSL channels; fixed here.
-            '--tw-prose-body': 'hsl(var(--foreground))',
-            '--tw-prose-headings': 'hsl(var(--foreground))',
-            '--tw-prose-lead': 'hsl(var(--muted-foreground))',
-            '--tw-prose-links': 'hsl(var(--secondary))',
-            '--tw-prose-bold': 'hsl(var(--foreground))',
-            '--tw-prose-counters': 'hsl(var(--secondary))',
-            '--tw-prose-bullets': 'hsl(var(--secondary))',
-            '--tw-prose-hr': 'hsl(var(--border))',
-            '--tw-prose-quotes': 'hsl(var(--foreground))',
-            '--tw-prose-quote-borders': 'hsl(var(--border))',
-            '--tw-prose-captions': 'hsl(var(--muted-foreground))',
-            '--tw-prose-code': 'hsl(var(--primary))',
-            '--tw-prose-pre-code': 'hsl(var(--background))',
-            '--tw-prose-pre-bg': 'hsl(var(--foreground))',
-            '--tw-prose-th-borders': 'hsl(var(--border))',
-            '--tw-prose-td-borders': 'hsl(var(--border))',
+            // Wire prose tokens to the design system (the `--color-*` theme tokens in globals.css).
+            '--tw-prose-body': 'var(--color-foreground)',
+            '--tw-prose-headings': 'var(--color-foreground)',
+            '--tw-prose-lead': 'var(--color-muted-foreground)',
+            '--tw-prose-links': 'var(--color-iris-soft)',
+            '--tw-prose-bold': 'var(--color-foreground)',
+            '--tw-prose-counters': 'var(--color-iris-soft)',
+            '--tw-prose-bullets': 'var(--color-iris-soft)',
+            '--tw-prose-hr': 'var(--color-border)',
+            '--tw-prose-quotes': 'var(--color-foreground)',
+            '--tw-prose-quote-borders': 'var(--color-border)',
+            '--tw-prose-captions': 'var(--color-muted-foreground)',
+            '--tw-prose-code': 'var(--color-primary)',
+            '--tw-prose-pre-code': 'var(--color-background)',
+            '--tw-prose-pre-bg': 'var(--color-foreground)',
+            '--tw-prose-th-borders': 'var(--color-border)',
+            '--tw-prose-td-borders': 'var(--color-border)',
 
-            color: 'hsl(var(--foreground))',
+            color: 'var(--color-foreground)',
             lineHeight: '1.75',
             maxWidth: '72ch',
 
@@ -47,7 +46,7 @@ const config = {
             // h1 anchors in Slate Plum; h2 carries brand voice (Iris Ink); h3 lifts
             // (Hyacinth); h4 drops to label-style Quiet Plum. Hierarchy at a glance.
             h1: {
-              color: 'hsl(var(--foreground))',
+              color: 'var(--color-foreground)',
               fontWeight: '300',
               fontSize: '2.5rem',
               lineHeight: '1.1',
@@ -56,9 +55,9 @@ const config = {
               marginBottom: '0.6em',
             },
             h2: {
-              // Hyacinth (--secondary) reads more vivid than Iris Ink (--primary)
-              // at heading scale — text strokes lose chroma vs. button surface.
-              color: 'hsl(var(--secondary))',
+              // iris-soft reads more vivid than the anchor-coloured primary at heading
+              // scale — text strokes lose chroma vs. button surface.
+              color: 'var(--color-iris-soft)',
               fontWeight: '600',
               fontSize: '1.625rem',
               lineHeight: '1.25',
@@ -69,13 +68,13 @@ const config = {
             },
             // 'h2::before': {
             //   content: 'counter(chapter, decimal-leading-zero) "  "',
-            //   color: 'hsl(var(--accent))',
+            //   color: 'var(--color-lilac)',
             //   fontWeight: '400',
             //   fontVariantNumeric: 'tabular-nums',
             //   marginRight: '0.1em',
             // },
             h3: {
-              color: 'hsl(var(--foreground))',
+              color: 'var(--color-foreground)',
               fontWeight: '600',
               fontSize: '1.25rem',
               lineHeight: '1.35',
@@ -83,7 +82,7 @@ const config = {
               marginBottom: '0.4em',
             },
             h4: {
-              color: 'hsl(var(--muted-foreground))',
+              color: 'var(--color-muted-foreground)',
               fontWeight: '500',
               fontSize: '0.875rem',
               textTransform: 'uppercase',
@@ -93,20 +92,20 @@ const config = {
             },
 
             // Inline
-            strong: { color: 'hsl(var(--foreground))', fontWeight: '600' },
-            em: { color: 'hsl(var(--foreground))', fontStyle: 'italic' },
+            strong: { color: 'var(--color-foreground)', fontWeight: '600' },
+            em: { color: 'var(--color-foreground)', fontStyle: 'italic' },
 
             a: {
-              color: 'hsl(var(--secondary))',
+              color: 'var(--color-iris-soft)',
               fontWeight: '500',
               textDecoration: 'underline',
               textUnderlineOffset: '4px',
               textDecorationThickness: '1.5px',
-              textDecorationColor: 'hsl(var(--accent))',
+              textDecorationColor: 'var(--color-lilac)',
               transition: 'color 200ms ease-out, text-decoration-color 200ms ease-out',
               '&:hover': {
-                color: 'hsl(var(--primary))',
-                textDecorationColor: 'hsl(var(--secondary))',
+                color: 'var(--color-primary)',
+                textDecorationColor: 'var(--color-iris-soft)',
               },
             },
 
@@ -114,8 +113,8 @@ const config = {
             blockquote: {
               fontStyle: 'italic',
               fontWeight: '400',
-              color: 'hsl(var(--foreground))',
-              backgroundColor: 'hsl(var(--muted) / 0.5)',
+              color: 'var(--color-foreground)',
+              backgroundColor: 'color-mix(in srgb, var(--color-muted) 50%, transparent)',
               border: 'none',
               borderRadius: '16px',
               padding: '1.25em 1.5em',
@@ -126,8 +125,8 @@ const config = {
 
             // Inline + block code
             code: {
-              color: 'hsl(var(--primary))',
-              backgroundColor: 'hsl(var(--muted) / 0.7)',
+              color: 'var(--color-primary)',
+              backgroundColor: 'color-mix(in srgb, var(--color-muted) 70%, transparent)',
               padding: '0.15em 0.4em',
               borderRadius: '6px',
               fontWeight: '500',
@@ -136,8 +135,8 @@ const config = {
             'code::before': { content: 'none' },
             'code::after': { content: 'none' },
             pre: {
-              backgroundColor: 'hsl(var(--foreground))',
-              color: 'hsl(var(--background))',
+              backgroundColor: 'var(--color-foreground)',
+              color: 'var(--color-background)',
               borderRadius: '14px',
               padding: '1.25em 1.5em',
               fontSize: '0.875em',
@@ -153,16 +152,16 @@ const config = {
 
             // Lists — colored markers
             'ol > li::marker': {
-              color: 'hsl(var(--secondary))',
+              color: 'var(--color-iris-soft)',
               fontWeight: '600',
             },
-            'ul > li::marker': { color: 'hsl(var(--secondary))' },
+            'ul > li::marker': { color: 'var(--color-iris-soft)' },
             li: { marginTop: '0.5em', marginBottom: '0.5em' },
 
             // HR — quiet, generous, with a small Soft Violet dot in the
             // middle as a section-break flourish.
             hr: {
-              borderColor: 'hsl(var(--border))',
+              borderColor: 'var(--color-border)',
               marginTop: '3.5em',
               marginBottom: '3.5em',
               position: 'relative',
@@ -174,31 +173,31 @@ const config = {
               left: '50%',
               top: '50%',
               transform: 'translate(-50%, -50%)',
-              backgroundColor: 'hsl(var(--background))',
+              backgroundColor: 'var(--color-background)',
               padding: '0 0.75em',
-              color: 'hsl(var(--accent))',
+              color: 'var(--color-lilac)',
               fontSize: '1.5em',
               lineHeight: '1',
             },
 
             // Tables
             'thead th': {
-              backgroundColor: 'hsl(var(--muted) / 0.5)',
-              color: 'hsl(var(--foreground))',
+              backgroundColor: 'color-mix(in srgb, var(--color-muted) 50%, transparent)',
+              color: 'var(--color-foreground)',
               fontWeight: '600',
               padding: '0.75em 1em',
-              borderBottom: '1px solid hsl(var(--border))',
+              borderBottom: '1px solid var(--color-border)',
               whiteSpace: 'nowrap',
             },
             'tbody td': {
               padding: '0.75em 1em',
-              borderBottom: '1px solid hsl(var(--border))',
+              borderBottom: '1px solid var(--color-border)',
             },
             'table p': { marginTop: '0.5em', marginBottom: '0.5em' },
 
             // Figures / captions
             figcaption: {
-              color: 'hsl(var(--muted-foreground))',
+              color: 'var(--color-muted-foreground)',
               fontSize: '0.875em',
               marginTop: '0.75em',
             },

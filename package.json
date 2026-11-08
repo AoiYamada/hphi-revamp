@@ -45,7 +45,6 @@
     "cross-env": "7.0.3",
     "date-fns": "4.4.0",
     "framer-motion": "12.43.0",
-    "geist": "1.8.1",
     "graphql": "16.14.2",
     "jsonwebtoken": "9.0.3",
     "lucide-react": "0.513.0",

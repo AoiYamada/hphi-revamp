@@ -1,5 +1,6 @@
 import type { Header as HeaderType } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
+import { cn } from '@/utilities'
 import { FC } from 'react'
 
 type MenuItemLabelProps = Pick<
@@ -9,7 +10,12 @@ type MenuItemLabelProps = Pick<
 
 const MenuItemLabel: FC<MenuItemLabelProps> = ({ label, enableDirectLink, link, className }) => {
   return enableDirectLink ? (
-    <CMSLink label={label} {...link} appearance="link" className={className} />
+    <CMSLink
+      label={label}
+      {...link}
+      appearance="link"
+      className={cn('text-chrome-nav', className)}
+    />
   ) : (
     <div className={className}>{label}</div>
   )

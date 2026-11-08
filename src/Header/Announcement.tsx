@@ -18,7 +18,10 @@ const Announcement: FC<AnnouncementProps> = ({ enable, content, dismissal }) => 
   if (!enable || !content || isDismissed) return null
 
   return (
-    <div {...dismissibleProps(dismissal.id)} className="z-50 bg-primary text-primary-foreground">
+    <div
+      {...dismissibleProps(dismissal.id)}
+      className="z-50 bg-chrome-announcement text-chrome-announcement-foreground"
+    >
       <MaxWidthWrapper className="py-2">
         <div className="flex w-full items-center gap-3">
           <RichText
@@ -28,7 +31,7 @@ const Announcement: FC<AnnouncementProps> = ({ enable, content, dismissal }) => 
           />
           <button
             onClick={dismiss}
-            className="shrink-0 rounded-full p-1.5 transition-colors duration-200 ease-out hover:bg-secondary/40 focus-visible:outline-hidden focus-visible:shadow-lift-focus"
+            className="shrink-0 rounded-full p-1.5 transition-colors duration-200 ease-out hover:bg-chrome-nav/40 focus-visible:outline-hidden focus-visible:shadow-focus"
             aria-label="Close announcement"
           >
             <X size={14} />

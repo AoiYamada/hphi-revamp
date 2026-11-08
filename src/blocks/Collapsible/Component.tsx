@@ -22,7 +22,7 @@ export const CollapsibleBlock: FC<
               'flex w-full items-center justify-between gap-4 rounded-lg px-6 py-5 text-left',
               'text-base font-semibold text-foreground md:text-lg',
               'transition-colors duration-200 ease-out-quart hover:bg-muted/60',
-              'focus-visible:outline-hidden focus-visible:shadow-lift-focus',
+              'focus-visible:outline-hidden focus-visible:shadow-focus',
             )}
           >
             <span>{item.title}</span>

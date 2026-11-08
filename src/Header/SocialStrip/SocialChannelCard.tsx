@@ -26,7 +26,7 @@ const SocialChannelCard: FC<SocialChannelCardProps> = ({
       {...link}
       newTab
       onClick={() => sendGAEvent('event', 'social_strip_click', { channel: name })}
-      className="group flex h-full flex-col gap-2 rounded-lg focus-visible:outline-hidden focus-visible:shadow-lift-focus xl:flex-row xl:items-center xl:gap-4"
+      className="group flex h-full flex-col gap-2 rounded-lg focus-visible:outline-hidden focus-visible:shadow-focus xl:flex-row xl:items-center xl:gap-4"
     >
       {/* Pure white on purpose (DESIGN.md's no-#fff rule is for surfaces): scanners need maximum
           contrast and a light quiet zone around the code. Mobile: fills the card's width. */}
@@ -41,7 +41,7 @@ const SocialChannelCard: FC<SocialChannelCardProps> = ({
         />
         <ArrowUpRight
           aria-hidden
-          className="absolute -right-1.5 -top-1.5 size-5 rounded-full bg-primary p-0.5 text-primary-foreground lg:hidden"
+          className="absolute -right-1.5 -top-1.5 size-5 rounded-full bg-chrome-announcement p-0.5 text-chrome-announcement-foreground lg:hidden"
         />
       </span>
       {caption ? (

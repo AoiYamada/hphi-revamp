@@ -68,10 +68,10 @@ export default async function Page() {
                   <p className="mb-2 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
                     {String(index + 1).padStart(2, '0')}
                   </p>
-                  <h2 className="text-2xl font-semibold leading-tight text-foreground transition-colors duration-200 ease-out group-hover:text-secondary md:text-3xl/9 lg:text-4xl/10">
+                  <h2 className="text-2xl font-semibold leading-tight text-foreground transition-colors duration-200 ease-out group-hover:text-iris-soft md:text-3xl/9 lg:text-4xl/10">
                     {name}
                   </h2>
-                  <p className="mt-2 text-lg text-secondary">{title}</p>
+                  <p className="mt-2 text-lg text-iris-soft">{title}</p>
                   {meta?.description && (
                     <p className="mt-4 max-w-prose leading-relaxed text-muted-foreground">
                       {meta.description}

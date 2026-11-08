@@ -55,7 +55,7 @@ export default async function Tutor({ params: paramsPromise }: Args) {
           <h1 className="mb-2 text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl/none lg:text-6xl/none">
             {tutor.name}
           </h1>
-          <p className="text-xl text-secondary md:text-2xl">{tutor.title}</p>
+          <p className="text-xl text-iris-soft md:text-2xl">{tutor.title}</p>
         </header>
 
         <div className="grid gap-12 md:grid-cols-2 md:gap-16">
@@ -73,7 +73,7 @@ export default async function Tutor({ params: paramsPromise }: Args) {
 
           <div className="flex flex-col gap-10">
             <section>
-              <h2 className="mb-4 text-2xl font-semibold text-secondary">關於導師</h2>
+              <h2 className="mb-4 text-2xl font-semibold text-iris-soft">關於導師</h2>
               <RichText
                 data={tutor.description}
                 enableGutter={false}
@@ -82,7 +82,7 @@ export default async function Tutor({ params: paramsPromise }: Args) {
             </section>
 
             <section>
-              <h2 className="mb-4 text-2xl font-semibold text-secondary">專業資格</h2>
+              <h2 className="mb-4 text-2xl font-semibold text-iris-soft">專業資格</h2>
               <RichText
                 data={tutor.qualifications}
                 enableGutter={false}

@@ -5,18 +5,18 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/utilities'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors duration-200 ease-out-quart focus-visible:outline-hidden focus-visible:shadow-lift-focus disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors duration-200 ease-out-quart focus-visible:outline-hidden focus-visible:shadow-focus disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
   {
     variants: {
       variant: {
         // No box-shadow on any variant. Hover surfaces are Soft Bloom (--muted),
         // never Soft Violet (--accent). See DESIGN.md "No-Lavender-Backgrounds".
-        default: 'bg-primary text-primary-foreground hover:bg-secondary',
+        default: 'bg-primary text-primary-foreground hover:bg-iris',
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-        outline: 'border border-border bg-background text-primary hover:bg-muted hover:border-secondary',
+        outline: 'border border-border bg-background text-primary hover:bg-muted hover:border-iris-soft',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/85',
         ghost: 'text-primary hover:bg-muted',
-        link: 'items-start justify-start text-secondary underline-offset-4 hover:underline',
+        link: 'items-start justify-start text-iris-soft underline-offset-4 hover:underline',
       },
       size: {
         clear: '',

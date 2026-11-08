@@ -23,7 +23,7 @@ export const CallToActionBlock: FC<CTABlockProps> = ({ links, richText }) => {
 
           <div className="relative flex flex-col gap-6 px-7 py-10 md:flex-row md:items-center md:justify-between md:gap-12 md:px-14 md:py-16">
             {richText && (
-              <div className="prose md:prose-lg dark:prose-invert max-w-[36ch] md:flex-1">
+              <div className="prose md:prose-lg max-w-[36ch] md:flex-1">
                 <RichText className="mb-0" data={richText} enableGutter={false} />
               </div>
             )}

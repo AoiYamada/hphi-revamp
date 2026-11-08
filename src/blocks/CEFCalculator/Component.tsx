@@ -146,7 +146,7 @@ const ResultRow: FC<{ label: string; value: string; emphasis?: boolean }> = ({
 }) => (
   <div className="flex items-baseline justify-between gap-4 text-sm">
     <dt className="text-muted-foreground">{label}</dt>
-    <dd className={cn('font-medium tabular-nums', emphasis ? 'text-secondary' : 'text-foreground')}>
+    <dd className={cn('font-medium tabular-nums', emphasis ? 'text-iris-soft' : 'text-foreground')}>
       {value}
     </dd>
   </div>

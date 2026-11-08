@@ -35,7 +35,7 @@ export const ListLinks: FC<ListLinksProps> = ({ label, links }) => {
               <CMSLink
                 {...link}
                 appearance="link"
-                className="text-sm text-muted-foreground hover:text-secondary transition-colors duration-200 ease-out whitespace-break-spaces"
+                className="text-sm text-muted-foreground hover:text-chrome-nav transition-colors duration-200 ease-out whitespace-break-spaces"
               />
             </li>
           ))}
@@ -65,7 +65,7 @@ export const FeaturedLink: FC<FeaturedLinkProps> = ({ label, content, links }) =
               <CMSLink
                 {...link}
                 appearance="link"
-                className="text-sm text-muted-foreground hover:text-secondary transition-colors duration-200 ease-out whitespace-break-spaces"
+                className="text-sm text-muted-foreground hover:text-chrome-nav transition-colors duration-200 ease-out whitespace-break-spaces"
               />
             </li>
           ))}

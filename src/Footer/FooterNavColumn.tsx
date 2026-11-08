@@ -33,7 +33,7 @@ const FooterNavColumn: FC<FooterNavColumnProps> = ({ label, enableDirectLink, li
 
   return (
     <div className="flex flex-col items-start justify-start gap-2">
-      <h3 className="text-lg font-semibold">{title}</h3>
+      <h3 className="font-sans text-lg font-semibold">{title}</h3>
       {items.length > 0 && (
         <ul className="text-md flex flex-col items-start justify-start gap-1">
           {items.map(({ icon, link }) => (

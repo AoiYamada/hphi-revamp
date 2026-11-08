@@ -12,7 +12,7 @@ type Props = {
 const styleConfig = {
   info: {
     container: 'bg-muted/60 text-foreground',
-    icon: 'text-secondary',
+    icon: 'text-iris-soft',
     Icon: Info,
   },
   success: {

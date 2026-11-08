@@ -31,7 +31,7 @@ export const Bloom: FC<{
       aria-hidden
       className={cn('pointer-events-none absolute inset-0 -z-10', className)}
       style={{
-        background: `radial-gradient(ellipse ${size}% ${size + 10}% at ${anchor}, hsl(var(--secondary) / ${opacity}), transparent 70%)`,
+        background: `radial-gradient(ellipse ${size}% ${size + 10}% at ${anchor}, color-mix(in srgb, var(--color-iris-soft) ${opacity * 100}%, transparent), transparent 70%)`,
       }}
     />
   )
@@ -57,7 +57,7 @@ export const IrisMark: FC<
     stroke="currentColor"
     strokeWidth="0.6"
     className={cn(
-      'pointer-events-none absolute -z-10 text-accent/40',
+      'pointer-events-none absolute -z-10 text-lilac/40',
       positionToCorner[position],
       className,
     )}

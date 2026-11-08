@@ -41,7 +41,7 @@ const SocialStrip: FC<SocialStripProps> = ({
     <aside
       {...dismissibleProps(dismissal.id)}
       aria-label="關注我們"
-      className="border-b border-border bg-muted/60"
+      className="border-b border-chrome-strip-border bg-chrome-strip"
     >
       <MaxWidthWrapper className="flex items-start gap-2 py-3 xl:py-4">
         {/* Mobile card width = (row − the two gap-3 gaps) / 2.5, capped on wide phones */}
@@ -57,7 +57,7 @@ const SocialStrip: FC<SocialStripProps> = ({
         </ul>
         <button
           onClick={handleDismiss}
-          className="shrink-0 rounded-md p-1.5 text-muted-foreground transition-colors duration-200 ease-out hover:bg-muted hover:text-foreground focus-visible:outline-hidden focus-visible:shadow-lift-focus"
+          className="shrink-0 rounded-md p-1.5 text-muted-foreground transition-colors duration-200 ease-out hover:bg-chrome-strip-border hover:text-foreground focus-visible:outline-hidden focus-visible:shadow-focus"
           aria-label="Close social strip"
         >
           <X size={14} />

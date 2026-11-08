@@ -7,75 +7,173 @@
 @source not './styles/typography.config.mjs';
 
 /*
-  v3 的 `darkMode` 是 selector 模式（`[data-theme="dark"]`），而且沒有任何地方設定 data-theme，
-  所以 `dark:` 一直沒有生效。v4 預設改成跟著 prefers-color-scheme，深色模式的裝置會變色，
-  所以改回 selector 模式，維持 `dark:` 不生效。（Task 3 會移除所有 `dark:`。）
-*/
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+  整站只做淺色，沒有 `dark:` 變體（深色模式的處理見下方 base layer 的 color-scheme）。
 
-/*
   v4 的 `hover:` 只在支援 hover 的裝置生效（`@media (hover: hover)`），v3 則是任何裝置點一下都會套用。
   這次遷移不改行為，所以還原成 v3 的寫法。`group-hover:` 也跟著走這個定義。
 */
 @custom-variant hover (&:hover);
 
-/*
-  顏色、陰影、字體。數值放在 :root 的 CSS 變數（顏色是以空白分隔的 HSL 三元組）或 layout 設定的
-  字體變數，所以用 `inline`：在使用的位置才解析，不在 :root 先解析一次。
-*/
-@theme inline {
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-  --color-background: hsl(var(--background));
-  --color-border: hsl(var(--border));
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-  --color-foreground: hsl(var(--foreground));
-  --color-input: hsl(var(--input));
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-  --color-anchor: hsl(var(--anchor));
-  --color-anchor-foreground: hsl(var(--anchor-foreground));
-  --color-ring: hsl(var(--ring));
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-  --color-success: hsl(var(--success));
-  --color-error: hsl(var(--error));
-  --color-warning: hsl(var(--warning));
-  --color-chart-1: hsl(var(--chart-1));
-  --color-chart-2: hsl(var(--chart-2));
-  --color-chart-3: hsl(var(--chart-3));
-  --color-chart-4: hsl(var(--chart-4));
-  --color-chart-5: hsl(var(--chart-5));
+/* ========================================================================================
+   設計 token
+   所有顏色、字體、圓角、陰影都在這裡定義，元件只能用這裡的 token（不寫 bg-gray-300 這類原始色）。
+   `static`：不管有沒有 class 用到，都輸出成 :root 的 CSS 變數，方便其他 CSS 或 inline style
+   直接寫 `var(--color-paper)`。
+   ======================================================================================== */
 
-  /* 陰影：lift-1 是可點擊卡片平時的高度，lift-2 是 hover 時，lift-focus 是鍵盤 focus 外圈。 */
-  --shadow-lift-1: 0 1px 2px 0 hsl(var(--primary) / 0.06);
-  --shadow-lift-2: 0 8px 24px -12px hsl(var(--primary) / 0.18);
-  --shadow-lift-focus: 0 0 0 3px hsl(var(--accent) / 0.45);
+/* ---------- 一、調色盤（想改主色，改這一段就好） ---------- */
+@theme static {
+  /* 紙色：頁面底色，用在 body 背景。 */
+  --color-paper: #f7f4ee;
+  /* 浮起的紙：卡片、輸入框、彈出層的背景。 */
+  --color-paper-raised: #fbf9f5;
+  /* 下沉的紙：次要區塊底色、hover 底色。 */
+  --color-paper-sunken: #efe9df;
 
-  /* 字體：變數由 layout.tsx 的 geist 設定。 */
-  --font-mono: var(--font-geist-mono);
-  --font-sans: var(--font-geist-sans);
+  /* 墨色：主要文字，內文和標題。 */
+  --color-ink: #2b2622;
+  /* 淡一階的墨色：副標題、hero 說明文字。 */
+  --color-ink-soft: #4a423b;
+  /* 最淡的墨色（輔助文字）：日期、作者、圖說、placeholder。 */
+  --color-ink-faint: #7a716a;
+
+  /* 線：邊框、分隔線、表格線。 */
+  --color-line: #e2dbd0;
+  /* 較深的線：Banner 上下線、卡片 hover 邊框。 */
+  --color-line-strong: #d9d1c6;
+
+  /* 品牌紫：小標籤、目錄高亮、連結底線、focus、公告列。 */
+  --color-iris: #6241a0;
+  /* 淡一階的品牌紫：H2 編號。 */
+  --color-iris-soft: #8865bb;
+  /* 裝飾紫：分隔線菱形、細裝飾。 */
+  --color-lilac: #b9aacd;
+  /* 深紫：主要按鈕、CTA 色帶、footer、文章導言文字。 */
+  --color-anchor: #3d2b5f;
+
+  /* 狀態色：成功（sage）。 */
+  --color-success: #5a8a64;
+  /* 狀態色：警告（amber）。 */
+  --color-warning: #c08a2b;
+  /* 狀態色：錯誤（madder），表單錯誤、Banner、destructive 按鈕。 */
+  --color-error: #b8413f;
+
+  /* 第三方品牌色：WhatsApp 按鈕的綠（bg-green-500）。v4 預設色盤改用 oklch，顏色會更鮮豔，這裡釘回 v3 的值。 */
+  --color-green-500: #22c55e;
 }
 
-@theme {
-  /* 圓角：整站共用一組。（原本的 DEFAULT 10px 沒有任何地方用到，不搬。） */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+/* ---------- 二、語意顏色（shadcn 元件用的名稱，全部指向調色盤） ---------- */
+@theme static {
+  /* 頁面背景與預設文字。 */
+  --color-background: var(--color-paper);
+  --color-foreground: var(--color-ink);
 
+  /* 卡片背景與卡片上的文字。 */
+  --color-card: var(--color-paper-raised);
+  --color-card-foreground: var(--color-ink);
+
+  /* 彈出層（Dialog、Popover、下拉選單）背景與文字。 */
+  --color-popover: var(--color-paper-raised);
+  --color-popover-foreground: var(--color-ink);
+
+  /* 主色（主要按鈕）與主色上的文字。 */
+  --color-primary: var(--color-anchor);
+  --color-primary-foreground: var(--color-paper);
+
+  /* 次要面、輔助面、強調面：都是「下沉的紙」，只當作底色用；要紫色文字請直接用 iris／iris-soft／lilac。 */
+  --color-secondary: var(--color-paper-sunken);
+  --color-secondary-foreground: var(--color-ink);
+  --color-muted: var(--color-paper-sunken);
+  --color-accent: var(--color-paper-sunken);
+  --color-accent-foreground: var(--color-ink);
+
+  /* 輔助文字（日期、作者、圖說、placeholder）。 */
+  --color-muted-foreground: var(--color-ink-faint);
+
+  /* 危險操作（destructive 按鈕）與其上的文字。 */
+  --color-destructive: var(--color-error);
+  --color-destructive-foreground: var(--color-paper);
+
+  /* 預設邊框色、輸入框邊框、focus 外圈顏色。 */
+  --color-border: var(--color-line);
+  --color-input: var(--color-line);
+  --color-ring: var(--color-iris);
+}
+
+/* ---------- 三、chrome（社交條、公告、選單、footer）：保留原版外觀，不要隨意改 ----------
+   這幾個顏色是原版網站實際看到的顏色（把半透明層疊起來算出來的結果），刻意和調色盤分開，
+   這樣調色盤再怎麼改，頂部和 footer 的樣子都不會跟著變。
+   原版是 `body` 的淡紫底（bg-primary/10）疊在白色畫布上，再疊上各元件自己的半透明色。 */
+@theme static {
+  /* 社交條底色。原版：muted/60 疊在淡紫的 body 上。 */
+  --color-chrome-strip: #eae4f0;
+  /* 淡紫細線：社交條下緣。也用在手機選單面板的上緣和 footer 的上緣。 */
+  --color-chrome-strip-border: #e3dde9;
+
+  /*
+    選單列底色，用法是 `bg-chrome-header/80`（和原版一樣 80% 不透明加 backdrop-blur）。
+    這個值是疊上去的那一層（不是疊完的結果）：疊在新的米白底和飽和度 150% 的模糊背景上，
+    看起來和原版一樣是 rgb(248, 246, 251)。手機選單面板直接用它當不透明底色。
+  */
+  --color-chrome-header: #f8f6ff;
+  /* 選單列下緣的線（已經疊在選單列底色上的結果）。 */
+  --color-chrome-header-border: #f0ecf3;
+
+  /* 公告列底色（原版 bg-primary，和 iris 幾乎相同）與公告上的文字。 */
+  --color-chrome-announcement: #62419f;
+  --color-chrome-announcement-foreground: #faf9fb;
+
+  /* 選單連結顏色。原版沒有分「目前所在頁」的樣式，所以兩個值相同。 */
+  --color-chrome-nav: #8766b7;
+  --color-chrome-nav-active: #8766b7;
+
+  /* footer 底色與文字（淡一點的文字用 `text-chrome-footer-foreground/70` 這類寫法）。 */
+  --color-chrome-footer: #3d2b5f;
+  --color-chrome-footer-foreground: #faf9fb;
+  /* footer 內的分隔線（原版是文字色 15% 疊在 footer 底色上）。 */
+  --color-chrome-footer-line: #584975;
+}
+
+/* ---------- 四、字體 ----------
+   `inline`：直接在使用的位置解析 `var(--font-noto-*)`。變數由 fonts.ts 的 next/font 設在 <html> 上。 */
+@theme static inline {
+  /* 黑體（Noto Sans TC）：選單、按鈕、小標籤、表單、日期與作者等資訊、卡片摘要、表格、目錄。 */
+  --font-sans: var(--font-noto-sans), 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  /* 明體（Noto Serif TC）：所有標題、文章內文、頁面長文、卡片標題、引言。 */
+  --font-serif: var(--font-noto-serif), 'Songti TC', 'PMingLiU', serif;
+  /* 等寬字：只用在 Code 區塊，用系統字型。 */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ---------- 五、圓角：整站只有這幾種（另外還有 rounded-none 和 rounded-full） ---------- */
+@theme static {
+  /* 先清掉預設的圓角，沒定義的尺寸（md、xl 等）就不存在。 */
+  --radius-*: initial;
+  /* 最小圓角：細部元素。 */
+  --radius-xs: 2px;
+  /* 預設圓角：按鈕、輸入框、卡片、圖片。 */
+  --radius-sm: 4px;
+  /* 大圓角：彈出視窗、下拉選單。 */
+  --radius-lg: 8px;
+}
+
+/* ---------- 六、陰影：平時一律不用，只有浮在上面的東西才用 ---------- */
+@theme static {
+  /* 先清掉預設的陰影。 */
+  --shadow-*: initial;
+  /* 浮層陰影：下拉選單、彈出視窗、手機目錄展開的面板。 */
+  --shadow-float: 0 16px 32px -16px rgb(43 38 34 / 0.35);
+  /* focus 外圈：3px、品牌紫 25%。（再搭配 1px 的品牌紫邊框。） */
+  --shadow-focus: 0 0 0 3px color-mix(in srgb, var(--color-iris) 25%, transparent);
+}
+
+/* ---------- 七、動畫 ---------- */
+@theme {
   /* 緩動曲線 */
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* 動畫：Radix accordion 展開和收合 */
+  /* Radix accordion 展開和收合 */
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
@@ -96,9 +194,6 @@
       height: 0;
     }
   }
-
-  /* WhatsApp 品牌綠（WhatsAppUs 的 bg-green-500）。v4 預設色盤改用 oklch，顏色會更鮮豔，這裡釘回 v3 的值。 */
-  --color-green-500: #22c55e;
 }
 
 /*
@@ -157,89 +252,31 @@
   }
 }
 
+/* 全站基礎樣式：只做淺色、紙色底、字體分工。 */
 @layer base {
+  /*
+    只做淺色。要寫 `only`，瀏覽器的自動深色功能（Chrome 的強制深色、Safari 的自動深色）才不會
+    改我們的顏色。<head> 裡還有一個同樣內容的 <meta name="color-scheme">（layout.tsx）。
+  */
+  :root {
+    color-scheme: only light;
+  }
+
+  /* 頁面底色用紙色，文字用墨色，預設字體是黑體。 */
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  /* 標題用明體；黑體的標題（例如 footer 欄位標題）要自己加 `font-sans`。 */
   h1,
   h2,
   h3,
-  h4,
-  h5,
-  h6 {
-    font-size: auto;
-    font-weight: auto;
-  }
-
-  :root {
-    /* See DESIGN.md for the full token spec. Values are space-separated HSL
-       channels; the @theme block above wraps them in hsl() for the colour utilities. */
-
-    /* Surfaces — Calm Paper at the floor, Soft Bloom one tonal step up. */
-    --background: 280 27% 98%; /* Calm Paper */
-    --foreground: 268 15% 20%; /* Slate Plum */
-    --text: 268 15% 20%; /* alias consumed by prose */
-
-    --card: 280 27% 98%;
-    --card-foreground: 268 15% 20%;
-
-    --popover: 280 27% 98%;
-    --popover-foreground: 268 15% 20%;
-
-    /* Brand voice — Iris Ink (committed) and Hyacinth (hover/secondary).
-       Tuned for button-scale: 40% read as too dark, 46% as too light, 44% sits
-       in the pocket. */
-    --primary: 261 42% 44%;
-    --primary-foreground: 280 27% 98%;
-
-    --secondary: 264 36% 56%;
-    --secondary-foreground: 280 27% 98%;
-
-    /* Anchor — deep purple for full-bleed dark surfaces (footer, hero scrim,
-       any future committed dark moment). Same color at button scale would feel
-       crushing; same primary at footer scale would feel diluted. Two tokens. */
-    --anchor: 261 38% 27%;
-    --anchor-foreground: 280 27% 98%;
-
-    /* Soft Bloom — second tonal layer (cards-on-cards, hover, accordion bodies,
-       CTA panel). Pushed darker than the original 95% so it reads as a real
-       second step against Calm Paper, not a barely-different shade of white. */
-    --muted: 274 24% 90%;
-    --muted-foreground: 265 9% 43%; /* Quiet Plum */
-
-    /* Soft Violet — accent only. Never a panel bg or default border at rest. */
-    --accent: 266 26% 74%;
-    --accent-foreground: 268 15% 20%;
-
-    /* Hush Line — the only border tone at rest. */
-    --border: 270 21% 89%;
-    --input: 270 21% 89%;
-    --ring: 261 39% 40%;
-
-    /* Madder. */
-    --destructive: 1 49% 48%;
-    --destructive-foreground: 280 27% 98%;
-
-    /* One rounding source of truth. Tailwind's borderRadius scale derives from this. */
-    --radius: 0.875rem; /* 14px = rounded-lg = canonical card */
-
-    /* Status — Sage / Amber / Madder. */
-    --success: 133 21% 45%;
-    --warning: 38 63% 46%;
-    --error: 1 49% 48%;
-
-    /* Charts — iris through soft violet, with sage/amber for cross-series. */
-    --chart-1: 261 42% 44%;
-    --chart-2: 264 36% 56%;
-    --chart-3: 266 26% 74%;
-    --chart-4: 38 63% 46%;
-    --chart-5: 133 21% 45%;
+  h4 {
+    @apply font-serif;
   }
 }
 
-@layer base {
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
+/* 沿用 Payload website 模板的設定。 */
 html {
   opacity: initial;
 }

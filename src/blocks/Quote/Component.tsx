@@ -14,7 +14,7 @@ export const QuoteBlock: FC<
         {/* Restrained opening quote — Soft Violet, decorative not loud */}
         <span
           aria-hidden
-          className="absolute left-6 top-4 select-none font-serif text-6xl leading-none text-accent/50 md:left-10 md:top-6 md:text-7xl"
+          className="absolute left-6 top-4 select-none font-serif text-6xl leading-none text-lilac/50 md:left-10 md:top-6 md:text-7xl"
         >
           &ldquo;
         </span>
@@ -32,7 +32,7 @@ export const QuoteBlock: FC<
 
         {author && (
           <figcaption className="mt-6 flex items-center gap-3 text-sm font-medium text-muted-foreground">
-            <span className="h-px w-6 bg-secondary" aria-hidden />
+            <span className="h-px w-6 bg-iris-soft" aria-hidden />
             {author}
           </figcaption>
         )}

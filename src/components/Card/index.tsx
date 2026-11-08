@@ -77,7 +77,7 @@ export const Card: FC<{
         )}
 
         {titleToUse && (
-          <h3 className="text-lg font-semibold leading-snug text-foreground transition-colors duration-200 ease-out group-hover:text-secondary">
+          <h3 className="text-lg font-semibold leading-snug text-foreground transition-colors duration-200 ease-out group-hover:text-iris-soft">
             <Link className="not-prose" href={href} ref={linkRef}>
               {titleToUse}
             </Link>

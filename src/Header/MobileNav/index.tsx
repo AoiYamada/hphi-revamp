@@ -44,14 +44,14 @@ const MobileNav = ({ header, className }: MobileNavProps) => {
     <div className={className}>
       <Icon
         onClick={toggleOpen}
-        className="relative z-50 size-7 cursor-pointer select-none text-foreground transition-colors duration-200 ease-out hover:text-secondary"
+        className="relative z-50 size-7 cursor-pointer select-none text-foreground transition-colors duration-200 ease-out hover:text-chrome-nav"
       />
 
       {isOpen ? (
         // Anchored to the sticky <header> (nearest positioned ancestor) so it always opens right
         // below it, whatever the Announcement's height. `fixed` would resolve against the header
         // anyway (backdrop-filter makes it the containing block) and cover the Announcement.
-        <ul className="absolute inset-x-0 top-full z-10 grid max-h-[calc(100dvh-100%)] gap-3 overflow-y-auto border-t border-border bg-card px-10 pb-8 pt-4 shadow-lift-1 animate-in fade-in-20 slide-in-from-top-5">
+        <ul className="absolute inset-x-0 top-full z-10 grid max-h-[calc(100dvh-100%)] gap-3 overflow-y-auto border-t border-chrome-strip-border bg-chrome-header px-10 pb-8 pt-4 shadow-lift-1 animate-in fade-in-20 slide-in-from-top-5">
           {taps.map(({ label, link, enableDirectLink, enableDropdown, navItems, ...others }, i) => {
             if (others.description || others.descriptionLinks?.length) {
               return null
@@ -74,10 +74,10 @@ const MobileNav = ({ header, className }: MobileNavProps) => {
           <li className="group">
             <MaxWidthWrapper className="p-0">
               <Link
-                className="flex w-full items-center text-xl font-bold group-hover:text-secondary"
+                className="flex w-full items-center text-xl font-bold group-hover:text-chrome-nav"
                 href="/search"
               >
-                文章搜尋 <SearchIcon className="ml-2 h-4 w-4 group-hover:text-secondary" />
+                文章搜尋 <SearchIcon className="ml-2 h-4 w-4 group-hover:text-chrome-nav" />
               </Link>
             </MaxWidthWrapper>
           </li>
@@ -102,23 +102,23 @@ const MenuItem = ({ enableDropdown, label, link, enableDirectLink, navItems }: M
   if (enableDropdown) {
     return (
       <Collapsible>
-        <CollapsibleTrigger className="group flex flex-row items-center justify-between w-full data-[state=open]:text-secondary hover:text-secondary transition-colors">
+        <CollapsibleTrigger className="group flex flex-row items-center justify-between w-full data-[state=open]:text-chrome-nav hover:text-chrome-nav transition-colors">
           <MenuItemLabel
             label={label}
             enableDirectLink={enableDirectLink}
             link={link}
             className={cn(
-              'justify-start text-xl font-bold group-data-[state=open]:text-secondary group-hover:text-secondary transition-colors',
+              'justify-start text-xl font-bold group-data-[state=open]:text-chrome-nav group-hover:text-chrome-nav transition-colors',
             )}
           />
           <ChevronRight
             className={cn(
-              'ml-1 h-4 w-4 transition-all group-data-[state=open]:rotate-90 group-data-[state=open]:text-secondary',
+              'ml-1 h-4 w-4 transition-all group-data-[state=open]:rotate-90 group-data-[state=open]:text-chrome-nav',
             )}
           />
         </CollapsibleTrigger>
         <CollapsibleContent className="collapsible-content pl-2">
-          <ul className="border-l-2 pl-2 py-2 space-y-4">
+          <ul className="border-l-2 border-chrome-strip-border pl-2 py-2 space-y-4">
             {navItems?.map(({ style, defaultLink, featuredLink, listLinks }, i) => {
               let item: JSX.Element | null = null
 
@@ -148,7 +148,7 @@ const MenuItem = ({ enableDropdown, label, link, enableDirectLink, navItems }: M
       enableDirectLink={enableDirectLink}
       link={link}
       className={cn('text-xl font-bold w-full transition-colors', {
-        'hover:text-secondary': enableDirectLink,
+        'hover:text-chrome-nav': enableDirectLink,
       })}
     />
   )

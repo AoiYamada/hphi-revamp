@@ -38,7 +38,7 @@ export const BookItem: FC<Props> = ({ book, idPrefix, selected, onOpen, onToggle
         'md:transition-shadow md:duration-300 md:ease-out md:hover:shadow-lift-2',
         selected && 'md:border-primary',
         // The card clips its children, so from md up the focus ring goes on the card itself.
-        'md:has-[[data-book-opener]:focus-visible]:border-secondary md:has-[[data-book-opener]:focus-visible]:shadow-lift-focus',
+        'md:has-[[data-book-opener]:focus-visible]:border-iris md:has-[[data-book-opener]:focus-visible]:shadow-focus',
       )}
     >
       <div className="group relative flex min-w-0 flex-1 items-center gap-3 md:flex-col md:items-stretch md:gap-0">
@@ -54,9 +54,9 @@ export const BookItem: FC<Props> = ({ book, idPrefix, selected, onOpen, onToggle
               data-book-opener
               onClick={(event) => onOpen(book.id, event.currentTarget)}
               className={cn(
-                'text-left transition-colors duration-200 ease-out-quart group-hover:text-secondary',
+                'text-left transition-colors duration-200 ease-out-quart group-hover:text-iris-soft',
                 'after:absolute after:inset-0 after:rounded-md md:after:rounded-none',
-                'focus-visible:outline-hidden focus-visible:after:shadow-lift-focus md:focus-visible:after:shadow-none',
+                'focus-visible:outline-hidden focus-visible:after:shadow-focus md:focus-visible:after:shadow-none',
               )}
             >
               {book.title}
