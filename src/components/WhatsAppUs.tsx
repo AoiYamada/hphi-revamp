@@ -15,7 +15,7 @@ const WhatsAppUs: FC<WhatsAppUsProps> = ({ link, className }) => {
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        'flex justify-center items-center cursor-pointer group bg-green-500 text-white rounded-3xl',
+        'flex justify-center items-center cursor-pointer group bg-green-500 text-white rounded-full',
         className,
       )}
     >

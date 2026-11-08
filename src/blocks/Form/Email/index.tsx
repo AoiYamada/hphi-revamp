@@ -19,11 +19,12 @@ export const Email: React.FC<
   }
 > = ({ name, defaultValue, errors, label, register, required: requiredFromProps, width }) => {
   return (
-    <Width width={width} className="legacy-space-y-2">
+    <Width width={width} className="flex flex-col gap-2">
       <Label htmlFor={name}>{label}</Label>
       <Input
         defaultValue={defaultValue}
         id={name}
+        aria-invalid={Boolean(errors[name])}
         type="text"
         {...register(name, { pattern: /^\S[^\s@]*@\S+$/, required: requiredFromProps })}
       />

@@ -29,12 +29,13 @@ export const Textarea: React.FC<
   width,
 }) => {
   return (
-    <Width width={width} className="legacy-space-y-2">
+    <Width width={width} className="flex flex-col gap-2">
       <Label htmlFor={name}>{label}</Label>
 
       <TextAreaComponent
         defaultValue={defaultValue}
         id={name}
+        aria-invalid={Boolean(errors[name])}
         rows={rows}
         {...register(name, { required: requiredFromProps })}
       />

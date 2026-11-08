@@ -112,19 +112,19 @@ function Calendar({
   )
   const _dayButtonClassName = cn(
     buttonVariants({ variant: 'ghost' }),
-    'size-8 rounded-md p-0 font-normal transition-none aria-selected:opacity-100',
+    'size-8 rounded-sm p-0 font-normal transition-none aria-selected:opacity-100',
     props.dayButtonClassName,
   )
   const buttonRangeClassName =
     'bg-accent [&>button]:bg-primary [&>button]:text-primary-foreground hover:[&>button]:bg-primary hover:[&>button]:text-primary-foreground'
   const _rangeStartClassName = cn(
     buttonRangeClassName,
-    'day-range-start rounded-s-md',
+    'day-range-start rounded-s-sm',
     props.rangeStartClassName,
   )
   const _rangeEndClassName = cn(
     buttonRangeClassName,
-    'day-range-end rounded-e-md',
+    'day-range-end rounded-e-sm',
     props.rangeEndClassName,
   )
   const _rangeMiddleClassName = cn(
@@ -135,7 +135,7 @@ function Calendar({
     '[&>button]:bg-primary [&>button]:text-primary-foreground hover:[&>button]:bg-primary hover:[&>button]:text-primary-foreground',
     props.selectedClassName,
   )
-  const _todayClassName = cn('[&>button]:bg-accent/30', props.todayClassName)
+  const _todayClassName = cn('[&>button]:bg-accent [&>button]:font-medium', props.todayClassName)
   const _outsideClassName = cn(
     'day-outside text-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-foreground aria-selected:opacity-30',
     props.outsideClassName,
@@ -311,7 +311,7 @@ function Nav({
     <nav className={cn('flex items-center', className)}>
       <Button
         variant="outline"
-        className="absolute left-0 h-7 w-7 bg-transparent p-0 opacity-80 hover:opacity-100"
+        className="absolute left-0 size-7 border-border bg-transparent p-0 opacity-80 hover:opacity-100"
         type="button"
         tabIndex={isPreviousDisabled ? undefined : -1}
         disabled={isPreviousDisabled}
@@ -327,7 +327,7 @@ function Nav({
 
       <Button
         variant="outline"
-        className="absolute right-0 h-7 w-7 bg-transparent p-0 opacity-80 hover:opacity-100"
+        className="absolute right-0 size-7 border-border bg-transparent p-0 opacity-80 hover:opacity-100"
         type="button"
         tabIndex={isNextDisabled ? undefined : -1}
         disabled={isNextDisabled}

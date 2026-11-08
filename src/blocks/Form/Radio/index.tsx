@@ -16,7 +16,7 @@ export const Radio: React.FC<
   }
 > = ({ name, control, errors, label, options, required, width, defaultValue }) => {
   return (
-    <Width width={width} className="legacy-space-y-2">
+    <Width width={width} className="flex flex-col gap-2">
       <Label htmlFor={name}>{label}</Label>
       <Controller
         control={control}
@@ -24,13 +24,13 @@ export const Radio: React.FC<
         name={name}
         render={({ field: { onChange, value } }) => {
           return (
-            <RadioGroup onValueChange={(val) => onChange(val)} value={value} className="space-y-2">
+            <RadioGroup onValueChange={(val) => onChange(val)} value={value} className="gap-3">
               {options.map(({ label, value }) => {
                 const id = `${name}-${value}`
 
                 return (
-                  <div key={value} className="flex items-center space-x-2">
-                    <RadioGroupItem value={value} id={id} />
+                  <div key={value} className="flex items-center gap-2">
+                    <RadioGroupItem value={value} id={id} aria-invalid={Boolean(errors[name])} />
                     <Label htmlFor={id}>{label}</Label>
                   </div>
                 )

@@ -31,14 +31,13 @@ type PaginationLinkProps = {
 } & Pick<ButtonProps, 'size'> &
   React.ComponentProps<'button'>
 
+// 黑體數字；目前頁是 ink 粗體加底線，其他頁是一般字重，hover 才有底色。
 const PaginationLink = ({ className, isActive, size = 'icon', ...props }: PaginationLinkProps) => (
   <button
     aria-current={isActive ? 'page' : undefined}
     className={cn(
-      buttonVariants({
-        variant: isActive ? 'outline' : 'ghost',
-        size,
-      }),
+      buttonVariants({ variant: 'ghost', size }),
+      isActive && 'font-bold text-ink underline underline-offset-4',
       className,
     )}
     {...props}

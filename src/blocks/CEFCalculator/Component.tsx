@@ -65,8 +65,9 @@ export const CEFCalculatorBlock: FC<{
   }
 
   return (
-    <div className={cn('mx-auto my-8 w-full max-w-xl', className)}>
-      <div className="rounded-xl border border-border bg-card p-6 shadow-lift-1 md:p-8">
+    // 計算器放在富文字（`prose`）裡，`not-prose` 讓標題、段落和輸入框不吃文章的間距與字級。
+    <div className={cn('not-prose mx-auto my-8 w-full max-w-xl', className)}>
+      <div className="rounded-sm border border-border bg-card p-6 md:p-8">
         <div className="mb-6">
           <h2 className="text-xl font-semibold text-primary md:text-2xl">CEF 計算器</h2>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -80,6 +81,7 @@ export const CEFCalculatorBlock: FC<{
             <Input
               id="cefBalance"
               type="number"
+              aria-invalid={Boolean(errors.cefBalance)}
               {...register('cefBalance', {
                 required: '請輸入 CEF 帳戶餘額。',
                 min: { value: 0, message: 'CEF 帳戶餘額必須至少為 $0。' },
@@ -97,6 +99,7 @@ export const CEFCalculatorBlock: FC<{
             <Input
               id="tuitionFee"
               type="number"
+              aria-invalid={Boolean(errors.tuitionFee)}
               {...register('tuitionFee', {
                 required: '請輸入學費。',
                 min: { value: 1, message: '學費必須大於 0。' },
@@ -113,8 +116,8 @@ export const CEFCalculatorBlock: FC<{
         </form>
 
         {result && (
-          <div className="mt-6 rounded-lg bg-muted/60 p-5">
-            <h3 className="mb-4 border-b border-border/60 pb-2 text-base font-semibold text-foreground">
+          <div className="mt-6 rounded-sm bg-muted p-5">
+            <h3 className="mb-4 border-b border-line-strong pb-2 text-base font-semibold text-foreground">
               計算結果
             </h3>
             <dl className="flex flex-col gap-3">
@@ -146,7 +149,7 @@ const ResultRow: FC<{ label: string; value: string; emphasis?: boolean }> = ({
 }) => (
   <div className="flex items-baseline justify-between gap-4 text-sm">
     <dt className="text-muted-foreground">{label}</dt>
-    <dd className={cn('font-medium tabular-nums', emphasis ? 'text-iris-soft' : 'text-foreground')}>
+    <dd className={cn('font-medium tabular-nums', emphasis ? 'text-iris' : 'text-foreground')}>
       {value}
     </dd>
   </div>

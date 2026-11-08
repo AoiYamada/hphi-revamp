@@ -34,8 +34,8 @@ export const BookItem: FC<Props> = ({ book, idPrefix, selected, onOpen, onToggle
     <li
       className={cn(
         'flex items-center gap-1 py-2 pl-1 pr-4',
-        'md:flex-col md:items-stretch md:gap-0 md:overflow-hidden md:rounded-lg md:border md:border-border md:bg-card md:p-0 md:shadow-lift-1',
-        'md:transition-shadow md:duration-300 md:ease-out md:hover:shadow-lift-2',
+        'md:flex-col md:items-stretch md:gap-0 md:overflow-hidden md:rounded-sm md:border md:border-border md:bg-card md:p-0',
+        'md:transition-colors md:duration-200 md:ease-out md:hover:border-line-strong',
         selected && 'md:border-primary',
         // The card clips its children, so from md up the focus ring goes on the card itself.
         'md:has-[[data-book-opener]:focus-visible]:border-iris md:has-[[data-book-opener]:focus-visible]:shadow-focus',
@@ -55,7 +55,7 @@ export const BookItem: FC<Props> = ({ book, idPrefix, selected, onOpen, onToggle
               onClick={(event) => onOpen(book.id, event.currentTarget)}
               className={cn(
                 'text-left transition-colors duration-200 ease-out-quart group-hover:text-iris-soft',
-                'after:absolute after:inset-0 after:rounded-md md:after:rounded-none',
+                'after:absolute after:inset-0 after:rounded-sm md:after:rounded-none',
                 'focus-visible:outline-hidden focus-visible:after:shadow-focus md:focus-visible:after:shadow-none',
               )}
             >

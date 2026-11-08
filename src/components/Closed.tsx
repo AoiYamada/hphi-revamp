@@ -10,10 +10,7 @@ type ClosedProps = {
 
 const Closed: FC<ClosedProps> = ({ className }) => {
   return (
-    <Button
-      className={cn('flex flex-row justify-center text-primary-foreground font-normal', className)}
-      disabled
-    >
+    <Button className={cn('flex flex-row justify-center', className)} disabled>
       <span className="px-[14px]">名額已滿</span>
     </Button>
   )

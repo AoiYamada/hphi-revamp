@@ -37,7 +37,7 @@ export const BookDialog: FC<Props> = ({
         onCloseAutoFocus={onCloseAutoFocus}
       >
         <div className="grid gap-6 sm:grid-cols-[13rem_minmax(0,1fr)]">
-          <CoverFrame cover={book.cover} className="mx-auto w-40 rounded-md sm:w-full" />
+          <CoverFrame cover={book.cover} className="mx-auto w-40 rounded-sm sm:w-full" />
 
           <div className="flex min-w-0 flex-col gap-4">
             <DialogHeader className="pr-8">

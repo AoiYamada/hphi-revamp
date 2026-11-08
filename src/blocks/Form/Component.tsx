@@ -138,12 +138,16 @@ export const FormBlock: FC<
       {enableIntro && introContent && !hasSubmitted && (
         <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
       )}
-      <div className="rounded-lg border border-border bg-card px-6 py-6 shadow-lift-1 lg:px-10 lg:py-8">
+      <div className="rounded-sm border border-border bg-card px-6 py-6 lg:px-10 lg:py-8">
         <FormProvider {...formMethods}>
           {!isLoading && hasSubmitted && confirmationType === 'message' && (
             <RichText data={confirmationMessage} />
           )}
-          {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
+          {error && (
+            <div role="alert" className="mb-6 text-sm text-error">
+              {`${error.status || '500'}: ${error.message || ''}`}
+            </div>
+          )}
           {!hasSubmitted && (
             <form id={formID} onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-8 last:mb-0">

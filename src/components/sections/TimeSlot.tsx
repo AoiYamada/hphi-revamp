@@ -43,8 +43,8 @@ type ClassCardProps = {
 
 const ClassCard: FC<ClassCardProps> = ({ title, time, date, notes, tutors, closed, formId }) => {
   return (
-    <div className="flex flex-col gap-5 rounded-lg border border-border bg-card p-7 text-card-foreground shadow-lift-1 transition-shadow duration-300 ease-out hover:shadow-lift-2">
-      <h2 className="text-xl font-semibold leading-snug text-iris-soft md:text-2xl/8">{title}</h2>
+    <div className="flex flex-col gap-5 rounded-sm border border-border bg-card p-7 text-card-foreground transition-colors duration-200 ease-out hover:border-line-strong">
+      <h2 className="text-xl font-semibold leading-snug text-foreground md:text-2xl/8">{title}</h2>
 
       <div className="flex flex-col gap-3 text-sm">
         <DetailRow icon={<Clock className="size-4" />} label="時間">
@@ -95,7 +95,7 @@ const DetailRow: FC<{
   children: React.ReactNode
 }> = ({ icon, label, children }) => (
   <div className="flex items-start gap-3">
-    <div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-md bg-muted text-iris-soft">
+    <div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-sm bg-muted text-iris">
       {icon}
     </div>
     <div className="flex-1">

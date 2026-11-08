@@ -16,13 +16,19 @@ export const Date: React.FC<
   }
 > = ({ name, control, errors, label, required, width }) => {
   return (
-    <Width width={width} className="legacy-space-y-2">
+    <Width width={width} className="flex flex-col gap-2">
       <Label htmlFor={name}>{label}</Label>
       <Controller
         control={control}
         name={name}
         render={({ field: { onChange, value } }) => {
-          return <DatePicker defaultDate={value} onSelect={(date) => onChange(date)} />
+          return (
+            <DatePicker
+              defaultDate={value}
+              invalid={Boolean(errors[name])}
+              onSelect={(date) => onChange(date)}
+            />
+          )
         }}
         rules={{ required }}
       />

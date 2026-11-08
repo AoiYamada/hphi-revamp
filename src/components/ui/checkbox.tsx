@@ -13,13 +13,14 @@ const Checkbox = React.forwardRef<
   <CheckboxPrimitive.Root
     ref={ref}
     className={cn(
-      'peer size-5 shrink-0 rounded-sm border border-border bg-background transition-colors duration-200 ease-out focus-visible:border-iris focus-visible:outline-hidden focus-visible:shadow-focus disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
+      // 未勾選用 ink-faint 邊框（line 色太淡，看不清楚框在哪裡）；勾選後整格變 iris。
+      'peer size-5 shrink-0 rounded-xs border border-ink-faint bg-card transition-colors duration-200 ease-out focus-visible:border-ring focus-visible:shadow-focus focus-visible:outline-hidden aria-invalid:border-error disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-iris data-[state=checked]:bg-iris data-[state=checked]:text-paper',
       className,
     )}
     {...props}
   >
     <CheckboxPrimitive.Indicator className={cn('flex items-center justify-center text-current')}>
-      <Check className="h-4 w-4" />
+      <Check className="size-4" />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
 ))

@@ -14,7 +14,7 @@ type Props = {
 // Sticks to the bottom of the viewport only while its Book List is on screen. On narrow
 // screens the right padding leaves room for the site-wide floating WhatsApp button.
 export const OrderBar: FC<Props> = ({ count, total, href, onOrder }) => (
-  <div className="sticky bottom-3 flex items-center justify-between gap-4 rounded-lg border border-border bg-background py-3 pl-4 pr-20 shadow-lift-2 md:pr-3">
+  <div className="sticky bottom-3 flex items-center justify-between gap-4 rounded-lg border border-border bg-popover py-3 pl-4 pr-20 shadow-float md:pr-3">
     {/* Two short lines on mobile, where the button and floating WhatsApp button leave ~60px. */}
     <p className="flex flex-col text-sm text-muted-foreground md:flex-row">
       <span className="whitespace-nowrap">

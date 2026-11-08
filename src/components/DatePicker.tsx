@@ -11,10 +11,11 @@ import { CalendarIcon } from 'lucide-react'
 
 type DatePickerProps = {
   defaultDate?: Date
+  invalid?: boolean
   onSelect?: (date: Date) => void
 }
 
-const DatePicker: FC<DatePickerProps> = ({ defaultDate, onSelect }) => {
+const DatePicker: FC<DatePickerProps> = ({ defaultDate, invalid, onSelect }) => {
   const [date, setDate] = useState<Date | undefined>(defaultDate)
 
   const handleSelect = (date: Date) => {
@@ -26,11 +27,13 @@ const DatePicker: FC<DatePickerProps> = ({ defaultDate, onSelect }) => {
     <div className="w-full">
       <Popover>
         <PopoverTrigger asChild>
+          {/* 外觀和輸入框一致（見 ui/input.tsx）：line 邊框、paper-raised 底。 */}
           <Button
-            variant={'outline'}
+            variant="outline"
+            aria-invalid={invalid}
             className={cn(
-              'w-[240px] justify-start text-left font-normal',
-              !date && 'text-foreground',
+              'w-60 justify-start border-input bg-card px-3.5 text-left font-normal tracking-normal text-foreground hover:bg-card focus-visible:border-ring aria-invalid:border-error',
+              !date && 'text-muted-foreground',
             )}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />

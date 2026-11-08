@@ -26,7 +26,7 @@ export const Select: React.FC<
   }
 > = ({ name, control, errors, label, options, required, width, defaultValue, placeholder }) => {
   return (
-    <Width width={width} className="legacy-space-y-2">
+    <Width width={width} className="flex flex-col gap-2">
       <Label htmlFor={name}>{label}</Label>
       <Controller
         control={control}
@@ -37,7 +37,7 @@ export const Select: React.FC<
 
           return (
             <SelectComponent onValueChange={(val) => onChange(val)} value={controlledValue?.value}>
-              <SelectTrigger className="w-full" id={name}>
+              <SelectTrigger aria-invalid={Boolean(errors[name])} className="w-full" id={name}>
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
               <SelectContent>

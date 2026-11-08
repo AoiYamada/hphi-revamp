@@ -22,7 +22,7 @@ const TimelineHeader = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'mb-1 flex flex-col items-start before:absolute before:left-2 before:h-full before:-translate-x-1/2 before:translate-y-3 before:self-start before:bg-border before:px-px after:absolute after:left-2 after:box-content after:size-2 after:-translate-x-1/2 after:translate-y-1.5 after:rounded-full after:border-4 after:border-background after:bg-iris-soft group-last:before:hidden sm:flex-row sm:before:left-0 sm:before:ml-40 sm:after:left-0 sm:after:ml-40',
+      'mb-1 flex flex-col items-start before:absolute before:left-2 before:h-full before:-translate-x-1/2 before:translate-y-3 before:self-start before:bg-border before:px-px after:absolute after:left-2 after:box-content after:size-2 after:-translate-x-1/2 after:translate-y-1.5 after:rounded-full after:border-4 after:border-background after:bg-iris group-last:before:hidden sm:flex-row sm:before:left-0 sm:before:ml-40 sm:after:left-0 sm:after:ml-40',
       className,
     )}
     {...props}
@@ -32,7 +32,11 @@ TimelineHeader.displayName = 'TimelineHeader'
 
 const TimelineTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, children, ...props }, ref) => (
-    <div ref={ref} className={cn('text-xl font-semibold text-iris-soft', className)} {...props}>
+    <div
+      ref={ref}
+      className={cn('font-serif text-xl font-semibold text-foreground', className)}
+      {...props}
+    >
       {children}
     </div>
   ),

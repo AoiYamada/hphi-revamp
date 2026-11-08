@@ -19,12 +19,13 @@ export default function DateRangePicker({ className }: React.HTMLAttributes<HTML
     <div className={cn('grid gap-2 w-full', className)}>
       <Popover>
         <PopoverTrigger asChild>
+          {/* 外觀和輸入框一致（見 ui/input.tsx）：line 邊框、paper-raised 底。 */}
           <Button
             id="date"
-            variant={'outline'}
+            variant="outline"
             className={cn(
-              'w-[300px] justify-start text-left font-normal',
-              !date && 'text-foreground',
+              'w-75 justify-start border-input bg-card px-3.5 text-left font-normal tracking-normal text-foreground hover:bg-card focus-visible:border-ring',
+              !date && 'text-muted-foreground',
             )}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />

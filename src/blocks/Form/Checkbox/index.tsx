@@ -26,11 +26,12 @@ export const Checkbox: React.FC<
   const { setValue } = useFormContext()
 
   return (
-    <Width width={width} className="space-y-2">
-      <div className="flex items-center gap-2">
+    <Width width={width} className="flex flex-col gap-2">
+      <div className="flex items-start gap-2">
         <CheckboxUi
           defaultChecked={defaultValue}
           id={name}
+          aria-invalid={Boolean(errors[name])}
           {...props}
           onCheckedChange={(checked) => {
             setValue(props.name, checked)
