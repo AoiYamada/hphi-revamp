@@ -31,7 +31,7 @@ type ListLinksProps = NonNullable<
 
 export const ListLinks: FC<ListLinksProps> = ({ label, links }) => {
   return (
-    <div className="space-y-2">
+    <div className="legacy-space-y-2">
       {label && <p className="text-lg font-medium">{label}</p>}
       {links && links.length > 0 && (
         <ul className="space-y-1 pl-4" style={{ marginTop: '0.25rem' }}>
@@ -56,7 +56,7 @@ type FeaturedLinkProps = NonNullable<
 
 export const FeaturedLink: FC<FeaturedLinkProps> = ({ label, content, links }) => {
   return (
-    <div className="space-y-2">
+    <div className="legacy-space-y-2">
       {label && <p className="text-lg font-medium">{label}</p>}
       {content && (
         <div>
