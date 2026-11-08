@@ -67,16 +67,33 @@ type AnchoredHeadingNode = SerializedHeadingNode & { anchorId?: string; anchorNu
 
 const HEADING_TAGS: ReadonlySet<string> = new Set(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
 
+/**
+ * Lexical formats that mean "no alignment chosen". Under the old left-aligned design they changed
+ * nothing visually, so an editor did not pick them on purpose (see `heading` below).
+ */
+const DEFAULT_ALIGN_FORMATS: ReadonlySet<string> = new Set(['start', 'left'])
+
 const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
   ...LinkJSXConverter({ internalDocToHref }),
   // Same output as the default converter, plus `id` and `data-number` when the node is anchored.
   // The number itself is drawn by `h2[data-number]::before` in styles/article.css.
+  //
+  // R22: the article design centres H2s. Old content often has H2s saved with format `start`, which
+  // the library renders as an inline `text-align: left`. For the article's anchored H2s that value is
+  // treated as the default, so no inline alignment is emitted and the stylesheet's centring applies.
+  // `center`, `right`/`end` and `justify` are still written inline as usual. Headings that are not
+  // anchored (pages, nested rich text, H3/H4) keep every alignment exactly as before.
   heading: ({ node, nodesToJSX }) => {
     const { anchorId, anchorNumber } = node as AnchoredHeadingNode
     const Tag = (HEADING_TAGS.has(node.tag) ? node.tag : 'h1') as 'h1'
+    const useDesignAlignment =
+      node.tag === 'h2' && anchorId !== undefined && DEFAULT_ALIGN_FORMATS.has(node.format)
+    // The library merges its own style under the one we return, so an undefined value cancels it.
+    const style = useDesignAlignment ? { textAlign: undefined } : undefined
+
     return (
-      <Tag id={anchorId} data-number={anchorNumber}>
+      <Tag id={anchorId} data-number={anchorNumber} style={style}>
         {nodesToJSX({ nodes: node.children })}
       </Tag>
     )
