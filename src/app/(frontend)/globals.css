@@ -57,6 +57,10 @@
   /* 狀態色：錯誤（madder），表單錯誤、Banner、destructive 按鈕。 */
   --color-error: #b8413f;
 
+  /* 狀態色的文字版：小字（例如 Banner 的 13px 標籤）用，在紙色底上對比 ≥ 4.5:1。success、warning 本色只用在色塊和線條。 */
+  --color-success-text: #44704e;
+  --color-warning-text: #8f6410;
+
   /* 第三方品牌色：WhatsApp 按鈕的綠（bg-green-500）。v4 預設色盤改用 oklch，顏色會更鮮豔，這裡釘回 v3 的值。 */
   --color-green-500: #22c55e;
 }

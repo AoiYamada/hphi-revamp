@@ -14,8 +14,8 @@ type Props = {
 */
 const styleConfig = {
   info: { label: '提示', color: 'text-iris' },
-  success: { label: '重點', color: 'text-success' },
-  warning: { label: '注意', color: 'text-warning' },
+  success: { label: '重點', color: 'text-success-text' },
+  warning: { label: '注意', color: 'text-warning-text' },
   error: { label: '重要', color: 'text-error' },
 } as const
 
