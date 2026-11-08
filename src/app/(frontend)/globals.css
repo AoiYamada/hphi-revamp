@@ -3,6 +3,7 @@
 @import 'tw-animate-css';
 @plugin '@tailwindcss/typography';
 @import './styles/prose.css';
+@import './styles/article.css';
 /* typography.config.mjs 裡的註解有 `prose-lg` 這類字眼，不要被當成 class 掃描。 */
 @source not './styles/typography.config.mjs';
 

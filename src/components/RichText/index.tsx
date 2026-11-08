@@ -2,6 +2,7 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import {
   DefaultNodeTypes,
   SerializedBlockNode,
+  SerializedHeadingNode,
   SerializedLinkNode,
 } from '@payloadcms/richtext-lexical'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
@@ -58,14 +59,32 @@ const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   return `${relationTo !== 'pages' ? `/${relationTo}` : ''}/${slug}`
 }
 
+/**
+ * `annotateH2Anchors` (src/utilities/article/headings.ts) adds these to the top-level H2 nodes of
+ * an article. They only exist on article content, so other rich text renders headings unchanged.
+ */
+type AnchoredHeadingNode = SerializedHeadingNode & { anchorId?: string; anchorNumber?: string }
+
+const HEADING_TAGS: ReadonlySet<string> = new Set(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
+
 const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
   ...LinkJSXConverter({ internalDocToHref }),
+  // Same output as the default converter, plus `id` and `data-number` when the node is anchored.
+  // The number itself is drawn by `h2[data-number]::before` in styles/article.css.
+  heading: ({ node, nodesToJSX }) => {
+    const { anchorId, anchorNumber } = node as AnchoredHeadingNode
+    const Tag = (HEADING_TAGS.has(node.tag) ? node.tag : 'h1') as 'h1'
+    return (
+      <Tag id={anchorId} data-number={anchorNumber}>
+        {nodesToJSX({ nodes: node.children })}
+      </Tag>
+    )
+  },
   blocks: {
-    banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
+    banner: ({ node }) => <BannerBlock className="mb-4" {...node.fields} />,
     mediaBlock: ({ node }) => (
       <MediaBlock
-        className="col-start-1 col-span-3"
         imgClassName="m-0 mx-auto"
         videoClassName="m-0 mx-auto"
         {...node.fields}
@@ -74,24 +93,14 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
         disableInnerContainer={true}
       />
     ),
-    youtubeBlock: ({ node }) => <YouTube className="col-start-2" {...node.fields} />,
-    code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
+    youtubeBlock: ({ node }) => <YouTube {...node.fields} />,
+    code: ({ node }) => <CodeBlock {...node.fields} />,
     cta: ({ node }) => <CallToActionBlock {...node.fields} />,
-    formBlock: ({ node }) => <FormBlock className="col-start-2 p-0 md:p-0" {...node.fields} />,
-    collapsibleBlock: ({ node }) => (
-      <div className="col-start-2">
-        <CollapsibleBlock {...node.fields} />
-      </div>
-    ),
-    quoteBlock: ({ node }) => <QuoteBlock className="col-start-2" {...node.fields} />,
-    cefCalculatorBlock: ({ node }) => (
-      <CEFCalculatorBlock className="col-start-2" {...node.fields} />
-    ),
-    tabsBlock: ({ node }) => (
-      <div className="col-start-2">
-        <TabsBlock {...node.fields} />,
-      </div>
-    ),
+    formBlock: ({ node }) => <FormBlock className="p-0 md:p-0" {...node.fields} />,
+    collapsibleBlock: ({ node }) => <CollapsibleBlock {...node.fields} />,
+    quoteBlock: ({ node }) => <QuoteBlock {...node.fields} />,
+    cefCalculatorBlock: ({ node }) => <CEFCalculatorBlock {...node.fields} />,
+    tabsBlock: ({ node }) => <TabsBlock {...node.fields} />,
   },
 })
 

@@ -1,18 +1,15 @@
 import type { Metadata } from 'next'
 
-import { RelatedPosts } from '@/blocks/RelatedPosts/Component'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import config from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
-import RichText from '@/components/RichText'
 
 import type { Post } from '@/payload-types'
 
-import { PostHero } from '@/heros/PostHero'
+import { ArticleLayout } from '@/components/Article/ArticleLayout'
 import { generateMeta } from '@/utilities/generateMeta'
-import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 
 export async function generateStaticParams() {
@@ -51,26 +48,11 @@ export default async function Post({ params: paramsPromise }: Args) {
   if (!post) return <PayloadRedirects url={url} />
 
   return (
-    <MaxWidthWrapper>
-      <article className="pb-16">
-        <PayloadRedirects disableNotFound url={url} />
-        <LivePreviewListener />
-
-        <PostHero post={post} />
-
-        <div className="flex flex-col items-center gap-4 pt-8">
-          <div className="w-full">
-            <RichText className="mx-auto" data={post.content} enableGutter={false} />
-            {post.relatedPosts && post.relatedPosts.length > 0 && (
-              <RelatedPosts
-                className="mt-12 lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
-                docs={post.relatedPosts.filter((post) => typeof post === 'object')}
-              />
-            )}
-          </div>
-        </div>
-      </article>
-    </MaxWidthWrapper>
+    <>
+      <PayloadRedirects disableNotFound url={url} />
+      <LivePreviewListener />
+      <ArticleLayout post={post} />
+    </>
   )
 }
 

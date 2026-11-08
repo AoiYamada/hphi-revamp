@@ -16,7 +16,9 @@ const isH2 = (node: LexicalLike): boolean => node.type === 'heading' && node.tag
 const hasText = (node: LexicalLike): boolean => collectText(node).trim() !== ''
 
 /**
- * Adds `anchorId` and `anchorNumber` to each top-level H2 and returns the TOC entries.
+ * Adds `anchorId` and `anchorNumber` to each top-level H2 that has text and returns the TOC
+ * entries. H2s that are empty once trimmed are left untouched (no anchor, no TOC entry) and do
+ * not use up a number, so the numbering stays consecutive.
  * Does not mutate the input state.
  */
 export function annotateH2Anchors(state: SerializedEditorState): {
@@ -28,10 +30,13 @@ export function annotateH2Anchors(state: SerializedEditorState): {
     const lexical: LexicalLike = node
     if (!isH2(lexical)) return node
 
+    const headingText = collectText(lexical).trim()
+    if (headingText === '') return node
+
     const index = headings.length + 1
     const id = `section-${index}`
     const number = String(index).padStart(2, '0')
-    headings.push({ id, text: collectText(lexical).trim(), number })
+    headings.push({ id, text: headingText, number })
     return { ...node, anchorId: id, anchorNumber: number }
   })
 

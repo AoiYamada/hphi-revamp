@@ -1,0 +1,334 @@
+/*
+  文章頁（/posts/[slug]、/single-post/[slug]）的排版：書卷風格。數值取自設計文件 5.1、5.2。
+
+  這份 CSS 不依賴 @tailwindcss/typography（`prose`）。文章內文由 RichText 以 `enableProse={false}`
+  輸出，每個節點都是 `.article-richtext` 的直接子元素，所以下面的內文規則一律用 `>` 只管最外層的節點：
+  Quote、Banner、Collapsible、Tabs、表單這些區塊自己的內部排版不會被誤傷。
+
+  用 `@layer components`：Tailwind 的工具類別（區塊自己帶的 `my-12`、`mb-4` 之類）排在後面，
+  永遠蓋得過這裡的預設值；而 Lexical 輸出的 inline `text-align` 是 style 屬性，優先權比任何
+  stylesheet 都高。對齊只靠預設值，這份檔案不能對 `text-align` 寫 `!important`。
+
+  顏色、字體一律用 globals.css 的 token（`var(--color-*)`、`var(--font-*)`）。
+*/
+
+@layer components {
+  /* ======================================================================================
+     一、文章頂部（ArticleHeader）
+     ====================================================================================== */
+
+  /* 分類小標籤：黑體、iris、字距加寬；多個分類用「 · 」連接（在 TSX 組好字串）。 */
+  .article-kicker {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.2em;
+    color: var(--color-iris);
+  }
+
+  /* 標題：明體 700，手機約 24px、桌面約 40px，行高 1.45。 */
+  .article-title {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
+    color: var(--color-ink);
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+  }
+  .article-kicker + .article-title {
+    margin-top: 20px;
+  }
+  @media (min-width: 48rem) {
+    .article-title {
+      font-size: 40px;
+    }
+  }
+
+  /* 作者、日期、閱讀時間：黑體、muted（ink-faint）。項目之間用間距隔開，換行時不會留下孤單的符號。 */
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 24px;
+    margin-top: 22px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-ink-faint);
+  }
+
+  /* 標題區最下面那條 40px 長的 lilac 細線。 */
+  .article-rule {
+    width: 40px;
+    height: 1px;
+    margin: 28px auto 0;
+    background: var(--color-lilac);
+  }
+
+  /* ======================================================================================
+     二、內文（RichText 的最外層節點）
+     ====================================================================================== */
+
+  .article-richtext {
+    /* 手機 17px、桌面 18px；導言 18px／20px。 */
+    --article-text: 17px;
+    --article-lede: 18px;
+
+    /* 長英文字串、長網址在欄寬裡換行，不撐開頁面（表格儲存格另外處理，見下）。 */
+    overflow-wrap: anywhere;
+    min-width: 0;
+  }
+  @media (min-width: 48rem) {
+    .article-richtext {
+      --article-text: 18px;
+      --article-lede: 20px;
+    }
+  }
+
+  /* 段落、清單、引用：明體 500，行高 2.0。 */
+  .article-richtext > p,
+  .article-richtext > ul,
+  .article-richtext > ol,
+  .article-richtext > blockquote {
+    margin: 0 0 1.2em;
+    font-family: var(--font-serif);
+    font-size: var(--article-text);
+    font-weight: 500;
+    line-height: 2;
+    color: var(--color-ink);
+  }
+
+  /* 粗體（明體只載入 500／600／700，內文是 500，所以粗體用 700）。 */
+  .article-richtext strong {
+    font-weight: 700;
+  }
+
+  /* 底線：Lexical 輸出 <span style="text-decoration: underline">，只調整底線離字的距離。 */
+  .article-richtext span[style*='underline'] {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
+
+  /* 導言（內文第一段）：約 20px、600、anchor 色。粗體在導言裡維持同色。 */
+  .article-lede > p {
+    font-size: var(--article-lede);
+    font-weight: 600;
+    line-height: 1.9;
+    color: var(--color-anchor);
+  }
+
+  /* ---------- 標題 ---------- */
+
+  /* H1（編輯器允許，但頁面已經有標題了，所以只做成和 H2 同級的區塊標題）。 */
+  .article-richtext > h1,
+  .article-richtext > h2 {
+    margin: 56px 0 22px;
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.45;
+    color: var(--color-ink);
+    text-align: center;
+    text-wrap: balance;
+  }
+  .article-richtext > h1 {
+    font-size: 30px;
+  }
+  @media (min-width: 48rem) {
+    .article-richtext > h1 {
+      font-size: 32px;
+    }
+    .article-richtext > h2 {
+      font-size: 27px;
+    }
+  }
+
+  /* H2 上方的小編號（01、02…）：黑體、iris-soft，和目錄的編號一致。沒有編號的 H2 不畫。 */
+  .article-richtext > h2[data-number]::before {
+    content: attr(data-number);
+    display: block;
+    margin-bottom: 6px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.2em;
+    color: var(--color-iris-soft);
+  }
+
+  /* H3：明體 700，約 21px，靠左（不指定 text-align，編輯器設定了才會變）。 */
+  .article-richtext > h3 {
+    margin: 40px 0 12px;
+    font-family: var(--font-serif);
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--color-ink);
+  }
+
+  /* H4：黑體小字、iris、字距加寬，當小標籤用。 */
+  .article-richtext > h4 {
+    margin: 32px 0 8px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: 0.16em;
+    color: var(--color-iris);
+  }
+
+  /* ---------- 連結 ---------- */
+
+  /* ink 文字加 iris 底線，hover 時文字變 iris。只管內文的行內連結，不碰 CTA 按鈕這類區塊裡的連結。 */
+  .article-richtext > :is(p, h1, h2, h3, h4, ul, ol, blockquote) a,
+  .article-richtext .lexical-table-container a {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-iris);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    transition: color 200ms ease-out;
+  }
+  .article-richtext > :is(p, h1, h2, h3, h4, ul, ol, blockquote) a:hover,
+  .article-richtext .lexical-table-container a:hover {
+    color: var(--color-iris);
+  }
+  .article-richtext > :is(p, h1, h2, h3, h4, ul, ol, blockquote) a:focus-visible,
+  .article-richtext .lexical-table-container a:focus-visible {
+    outline: none;
+    border-radius: 2px;
+    box-shadow: var(--shadow-focus);
+  }
+
+  /* ---------- 清單與引用（編輯器目前沒有開，舊內容可能有） ---------- */
+
+  .article-richtext > ul {
+    padding-left: 1.5em;
+    list-style: disc;
+  }
+  .article-richtext > ol {
+    padding-left: 1.6em;
+    list-style: decimal;
+  }
+  .article-richtext > :is(ul, ol) li {
+    margin: 0.3em 0;
+    padding-left: 0.2em;
+  }
+  .article-richtext > :is(ul, ol) li::marker {
+    color: var(--color-iris-soft);
+  }
+  .article-richtext > :is(ul, ol) :is(ul, ol) {
+    margin: 0.3em 0 0;
+    list-style: circle;
+  }
+  .article-richtext > blockquote {
+    margin-block: 2em;
+    padding-inline: 1.5em;
+    font-weight: 600;
+    color: var(--color-anchor);
+    text-align: center;
+  }
+
+  /* ---------- 分隔線：不畫線，改成置中的三顆 lilac 小菱形，沒有背景色塊 ---------- */
+
+  .article-richtext > hr {
+    height: auto;
+    margin: 44px 0;
+    border: 0;
+    background: none;
+    text-align: center;
+    overflow: visible;
+  }
+  .article-richtext > hr::after {
+    content: '◆　◆　◆';
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: 0.3em;
+    color: var(--color-lilac);
+  }
+
+  /* ---------- 表格 ---------- */
+
+  /* 外面那層（Payload 輸出的 .lexical-table-container）可以橫向捲動，表格再寬也不會撐開頁面。 */
+  .article-richtext .lexical-table-container {
+    margin: 8px 0 28px;
+    overflow-x: auto;
+  }
+  .article-richtext .lexical-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--color-ink);
+    text-align: left;
+  }
+  /* 儲存格：黑體 15px、靠左、每列 1px line、頂端對齊。
+     Payload 會替每個儲存格寫 inline 的 `border: 1px solid #ccc; padding: 8px`，
+     只有 !important 才蓋得過 inline style。這裡只蓋邊框和內距，不碰 text-align 和背景色。 */
+  .article-richtext .lexical-table-container :is(th, td) {
+    padding: 10px 12px !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--color-line) !important;
+    text-align: left;
+    vertical-align: top;
+    /* 不用 anywhere：它會把欄位壓到一個字寬，英文單字被攔腰切開。太長的字串靠外層捲動。 */
+    overflow-wrap: break-word;
+    /* 旁邊有很長的儲存格時，自動排版會把短欄壓成一個字寬（「第／一／列」直排）。
+       保留約 3 個中文字的內容寬度（含左右內距）。欄數太多時就靠外層捲動。 */
+    min-width: 5.5em;
+  }
+  .article-richtext .lexical-table-container th {
+    font-weight: 700;
+  }
+  /* 表頭（第一列）下方 2px ink 線；只有「欄標題」（第一欄）的 th 維持 1px。 */
+  .article-richtext
+    .lexical-table-container
+    :is(.lexical-table-cell-header-1, .lexical-table-cell-header-3) {
+    border-bottom: 2px solid var(--color-ink) !important;
+  }
+
+  /* ---------- 區塊（MediaBlock、YouTube、Code、CTA、Collapsible、Tabs…） ---------- */
+
+  /* 區塊自己的樣式留給各自的元件。這裡只保證：不超出欄寬，上下有預設間距
+     （區塊自己帶 `my-*` 時，工具類別排在 components 之後，會蓋掉這個預設）。 */
+  .article-richtext > :where(div, figure, section):not(.lexical-table-container) {
+    max-width: 100%;
+    margin-block: 2rem;
+  }
+  .article-richtext :is(img, video, iframe, pre) {
+    max-width: 100%;
+  }
+  /* 沒有導言時，內文的第一個節點貼齊欄位頂端，不要多出標題或區塊的上邊距。
+     要放在區塊規則後面：兩者優先權一樣，後面的贏。 */
+  .article-richtext-first > :first-child {
+    margin-top: 0;
+  }
+
+  /* ======================================================================================
+     三、相關文章
+     ====================================================================================== */
+
+  /* 區塊標題：明體、置中，下方一條 32px 的 iris 短線。 */
+  .article-related-title {
+    margin-bottom: 40px;
+    font-family: var(--font-serif);
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--color-ink);
+    text-align: center;
+  }
+  .article-related-title::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 2px;
+    margin: 14px auto 0;
+    background: var(--color-iris);
+  }
+}
