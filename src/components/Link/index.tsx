@@ -11,11 +11,12 @@ import type { Course, Page, Post, Tutor } from '@/payload-types'
   `inline` 不套用任何按鈕樣式（富文字裡的連結）。
 
   `link` 只有選單和 footer 在用，它是「純文字連結」：顏色由呼叫端的 className 決定，只在 hover 時
-  才有底線，字距也不加寬，保留原版的外觀（規格 4.3）。所以這裡把 `link` variant 的恆常底線和
-  字距蓋掉，其他地方要用文字按鈕請直接用 `<Button variant="link">`。
+  才有底線，底線顏色跟著文字（`decoration-current`），字距也不加寬，保留原版的外觀（規格 4.3）。
+  所以這裡把 `link` variant 的恆常底線、iris 底線色和字距蓋掉，其他地方要用文字按鈕請直接用
+  `<Button variant="link">`。
 */
 const NAV_LINK_CLASS =
-  'items-start justify-start text-iris-soft no-underline tracking-normal hover:underline'
+  'items-start justify-start text-iris-soft no-underline decoration-current tracking-normal hover:underline'
 
 export type CMSLinkType = {
   appearance?: 'inline' | ButtonProps['variant']
