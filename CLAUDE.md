@@ -26,8 +26,9 @@ pnpm lint:fix
 pnpm gen:types        # regenerate src/payload-types.ts after collection/global edits
 pnpm gen:import       # regenerate Payload import map (run after adding admin custom components)
 pnpm payload          # raw Payload CLI (e.g. pnpm payload migrate)
-pnpm install          # install dependencies. Use this, not `pnpm ii`: `pnpm ii` ignores pnpm-workspace.yaml (overrides + allowBuilds) and fails
-pnpm reinstall        # nuke node_modules + lockfile and reinstall
+pnpm install          # install dependencies (honours pnpm-workspace.yaml: overrides + allowBuilds)
+pnpm ii               # alias for `pnpm install` (no longer passes --ignore-workspace, which skipped pnpm-workspace.yaml and failed)
+pnpm reinstall        # nuke node_modules + lockfile and reinstall (plain `pnpm install`, workspace settings applied)
 ```
 
 There is no test suite configured — do not invent one or add `pnpm test` instructions.
