@@ -9,7 +9,6 @@ import { annotateH2Anchors, splitLede } from '@/utilities/article/headings'
 import { estimateReadingMinutes } from '@/utilities/article/readingTime'
 
 import { ArticleHeader } from './ArticleHeader'
-import { MIN_HEADINGS } from './Toc/copy'
 import { DesktopToc } from './Toc/DesktopToc'
 import { InlineToc } from './Toc/InlineToc'
 import { TocBar } from './Toc/TocBar'
@@ -41,7 +40,6 @@ const prepareBody = (content: Content | null | undefined) => {
  */
 export const ArticleLayout: FC<{ post: Post }> = ({ post }) => {
   const { lede, body, headings, readingMinutes } = prepareBody(post.content)
-  const hasToc = headings.length >= MIN_HEADINGS
   const cover = post.meta?.image && typeof post.meta.image === 'object' ? post.meta.image : null
   const relatedPosts = (post.relatedPosts ?? []).filter(
     (related): related is Post => typeof related === 'object' && related !== null,
@@ -89,7 +87,7 @@ export const ArticleLayout: FC<{ post: Post }> = ({ post }) => {
               data={body}
               enableGutter={false}
               enableProse={false}
-              className={cn('article-richtext', !lede && !hasToc && 'article-richtext-first')}
+              className={cn('article-richtext', !lede && 'article-richtext-first')}
             />
           )}
         </div>

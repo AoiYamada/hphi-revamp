@@ -36,7 +36,7 @@ export const BookItem: FC<Props> = ({ book, idPrefix, selected, onOpen, onToggle
         'flex items-center gap-1 py-2 pl-1 pr-4',
         'md:flex-col md:items-stretch md:gap-0 md:overflow-hidden md:rounded-sm md:border md:border-border md:bg-card md:p-0',
         'md:transition-colors md:duration-200 md:ease-out md:hover:border-line-strong',
-        selected && 'md:border-primary',
+        selected && 'md:border-primary md:hover:border-primary',
         // The card clips its children, so from md up the focus ring goes on the card itself.
         'md:has-[[data-book-opener]:focus-visible]:border-iris md:has-[[data-book-opener]:focus-visible]:shadow-focus',
       )}

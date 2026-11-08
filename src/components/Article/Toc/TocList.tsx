@@ -39,7 +39,7 @@ export const TocList: FC<TocListProps> = ({ headings, variant, activeId = null, 
   }
 
   return (
-    <ol>
+    <ol role="list">
       {headings.map(({ id, number, text }) => {
         const isActive = id === activeId
         return (
