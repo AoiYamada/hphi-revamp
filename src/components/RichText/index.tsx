@@ -112,7 +112,8 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     ),
     youtubeBlock: ({ node }) => <YouTube {...node.fields} />,
     code: ({ node }) => <CodeBlock {...node.fields} />,
-    cta: ({ node }) => <CallToActionBlock {...node.fields} />,
+    // 富文字裡的 CTA 一律限制在所在的欄位內（文章內文欄、Content 區塊的欄位），滿版色帶只給頁面 layout。
+    cta: ({ node }) => <CallToActionBlock {...node.fields} variant="contained" />,
     formBlock: ({ node }) => <FormBlock className="p-0 md:p-0" {...node.fields} />,
     collapsibleBlock: ({ node }) => <CollapsibleBlock {...node.fields} />,
     quoteBlock: ({ node }) => <QuoteBlock {...node.fields} />,
@@ -140,7 +141,7 @@ const RichText: FC<RichTextProps> = ({
         {
           'w-full': enableGutter,
           'max-w-none': !enableGutter,
-          'mx-auto prose md:prose-md': enableProse,
+          'mx-auto prose': enableProse,
         },
         className,
       )}

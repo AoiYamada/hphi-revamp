@@ -1,15 +1,327 @@
 /*
-  文章排版（@tailwindcss/typography 的 `prose`）。
+  頁面裡的長文（`prose`）：書卷風格。數值取自設計文件 6.5。
 
-  客製內容放在同目錄的 typography.config.mjs，這裡只負責用 `@config` 載入。
+  這是純 CSS，不依賴 @tailwindcss/typography（已移除）。富文字（RichText）預設會套上 `prose`，
+  Content、Collapsible、Tabs、Timeline 等區塊的文字都靠這份檔案排版。文章頁（/posts、/single-post）
+  不用 `prose`，它的排版在 article.css。
 
-  為什麼不直接寫成 CSS：plugin 會把設定合併進它自己的規則，位置不變，所以 plugin 排在後面的重設規則
-  （`h2 + *`、`:first-child`、`thead th:first-child`、`h2 strong`、`md:prose-lg` 的字級）仍然蓋得過
-  這些客製值。v4 的 `@utility` 排在哪裡由屬性排序決定，沒辦法固定排在 plugin 規則之後；
-  `.prose h2 { ... }` 的優先權又高過 plugin 的 `:where()` 規則。兩種寫法都會讓上述重設失效：
-  緊接在 h2 後面的 h3 會多出上邊距、第一個子元素不再貼齊容器、表格第一欄會多出左內距、
-  `md:prose-lg` 的標題字級會被蓋掉。
+  規則的寫法：
+  - 放在 `@layer components`：區塊自己帶的工具類別（`max-w-none`、`mx-auto`、`my-8`、`m-0`…）
+    排在後面，永遠蓋得過這裡的預設值。
+  - 元素規則寫成 `.prose :where(h2)`，優先權只有一個 class（0,1,0）。`:not(:where(.not-prose, .not-prose *))`
+    讓 `not-prose` 繼續有效：Code、CEF 計算器、CTA、Quote 這些放在富文字裡、自己有排版的區塊，
+    加上 `not-prose` 就不會被這裡的規則影響。
+  - 編輯器設定的對齊（Lexical 輸出的 inline `text-align`）優先權比任何 stylesheet 高。
+    這份檔案對 `text-align` 只寫預設值（沒有的就不寫），而且絕對不用 `!important`。
 
-  之後重寫文章排版時，可以整份改成純 CSS，再移除 typography.config.mjs。
+  顏色、字體一律用 globals.css 的 token（`var(--color-*)`、`var(--font-*)`、`var(--radius-*)`）。
 */
-@config './typography.config.mjs';
+
+@layer components {
+  /* ======================================================================================
+     一、基本設定：明體 16.5px、行高 2.0、墨色
+     ====================================================================================== */
+
+  .prose {
+    /* 單欄長文的最大寬度；區塊在欄位裡時用 `max-w-none` 取消。 */
+    max-width: 72ch;
+    font-family: var(--font-serif);
+    font-size: 16.5px;
+    font-weight: 500;
+    line-height: 2;
+    color: var(--color-ink);
+    /* 太長的英文字串或網址在欄寬裡換行，不撐開頁面。 */
+    overflow-wrap: break-word;
+  }
+
+  /* 段落：上下各 1em（相鄰的段落合併成 1em）。 */
+  .prose :where(p):not(:where(.not-prose, .not-prose *)) {
+    margin-block: 1em;
+  }
+
+  /* 粗體：明體內文是 500，粗體用 700（明體只載入 500、600、700）。 */
+  .prose :where(strong, b):not(:where(.not-prose, .not-prose *)) {
+    font-weight: 700;
+  }
+
+  /* ======================================================================================
+     二、標題
+     ====================================================================================== */
+
+  /*
+    H1、H2：區塊大標題，明體 700。手機 28px、md 起 34px，字距 0.08em。
+    首頁等頁面的區塊標題，編輯常選 H1，所以 H1 和 H2 同一個樣式。
+  */
+  .prose :where(h1, h2):not(:where(.not-prose, .not-prose *)) {
+    margin-block: 1.8em 1.1em;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: 0.08em;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+  @media (min-width: 48rem) {
+    .prose :where(h1, h2):not(:where(.not-prose, .not-prose *)) {
+      font-size: 34px;
+    }
+  }
+
+  /*
+    區塊大標題下方 32px 長、2px 高的 iris 短線。
+    短線是 `display: block` 的 ::after，預設靠左；標題置中或靠右時跟著走（下面兩組規則）。
+    Lexical 把對齊寫成 inline style（`text-align:center`，有的版本會多一個空格），兩種寫法都要比對。
+    完全空白的標題（沒有任何內容）不畫短線。
+  */
+  .prose :where(h1, h2):not(:where(.not-prose, .not-prose *))::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 2px;
+    margin-top: 18px;
+    background: var(--color-iris);
+  }
+  .prose :where(h1, h2):is([style*='text-align:center' i], [style*='text-align: center' i])::after {
+    margin-inline: auto;
+  }
+  .prose
+    :where(h1, h2):is(
+      [style*='text-align:right' i],
+      [style*='text-align: right' i],
+      [style*='text-align:end' i],
+      [style*='text-align: end' i]
+    )::after {
+    margin-inline-start: auto;
+  }
+  .prose :where(h1, h2):empty::after {
+    display: none;
+  }
+
+  /*
+    首頁大圖（HighImpact 等 hero）的標題也是 prose 裡的 H1，但它是頁面標題，不是區塊標題：
+    不畫短線、字級大一點。RenderHero 在最外層加了 `data-hero`。
+    hero 的樣式之後由 src/heros 自己接手，這裡只是讓它在那之前維持原本的樣子。
+  */
+  [data-hero] .prose :where(h1, h2)::after {
+    content: none;
+  }
+  [data-hero] .prose :where(h1) {
+    margin-block: 0 0.5em;
+    font-size: 40px;
+    line-height: 1.3;
+    letter-spacing: 0.04em;
+  }
+  @media (min-width: 48rem) {
+    [data-hero] .prose :where(h1) {
+      font-size: 48px;
+    }
+  }
+
+  /* H3：明體 700，約 21px。「學員分享」的名字就是 H3。 */
+  .prose :where(h3):not(:where(.not-prose, .not-prose *)) {
+    margin-block: 1.8em 0.4em;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  /* H4：黑體小字、iris、字距加寬，當小標籤用（學員的身分、欄位標籤）。 */
+  .prose :where(h4):not(:where(.not-prose, .not-prose *)) {
+    margin-block: 1.6em 0.8em;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.7;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-iris);
+  }
+
+  /*
+    名字（H3）後面緊接的身分（H4）：身分下方一條 1px line 細線，再接內文（「學員分享」就是這個結構，
+    照首頁草稿 home-b.html）。
+  */
+  .prose :where(h3 + h4):not(:where(.not-prose, .not-prose *)) {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  /* ======================================================================================
+     三、連結、清單、引用、程式碼
+     ====================================================================================== */
+
+  /* 連結：ink 文字加 iris 底線，hover 時文字變 iris。 */
+  .prose :where(a):not(:where(.not-prose, .not-prose *)) {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-iris);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    transition: color 200ms ease-out;
+  }
+  .prose :where(a):not(:where(.not-prose, .not-prose *)):hover {
+    color: var(--color-iris);
+  }
+  .prose :where(a):not(:where(.not-prose, .not-prose *)):focus-visible {
+    outline: none;
+    border-radius: var(--radius-xs);
+    box-shadow: var(--shadow-focus);
+  }
+
+  /* 清單：Tailwind 的 preflight 把 list-style 清掉了，這裡補回來；記號用 iris-soft。 */
+  .prose :where(ul, ol):not(:where(.not-prose, .not-prose *)) {
+    margin-block: 1em;
+    padding-inline-start: 1.6em;
+  }
+  .prose :where(ul):not(:where(.not-prose, .not-prose *)) {
+    list-style: disc;
+  }
+  .prose :where(ol):not(:where(.not-prose, .not-prose *)) {
+    list-style: decimal;
+  }
+  .prose :where(li):not(:where(.not-prose, .not-prose *)) {
+    margin-block: 0.25em;
+    padding-inline-start: 0.2em;
+  }
+  .prose :where(li):not(:where(.not-prose, .not-prose *))::marker {
+    color: var(--color-iris-soft);
+  }
+  .prose :where(ol > li):not(:where(.not-prose, .not-prose *))::marker {
+    font-weight: 600;
+  }
+  /* 巢狀清單：貼著上一項，圓圈記號。 */
+  .prose :where(ul, ol) :where(ul, ol):not(:where(.not-prose, .not-prose *)) {
+    margin-block: 0.25em 0;
+  }
+  .prose :where(ul ul):not(:where(.not-prose, .not-prose *)) {
+    list-style: circle;
+  }
+
+  /* 引用：不畫色塊也不畫側邊線，明體 600、anchor 色。預設置中（編輯設定的對齊會蓋過）。 */
+  .prose :where(blockquote):not(:where(.not-prose, .not-prose *)) {
+    margin-block: 2em;
+    padding-inline: 1.5em;
+    font-weight: 600;
+    color: var(--color-anchor);
+    text-align: center;
+    quotes: none;
+  }
+
+  /* 行內程式碼和程式碼區塊（Code 區塊自己有樣式，放在 `not-prose` 裡）。 */
+  .prose :where(code):not(:where(.not-prose, .not-prose *)) {
+    padding: 0.15em 0.4em;
+    border-radius: var(--radius-xs);
+    background: var(--color-paper-sunken);
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    font-weight: 500;
+  }
+  .prose :where(pre):not(:where(.not-prose, .not-prose *)) {
+    margin-block: 1.6em;
+    padding: 1.25em 1.5em;
+    overflow-x: auto;
+    border-radius: var(--radius-sm);
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    line-height: 1.6;
+  }
+  .prose :where(pre code):not(:where(.not-prose, .not-prose *)) {
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    font-size: 1em;
+    font-weight: 400;
+  }
+
+  /* ======================================================================================
+     四、分隔線、圖片、表格
+     ====================================================================================== */
+
+  /* 分隔線：不畫線，改成置中的三顆 lilac 小菱形，沒有背景色塊（和文章頁一樣）。 */
+  .prose :where(hr):not(:where(.not-prose, .not-prose *)) {
+    height: auto;
+    margin-block: 3em;
+    border: 0;
+    background: none;
+    text-align: center;
+    overflow: visible;
+  }
+  .prose :where(hr):not(:where(.not-prose, .not-prose *))::after {
+    /* 第二行的 `/ ''` 是替代文字：讀屏軟體不會把菱形唸出來；不支援的瀏覽器用第一行。 */
+    content: '◆　◆　◆';
+    content: '◆　◆　◆' / '';
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: 0.3em;
+    color: var(--color-lilac);
+  }
+
+  /* 圖片：4px 圓角。MediaBlock 的圖片在 `picture` 裡，不加上下邊距（版面由區塊自己控制）。 */
+  .prose :where(img):not(:where(.not-prose, .not-prose *)) {
+    margin-block: 2em;
+    border-radius: var(--radius-sm);
+  }
+  .prose :where(picture > img):not(:where(.not-prose, .not-prose *)) {
+    margin-block: 0;
+  }
+
+  /*
+    表格：黑體 15px、靠左、表頭下方 2px ink 線、每列 1px line（和文章頁一樣）。
+    外面那層（Payload 輸出的 .lexical-table-container）可以橫向捲動，表格再寬也不會撐開頁面。
+    Payload 會替每個儲存格寫 inline 的 `border` 和 `padding`，只有 !important 才蓋得過 inline style；
+    這裡只蓋邊框和內距，不碰 text-align 和背景色。
+  */
+  .prose .lexical-table-container {
+    margin-block: 1.5em;
+    overflow-x: auto;
+  }
+  .prose .lexical-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.6;
+    text-align: left;
+  }
+  .prose .lexical-table-container :is(th, td) {
+    padding: 10px 12px !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--color-line) !important;
+    vertical-align: top;
+    overflow-wrap: break-word;
+    /* 旁邊有很長的儲存格時，自動排版會把短欄壓成一個字寬；保留約 3 個中文字的寬度。 */
+    min-width: 5.5em;
+  }
+  .prose .lexical-table-container th {
+    font-weight: 700;
+  }
+  .prose .lexical-table-container :is(.lexical-table-cell-header-1, .lexical-table-cell-header-3) {
+    border-bottom: 2px solid var(--color-ink) !important;
+  }
+  .prose .lexical-table-container :is(p) {
+    margin-block: 0;
+  }
+
+  /* ======================================================================================
+     五、間距收尾：這幾條要放在最後面（優先權一樣，後面的贏）
+     ====================================================================================== */
+
+  /* 標題後面緊接的元素不再加上邊距，間距由標題的下邊距決定。 */
+  .prose :where(h1, h2, h3, h4):not(:where(.not-prose, .not-prose *)) + * {
+    margin-top: 0;
+  }
+  /* 第一個子元素貼齊容器頂端、最後一個貼齊底端，區塊（Content 的欄位等）才不會多出空白。 */
+  .prose > :where(:first-child):not(:where(.not-prose)) {
+    margin-top: 0;
+  }
+  .prose > :where(:last-child):not(:where(.not-prose)) {
+    margin-bottom: 0;
+  }
+}

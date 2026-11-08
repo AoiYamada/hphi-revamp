@@ -12,7 +12,7 @@ export const YouTube: FC<Props> = ({ videoUrl, className }) => {
 
   return (
     <div className={cn('youtube-block mx-auto my-8 w-full max-w-3xl', className)}>
-      <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-border bg-muted shadow-lift-1">
+      <div className="relative aspect-video w-full overflow-hidden rounded-sm border border-border bg-paper-sunken">
         <iframe
           src={embedUrl}
           title="YouTube video player"

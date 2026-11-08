@@ -29,13 +29,22 @@ const getLinkUrl = (linkData: unknown): string | null => {
   return null
 }
 
+/* 分頁標籤：黑體；選中的是 ink 色加 2px iris 底線，沒選中的是 muted，hover 時變 ink。 */
 const tabBaseClass =
-  'relative inline-flex items-center justify-center whitespace-nowrap px-6 py-4 text-base font-medium transition-colors duration-200 ease-out-quart focus-visible:outline-hidden focus-visible:shadow-focus md:text-lg'
+  'relative inline-flex items-center justify-center whitespace-nowrap px-6 py-4 font-sans text-base font-medium leading-normal transition-colors duration-200 ease-out-quart focus-visible:outline-hidden focus-visible:shadow-focus md:text-lg'
 
 const tabActiveClass =
-  'text-iris-soft after:absolute after:inset-x-4 after:bottom-0 after:h-0.5 after:rounded-full after:bg-iris-soft'
+  'text-ink after:absolute after:inset-x-4 after:bottom-0 after:h-0.5 after:bg-iris'
 
-const tabInactiveClass = 'text-muted-foreground hover:text-foreground'
+const tabInactiveClass = 'text-ink-faint hover:text-ink'
+
+/* 手機版：一排排整行的按鈕，選中的是 anchor 底。 */
+const mobileTabClass =
+  'flex w-full items-center justify-center rounded-sm border px-6 py-4 font-sans text-base font-medium leading-normal transition-colors duration-200 ease-out-quart'
+
+const mobileTabActiveClass = 'border-anchor bg-anchor text-paper'
+
+const mobileTabInactiveClass = 'border-line bg-paper-raised text-ink hover:bg-paper-sunken'
 
 const LifeEnrichLikeTabs: FC<
   TabsBlockProps & {
@@ -120,10 +129,8 @@ const LifeEnrichLikeTabs: FC<
                 <Link
                   href={linkUrl}
                   className={cn(
-                    'flex w-full items-center justify-center rounded-md border px-6 py-4 text-base font-medium transition-colors duration-200 ease-out-quart',
-                    isActive
-                      ? 'border-primary bg-primary text-primary-foreground'
-                      : 'border-border bg-card text-foreground hover:bg-muted/60',
+                    mobileTabClass,
+                    isActive ? mobileTabActiveClass : mobileTabInactiveClass,
                   )}
                 >
                   {item.title}
@@ -141,10 +148,9 @@ const LifeEnrichLikeTabs: FC<
                   onClick={() => handleTabClick(idx)}
                   data-active={isActive}
                   className={cn(
-                    'flex w-full items-center justify-center rounded-md border px-6 py-4 text-base font-medium transition-colors duration-200 ease-out-quart focus-visible:outline-hidden focus-visible:shadow-focus',
-                    isActive
-                      ? 'border-primary bg-primary text-primary-foreground'
-                      : 'border-border bg-card text-foreground hover:bg-muted/60',
+                    mobileTabClass,
+                    'focus-visible:outline-hidden focus-visible:shadow-focus',
+                    isActive ? mobileTabActiveClass : mobileTabInactiveClass,
                   )}
                 >
                   {item.title}

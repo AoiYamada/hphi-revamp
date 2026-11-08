@@ -2,6 +2,11 @@ import { QuoteBlock as QuoteBlockProps } from '@/payload-types'
 import { cn } from '@/utilities'
 import { FC } from 'react'
 
+/*
+  引言：置中、明體 600、約 25px、anchor 色，整段前後加「」，作者用黑體小字。
+  放在富文字裡時要加 `not-prose`，blockquote 和 p 才不會吃到頁面長文的規則。
+  「」用 CSS 的 ::before／::after 加在第一行和最後一行，複製文字時不會帶進去。
+*/
 export const QuoteBlock: FC<
   QuoteBlockProps & {
     id?: string
@@ -9,34 +14,20 @@ export const QuoteBlock: FC<
   }
 > = ({ quote, author, className }) => {
   return (
-    <figure className={cn('my-12 w-full', className)}>
-      <blockquote className="relative rounded-xl bg-muted/60 px-8 py-10 md:px-14 md:py-14">
-        {/* Restrained opening quote — Soft Violet, decorative not loud */}
-        <span
-          aria-hidden
-          className="absolute left-6 top-4 select-none font-serif text-6xl leading-none text-lilac/50 md:left-10 md:top-6 md:text-7xl"
-        >
-          &ldquo;
-        </span>
-
-        <div className="relative space-y-3">
-          {quote.split('\n').map((line, index) => (
-            <p
-              key={index}
-              className="text-xl font-light leading-relaxed text-foreground md:text-2xl md:leading-relaxed lg:text-3xl/9"
-            >
-              {line}
-            </p>
-          ))}
-        </div>
-
-        {author && (
-          <figcaption className="mt-6 flex items-center gap-3 text-sm font-medium text-muted-foreground">
-            <span className="h-px w-6 bg-iris-soft" aria-hidden />
-            {author}
-          </figcaption>
-        )}
+    <figure className={cn('not-prose my-12 w-full text-center', className)}>
+      <blockquote className="mx-auto max-w-[34em] font-serif text-[22px] font-semibold leading-[1.8] text-anchor md:text-[25px]">
+        {quote.split('\n').map((line, index) => (
+          <p key={index} className="first:before:content-['「'] last:after:content-['」']">
+            {line}
+          </p>
+        ))}
       </blockquote>
+
+      {author && (
+        <figcaption className="mt-5 font-sans text-[13px] leading-normal tracking-[0.2em] text-ink-faint">
+          {author}
+        </figcaption>
+      )}
     </figure>
   )
 }

@@ -61,7 +61,7 @@ export default async function Course({ params: paramsPromise }: Args) {
   const { hero, description } = course
 
   return (
-    <article className="pb-16">
+    <article className="@container pb-16">
       <PayloadRedirects disableNotFound url={url} />
 
       {hero?.richText || hero?.media ? <RenderHero {...hero} /> : <></>}

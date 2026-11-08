@@ -52,8 +52,8 @@ export const MediaBlock: FC<Props> = (props) => {
       <Media
         fill={fill}
         size={size}
-        imgClassName={cn('rounded-lg mx-auto', imgClassName)}
-        videoClassName={cn('rounded-lg mx-auto', videoClassName)}
+        imgClassName={cn('rounded-sm mx-auto', imgClassName)}
+        videoClassName={cn('rounded-sm mx-auto', videoClassName)}
         resource={media}
         thumbnail={thumbnail ? thumbnail : undefined}
         src={staticImage}
@@ -61,14 +61,15 @@ export const MediaBlock: FC<Props> = (props) => {
       {caption && (
         <div
           className={cn(
-            'mt-6',
+            'mt-3 text-center font-sans text-[13px] leading-relaxed text-ink-faint',
             {
               'w-full': !disableInnerContainer,
             },
             captionClassName,
           )}
         >
-          <RichText data={caption} enableGutter={false} />
+          {/* 圖說：黑體 13px、muted、置中；編輯設定的對齊（inline text-align）仍然優先。 */}
+          <RichText data={caption} enableGutter={false} enableProse={false} />
         </div>
       )}
     </div>

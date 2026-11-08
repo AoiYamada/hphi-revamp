@@ -1,11 +1,9 @@
 /* 只掃描 src/，和 v3 的 content 範圍一致（避免掃到 docs、log 之類的檔案）。 */
 @import 'tailwindcss' source('../../');
 @import 'tw-animate-css';
-@plugin '@tailwindcss/typography';
 @import './styles/prose.css';
 @import './styles/article.css';
-/* typography.config.mjs 裡的註解有 `prose-lg` 這類字眼，不要被當成 class 掃描。 */
-@source not './styles/typography.config.mjs';
+@import './styles/cta.css';
 
 /*
   整站只做淺色，沒有 `dark:` 變體（深色模式的處理見下方 base layer 的 color-scheme）。

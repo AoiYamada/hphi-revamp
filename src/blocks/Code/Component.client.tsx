@@ -14,10 +14,10 @@ export const Code: FC<Props> = ({ code, language = '' }) => {
   return (
     <Highlight code={code} language={language} theme={themes.vsDark}>
       {({ getLineProps, getTokenProps, tokens }) => (
-        <pre className="overflow-x-auto rounded-lg bg-foreground p-5 text-xs text-background shadow-lift-1">
+        <pre className="overflow-x-auto rounded-sm bg-ink p-5 text-xs text-paper">
           {tokens.map((line, i) => (
             <div key={i} {...getLineProps({ className: 'table-row', line })}>
-              <span className="table-cell select-none text-right text-white/25">{i + 1}</span>
+              <span className="table-cell select-none text-right text-paper/30">{i + 1}</span>
               <span className="table-cell pl-4">
                 {line.map((token, key) => (
                   <span key={key} {...getTokenProps({ token })} />

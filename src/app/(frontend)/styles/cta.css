@@ -1,0 +1,58 @@
+/*
+  CTA 區塊（src/blocks/CallToAction）裡的文字排版。數值取自設計文件 6.4 和首頁草稿 home-b.html。
+
+  CTA 的底色是 anchor（深紫），文字是編輯在後台寫的富文字：通常是一個標題加一兩行說明。
+  元件用 `enableProse={false}` 輸出，所以這裡的規則不會跟 `prose` 搶：標題是明體、paper 色，
+  說明是黑體、淡紫灰。
+
+  編輯設定的對齊（inline `text-align`）優先權比任何 stylesheet 高，這裡只寫預設值，不用 `!important`。
+  用 `@layer components`，區塊自己帶的工具類別排在後面，永遠蓋得過這裡。
+*/
+
+@layer components {
+  /* 標題（H1–H4 都當標題）：明體 700，paper 色。手機 24px；色帶在 md 起 30px。 */
+  .cta-text :is(h1, h2, h3, h4) {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: var(--color-paper);
+    text-wrap: balance;
+  }
+  @media (min-width: 48rem) {
+    [data-variant='band'] .cta-text :is(h1, h2, h3, h4) {
+      font-size: 30px;
+    }
+  }
+
+  /* 副標題與說明：黑體 15px，淡紫灰。標題後面的第一段離標題 8px。 */
+  .cta-text p {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.8;
+    /* 淡紫灰：lilac 調亮一點（和 paper 混 30%），在 anchor 底上對比夠，又接近草稿的 #cfc4e0。 */
+    color: color-mix(in srgb, var(--color-lilac) 70%, var(--color-paper));
+  }
+  .cta-text :is(h1, h2, h3, h4) + p {
+    margin-top: 8px;
+  }
+  .cta-text p + p {
+    margin-top: 0.5em;
+  }
+
+  /* 文字裡的連結：paper 色加底線。 */
+  .cta-text a {
+    color: var(--color-paper);
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+  .cta-text a:focus-visible {
+    outline: none;
+    border-radius: var(--radius-xs);
+    box-shadow: var(--shadow-focus-inverse);
+  }
+}

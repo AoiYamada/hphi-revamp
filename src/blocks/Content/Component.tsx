@@ -47,19 +47,26 @@ export const ContentBlock: FC<ContentBlockProps> = (props) => {
             return (
               <div
                 className={cn(colsSpanClasses[size ?? 'full'], {
-                  'relative isolate flex flex-col gap-4 overflow-hidden rounded-lg p-6 md:p-8':
+                  'relative isolate flex flex-col gap-4 overflow-hidden rounded-sm p-6 md:p-8':
                     hasBackground,
                 })}
                 key={index}
               >
                 {hasBackground && (
-                  <Media
-                    fill
-                    imgClassName="-z-10 object-cover"
-                    priority={false}
-                    loading="lazy"
-                    resource={backgroundImage}
-                  />
+                  <>
+                    <Media
+                      fill
+                      imgClassName="-z-10 object-cover"
+                      priority={false}
+                      loading="lazy"
+                      resource={backgroundImage}
+                    />
+                    {/* 文字對比不足時的保險：從上到下由紙色淡出的遮罩，夾在背景圖和文字之間。 */}
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0 -z-5 bg-linear-to-b from-paper/40 via-paper/15 to-transparent"
+                    />
+                  </>
                 )}
 
                 {richText && <RichText data={richText} enableGutter={false} />}
