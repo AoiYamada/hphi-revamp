@@ -24,11 +24,11 @@ Tailwind 的用法是 `bg-<名稱>`、`text-<名稱>`、`border-<名稱>`，例�
 | paper-sunken | `--color-paper-sunken` | `#efe9df` | 次要區塊底色、hover 底色（下沉的面） |
 | ink | `--color-ink` | `#2b2622` | 主要文字：內文、標題 |
 | ink-soft | `--color-ink-soft` | `#4a423b` | 副標題、hero 說明文字 |
-| ink-faint | `--color-ink-faint` | `#7a716a` | 輔助文字：日期、作者、圖說、placeholder |
+| ink-faint | `--color-ink-faint` | `#706760` | 輔助文字：日期、作者、圖說、placeholder（在紙色上對比 5.04:1，在 paper-sunken 上 4.58:1，小字都 ≥ 4.5:1） |
 | line | `--color-line` | `#e2dbd0` | 邊框、分隔線、表格線 |
 | line-strong | `--color-line-strong` | `#d9d1c6` | Banner 上下線、卡片 hover 邊框 |
 | iris | `--color-iris` | `#6241a0` | 品牌紫：小標籤、目錄高亮、連結底線、focus、公告列 |
-| iris-soft | `--color-iris-soft` | `#8865bb` | 淡一階的品牌紫：H2 編號 |
+| iris-soft | `--color-iris-soft` | `#7f5cb3` | 淡一階的品牌紫：H2 編號（在紙色上對比 4.68:1，13px 的編號也 ≥ 4.5:1） |
 | lilac | `--color-lilac` | `#b9aacd` | 裝飾紫：分隔線菱形、標題下的細線 |
 | anchor | `--color-anchor` | `#3d2b5f` | 深紫：主要按鈕、CTA 色帶、footer、文章導言文字 |
 | success | `--color-success` | `#5a8a64` | 成功（sage）：色塊、線條 |
