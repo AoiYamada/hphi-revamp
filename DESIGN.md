@@ -90,15 +90,16 @@ Tailwind 的用法是 `bg-<名稱>`、`text-<名稱>`、`border-<名稱>`，例�
 
 | 分工 | 字型 | 字重 | 用在哪裡 |
 |---|---|---|---|
-| 明體（serif） | Noto Serif TC | 500、600、700 | 所有標題（H1–H4）、文章內文、頁面長文（prose）、卡片標題、引言 |
-| 黑體（sans） | Noto Sans TC | 400、500、700 | 選單、按鈕、小標籤、表單、日期與作者等資訊、卡片摘要、表格、目錄、Banner 標籤 |
+| 明體（serif） | Noto Serif TC | 500（600／700 由瀏覽器模擬加粗） | 所有標題（H1–H4）、文章內文、頁面長文（prose）、卡片標題、引言 |
+| 黑體（sans） | 系統字體（蘋方／微軟正黑體／Android 內建 Noto Sans CJK） | 400、500、700 | 選單、按鈕、小標籤、表單、日期與作者等資訊、卡片摘要、表格、目錄、Banner 標籤 |
 | 等寬（mono） | 系統 `ui-monospace` | — | 只用在 Code 區塊 |
 
 - 預設字體是黑體（`body`）。標題在 `globals.css` 的 base 層自動套用明體；黑體的標題（例如 footer 的欄位標題）要自己加 `font-sans`。
-- fallback 順序：黑體依序是 `PingFang TC`、`Microsoft JhengHei`；明體依序是 `Songti TC`、`PMingLiU`。
+- fallback 順序：黑體沒有網路字型，依序是 `PingFang TC`（蘋方）、`Microsoft JhengHei`（微軟正黑體）、`Noto Sans TC`／`Noto Sans CJK TC`（有安裝 Noto 的電腦），最後是 `sans-serif`（Android 會落到內建的 Noto Sans CJK）；明體依序是 `Songti TC`、`PMingLiU`。
 - `fonts.ts` 的 `preload: false`、`display: 'swap'`：中文字型切成很多片段，不預先載入，讓瀏覽器只抓頁面用得到的部分。
-- 兩個字型都用 `weight: 'variable'`（可變字型）載入：不用列字重，瀏覽器會照 CSS 的 `font-weight` 直接渲染。字型檔（woff2）的大小和之前列 3 個字重時一樣，但 `@font-face` 規則從 650 條減到 218 條，字型 CSS 從約 728 KB 降到約 300 KB。
-- 設計上用到的字重還是：黑體 400、500、700；明體 500、600、700（明體內文用 500、粗體用 700）。可變字型會照字面渲染其他字重，所以黑體的 `font-semibold`（600）是真的 600、`font-light`（300）是真的 300，`<strong>` 放在 700 的明體標題裡會變 `bolder`（900）。要維持原本的樣子就用上面列的字重。
+- 明體只載入一個字重 500（`weight: '500'`）：內文就是 500；標題、導言、引言、粗體（600／700）由瀏覽器模擬加粗，看起來幾乎一樣。不要改成多個字重或 `'variable'`：Google 對多個字重回傳的是整套可變字型，每個分片大約是單一字重的兩倍。
+- 實測省下的下載量：首頁字型從約 2.8 MB 降到約 0.93 MB；長文從約 3.0 MB 降到約 1.0 MB。黑體不載入網路字型，省下的就是上面那部分。
+- 設計上用到的字重：黑體 400、500、700（系統字體）；明體 500，600、700 由瀏覽器模擬。CSS 裡寫 600、700 的地方不用改，會自動模擬加粗。
 - 移除了 Geist 字體，不要再用 `font-geist-*`。
 
 ## 4. 圓角
@@ -223,7 +224,7 @@ Tailwind 的用法是 `bg-<名稱>`、`text-<名稱>`、`border-<名稱>`，例�
 
 - **社交條**、**公告列**、**選單**（含桌面下拉選單與手機選單）、**footer**。
 - 顏色全部由 `chrome-*` token 指定（見 2.3），不是由調色盤間接得到。
-- 允許的改動只有：圓角改用新的圓角尺寸、字體跟著全站換成 Noto Sans TC、程式碼整理。
+- 允許的改動只有：圓角改用新的圓角尺寸、字體跟著全站換成黑體的系統字體、程式碼整理。
 - **只在手機（< 768px）** 把社交條和公告列縮小一點（QR 縮小、上下內距和字級減少），讓文章內容早一點出現。
 - 公告列和 footer 是深色底，focus 外圈用 `shadow-focus-inverse`。
 - WhatsApp 浮動按鈕、Google 翻譯小工具外觀不變。Google 翻譯小工具會避開手機目錄小條，不蓋住它的展開按鈕。
@@ -235,12 +236,13 @@ Tailwind 的用法是 `bg-<名稱>`、`text-<名稱>`、`border-<名稱>`，例�
 | 主色（深紫、品牌紫）、紙色、墨色、線色 | `src/app/(frontend)/globals.css` 的「一、調色盤」那一段，改 hex 值即可 |
 | 按鈕、標籤、卡片等用到哪個顏色 | `globals.css` 的「二、語意顏色」，它只是指向調色盤，通常不用改 |
 | 頂部社交條、公告列、選單、footer 的顏色 | `globals.css` 的「三、chrome」。這一段是原版外觀，改之前先截圖比較 |
-| 標題、內文用的字型 | `src/app/(frontend)/fonts.ts` 換 Google 字型名稱和字重；`globals.css` 的「四、字體」決定 fallback |
+| 標題、內文用的明體 | `src/app/(frontend)/fonts.ts` 換 Google 字型名稱；字重固定為 500，要維持單一字重（見第 3 節）。`globals.css` 的「四、字體」決定 fallback |
+| 黑體（系統字體） | 只改 `globals.css` 的「四、字體」裡的 `--font-sans`，不用動 `fonts.ts` |
 | 圓角、陰影 | `globals.css` 的「五、圓角」和「六、陰影」 |
 | 文章頁的字級、間距、H2 樣式 | `src/app/(frontend)/styles/article.css` 和 `prose.css` |
 | 大圖的漸層與文字 | `src/app/(frontend)/styles/hero.css` |
 | CTA 色帶的文字樣式 | `src/app/(frontend)/styles/cta.css` |
 
 - 改了 `globals.css` 或 `fonts.ts` 後，請重新整理頁面；如果字型沒有變，停掉 `pnpm dev` 再啟動。
-- `fonts.ts` 用可變字型（`weight: 'variable'`），改字重不需要動 `fonts.ts`；如果換成沒有可變版的 Google 字型，才要改回字重陣列。
+- `fonts.ts` 的明體要維持 `weight: '500'` 單一字重；改成多個字重或 `'variable'` 會讓下載量變成約兩倍。黑體不在 `fonts.ts`，改黑體只改 `globals.css`。
 - 改 token 名稱（不只是值）會影響所有用到它的元件，請全站搜尋後再改。

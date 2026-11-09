@@ -167,11 +167,12 @@
 }
 
 /* ---------- 四、字體 ----------
-   `inline`：直接在使用的位置解析 `var(--font-noto-*)`。變數由 fonts.ts 的 next/font 設在 <html> 上。 */
+   `inline`：直接在使用的位置解析 `var(--font-noto-serif)`。變數由 fonts.ts 的 next/font 設在 <html> 上。 */
 @theme static inline {
-  /* 黑體（Noto Sans TC）：選單、按鈕、小標籤、表單、日期與作者等資訊、卡片摘要、表格、目錄。 */
-  --font-sans: var(--font-noto-sans), 'PingFang TC', 'Microsoft JhengHei', sans-serif;
-  /* 明體（Noto Serif TC）：所有標題、文章內文、頁面長文、卡片標題、引言。 */
+  /* 黑體（系統字體，不用下載）：選單、按鈕、小標籤、表單、日期與作者等資訊、卡片摘要、表格、目錄。
+     依序是 Apple 的蘋方、Windows 的微軟正黑體、有安裝 Noto 的電腦；Android 會落到 sans-serif，也就是內建的 Noto Sans CJK。 */
+  --font-sans: 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', 'Noto Sans CJK TC', sans-serif;
+  /* 明體（Noto Serif TC，只載入 500，粗體由瀏覽器模擬，見 fonts.ts）：所有標題、文章內文、頁面長文、卡片標題、引言。 */
   --font-serif: var(--font-noto-serif), 'Songti TC', 'PMingLiU', serif;
   /* 等寬字：只用在 Code 區塊，用系統字型。 */
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;

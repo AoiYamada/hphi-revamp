@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 
-import { cn } from '@/utilities'
 import React, { ReactNode } from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
@@ -13,7 +12,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from 'next/script'
 
 import './globals.css'
-import { fontSans, fontSerif } from './fonts'
+import { fontSerif } from './fonts'
 import { getServerSideURL } from '@/utilities/getURL'
 import FacebookPixel from '@/components/FacebookPixel'
 import { fbId } from '@/lib/f-pixel'
@@ -28,7 +27,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 
   return (
     <html
-      className={cn(fontSans.variable, fontSerif.variable)}
+      className={fontSerif.variable}
       lang="zh-HK"
       // to get rid of the hydration warning caused by extensions
       suppressHydrationWarning
