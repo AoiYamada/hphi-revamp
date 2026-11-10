@@ -69,7 +69,9 @@ export const ContentBlock: FC<ContentBlockProps> = (props) => {
                   </>
                 )}
 
-                {richText && <RichText data={richText} enableGutter={false} />}
+                {/* `w-full`：有背景圖時欄位是直向 flex，RichText 的 `mx-auto` 會讓文字框縮成內容寬並置中；
+                    撐滿欄位後，文字對齊才會照編輯器的設定（靠左時和下面的按鈕對齊）。 */}
+                {richText && <RichText data={richText} enableGutter={false} className="w-full" />}
 
                 {enableLink && (
                   <div className={cn('flex', linkJustifyClass)}>

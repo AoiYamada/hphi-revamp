@@ -24,6 +24,7 @@ import type {
   QuoteBlock as QuoteBlockProps,
   CEFCalculatorBlock as CEFCalculatorBlockProps,
   TabsBlock as TabsBlockProps,
+  ContentBlock as ContentBlockProps,
 } from '@/payload-types'
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
@@ -34,6 +35,7 @@ import { YouTube } from '@/blocks/YouTube/Component'
 import { CollapsibleBlock } from '@/blocks/Collapsible/Component'
 import { QuoteBlock } from '@/blocks/Quote/Component'
 import { TabsBlock } from '@/blocks/Tabs/Component'
+import { ContentBlock } from '@/blocks/Content/Component'
 
 type NodeTypes =
   | DefaultNodeTypes
@@ -48,6 +50,7 @@ type NodeTypes =
       | QuoteBlockProps
       | CEFCalculatorBlockProps
       | TabsBlockProps
+      | ContentBlockProps
     >
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
@@ -119,6 +122,8 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     quoteBlock: ({ node }) => <QuoteBlock {...node.fields} />,
     cefCalculatorBlock: ({ node }) => <CEFCalculatorBlock {...node.fields} />,
     tabsBlock: ({ node }) => <TabsBlock {...node.fields} />,
+    // Tabs 的編輯器可以插入 Content 區塊（1/2、1/3 等多欄內容）；沒有這一行，前台會印出「unknown node」。
+    content: ({ node }) => <ContentBlock {...node.fields} />,
   },
 })
 
