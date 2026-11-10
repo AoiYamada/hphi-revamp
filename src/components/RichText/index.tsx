@@ -143,6 +143,7 @@ const RichText: FC<RichTextProps> = ({
     <RichTextWithoutBlocks
       converters={jsxConverters}
       className={cn(
+        'rich-text',
         {
           'w-full': enableGutter,
           'max-w-none': !enableGutter,

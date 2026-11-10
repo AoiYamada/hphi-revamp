@@ -366,3 +366,23 @@ a.anchor {
   /* 錨點只用來定位，不顯示。 */
   visibility: hidden;
 }
+
+/* ---------- 富文字清單的基本樣式 ----------
+   Tailwind 的 preflight 把 ul／ol 的記號和縮排清掉了。`prose`（styles/prose.css）和文章內文（styles/article.css）
+   有自己更細的清單樣式，會蓋過這裡；這裡只補沒有 `prose` 的富文字，例如 CTA、圖說、上課時間的導師欄。
+   `.rich-text` 由 components/RichText 加在每個富文字外層。 */
+@layer components {
+  :where(.rich-text) ul,
+  :where(.rich-text) ol {
+    padding-inline-start: 1.5em;
+  }
+  :where(.rich-text) ul {
+    list-style: disc;
+  }
+  :where(.rich-text) ol {
+    list-style: decimal;
+  }
+  :where(.rich-text) :is(ul, ol) :is(ul, ol) {
+    list-style: circle;
+  }
+}

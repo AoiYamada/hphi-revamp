@@ -27,8 +27,9 @@
     }
   }
 
-  /* 副標題與說明：黑體 15px，淡紫灰。標題後面的第一段離標題 8px。 */
-  .cta-text p {
+  /* 副標題與說明（段落和清單）：黑體 15px，淡紫灰。標題後面的第一段離標題 8px。
+     清單的記號和縮排來自 globals.css 的「富文字清單的基本樣式」，記號跟著文字顏色。 */
+  .cta-text :is(p, ul, ol) {
     margin: 0;
     font-family: var(--font-sans);
     font-size: 15px;
@@ -37,10 +38,10 @@
     /* 淡紫灰：lilac 調亮一點（和 paper 混 30%），在 anchor 底上對比夠，又接近草稿的 #cfc4e0。 */
     color: color-mix(in srgb, var(--color-lilac) 70%, var(--color-paper));
   }
-  .cta-text :is(h1, h2, h3, h4) + p {
+  .cta-text :is(h1, h2, h3, h4) + :is(p, ul, ol) {
     margin-top: 8px;
   }
-  .cta-text p + p {
+  .cta-text :is(p, ul, ol) + :is(p, ul, ol) {
     margin-top: 0.5em;
   }
 

@@ -182,6 +182,7 @@ Tailwind 的用法是 `bg-<名稱>`、`text-<名稱>`、`border-<名稱>`，例�
 - **分隔線**：不畫線，改成置中的三顆 lilac 小菱形。
 - **連結**：ink 文字加 iris 底線，hover 時文字變 iris。
 - **表格**：黑體 15px、靠左、每列 1px `line`、表頭下方 2px `ink` 線。表格外層可以橫向捲動，手機上不會撐破版面。
+- **清單**：所有富文字編輯器都可以用列點清單和數字清單（工具列按鈕，或打「- 」「1. 」自動轉換），按 Tab／Shift+Tab 做巢狀清單。記號用 iris-soft，數字清單的數字加粗，第二層列點是空心圓。樣式在 `styles/prose.css`、`styles/article.css`；沒有 prose 的地方由 `globals.css` 最後的「富文字清單的基本樣式」補上。
 - **引言（Quote）**：置中、明體 600 約 25px、`anchor` 色，前後加「」；作者用黑體小字、ink-faint。
 - **提示框（Banner）**：不用色塊，上下各一條 `line-strong` 細線，上方一個黑體小標籤。顏色依樣式：info（提示）iris、success（重點）success-text、warning（注意）warning-text、error（重要）error。
 - **圖片（MediaBlock）與影片（YouTube）**：寬度等於內文欄，不向兩側延伸，圖說黑體 13px、ink-faint、置中。
