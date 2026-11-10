@@ -25,8 +25,8 @@
 @theme static {
   /* 紙色：頁面底色，用在 body 背景。 */
   --color-paper: #f7f4ee;
-  /* 浮起的紙：卡片、輸入框、彈出層的背景。 */
-  --color-paper-raised: #fbf9f5;
+  /* 浮起的紙：卡片、表單面板、時段面板、輸入框、彈出層的背景。純白，和米白的頁面底色（paper）拉開明顯距離。 */
+  --color-paper-raised: #ffffff;
   /* 下沉的紙：次要區塊底色、hover 底色。 */
   --color-paper-sunken: #efe9df;
 

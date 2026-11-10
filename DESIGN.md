@@ -20,7 +20,7 @@ Tailwind 的用法是 `bg-<名稱>`、`text-<名稱>`、`border-<名稱>`，例�
 | 名稱 | token | 值 | 用途 |
 |---|---|---|---|
 | paper | `--color-paper` | `#f7f4ee` | 頁面底色（`body` 背景） |
-| paper-raised | `--color-paper-raised` | `#fbf9f5` | 卡片、輸入框、彈出層的背景（浮起的面） |
+| paper-raised | `--color-paper-raised` | `#ffffff` | 卡片、輸入框、彈出層的背景（浮起的面），純白，和米白頁面底色拉開距離 |
 | paper-sunken | `--color-paper-sunken` | `#efe9df` | 次要區塊底色、hover 底色（下沉的面） |
 | ink | `--color-ink` | `#2b2622` | 主要文字：內文、標題 |
 | ink-soft | `--color-ink-soft` | `#4a423b` | 副標題、hero 說明文字 |

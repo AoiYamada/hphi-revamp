@@ -112,7 +112,7 @@ const MenuItem = ({ enableDropdown, label, link, enableDirectLink, navItems }: M
           />
           <ChevronRight
             className={cn(
-              'ml-1 h-4 w-4 transition-all group-data-[state=open]:rotate-90 group-data-[state=open]:text-chrome-nav',
+              'ml-1 h-4 w-4 text-chrome-nav transition-all group-data-[state=open]:rotate-90',
             )}
           />
         </CollapsibleTrigger>

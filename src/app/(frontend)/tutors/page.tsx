@@ -38,7 +38,7 @@ export default async function Page() {
     <MaxWidthWrapper className="pb-24">
       <PageHeader kicker="Our Team" title="導師團隊" align="center" className="my-16 md:my-24" />
 
-      <div className="flex flex-col gap-16 md:gap-24">
+      <div className="mx-auto flex max-w-4xl flex-col gap-12 md:gap-16">
         {tutors.docs.map(({ id, name, title, image, meta, slug }, index) => {
           image = meta?.image || image
           if (!image || typeof image === 'string') return null
@@ -46,19 +46,22 @@ export default async function Page() {
 
           return (
             <Link key={id} href={`/tutors/${slug}`} className="group block">
-              <div className={cn('grid items-center gap-8 md:grid-cols-12 md:gap-12 lg:gap-16')}>
-                <div className={cn('md:col-span-5', isEven ? 'md:order-1' : 'md:order-2')}>
-                  <div className="overflow-hidden rounded-sm">
-                    <NextImage
-                      src={image.url ?? ''}
-                      alt={image.alt ?? ''}
-                      width={image.width ?? 0}
-                      height={image.height ?? 0}
-                      className="h-auto w-full"
-                    />
-                  </div>
+              <div
+                className={cn(
+                  'flex flex-col gap-6 md:flex-row md:items-center md:gap-12 lg:gap-16',
+                  !isEven && 'md:flex-row-reverse',
+                )}
+              >
+                <div className="w-44 shrink-0 overflow-hidden rounded-sm md:w-60">
+                  <NextImage
+                    src={image.url ?? ''}
+                    alt={image.alt ?? ''}
+                    width={image.width ?? 0}
+                    height={image.height ?? 0}
+                    className="h-auto w-full"
+                  />
                 </div>
-                <div className={cn('md:col-span-7', isEven ? 'md:order-2' : 'md:order-1')}>
+                <div className="min-w-0 flex-1">
                   <p className="mb-2 font-sans text-[13px] font-medium tracking-[0.2em] text-iris">
                     {String(index + 1).padStart(2, '0')}
                   </p>

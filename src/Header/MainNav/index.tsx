@@ -37,7 +37,11 @@ const MainNav: FC<MainNavProps> = ({ header, className }) => {
 
           return (
             <NavigationMenuItem key={i}>
-              {enableDropdown ? <NavigationMenuTrigger>{text}</NavigationMenuTrigger> : text}
+              {enableDropdown ? (
+                <NavigationMenuTrigger className="text-chrome-nav">{text}</NavigationMenuTrigger>
+              ) : (
+                text
+              )}
               {enableDropdown && <MenuItemContent {...content} />}
             </NavigationMenuItem>
           )

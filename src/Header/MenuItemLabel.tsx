@@ -17,7 +17,7 @@ const MenuItemLabel: FC<MenuItemLabelProps> = ({ label, enableDirectLink, link, 
       className={cn('text-chrome-nav', className)}
     />
   ) : (
-    <div className={className}>{label}</div>
+    <div className={cn('text-chrome-nav', className)}>{label}</div>
   )
 }
 
