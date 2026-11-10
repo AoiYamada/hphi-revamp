@@ -17,3 +17,15 @@ en.hk-hphi.com	cdn1.wixdns.net
 m.hk-hphi.com	www129.wixdns.net
 www.hk-hphi.com	cdn1.wixdns.net
 zh.hk-hphi.com	cdn1.wixdns.net
+
+# New backup script
+D=$(date +%F_%H%M); OUT="/home/yamada/文件/hphi-backup-$D.zip"; TMP=$(mktemp -d) && \
+mkdir -p /home/yamada/文件 && \
+docker exec mongodb sh -c 'mongodump -u root -p "$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin --db hphi-revamp --archive' > "$TMP/hphi-db.archive" && \
+(cd /home/yamada/workspace/hphi/hphi-revamp/public && zip -rq "$OUT" media) && \
+zip -qj "$OUT" "$TMP/hphi-db.archive" && \
+rm -rf "$TMP" && \
+ls -lh "$OUT" && unzip -l "$OUT" hphi-db.archive
+
+# and unzip
+docker exec -i mongodb sh -c 'mongorestore -u root -p "$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin --archive' < hphi-db.archive
